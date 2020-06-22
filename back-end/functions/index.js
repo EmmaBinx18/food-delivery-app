@@ -1,20 +1,23 @@
 const functions = require('firebase-functions');
-const admin = require('firebase-admin');
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 
-var serviceAccount = require("./permissions.json");
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://fir-api-9a206..firebaseio.com"
-});
-const db = admin.firestore();
+const {
+  userController,
+  businessController,
+  homeChefController,
+  orderController
+} = require('./routes/index');
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({ origin: true }));
 
-app.get('/hello-world', (req, res) => {
-  return res.status(200).send('Hello World!');
-});
+app.use('/user', userController);
+app.use('/business', businessController);
+app.use('/homeChef', homeChefController);
+app.use('/orders', orderController);
 
 exports.app = functions.https.onRequest(app);
