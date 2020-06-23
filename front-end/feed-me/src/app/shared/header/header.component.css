@@ -1,0 +1,38 @@
+@import '../../../assets/styles/variables.css';
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    border: none;
+    background-color: var(--primary-green);
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+img{
+    display: inline;
+    width: 400px;
+}
+
+ul{
+    margin-left: 8%;
+}
+
+ul li{
+    display: inline;
+    padding: 15px;
+}
+
+ul li a{
+    font-family: var(--primary-font-family);
+    color: white;
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+
+ul li a:hover{
+    font-weight: bold;
+    cursor: pointer;
+}
