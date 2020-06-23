@@ -13,16 +13,18 @@ header{
 
 img{
     display: inline;
-    width: 400px;
+    width: 380px;
 }
 
 ul{
-    margin-left: 6%;
+    position: absolute;
+    right: 4%;
+    bottom: 28%;
 }
 
 ul li{
     display: inline;
-    padding: 18px;
+    padding: 22px;
 }
 
 ul li a{
