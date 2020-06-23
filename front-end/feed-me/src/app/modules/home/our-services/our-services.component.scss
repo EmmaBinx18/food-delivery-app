@@ -8,25 +8,35 @@
 
 ul{
     display: flex;
-    width: 100%;
+    align-items: center;
     justify-content: center;
+    margin-left: 2%;
+    padding-inline-start: 0;
+
+    @media(max-width: 850px){
+        flex-direction: column;
+    }
 }
 
 ul li{
     display: inline;
-    height: 330px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    @media(min-width: 860px){height: 320px;}
 }
 
 .card{
     background-color: white;
-    box-shadow: 3px 3px 5px 0px rgb(207, 207, 207);
     width: 25%;
     padding: 20px;
     text-align: center;
+    border: 3px solid var(--primary-yellow);
+    @media(max-width: 850px){width: 80%;}
 }
 
 .spacer{
     width: 3% !important;
+    @media(max-width: 850px){display: none;}
 }
 
 p{

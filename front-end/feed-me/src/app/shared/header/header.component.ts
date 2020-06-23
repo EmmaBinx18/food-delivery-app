@@ -15,4 +15,8 @@ export class HeaderComponent {
     this.authService.logout();
   }
 
+  scroll(element: string) {
+    document.getElementById(element).scrollIntoView({ behavior: "smooth" });
+  }
+
 }
