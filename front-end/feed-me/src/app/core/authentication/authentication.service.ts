@@ -67,10 +67,12 @@ export class AuthService {
     //     return await this.firebaseAuth.sendPasswordResetEmail(passwordResetEmail);
     // }
 
-    async logout() {
-        await this.firebaseAuth.signOut();
-        localStorage.removeItem('user');
-        this.router.navigate(['/login']);
+    logout() {
+        this.firebaseAuth.signOut()
+            .then(() => {
+                localStorage.removeItem('user');
+                this.router.navigate(['/login']);
+            });
     }
 
     // async loginWithGoogle() {

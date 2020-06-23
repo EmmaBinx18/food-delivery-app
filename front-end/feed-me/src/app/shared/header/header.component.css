@@ -17,18 +17,18 @@ img{
 }
 
 ul{
-    margin-left: 8%;
+    margin-left: 6%;
 }
 
 ul li{
     display: inline;
-    padding: 15px;
+    padding: 18px;
 }
 
 ul li a{
     font-family: var(--primary-font-family);
     color: white;
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-decoration: none;
 }
 
