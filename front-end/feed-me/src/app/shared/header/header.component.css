@@ -2,8 +2,6 @@
 
 header{
     position: fixed;
-    top: 0;
-    left: 0;
     border: none;
     background-color: var(--primary-green);
     width: 100%;
