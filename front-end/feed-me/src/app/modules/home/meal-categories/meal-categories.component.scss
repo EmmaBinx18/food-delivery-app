@@ -1,12 +1,5 @@
-@import  '../../../../assets/styles/variables.css';
-
-h1{
-    color: var(--primary-dark-blue);
-    font-family: var(--primary-font-family);
-    font-size: 3rem;
-
-    @media(max-width: 850px){font-size: 2rem;}
-}
+@import  '../../../../assets/styles/variables.scss';
+@import '../../../../assets/styles/common.scss';
 
 .categories{
     display: flex;
@@ -20,14 +13,11 @@ h1{
         background-repeat: no-repeat;
         margin: 10px 20px 10px 20px;
         flex-grow: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-shadow: 3px 3px 5px 0px rgb(207, 207, 207);
+        @extend .flex-container;
+        box-shadow: var(--primary-box-shadow);
 
         h2{
             background-color: white;
-            font-family: var(--primary-font-family);
             width: 100%;
             padding: 10px;
         }

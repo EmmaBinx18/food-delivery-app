@@ -1,11 +1,8 @@
-@import '../../../assets/styles/variables.css';
+@import '../../../assets/styles/variables.scss';
+@import '../../../assets/styles/common.scss';
 
 footer{
-    border: none;
-    background-color: var(--primary-green);
-    width: 100%;
-    display: flex;
-    align-items: center;
+    @extend .green-container;
     justify-content: space-around;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -24,38 +21,16 @@ img{
 }
 
 h2{
-    font-family: var(--primary-font-family);
     color: white;
-    font-size: 1.25rem;
     padding-left: 5px;
-
-    @media(max-width: 600px){
-        font-size: 1rem;
-    }
 }
 
-ul{
-    list-style-type: none;
-    padding-inline-start: 0;
+ul li{
+    padding: 5px;
 
-    li{
-        padding: 5px;
-
-        a{
-            color: white;
-            font-size: 1rem;
-            text-decoration: none;
-            font-family: Arial, Helvetica, sans-serif;
-
-            @media(max-width: 600px){
-                font-size: 0.8rem;
-            }
-        }
-
-        &:hover{
-            font-weight: bold;
-            cursor: pointer;
-        }
+    a{
+        font-size: 1rem;
+        @media(max-width: 600px){font-size: 0.8rem;}
     }
 }
 

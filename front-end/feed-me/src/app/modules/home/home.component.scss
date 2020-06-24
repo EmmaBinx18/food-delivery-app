@@ -1,5 +1,5 @@
-@import '../../../assets/styles/variables.css';
-@import '../../../assets/styles/common.css';
+@import '../../../assets/styles/variables.scss';
+@import '../../../assets/styles/common.scss';
 
 .container{
     display: flex;
@@ -24,19 +24,6 @@ main{
     h1, h2, h3{
         color: white;
         display: inline;
-    }
-
-    h1, h2{
-        font-family: var(--primary-font-family);
-    }
-
-    h1{
-        font-size: 2.5rem;
-        @media(max-width: 700px){font-size: 1.3rem;}
-    }
-
-    h2{
-        @media(max-width: 700px){font-size: 1.1rem;}
     }
 
     h3{
