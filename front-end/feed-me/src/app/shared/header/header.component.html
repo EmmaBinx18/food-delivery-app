@@ -14,8 +14,7 @@
             <a (click)="logout()">Logout</a>
         </li>
     </ul>
-    <div *ngIf="!displaySidenav" id="burger-menu" (click)="openNav()">
+    <div *ngIf="!display" id="burger-menu" (click)="openNav()">
         <img src="../../../assets/icons/menu.png" alt="menu" />
     </div>
 </header>
-<app-side-nav [display]="displaySidenav" (closeNavEmitter)="closeNav()"></app-side-nav>

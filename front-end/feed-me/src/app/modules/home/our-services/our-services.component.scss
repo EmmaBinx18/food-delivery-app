@@ -26,11 +26,11 @@ ul li{
 }
 
 .card{
-    background-color: white;
+    background-color: rgb(247, 247, 247);
     width: 25%;
     padding: 20px;
     text-align: center;
-    border: 3px solid var(--primary-yellow);
+    box-shadow: 3px 3px 5px 0px rgb(207, 207, 207);
     @media(max-width: 850px){width: 80%;}
 }
 

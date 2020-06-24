@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 import { AuthService } from '../../core/authentication/authentication.service';
 
@@ -9,7 +9,8 @@ import { AuthService } from '../../core/authentication/authentication.service';
 })
 export class HeaderComponent {
 
-  displaySidenav: boolean = false;
+  @Input() display: boolean;
+  @Output() openNavEmitter = new EventEmitter();
 
   constructor(private authService: AuthService) { }
 
@@ -22,11 +23,7 @@ export class HeaderComponent {
   }
 
   openNav() {
-    this.displaySidenav = false;
-  }
-
-  closeNav() {
-    this.displaySidenav = true;
+    this.openNavEmitter.emit();
   }
 
 }
