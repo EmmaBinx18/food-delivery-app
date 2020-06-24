@@ -1,5 +1,5 @@
 @import '../../../assets/styles/variables.scss';
-@import '../../../assets/styles/variables.scss';
+@import '../../../assets/styles/common.scss';
 
 .side-nav{
     height: 100%;
@@ -18,19 +18,23 @@
         margin-top: 4%;
     }
 
-    ul li{
-        padding-top: 8%;
-        display: flex;
-        align-items: center;
-
-        a{
-            font-family: var(--primary-font-family);
-            font-size: 1.1rem;
-            padding-left: 10%;
-        }
-
-        img{
-            width:30px;
+    ul {
+        padding-left: 10%;
+        
+        li{
+            padding-top: 8%;
+            display: flex;
+            align-items: center;
+    
+            a{
+                font-family: var(--primary-font-family);
+                font-size: 1.1rem;
+                padding-left: 10%;
+            }
+    
+            img{
+                width:30px;
+            }
         }
     }
 }

@@ -16,10 +16,18 @@
         @extend .flex-container;
         box-shadow: var(--primary-box-shadow);
 
+        @media(max-width: 900px){
+            width: 100px;
+            height: 100px;
+            margin: 10px 15px 10px 15px;
+        }
+
         h2{
             background-color: white;
             width: 100%;
             padding: 10px;
+
+            @media(max-width: 900px){font-size: 1.1rem;}
         }
     }
 }
