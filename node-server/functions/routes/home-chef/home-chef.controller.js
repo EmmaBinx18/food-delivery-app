@@ -1,8 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-
 const router = express.Router();
-router.use(bodyParser.json());
 
 router.get('/meals', (req, res) => {
 
@@ -24,4 +21,4 @@ router.patch('/:mealId', (req, res) => {
 
 });
 
-module.exports.homeChefController = router;
+module.exports = router;
