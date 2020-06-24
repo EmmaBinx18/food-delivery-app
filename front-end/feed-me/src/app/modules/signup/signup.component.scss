@@ -46,10 +46,8 @@ h4:hover{
 
 form{
     margin-top: 6%;
-    @media(max-width: 850px){
-        width: 100%;
-        margin-top: 0;
-    }
+    width: 100%;
+    margin-top: 0;
 }
 
 .form-group{
@@ -70,6 +68,10 @@ input[type="text"], input[type="password"]{
 
     @media(max-width: 850px){
         width: 70%;
+        margin-top: 3%;
+    }
+    @media(max-height: 850px){
+        width: 50%;
         margin-top: 3%;
     }
 }
