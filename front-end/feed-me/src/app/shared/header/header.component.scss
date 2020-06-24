@@ -1,0 +1,60 @@
+@import '../../../assets/styles/variables.css';
+
+header{
+    position: fixed;
+    z-index: 1;
+    border: none;
+    background-color: var(--primary-green);
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    #burger-menu{
+        display: none;
+    }
+
+    @media(max-width: 900px){
+        .top-nav{display: none;}
+        #burger-menu{display: block;}
+    }
+}
+
+img{
+    display: inline;
+    width: 380px;
+
+    @media(max-width: 900px){width: 250px;}
+}
+
+.top-nav{
+    position: absolute;
+    right: 4%;
+    bottom: 28%;
+
+    li{
+        display: inline;
+        padding: 22px;
+
+        a{
+            font-family: var(--primary-font-family);
+            color: white;
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+    }
+}
+
+ul li a:hover{
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#burger-menu {
+    width: 100%;
+
+    img{
+        width: 40px;
+        float: right;
+        padding-right: 20px;
+    }
+}

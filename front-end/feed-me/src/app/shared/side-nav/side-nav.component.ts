@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { AuthService } from 'src/app/core/authentication/authentication.service';
 
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
-  styleUrls: ['./side-nav.component.css']
+  styleUrls: ['./side-nav.component.scss']
 })
-export class SideNavComponent implements OnInit {
+export class SideNavComponent {
 
-  constructor() { }
+  @Input() display: boolean;
+  @Output() closeNavEmitter = new EventEmitter();
 
-  ngOnInit(): void {
+  constructor(private authService: AuthService) { }
+
+  logout() {
+    this.authService.logout();
+  }
+
+  closeNav() {
+    this.closeNavEmitter.emit();
   }
 
 }

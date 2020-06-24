@@ -5,9 +5,11 @@ import { AuthService } from '../../core/authentication/authentication.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+
+  displaySidenav: boolean = false;
 
   constructor(private authService: AuthService) { }
 
@@ -17,6 +19,14 @@ export class HeaderComponent {
 
   scroll(element: string) {
     document.getElementById(element).scrollIntoView({ behavior: "smooth" });
+  }
+
+  openNav() {
+    this.displaySidenav = false;
+  }
+
+  closeNav() {
+    this.displaySidenav = true;
   }
 
 }

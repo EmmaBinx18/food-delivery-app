@@ -1,6 +1,6 @@
 <header>
     <img src="../../../assets/logo/logo.png" alt="feedME_logo" />
-    <ul>
+    <ul class="top-nav">
         <li>
             <a [routerLink]="'/home'">Home</a>
         </li>
@@ -14,4 +14,8 @@
             <a (click)="logout()">Logout</a>
         </li>
     </ul>
+    <div *ngIf="!displaySidenav" id="burger-menu" (click)="openNav()">
+        <img src="../../../assets/icons/menu.png" alt="menu" />
+    </div>
 </header>
+<app-side-nav [display]="displaySidenav" (closeNavEmitter)="closeNav()"></app-side-nav>
