@@ -5,6 +5,7 @@ import { User } from '../models/user';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import { UserService } from '../services/user.service';
+import { Role } from '../models/role';
 
 @Injectable({
     providedIn: 'root'
@@ -12,30 +13,46 @@ import { UserService } from '../services/user.service';
 
 export class AuthService {
     currentUser: any;
+    currentRole: Role;
 
     constructor(
         public firebaseAuth: AngularFireAuth,
         public router: Router,
         private userService: UserService
     ) {
+        this.currentRole = Role.Customer;
         this.firebaseAuth.authState.subscribe(user => {
             if (user) {
                 this.currentUser = user;
                 localStorage.setItem('user', JSON.stringify(this.currentUser));
+                // this.currentRole = this.getUser(this.currentUser.uid)['role'];
             } else {
                 localStorage.setItem('user', null);
             }
         });
     }
 
+    getUser(uid: string) {
+        this.userService.getUser(uid)
+            .then(response => {
+                return response;
+            })
+            .catch(() => {
+                throw Error;
+            })
+    }
+
     login(login: any) {
         this.firebaseAuth.signInWithEmailAndPassword(login.email, login.password)
             .then(response => {
                 console.log(response);
+                // this.currentRole = this.getUser(response.user.uid)['role'];
+                this.currentRole = Role.Customer;
                 this.router.navigate(['/home']);
             })
             .catch(error => {
-
+                console.log(error);
+                this.router.navigate(['/login']);
             });
     }
 
@@ -51,10 +68,12 @@ export class AuthService {
 
                 this.currentUser = response;
                 localStorage.setItem('user', JSON.stringify(this.currentUser));
+                this.currentRole = Role.Customer;
                 this.router.navigate(['/home']);
             })
             .catch(error => {
                 console.error(error);
+                this.router.navigate(['/login']);
             });
     }
 

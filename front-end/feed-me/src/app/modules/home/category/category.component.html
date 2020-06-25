@@ -1,0 +1,19 @@
+<div class="container">
+    <app-header [display]="displaySidenav" (openNavEmitter)="openNav()"></app-header>
+    <app-side-nav [display]="displaySidenav" (closeNavEmitter)="closeNav()"></app-side-nav>
+    <main>
+        <div #content class="content">
+            <section>
+                <h1>{{category}}</h1>
+            </section>
+            <section class="category-table">
+                <table>
+                    <tr *ngFor="let business of businesses">
+
+                    </tr>
+                </table>
+            </section>
+        </div>
+    </main>
+    <!-- <app-footer></app-footer> -->
+</div>

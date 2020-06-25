@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-meal-categories',
@@ -40,10 +41,13 @@ export class MealCategoriesComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
     //TODO: fetch images from server
   }
 
+  openCategory(category: string) {
+    this.router.navigate(['/home', category]);
+  }
 }

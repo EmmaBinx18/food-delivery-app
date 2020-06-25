@@ -7,6 +7,12 @@
         <li>
             <a (click)="scroll('categories')">Meal Categories</a>
         </li>
+        <li *ngIf="userRole === 'HomeChef'">
+            <a>Home Chef</a>
+        </li>
+        <li *ngIf="userRole === 'Delivery'">
+            <a>Deliveries</a>
+        </li>
         <li>
             <a>Account</a>
         </li>

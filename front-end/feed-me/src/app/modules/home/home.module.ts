@@ -8,6 +8,7 @@ import { OurServicesComponent } from './our-services/our-services.component';
 import { AccountComponent } from './account/account.component';
 
 import { SharedModule } from '../../shared/shared.module';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { SharedModule } from '../../shared/shared.module';
         MealCategoriesComponent,
         AboutUsComponent,
         OurServicesComponent,
-        AccountComponent
+        AccountComponent,
+        CategoryComponent
     ],
     imports: [
         SharedModule,
