@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 import { AuthService } from 'src/app/core/authentication/authentication.service';
-import { Role } from 'src/app/core/models/role';
+import { Role } from 'src/app/core/models/role.model';
 
 @Component({
   selector: 'app-side-nav',

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 
-import { User } from '../models/user';
+import { User } from '../models/user.model';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import { UserService } from '../services/user.service';
-import { Role } from '../models/role';
+import { Role } from '../models/role.model';
 
 @Injectable({
     providedIn: 'root'
@@ -45,13 +45,12 @@ export class AuthService {
     login(login: any) {
         this.firebaseAuth.signInWithEmailAndPassword(login.email, login.password)
             .then(response => {
-                console.log(response);
                 // this.currentRole = this.getUser(response.user.uid)['role'];
+                this.currentUser = response.user;
                 this.currentRole = Role.Customer;
                 this.router.navigate(['/home']);
             })
             .catch(error => {
-                console.log(error);
                 this.router.navigate(['/login']);
             });
     }

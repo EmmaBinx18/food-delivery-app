@@ -7,6 +7,9 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { OurServicesComponent } from './our-services/our-services.component';
 import { AccountComponent } from './account/account.component';
 
+import { HomeChefModule } from './home-chef/home-chef.module';
+import { DeliveryModule } from './delivery/delivery.module';
+
 import { SharedModule } from '../../shared/shared.module';
 import { CategoryComponent } from './category/category.component';
 
@@ -21,7 +24,9 @@ import { CategoryComponent } from './category/category.component';
     ],
     imports: [
         SharedModule,
-        HomeRoutingModule
+        HomeRoutingModule,
+        HomeChefModule,
+        DeliveryModule
     ]
 })
 export class HomeModule { }

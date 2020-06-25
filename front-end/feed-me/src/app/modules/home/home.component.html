@@ -1,29 +1,29 @@
-<div class="container">
-    <app-header [display]="displaySidenav" (openNavEmitter)="openNav()"></app-header>
-    <app-side-nav [display]="displaySidenav" (closeNavEmitter)="closeNav()"></app-side-nav>
-    <main>
-        <div class="content">
-            <section class="text-div">
-                <h3>The <h2>FEED<h1>ME</h1>
-                    </h2> philosophy is inline with that of an NPO, thereby allowing our home chefs and delivery
-                    personal to
-                    benefit 100% financially</h3>
-            </section>
-            <section>
-                <button class="yellow-button">Register as a Home Chef</button><button
-                    class="delivery-driver yellow-button">Register as
-                    a Delivery Driver</button>
-            </section>
-            <section id="services" class="services">
-                <app-our-services></app-our-services>
-            </section>
-            <section id="aboutUs" class="about-us">
-                <app-about-us></app-about-us>
-            </section>
-            <section id="categories" class="meal-categories">
-                <app-meal-categories></app-meal-categories>
-            </section>
+<app-header [display]="displaySidenav" (openNavEmitter)="openNav()"></app-header>
+<app-side-nav [display]="displaySidenav" (closeNavEmitter)="closeNav()"></app-side-nav>
+<main>
+    <div class="image">
+        <div class="text-div">
+            <h3>The <h2>FEED<h1>ME</h1>
+                </h2> philosophy is inline with that of an NPO, thereby allowing our home chefs and delivery
+                personal to
+                benefit 100% financially</h3>
         </div>
-    </main>
-    <!-- <app-footer></app-footer> -->
-</div>
+        <div class="buttons">
+            <button class="yellow-button" (click)="registerHomeChef()">Register as a Home Chef</button><button
+                class="delivery-driver yellow-button">Register as
+                a Delivery Driver</button>
+        </div>
+        <section id="services" class="services">
+            <app-our-services></app-our-services>
+        </section>
+        <section id="aboutUs" class="about-us">
+            <app-about-us></app-about-us>
+        </section>
+        <section id="categories">
+            <app-meal-categories></app-meal-categories>
+        </section>
+        <app-footer (registerHomeChefEmitter)="registerHomeChef()"></app-footer>
+    </div>
+</main>
+<app-home-chef-register *ngIf="displayRegisterHomeChef" (closeFormEmitter)="closeRegisterBusinessForm()">
+</app-home-chef-register>

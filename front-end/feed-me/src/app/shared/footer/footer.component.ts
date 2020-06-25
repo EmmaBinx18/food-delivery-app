@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 import { AuthService } from '../../core/authentication/authentication.service';
 
@@ -9,6 +9,8 @@ import { AuthService } from '../../core/authentication/authentication.service';
 })
 export class FooterComponent {
 
+  @Output() registerHomeChefEmitter = new EventEmitter();
+
   constructor(private authService: AuthService) { }
 
   logout() {
@@ -17,6 +19,10 @@ export class FooterComponent {
 
   scroll(element: string) {
     document.getElementById(`${element}`).scrollIntoView({ behavior: "smooth" });
+  }
+
+  registerHomeChef() {
+    this.registerHomeChefEmitter.emit();
   }
 
 }

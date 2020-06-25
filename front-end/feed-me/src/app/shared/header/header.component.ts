@@ -1,7 +1,8 @@
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../../core/authentication/authentication.service';
-import { Role } from 'src/app/core/models/role';
+import { Role } from 'src/app/core/models/role.model';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,10 @@ export class HeaderComponent implements OnInit {
 
   userRole: Role;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.userRole = this.authService.currentRole;
@@ -26,7 +30,12 @@ export class HeaderComponent implements OnInit {
   }
 
   scroll(element: string) {
-    document.getElementById(element).scrollIntoView({ behavior: "smooth" });
+    if (this.router.url.match(/home[/]/g)) {
+      this.router.navigate(['/home']);
+    }
+    else {
+      document.getElementById(element).scrollIntoView({ behavior: "smooth" });
+    }
   }
 
   openNav() {

@@ -3,8 +3,8 @@
 
 header{
     @extend .green-container;
-    position: fixed;
-    z-index: 1;
+    position: relative;
+    z-index: 3;
 
     #burger-menu{
         display: none;

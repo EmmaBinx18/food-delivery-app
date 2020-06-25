@@ -10,6 +10,7 @@ export class CategoryComponent implements AfterViewInit, OnInit {
 
   category: string;
   displaySidenav: boolean = false;
+  displayRegisterHomeChef: boolean = false;
   businesses: any;
 
   @ViewChild('content') content: ElementRef;
@@ -19,6 +20,7 @@ export class CategoryComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
+    window.scroll(0, 0);
     //need to fetch all businesses for category
   }
 
@@ -32,6 +34,15 @@ export class CategoryComponent implements AfterViewInit, OnInit {
 
   closeNav() {
     this.displaySidenav = false;
+  }
+
+  registerHomeChef() {
+    window.scroll(0, 0);
+    this.displayRegisterHomeChef = true;
+  }
+
+  closeRegisterBusinessForm() {
+    this.displayRegisterHomeChef = false;
   }
 
 }

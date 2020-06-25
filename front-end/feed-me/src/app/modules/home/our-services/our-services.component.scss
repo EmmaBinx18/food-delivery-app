@@ -20,6 +20,10 @@ ul{
         padding-top: 20px;
         padding-bottom: 20px;
         @media(min-width: 860px){height: 320px;}
+        &:hover{
+            font-weight: normal;
+            cursor: default;
+        }
     }
 }
 
