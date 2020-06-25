@@ -1,0 +1,50 @@
+@import '../../../assets/styles/variables.scss';
+@import '../../../assets/styles/common.scss';
+
+header{
+    @extend .green-container;
+    position: relative;
+    z-index: 3;
+
+    #burger-menu{
+        display: none;
+    }
+
+    @media(max-width: 900px){
+        .top-nav{display: none;}
+        #burger-menu{display: block;}
+    }
+}
+
+img{
+    display: inline;
+    width: 380px;
+
+    @media(max-width: 900px){width: 250px;}
+}
+
+.top-nav{
+    position: absolute;
+    right: 4%;
+    bottom: 28%;
+
+    li{
+        display: inline;
+        padding: 22px;
+
+        a{
+            font-family: var(--primary-font-family);
+            font-size: 1.1rem;
+        }
+    }
+}
+
+#burger-menu {
+    width: 100%;
+
+    img{
+        width: 40px;
+        float: right;
+        padding-right: 20px;
+    }
+}

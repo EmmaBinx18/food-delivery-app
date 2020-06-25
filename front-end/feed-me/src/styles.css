@@ -1,9 +1,13 @@
-@import './assets/styles/variables.css';
+@import './assets/styles/variables.scss';
 
-body{
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
+body, html{
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    min-height: 100%; 
+    position: relative;
 }
 
 *:focus {

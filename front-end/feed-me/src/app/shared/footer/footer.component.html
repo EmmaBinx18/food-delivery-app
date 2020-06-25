@@ -1,1 +1,30 @@
-<p>footer works!</p>
+<footer>
+    <div><img src="../../../assets/logo/logo.png" alt="feedME_logo" /></div>
+    <div class="menu-list">
+        <h2>Menu</h2>
+        <ul>
+            <li><a [routerLink]="'/home'">Home</a></li>
+            <li><a (click)="registerHomeChef()">Register as a Home Chef</a></li>
+            <li><a>Register as a delivery driver</a></li>
+            <li><a (click)="scroll('services')">Our Services</a></li>
+            <li><a (click)="scroll('aboutUs')">About Us</a></li>
+            <li><a (click)="scroll('categories')">Meal Categries</a></li>
+            <li><a>Account</a></li>
+            <li><a (click)="logout()">Logout</a></li>
+        </ul>
+    </div>
+    <div class="contact-list">
+        <h2>Contact Us</h2>
+        <ul>
+            <li><a>feedme@gmail.com</a></li>
+            <li><a>011 798 5478</a></li>
+        </ul>
+    </div>
+    <div class="legal-list">
+        <h2>Legal</h2>
+        <ul>
+            <li><a>Privacy</a></li>
+            <li><a>Terms and Conditions</a></li>
+        </ul>
+    </div>
+</footer>

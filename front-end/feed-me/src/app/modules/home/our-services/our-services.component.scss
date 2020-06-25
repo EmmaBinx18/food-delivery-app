@@ -1,0 +1,68 @@
+@import '../../../../assets/styles/variables.scss';
+@import '../../../../assets/styles/common.scss';
+
+.service-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+ul{
+    @extend .flex-container;
+    margin-left: 2%;
+
+    @media(max-width: 850px){
+        flex-direction: column;
+    }
+
+    li{
+        display: inline;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        @media(min-width: 860px){height: 320px;}
+        &:hover{
+            font-weight: normal;
+            cursor: default;
+        }
+    }
+}
+
+.card{
+    background-color: rgb(247, 247, 247);
+    width: 25%;
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--primary-box-shadow);
+    @media(max-width: 850px){width: 80%;}
+
+    p{
+        font-size: 1.3rem;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 16px;
+
+        @media(max-width: 900px){font-size: 1rem;}
+    }
+}
+
+.spacer{
+    width: 3% !important;
+    @media(max-width: 850px){display: none;}
+}
+
+.circle{
+    background-color: white;
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    margin: auto;
+
+    @media(max-width: 900px){
+        width: 100px;
+        height: 100px;
+    }
+
+    img{
+        margin-top: 16px;
+        @media(max-width: 900px){width: 70px}
+    }
+}

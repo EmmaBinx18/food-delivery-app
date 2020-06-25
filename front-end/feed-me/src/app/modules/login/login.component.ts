@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/core/authentication/authentication.service'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   initForm() {
     return this.formBuilder.group({
-      email: ['', [Validators.required, Validators.pattern('[a-z0-9.@]*')]],
+      email: ['', [Validators.required, Validators.pattern('[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,}')]],
       password: ['', [Validators.required]]
     });
   }

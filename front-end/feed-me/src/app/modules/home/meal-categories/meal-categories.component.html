@@ -1,1 +1,9 @@
-<p>meal-categories works!</p>
+<div>
+    <h1>MEAL CATEGORIES</h1>
+    <div class="categories">
+        <div *ngFor="let category of categories" [class]="category.id"
+            [style.background-image]="'url(&quot;' + category.src + '&quot;)'" (click)="openCategory(category.id)">
+            <h2>{{category.text}}</h2>
+        </div>
+    </div>
+</div>

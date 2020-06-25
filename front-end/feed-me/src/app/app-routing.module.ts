@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './core/guards/auth/auth.guard';
-import { Role } from './core/models/role';
+import { Role } from './core/models/role.model';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -24,10 +24,6 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
     canActivate: [AuthGuard]
-  },
-  {
-    path: 'registerBusiness',
-    loadChildren: () => import('./modules/register-business/register-business.module').then(m => m.RegisterBusinessModule)
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];

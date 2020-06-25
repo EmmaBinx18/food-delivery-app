@@ -50,6 +50,10 @@
                         *ngIf="signupForm.controls.password.errors?.required && signupForm.controls.password.touched">
                         Password is Required
                     </p>
+                    <p class="error"
+                        *ngIf="signupForm.controls.password.errors?.minLength && signupForm.controls.password.touched">
+                        Password must be at least 8 characters
+                    </p>
                 </div>
                 <div class="controls">
                     <input type="password" id="confirmPassword" placeholder="Confirm Password" class="form-control"
@@ -66,9 +70,7 @@
             </div>
 
             <div class="form-control">
-                <div class="controls">
-                    <input class="yellow-button" type="submit" [disabled]="signupForm.invalid" value="SIGNUP" />
-                </div>
+                <button class="yellow-button" type="submit" [disabled]="signupForm.invalid">SIGNUP</button>
             </div>
         </form>
         <div>
