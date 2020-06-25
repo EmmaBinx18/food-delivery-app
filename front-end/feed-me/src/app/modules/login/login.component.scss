@@ -20,9 +20,18 @@ input[type="text"], input[type="password"]{
     @media(max-height: 850px) and (min-height: 1000px){width: 50%;}
 }
 
-input[type="submit"]{
+button[type="submit"]{
     width: 40%;
     @extend .submit-button;
+
+    &:disabled{
+        background-color: rgb(167, 167, 167);
+        color: white;
+
+        &:hover{
+            box-shadow: none;
+        }
+    }
 }
 
 .login-signup-image{
