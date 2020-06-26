@@ -1,0 +1,46 @@
+@import '../../../../assets/styles/variables.scss';
+@import '../../../../assets/styles/common.scss';
+
+main{
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+    height: 600px;
+    opacity: 0.8;
+    position: absolute;
+
+    h1{
+        color: white;
+        text-transform: uppercase;
+        padding-top: 4%;
+        padding-bottom: 1%;
+        background-color: black;
+        margin: auto;
+        margin-top: 2%;
+        width: 90%;
+    }
+
+    @media(max-width: 500px){
+        height: 500px;
+
+        h1{
+            padding-top: 8%;
+        }
+    }
+}
+
+.category-table{
+    background-color: white;
+    box-shadow: var(--primary-box-shadow);
+    width: 90%;
+    height: auto;
+    min-height: 70vh;
+    margin: auto;
+    margin-top: 2%;
+    margin-bottom: 4%;
+
+    table{
+        width: 100%;
+    }
+}

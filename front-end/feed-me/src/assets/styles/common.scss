@@ -1,0 +1,124 @@
+@import './variables.scss';
+
+.flex-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    font-size: 3rem;
+    @media(max-width: 850px){font-size: 2rem;}
+}
+
+h1, h2, h3, h4, h5{
+    font-family: var(--primary-font-family);
+    color: var(--primary-dark-blue);
+}
+
+h4{
+    font-weight: bolder;
+    &:hover{
+        font-size: 1.1rem;
+        cursor: pointer;
+    }
+}
+
+.yellow-button{
+    background-color: var(--primary-yellow);
+    color: var(--primary-dark-blue);
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+    font-family: var(--primary-font-family);
+
+    &:hover{
+        box-shadow: var(--primary-box-shadow);
+        cursor: pointer;
+    }
+}
+
+.form-headings{
+    font-family: var(--primary-font-family);
+}
+
+.error{
+    color: var(--primary-error);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+form{
+    margin-top: 6%;
+    width: 100%;
+    margin-top: 0;
+
+    .form-group{
+        margin-top: 2%;
+    }
+
+    input::placeholder{
+        color: var(--primary-dark-blue);
+    }
+}
+
+.submit-button{
+    margin-top: 6%;
+    margin-bottom: 6%;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.form-input{
+    border: 1px solid var(--primary-dark-blue);
+    border-radius: 8px;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+.white-container{
+    background-color: white;
+    border: none;
+    box-shadow: var(--primary-box-shadow);
+    text-align: center;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    flex-direction: column;
+    @extend .flex-container;
+}
+
+.green-container{
+    border: none;
+    background-color: var(--primary-green);
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.overlay{
+    width: 100%;
+    height: 100vh;
+    background-color: grey;
+    position: absolute;
+    top: 0;
+    opacity: 0.8;
+    z-index: 4;
+}
+
+ul{
+    list-style-type: none;
+    padding-inline-start: 0;
+
+    li{
+        a{
+            color: white;
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        &:hover{
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+}
