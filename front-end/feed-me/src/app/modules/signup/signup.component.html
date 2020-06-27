@@ -1,1 +1,81 @@
-<p>signup works!</p>
+<div class="login-signup-image flex-container">
+    <div class="form-container">
+        <h1>SIGNUP</h1>
+        <form [formGroup]="signupForm" (ngSubmit)="signup()">
+            <div class="form-group">
+                <div class="controls">
+                    <input type="text" id="firstname" placeholder="Firstname" class="form-control"
+                        formControlName="firstname">
+                    <p class="error"
+                        *ngIf="signupForm.controls.firstname.errors?.required && signupForm.controls.firstname.touched">
+                        Firstname is Required
+                    </p>
+                </div>
+                <div class="controls">
+                    <input type="text" id="lastname" placeholder="Lastname" class="form-control"
+                        formControlName="lastname">
+                    <p class="error"
+                        *ngIf="signupForm.controls.lastname.errors?.required && signupForm.controls.lastname.touched">
+                        Lastname is Required
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="controls">
+                    <input type="text" id="phone" placeholder="Phone" class="form-control" formControlName="phone">
+                    <p class="error"
+                        *ngIf="signupForm.controls.phone.errors?.required && signupForm.controls.phone.touched">
+                        Phone Number is Required
+                    </p>
+                </div>
+                <div class="controls">
+                    <input type="text" id="email" placeholder="Email" class="form-control" formControlName="email">
+                    <p class="error"
+                        *ngIf="signupForm.controls.email.errors?.required && signupForm.controls.email.touched">
+                        Email is Required
+                    </p>
+                    <p class="error"
+                        *ngIf="signupForm.controls.email.errors?.pattern && signupForm.controls.email.touched">
+                        Please enter a valid email
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="controls">
+                    <input type="password" id="password" placeholder="Password" class="form-control"
+                        formControlName="password">
+                    <p class="error"
+                        *ngIf="signupForm.controls.password.errors?.required && signupForm.controls.password.touched">
+                        Password is Required
+                    </p>
+                    <p class="error"
+                        *ngIf="signupForm.controls.password.errors?.minLength && signupForm.controls.password.touched">
+                        Password must be at least 8 characters
+                    </p>
+                </div>
+                <div class="controls">
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" class="form-control"
+                        formControlName="confirmPassword">
+                    <p class="error"
+                        *ngIf="signupForm.controls.confirmPassword.errors?.required && signupForm.controls.confirmPassword.touched">
+                        Confirm Password is Required
+                    </p>
+                    <p class="error"
+                        *ngIf="signupForm.controls.confirmPassword.errors?.passwordMismatch && signupForm.controls.confirmPassword.touched">
+                        Passwords don't match
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-control">
+                <button class="yellow-button" type="submit" [disabled]="signupForm.invalid">SIGNUP</button>
+            </div>
+        </form>
+        <div>
+            <h5>Already have an account?</h5>
+            <h4 [routerLink]="'/login'">LOGIN</h4>
+        </div>
+    </div>
+</div>

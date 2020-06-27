@@ -76,15 +76,6 @@ export class AuthService {
             });
     }
 
-    // async sendEmailVerification() {
-    //     await (await this.firebaseAuth.currentUser).sendEmailVerification();
-    //     this.router.navigate(['admin/verify-email']); //Change router according to user
-    // }
-
-    // async sendPasswordResetEmail(passwordResetEmail: string) {
-    //     return await this.firebaseAuth.sendPasswordResetEmail(passwordResetEmail);
-    // }
-
     logout() {
         this.firebaseAuth.signOut()
             .then(() => {
@@ -92,9 +83,4 @@ export class AuthService {
                 this.router.navigate(['/login']);
             });
     }
-
-    // async loginWithGoogle() {
-    //     await this.firebaseAuth.signInWithPopup(new auth.GoogleAuthProvider())
-    //     this.router.navigate(['admin/list']);
-    // }
 }

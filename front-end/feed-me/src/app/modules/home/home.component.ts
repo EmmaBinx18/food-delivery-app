@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,7 +12,7 @@ export class HomeComponent implements OnInit {
   displaySidenav: boolean = false;
   displayRegisterHomeChef: boolean = false;
 
-  constructor() { }
+  constructor(public snackbar: SnackbarService) { }
 
   ngOnInit() {
     window.scroll(0, 0);
