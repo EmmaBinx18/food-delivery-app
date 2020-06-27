@@ -16,7 +16,7 @@ import { MapComponent } from './modules/map/map.component';
   declarations: [AppComponent, MapComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    // AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule
   ],

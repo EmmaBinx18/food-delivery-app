@@ -14,8 +14,7 @@ export const environment = {
     appId: "1:2473855286:web:da00e89eabb5c5624a8b97",
     measurementId: "G-D46M7L07MZ"
   },
-  mapbox: 
-  {
+  mapbox: {
     accessToken: 'pk.eyJ1IjoiZmVlZG1ld2ViYXBwIiwiYSI6ImNrYnY1czVxdzAwNmQzMGxieTU4MnZraWEifQ.NQrq1y608FyGnM3Z7nmghg'
   },
   serverUrl: 'http://localhost:5001/feedme-208a2/us-central1/app'

@@ -14,12 +14,12 @@ export class MapComponent implements OnInit {
   constructor() { }
   ngOnInit() {
     //mapboxgl.accessToken = environment.mapbox.accessToken;
-      this.map = new mapboxgl.Map({
-        accessToken: environment.mapbox.accessToken,
-        container: 'map',
-        style: this.style,
-        zoom: 13,
-        center: [this.lng, this.lat]
+    this.map = new mapboxgl.Map({
+      accessToken: environment.mapbox.accessToken,
+      container: 'map',
+      style: this.style,
+      zoom: 13,
+      center: [this.lng, this.lat]
     });
     // Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
