@@ -43,9 +43,9 @@ BEGIN
 			@email VARCHAR(255)
 
 		BEGIN TRY
-			SELECT @id = id,  @firstname=[firstname], @lastname=lastname, @phone=phone, @email=email
+			SELECT @id = id,  @firstname= firstname, @lastname=lastname, @phone=phone, @email=email
 			FROM OPENJSON(@JSON)
-			WITH (id VARCHAR(128), [firstname] NVARCHAR(100),lastname NVARCHAR(100), phone  NVARCHAR(15), email VARCHAR(255))
+			WITH (id VARCHAR(128), firstname NVARCHAR(100),lastname NVARCHAR(100), phone  NVARCHAR(15), email VARCHAR(255))
 			
 			IF EXISTS (SELECT id FROM [User] WHERE id = @id)
 				BEGIN
