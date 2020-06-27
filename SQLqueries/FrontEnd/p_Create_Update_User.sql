@@ -12,14 +12,14 @@ GO
 -- SAMPLE JSON:
 -- { 
 --    "id": "string", 
---    "name": "string", 
---    "surname" : "string", 
---    "cellphoneNo": "string", 
+--    "firstname": "string", 
+--    "lastname" : "string", 
+--    "phone": "string", 
 --    "email": "string"
 -- } 
  /*
     DECLARE @Error int 
-	EXEC p_Create_Update_User '{ "id" : "uniqueidentifier", "name" : "Susan1", "surname" : "van Zyl", "cellphoneNo" : "0794920995", "email" : "susan0995@gmail.com"  }', @Error OUTPUT
+	EXEC p_Create_Update_User '{ "id" : "uniqueidentifier", "firstname" : "Susan1", "lastname" : "van Zyl", "phone" : "0794920995", "email" : "susan0995@gmail.com"  }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [User]
 */
@@ -37,30 +37,30 @@ BEGIN
 	SET NOCOUNT ON;
 	
 	DECLARE	@id VARCHAR(128), 
-			@name NVARCHAR(100), 
-			@surname NVARCHAR(100), 
-			@cellphoneNo  NVARCHAR(15), 
+			@firstname NVARCHAR(100), 
+			@lastname NVARCHAR(100), 
+			@phone  NVARCHAR(15), 
 			@email VARCHAR(255)
 
 		BEGIN TRY
-			SELECT @id = id,  @name=[name], @surname=surname, @cellphoneNo=cellphoneNo, @email=email
+			SELECT @id = id,  @firstname=[firstname], @lastname=lastname, @phone=phone, @email=email
 			FROM OPENJSON(@JSON)
-			WITH (id VARCHAR(128), [name] NVARCHAR(100),surname NVARCHAR(100), cellphoneNo  NVARCHAR(15), email VARCHAR(255))
+			WITH (id VARCHAR(128), [firstname] NVARCHAR(100),lastname NVARCHAR(100), phone  NVARCHAR(15), email VARCHAR(255))
 			
 			IF EXISTS (SELECT id FROM [User] WHERE id = @id)
-			BEGIN
-				UPDATE [User]
-				SET [Name] = @name,
-					[Surname] = @surname,
-					[CellphoneNo] = @cellphoneNo,
-					[Email] = @email
-				WHERE id = @id
-			END
+				BEGIN
+					UPDATE [User]
+					SET [firstname] = @firstname,
+						[lastname] = @lastname,
+						[phone] = @phone,
+						[Email] = @email
+					WHERE id = @id
+				END
 			ELSE
-			BEGIN
-				INSERT INTO [User] (id, [Name], Surname, CellphoneNo, Email)
-				VALUES (@id, @name, @surname, @cellphoneNo, @email)
-			END	
+				BEGIN
+					INSERT INTO [User] (id, [firstname], lastname, phone, email)
+					VALUES (@id, @firstname, @lastname, @phone, @email)
+				END	
 					
 			SET @Error = 0
 		END TRY
