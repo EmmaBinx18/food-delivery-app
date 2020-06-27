@@ -1,0 +1,48 @@
+@import '../../../assets/styles/variables.scss';
+
+.snackbar-container{
+    position: fixed;
+    margin: auto;
+    top: 14%;
+    width: 100%;
+    z-index: 200;
+
+    @media(max-width: 900px){
+        top: 9%;
+    }
+}
+
+#snackbar {
+    visibility: hidden;
+    margin: auto;
+    background-color: white;
+    border-radius: 8px;
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    box-shadow: var(--primary-box-shadow);
+
+    h3{
+        color: var(--primary-dark-blue);
+        font-family: Arial, Helvetica, sans-serif;
+    }
+}
+
+#snackbar.show {
+    visibility: visible;
+    animation: fadein 0.5s;
+}
+
+#snackbar.hide {
+    animation: fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
