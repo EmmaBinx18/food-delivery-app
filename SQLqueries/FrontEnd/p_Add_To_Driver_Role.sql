@@ -36,6 +36,8 @@ BEGIN
 		INSERT INTO [UserRole]
 		VALUES (@userId, @RoleDId)
 
+		SELECT @@ROWCOUNT 
+
 		SET @Error = 0
 	END TRY
 	BEGIN CATCH

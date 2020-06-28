@@ -50,7 +50,7 @@ BEGIN
 				SET operationalStatusId = @operationalStatusOId
 			WHERE businessId = @businessId			
 		END
-
+	SELECT @@ROWCOUNT
 	SET @Error = 0
 END
 GO

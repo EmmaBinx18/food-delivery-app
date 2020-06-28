@@ -6,7 +6,7 @@ GO
 -- =============================================
 -- Author:		Susan van Zyl
 -- Create date: 2020-06-27
--- Description:	Complete Order Product ; Expects productId, orderId; Returns affected rowcount 
+-- Description:	Assign the given driver to the order ; Expects productId, orderId; Returns affected rowcount 
 -- 
 -- Usage: 
  /*
@@ -28,27 +28,35 @@ CREATE PROCEDURE p_Assign_Order_Driver
 AS
 BEGIN
 	SET NOCOUNT ON;
+	BEGIN TRANSACTION
+		BEGIN TRY
+			DECLARE @OrderStatusDId INT, @orderId INT,  @driverId VARCHAR(128), @deliveryStatusPId INT, @deliveryId INT
+			SELECT @OrderStatusDId = OrderStatusId FROM OrderStatus WHERE [Name] LIKE 'Delivery_In_Progess';
+			SELECT @deliveryStatusPId = deliveryStatusId FROM deliveryStatus WHERE [Name] LIKE  'Picking_up_items';
 
-	DECLARE @OrderStatusDId INT, @orderId INT,  @driverId VARCHAR(128), @deliveryStatusPId INT, @deliveryId INT
-	SELECT @OrderStatusDId = OrderStatusId FROM OrderStatus WHERE [Name] LIKE 'Delivery_In_Progess';
-	SELECT @deliveryStatusPId = deliveryStatusId FROM deliveryStatus WHERE [Name] LIKE  'Picking_up_items';
+			SELECT @orderId = orderId, @driverId = driverId
+			FROM OPENJSON(@JSON)
+			WITH (orderId INT, driverId VARCHAR(128));
+		
+			INSERT INTO Delivery (startTime, [deliveryStatusId], [driverId])
+			VALUES(GETDATE(),@deliveryStatusPId,@driverId)
 
-	SELECT @orderId = orderId, @driverId = driverId
-	FROM OPENJSON(@JSON)
-	WITH (orderId INT, driverId VARCHAR(128));
+			SET @deliveryId = SCOPE_IDENTITY()
 
-	INSERT INTO Delivery (startTime, [deliveryStatusId], [driverId])
-	VALUES(GETDATE(),@deliveryStatusPId,@driverId)
+			UPDATE [Order]
+				SET orderStatusId = @OrderStatusDId,
+					deliveryId = @deliveryId
+			WHERE orderId = @orderId
 
-	SET @deliveryId = SCOPE_IDENTITY()
+			SELECT @@ROWCOUNT
 
-	UPDATE [Order]
-		SET orderStatusId = @OrderStatusDId,
-			deliveryId = @deliveryId
-	WHERE orderId = @orderId
-
-	SELECT @@ROWCOUNT
-
-	SET @Error = 0
+			SET @Error = 0
+			COMMIT
+		END TRY
+		BEGIN CATCH
+			ROLLBACK
+			EXEC p_Insert_Error @Error OUTPUT
+		END CATCH
+	
 END
 GO
