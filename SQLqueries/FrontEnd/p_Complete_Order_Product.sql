@@ -45,16 +45,15 @@ BEGIN
 
 	--Check if all items are ready in particular order id
 	DECLARE @OrderStatusPId INT,@OrderStatusRId INT, @outstandingProducts INT
-	SELECT @OrderStatusPId = OrderStatusId FROM [OrderStatus] WHERE [Name] LIKE 'Products_not_ready';
 	SELECT @OrderStatusRId = OrderStatusId FROM [OrderStatus] WHERE [Name] LIKE 'Waiting_for_driver';
 
-	WITH available_orders AS
+	WITH selected_order AS
 	(
-		SELECT orderId, orderDateTime FROM [Order] WHERE [OrderStatusId] = @OrderStatusPId
+		SELECT orderId, orderDateTime FROM [Order] WHERE orderId = @orderId 
 	)
 	SELECT @outstandingProducts =  COUNT(*)
-	FROM available_orders ao
-	INNER JOIN OrderProduct OP ON OP.orderId = ao.orderId AND  OrderProductStatusId <> @OrderProductStatusR
+	FROM selected_order ao
+	INNER JOIN OrderProduct OP ON OP.orderId = ao.orderId AND  OrderProductStatusId <> @OrderProductStatusR  --there should not be any Picked_up items in this stage
 
 	IF (@outstandingProducts = 0)
 	BEGIN
@@ -62,9 +61,6 @@ BEGIN
 		SET OrderStatusId = @OrderStatusRId
 		WHERE orderId = @orderId 
 	END
-
-
-	
 
 	SET @Error = 0
 END
