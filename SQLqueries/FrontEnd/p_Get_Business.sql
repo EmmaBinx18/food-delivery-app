@@ -6,7 +6,7 @@ GO
 -- =============================================
 -- Author:		Susan van Zyl
 -- Create date: 2020-06-26
--- Description:	Find a user given the business id - returns JSON string
+-- Description:	Find a business given the business id or all when null - returns JSON string
 -- 
 -- Usage:   EXEC p_Get_Business 1
 /*

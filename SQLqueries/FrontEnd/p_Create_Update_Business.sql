@@ -18,9 +18,8 @@ GO
 -- } 
  /*
     DECLARE @Error int 
-	EXEC p_Create_Update_Business '{ "businessId" : -1, "name": "My Business", "addressId" : 1,  "categoryId" : 1 }', @Error OUTPUT
+	EXEC p_Create_Update_Business '{ "businessId" : -1, "name": "My Business", "addressId" : 1,  "categoryId" : 1, "userId" : "chef_uid" }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
-	SELECT * FROM [Business]
 */
 -- =============================================
 
@@ -42,11 +41,12 @@ BEGIN
 				@name NVARCHAR(100), 
 				@categoryId INT, 
 				@addressId INT,
-				@operationalStatusId INT
+				@operationalStatusId INT,
+				@userId VARCHAR(128)
 
-				SELECT @businessId = businessId,  @name=[name], @categoryId=categoryId, @addressId = addressId
+				SELECT @businessId = businessId,  @name=[name], @categoryId=categoryId, @addressId = addressId, @userId = userId
 				FROM OPENJSON(@JSON)
-				WITH (businessId int, [name] NVARCHAR(100),categoryId INT,addressId INT)
+				WITH (businessId int, [name] NVARCHAR(100),categoryId INT,addressId INT, userId VARCHAR(128))
 
 				IF EXISTS (SELECT businessId FROM [Business] WHERE businessId = @businessId)
 				BEGIN
@@ -58,9 +58,20 @@ BEGIN
 				END
 				ELSE
 				BEGIN
+				    DECLARE @RoleCId INT;
+					SELECT @RoleCId = roleID FROM [Role] WHERE [Name] LIKE 'Home_Chef'
+
 					SET @OperationalStatusId = (SELECT operationalStatusId FROM OperationalStatus WHERE [Name] LIKE 'Pending_Approval')
 					INSERT INTO [Business] ( [Name], CategoryId, AddressId, OperationalStatusId)
 					VALUES ( @name, @categoryId, @addressId, 1)
+
+					SET @businessId = SCOPE_IDENTITY()
+
+					INSERT INTO [BusinessUser] 
+					VALUES (@userId,@businessId)
+
+					INSERT INTO [UserRole] 
+					VALUES (@userId, @RoleCId)
 				END	
 					
 				SET @Error = 0

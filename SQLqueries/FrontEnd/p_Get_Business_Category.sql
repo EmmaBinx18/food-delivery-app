@@ -6,7 +6,7 @@ GO
 -- =============================================
 -- Author:		Susan van Zyl
 -- Create date: 2020-06-26
--- Description:	Find a user given the business id - returns JSON string
+-- Description:	Find the category of a given the business id - returns JSON string
 -- 
 -- Usage:   
 /*
@@ -31,7 +31,7 @@ BEGIN
 	DECLARE @categoryid VARCHAR(128)
 	SELECT @categoryid = categoryid
 	FROM OPENJSON(@JSON) 
-	WITH (categoryid VARCHAR(128) )
+	WITH (categoryid INT )
 
 	SET NOCOUNT ON;
 	SELECT *
