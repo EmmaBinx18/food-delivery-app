@@ -11,8 +11,7 @@ GO
 -- Usage:   
 /*
 	DECLARE @Error int 
-	EXEC p_Get_Business_Category '{ "categoryid" : null }', @Error OUTPUT
-	--OR  EXEC p_Get_Business_Category '{ "categoryid" : 1 }', @Error OUTPUT
+	EXEC p_Get_Business_Category '{ "categoryid" : 1 }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [Business]
 */
