@@ -10,7 +10,7 @@ GO
 -- Usage : 
  /*
     DECLARE @Error int 
-	EXEC p_Create_Address '{ "id" : -1, "streetName" : "Street12", "suburb" : "Suburb1", "zipCode" : "1234", "streetNo" : 1,"complexName" : "Complex1", "houseNo"  : 1, "cityId" : 1 }', @Error OUTPUT
+	EXEC p_Create_Update_Address '{ "addressId" : -1, "streetName" : "Street12", "suburb" : "Suburb1", "zipCode" : "1234", "streetNo" : 1,"complexName" : "Complex1", "houseNo"  : 1, "cityId" : 1 }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [Address]
 */
@@ -28,7 +28,7 @@ BEGIN
 
 	BEGIN TRANSACTION
 		BEGIN TRY
-			DECLARE @id INT,
+			DECLARE @addressId INT,
 					@streetName VARCHAR(255),
 					@suburb VARCHAR(255),
 					@zipCode VARCHAR(7),
@@ -37,12 +37,12 @@ BEGIN
 					@houseNo INT,
 					@cityId INT
 
-			SELECT @id = id, @streetName=streetName, @suburb = suburb, @zipCode = zipCode, @streetNo = streetNo, @complexName = complexName, @houseNo = houseNo, @cityId = cityId
+			SELECT @addressId = addressId, @streetName=streetName, @suburb = suburb, @zipCode = zipCode, @streetNo = streetNo, @complexName = complexName, @houseNo = houseNo, @cityId = cityId
 			FROM OPENJSON(@JSON)
-			WITH (id INT, streetName VARCHAR(255),suburb VARCHAR(255),zipCode VARCHAR(7),streetNo INT,complexName VARCHAR(255),houseNo INT,cityId INT)
+			WITH (addressId INT, streetName VARCHAR(255),suburb VARCHAR(255),zipCode VARCHAR(7),streetNo INT,complexName VARCHAR(255),houseNo INT,cityId INT)
 			
 			--SELECT @streetName ,@suburb ,@zipCode,@streetNo ,@complexName ,@houseNo ,@cityId 
-			IF EXISTS (SELECT id FROM [Address] WHERE id = @id)
+			IF EXISTS (SELECT addressId FROM [Address] WHERE addressId = @addressId)
 				BEGIN
 					UPDATE [Address]
 					SET	streetName= @streetName, 
@@ -52,13 +52,13 @@ BEGIN
 						complexName = @complexName, 
 						houseNo = @houseNo, 
 						cityId = @cityId
-					WHERE id = @id
+					WHERE addressId = @addressId
 				END
 			ELSE
 				BEGIN		
 					INSERT INTO [Address]
 					VALUES (@StreetName, @Suburb, @ZipCode, @StreetNo, @ComplexName, @HouseNo, @CityId)
-					SET @id = SCOPE_IDENTITY()
+					SET @addressId = SCOPE_IDENTITY()
 				END
 			
 			SET @Error = 0 

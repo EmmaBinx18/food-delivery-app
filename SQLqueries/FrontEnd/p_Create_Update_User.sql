@@ -9,17 +9,17 @@ GO
 -- Description:	Create a user via JSON string on the Feed Me web application
 -- 
 -- Usage:
--- SAMPLE JSON:
--- { 
---    "id": "string", 
---    "firstname": "string", 
---    "lastname" : "string", 
---    "phone": "string", 
---    "email": "string"
--- } 
+ --SAMPLE JSON:
+ --{ 
+ --   "userId": "string", 
+ --   "firstname": "string", 
+ --   "lastname" : "string", 
+ --   "phone": "string", 
+ --   "email": "string"
+ --} 
  /*
     DECLARE @Error int 
-	EXEC p_Create_Update_User '{ "id" : "uniqueidentifier", "firstname" : "Susan1", "lastname" : "van Zyl", "phone" : "0794920995", "email" : "susan0995@gmail.com"  }', @Error OUTPUT
+	EXEC p_Create_Update_User '{ "userId" : "uniqueidentifier", "firstname" : "Susan1", "lastname" : "van Zyl", "phone" : "0794920995", "email" : "susan0995@gmail.com"  }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [User]
 */
@@ -36,30 +36,30 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	DECLARE	@id VARCHAR(128), 
+	DECLARE	@userId VARCHAR(128), 
 			@firstname NVARCHAR(100), 
 			@lastname NVARCHAR(100), 
 			@phone  NVARCHAR(15), 
 			@email VARCHAR(255)
 
 		BEGIN TRY
-			SELECT @id = id,  @firstname= firstname, @lastname=lastname, @phone=phone, @email=email
+			SELECT @userId = userId,  @firstname= firstname, @lastname=lastname, @phone=phone, @email=email
 			FROM OPENJSON(@JSON)
-			WITH (id VARCHAR(128), firstname NVARCHAR(100),lastname NVARCHAR(100), phone  NVARCHAR(15), email VARCHAR(255))
+			WITH (userId VARCHAR(128), firstname NVARCHAR(100),lastname NVARCHAR(100), phone  NVARCHAR(15), email VARCHAR(255))
 			
-			IF EXISTS (SELECT id FROM [User] WHERE id = @id)
+			IF EXISTS (SELECT userId FROM [User] WHERE userId = @userId)
 				BEGIN
 					UPDATE [User]
 					SET [firstname] = @firstname,
 						[lastname] = @lastname,
 						[phone] = @phone,
 						[Email] = @email
-					WHERE id = @id
+					WHERE userId = @userId
 				END
 			ELSE
 				BEGIN
-					INSERT INTO [User] (id, [firstname], lastname, phone, email)
-					VALUES (@id, @firstname, @lastname, @phone, @email)
+					INSERT INTO [User] (userId, [firstname], lastname, phone, email)
+					VALUES (@userId, @firstname, @lastname, @phone, @email)
 				END	
 					
 			SET @Error = 0

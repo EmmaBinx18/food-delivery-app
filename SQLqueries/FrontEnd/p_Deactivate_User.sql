@@ -8,7 +8,13 @@ GO
 -- Create date: 2020-06-26
 -- Description:	Deactivate a user given the user id
 -- 
--- Usage:   EXEC p_Deactivate_User '123' 
+-- Usage: 
+ /*
+    DECLARE @Error int 
+	EXEC p_Deactivate_User '{ "userId" : "uniqueidentifier"}', @Error OUTPUT
+	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
+	SELECT * FROM [User]
+*/
 -- =============================================
 
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Deactivate_User')
@@ -16,12 +22,22 @@ IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Deactivate_Us
 GO
 
 CREATE PROCEDURE p_Deactivate_User 
-	@id VARCHAR(128)
+	@JSON VARCHAR(MAX),
+	@Error INT OUTPUT
+
 AS
 BEGIN
+
+	DECLARE	@userId VARCHAR(128)
+	SELECT @userId = userId
+	FROM OPENJSON(@JSON)
+	WITH (userId VARCHAR(128) )
+
 	SET NOCOUNT ON;
 	UPDATE [User]
 	SET [isActive] = 0
-	WHERE id = @id			
+	WHERE userId = @userId			
+
+	SET @Error = 0
 END
 GO

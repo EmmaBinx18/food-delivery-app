@@ -8,7 +8,14 @@ GO
 -- Create date: 2020-06-26
 -- Description:	Find a user given the user id - returns JSON string
 -- 
--- Usage:   EXEC p_Get_User 'admin_uid' 
+-- Usage:   
+/*
+	DECLARE @Error int 
+	EXEC p_Get_User '{ "userId" : null }', @Error OUTPUT 
+	--OR EXEC p_Get_User '{ "userId" : "admin_uid" }', @Error OUTPUT
+	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
+	SELECT * FROM [User]
+*/
 -- =============================================
 
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Get_User')
@@ -16,27 +23,35 @@ IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Get_User')
 GO
 
 CREATE PROCEDURE p_Get_User 
-	@id VARCHAR(128) NULL
+	@JSON VARCHAR(MAX),
+	@Error INT OUTPUT
 AS
 BEGIN
 	SET NOCOUNT ON;
 
-	IF (@id IS NULL)
+	DECLARE @userId VARCHAR(128)
+	SELECT @userId = userId
+	FROM OPENJSON(@JSON) 
+	WITH (userId VARCHAR(128) )
+
+	IF (@userId IS NULL)
 		BEGIN
 			SELECT U.*, ISNULL(UR.RoleId,0) [roleid]
 			FROM [User] U
-			LEFT OUTER JOIN [UserRole] UR ON UR.UserId = U.ID 
+			LEFT OUTER JOIN [UserRole] UR ON UR.UserId = U.userId 
 			FOR JSON PATH	 
+			
+			
 		END
 	ELSE
 		BEGIN
 			SELECT U.*, ISNULL(UR.RoleId,0) [roleid]
 			FROM [User] U
-			LEFT OUTER JOIN [UserRole] UR ON UR.UserId = U.ID 
-			WHERE U.id = @id
+			LEFT OUTER JOIN [UserRole] UR ON UR.UserId = U.userId 
+			WHERE U.userId = @userId
 			FOR JSON PATH	
 		END
-
+	SET @Error = 0
 END
 GO
 

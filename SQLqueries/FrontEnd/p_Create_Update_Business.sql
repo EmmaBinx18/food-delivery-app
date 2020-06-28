@@ -11,14 +11,14 @@ GO
 -- Usage:
 -- SAMPLE JSON:
 -- { 
---    "id": int, 
+--    "businessId": int, 
 --    "name": "string", 
 --    "addressId" : int, 
 --    "categoryId": int
 -- } 
  /*
     DECLARE @Error int 
-	EXEC p_Create_Update_Business '{ "id" : -1, "name": "My Business", "addressId" : 2,  "categoryId" : 1 }', @Error OUTPUT
+	EXEC p_Create_Update_Business '{ "businessId" : -1, "name": "My Business", "addressId" : 1,  "categoryId" : 1 }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [Business]
 */
@@ -38,27 +38,27 @@ BEGIN
 		BEGIN TRANSACTION 
 			BEGIN TRY
 			
-				DECLARE	@id INT, 
+				DECLARE	@businessId INT, 
 				@name NVARCHAR(100), 
 				@categoryId INT, 
 				@addressId INT,
 				@operationalStatusId INT
 
-				SELECT @id = id,  @name=[name], @categoryId=categoryId, @addressId = addressId
+				SELECT @businessId = businessId,  @name=[name], @categoryId=categoryId, @addressId = addressId
 				FROM OPENJSON(@JSON)
-				WITH (id int, [name] NVARCHAR(100),categoryId INT,addressId INT)
+				WITH (businessId int, [name] NVARCHAR(100),categoryId INT,addressId INT)
 
-				IF EXISTS (SELECT id FROM [Business] WHERE id = @id)
+				IF EXISTS (SELECT businessId FROM [Business] WHERE businessId = @businessId)
 				BEGIN
 					UPDATE [Business]
 					SET [name] = @name, 
 						categoryId= @categoryId, 
 						addressId = @addressId
-					WHERE id = @id
+					WHERE businessId = @businessId
 				END
 				ELSE
 				BEGIN
-					SET @OperationalStatusId = (SELECT id FROM OperationalStatus WHERE [Name] LIKE 'Pending_Approval')
+					SET @OperationalStatusId = (SELECT operationalStatusId FROM OperationalStatus WHERE [Name] LIKE 'Pending_Approval')
 					INSERT INTO [Business] ( [Name], CategoryId, AddressId, OperationalStatusId)
 					VALUES ( @name, @categoryId, @addressId, 1)
 				END	

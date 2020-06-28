@@ -8,7 +8,14 @@ GO
 -- Create date: 2020-06-26
 -- Description:	Find a user given the business id - returns JSON string
 -- 
--- Usage:   EXEC p_Get_Business 1
+-- Usage:   
+/*
+	DECLARE @Error int 
+	EXEC p_Get_Business_Category '{ "categoryid" : null }', @Error OUTPUT
+	--OR  EXEC p_Get_Business_Category '{ "categoryid" : 1 }', @Error OUTPUT
+	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
+	SELECT * FROM [Business]
+*/
 -- =============================================
 
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Get_Business_Category')
@@ -16,13 +23,22 @@ IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Get_Business_
 GO
 
 CREATE PROCEDURE p_Get_Business_Category 
-	@categoryid int 
+	@JSON VARCHAR(MAX),
+	@Error INT OUTPUT 
 AS
 BEGIN
+
+	DECLARE @categoryid VARCHAR(128)
+	SELECT @categoryid = categoryid
+	FROM OPENJSON(@JSON) 
+	WITH (categoryid VARCHAR(128) )
+
 	SET NOCOUNT ON;
 	SELECT *
 	FROM [Business]
 	WHERE categoryId = @categoryid
 	FOR JSON PATH	 
+
+	SET @Error = 0
 END
 GO

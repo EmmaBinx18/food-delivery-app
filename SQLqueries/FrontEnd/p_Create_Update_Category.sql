@@ -10,7 +10,7 @@ GO
 -- Usage : 
  /*
     DECLARE @Error int 
-	EXEC p_Create_Update_Category '{ "id" : -1, "name" : "Category Name", "description" : "Category Description"}', @Error OUTPUT
+	EXEC p_Create_Update_Category '{ "categoryId" : -1, "name" : "Category Name", "description" : "Category Description"}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [Category]
 */
@@ -26,25 +26,25 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	BEGIN TRY
-		DECLARE @id INT,
+		DECLARE @categoryId INT,
 				@name VARCHAR(55),
 				@description VARCHAR(MAX)
-		SELECT @id = id, @name=[name], @description = [description]
+		SELECT @categoryId = categoryId, @name=[name], @description = [description]
 		FROM OPENJSON(@JSON)
-		WITH (id INT, [name] VARCHAR(55),[description] VARCHAR(MAX) )
+		WITH (categoryId INT, [name] VARCHAR(55),[description] VARCHAR(MAX) )
 			
-		IF EXISTS (SELECT id FROM [Category] WHERE id = @id)
+		IF EXISTS (SELECT categoryId FROM [Category] WHERE categoryId = @categoryId)
 			BEGIN
 				UPDATE [Category]
 				SET	[name]= @name, 
 					[description] = @description
-				WHERE id = @id
+				WHERE categoryId = @categoryId
 			END
 		ELSE
 			BEGIN		
-				INSERT INTO [Category]
+				INSERT INTO [Category] ([name], [description])
 				VALUES (@name, @description)
-				SET @id = SCOPE_IDENTITY()
+				SET @categoryId = SCOPE_IDENTITY()
 			END
 			
 		SET @Error = 0 

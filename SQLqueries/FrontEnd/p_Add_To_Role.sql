@@ -10,7 +10,7 @@ GO
 -- Usage: 
  /*
     DECLARE @Error int 
-	EXEC p_Add_To_Role 'admin_uid', 1, @Error OUTPUT
+	EXEC p_Add_To_Role '{ "userId" : "admin_uid", "roleId" : 1}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [UserRole]
 */
@@ -20,23 +20,27 @@ IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Add_To_Role')
 GO
 
 CREATE PROCEDURE p_Add_To_Role 
-	@UserId VARCHAR(128), 
-	@RoleId INT,
+	@JSON VARCHAR(MAX),
 	@Error INT OUTPUT
 AS
 BEGIN
 	SET NOCOUNT ON;
 	BEGIN TRY
-		IF EXISTS (SELECT * FROM [UserRole] WHERE userId = @UserId)
+		DECLARE @userId VARCHAR(128), @roleId INT
+		SELECT @userId = userId, @roleId = roleId
+		FROM OPENJSON(@JSON)
+		WITH (userId VARCHAR(128), roleId INT )
+
+		IF EXISTS (SELECT * FROM [UserRole] WHERE userId = @userId)
 			BEGIN
 				UPDATE [UserRole] 
-				SET RoleId = @RoleId
-				WHERE UserId = @UserId
+				SET roleId = @roleId
+				WHERE UserId = @userId
 			END
 		ELSE
 			BEGIN
 				INSERT INTO [UserRole]
-				VALUES (@UserId, @RoleId)
+				VALUES (@userId, @roleId)
 			END
 		SET @Error = 0
 	END TRY
