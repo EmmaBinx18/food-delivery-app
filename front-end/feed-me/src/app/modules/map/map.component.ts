@@ -18,10 +18,19 @@ export class MapComponent implements OnInit {
       accessToken: environment.mapbox.accessToken,
       container: 'map',
       style: this.style,
-      zoom: 13,
+      zoom: 3,
       center: [this.lng, this.lat]
     });
+
     // Add map controls
-    this.map.addControl(new mapboxgl.NavigationControl());
+    //this.map.addControl(new mapboxgl.NavigationControl());
+    this.map.addControl(
+      new mapboxgl.GeolocateControl({
+      positionOptions: {
+      enableHighAccuracy: true
+      },
+      trackUserLocation: true
+      })
+      );
   }
 }
