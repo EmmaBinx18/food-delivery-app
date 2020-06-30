@@ -3,29 +3,29 @@
 
 main{
     width: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
     text-align: center;
-    height: 600px;
-    opacity: 0.8;
     position: absolute;
 
     h1{
         color: white;
         text-transform: uppercase;
-        padding-top: 4%;
+        padding-top: 1%;
         padding-bottom: 1%;
-        background-color: black;
-        margin: auto;
-        margin-top: 2%;
-        width: 90%;
-    }
+        margin-left: 2%;
+        position: absolute;
+        width: 17%;
+        border-radius: 8px;
+        margin-block-start: 1%;
+        background-color: var(--primary-light-blue);
+        font-size: 2.2rem;
 
-    @media(max-width: 500px){
-        height: 500px;
+        @media(max-width: 1500px){width: 22%;}
 
-        h1{
-            padding-top: 8%;
+        @media(max-width: 900px){font-size: 1.3rem;}
+
+        @media(max-width: 600px){
+            font-size: 1rem;
+            border-radius: 4px;
         }
     }
 }
@@ -33,11 +33,11 @@ main{
 .category-table{
     background-color: white;
     box-shadow: var(--primary-box-shadow);
-    width: 90%;
+    width: 96%;
     height: auto;
     min-height: 70vh;
     margin: auto;
-    margin-top: 2%;
+    margin-top: 4%;
     margin-bottom: 4%;
 
     table{

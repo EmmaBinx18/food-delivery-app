@@ -13,6 +13,7 @@ import { FormValidationService } from 'src/app/core/services/form-validation.ser
 export class SignupComponent implements OnInit {
 
   signupForm: FormGroup;
+  error: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -21,6 +22,7 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.error = "";
     this.signupForm = this.initForm();
   }
 
@@ -41,7 +43,10 @@ export class SignupComponent implements OnInit {
 
   signup() {
     if (this.signupForm.valid) {
-      this.authService.signup(this.signupForm.value);
+      this.authService.signup(this.signupForm.value)
+        .catch(error => {
+          this.error = error;
+        });
     }
   }
 

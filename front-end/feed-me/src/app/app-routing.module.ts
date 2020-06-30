@@ -5,7 +5,7 @@ import { AuthGuard } from './core/guards/auth/auth.guard';
 import { Role } from './core/models/role.model';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'login',
     loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
@@ -25,7 +25,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
     canActivate: [AuthGuard]
   },
-  { path: '**', redirectTo: 'login', pathMatch: 'full' }
+  { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({

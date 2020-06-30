@@ -70,6 +70,7 @@
             </div>
 
             <div class="form-control">
+                <p class="error" *ngIf="error">{{error}}</p>
                 <button class="yellow-button" type="submit" [disabled]="signupForm.invalid">SIGNUP</button>
             </div>
         </form>

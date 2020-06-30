@@ -3,13 +3,11 @@
 .snackbar-container{
     position: fixed;
     margin: auto;
-    top: 14%;
+    top: 8%;
     width: 100%;
     z-index: 200;
 
-    @media(max-width: 900px){
-        top: 9%;
-    }
+    @media(max-width: 900px){top: 9%;}
 }
 
 #snackbar {
@@ -20,11 +18,30 @@
     width: 55%;
     display: flex;
     justify-content: center;
-    box-shadow: var(--primary-box-shadow);
 
-    h3{
+    h4{
         color: var(--primary-dark-blue);
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: var(--secondary-font-family);
+        margin-block-end: 0.8rem;
+        margin-block-start: 0.8rem;
+        text-decoration: none;
+        font-weight: normal;
+    }
+}
+
+.snackbar-error{
+    background-color: rgb(223, 79, 79) !important;
+
+    h4{
+        color: white !important;
+    }
+}
+
+.snackbar-success{
+    background-color: rgb(93, 173, 93) !important;
+
+    h4{
+        color: white !important;
     }
 }
 

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
@@ -6,12 +7,19 @@ import { MealCategoriesComponent } from './meal-categories/meal-categories.compo
 import { AboutUsComponent } from './about-us/about-us.component';
 import { OurServicesComponent } from './our-services/our-services.component';
 import { AccountComponent } from './account/account.component';
+import { CategoryComponent } from './category/category.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeChefRegisterComponent } from './home-chef-register/home-chef-register.component';
+import { DeliveryRegisterComponent } from './delivery-register/delivery-register.component';
+import { StatsComponent } from './dashboard/stats/stats.component';
+import { OrdersComponent } from './dashboard/orders/orders.component';
+import { MealsComponent } from './dashboard/meals/meals.component';
+import { DeliveriesComponent } from './dashboard/deliveries/deliveries.component';
+import { AddMealComponent } from './dashboard/meals/add-meal/add-meal.component';
 
-import { HomeChefModule } from './home-chef/home-chef.module';
-import { DeliveryModule } from './delivery/delivery.module';
 
 import { SharedModule } from '../../shared/shared.module';
-import { CategoryComponent } from './category/category.component';
+import { OrderCartComponent } from './order-cart/order-cart.component';
 
 @NgModule({
     declarations: [
@@ -20,13 +28,21 @@ import { CategoryComponent } from './category/category.component';
         AboutUsComponent,
         OurServicesComponent,
         AccountComponent,
-        CategoryComponent
+        CategoryComponent,
+        DashboardComponent,
+        HomeChefRegisterComponent,
+        DeliveryRegisterComponent,
+        StatsComponent,
+        OrdersComponent,
+        MealsComponent,
+        DeliveriesComponent,
+        AddMealComponent,
+        OrderCartComponent
     ],
     imports: [
         SharedModule,
         HomeRoutingModule,
-        HomeChefModule,
-        DeliveryModule
+        FormsModule, ReactiveFormsModule
     ]
 })
 export class HomeModule { }

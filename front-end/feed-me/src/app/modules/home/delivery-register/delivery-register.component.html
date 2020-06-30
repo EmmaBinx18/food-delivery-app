@@ -1,0 +1,70 @@
+<div class="overlay" (click)="closeForm()"></div>
+<div class="register-container flex-container">
+    <div class="form-container">
+        <h1>REGISTER AS A DELIVERY DRIVER</h1>
+        <p>Please note that every request to become a delivery driver can only be approved by an administrator
+            once the driver has been thoroughly vetted.
+        </p>
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+            <div class="form-group">
+                <div class="controls">
+                    <input type="text" id="street" placeholder="Street" class="form-control" formControlName="street" />
+                    <p class="error"
+                        *ngIf="registerForm.controls.street.errors?.required && registerForm.controls.street.touched">
+                        Street Address is Required
+                    </p>
+                </div>
+                <div class="controls">
+                    <input type="text" id="complex" placeholder="Complex (optional)" class="form-control"
+                        formControlName="complex" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="controls">
+                    <input type="text" id="suburb" placeholder="Suburb" class="form-control" formControlName="suburb" />
+                    <p class="error"
+                        *ngIf="registerForm.controls.suburb.errors?.required && registerForm.controls.suburb.touched">
+                        Suburb is Required
+                    </p>
+                </div>
+                <div class="controls">
+                    <input type="number" id="zipcode" placeholder="Zipcode" class="form-control"
+                        formControlName="zipcode" />
+                    <p class="error"
+                        *ngIf="registerForm.controls.zipcode.errors?.required && registerForm.controls.zipcode.touched">
+                        Zipcode is Required
+                    </p>
+                    <p class="error"
+                        *ngIf="registerForm.controls.zipcode.errors?.minLength && registerForm.controls.zipcode.errors?.maxLength">
+                        Enter a valid Zipcode
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="controls">
+                    <input type="text" id="city" placeholder="City" class="form-control" formControlName="city" />
+                    <p class="error"
+                        *ngIf="registerForm.controls.city.errors?.required && registerForm.controls.city.touched">
+                        City is Required
+                    </p>
+                </div>
+                <div class="controls">
+                    <select (change)="setProvince($event)" formControlName="province">
+                        <option value="" disabled>Province</option>
+                        <option *ngFor="let province of provinces" [ngValue]="province">{{province}}</option>
+                    </select>
+                    <p class="error"
+                        *ngIf="registerForm.controls.province.errors?.required && registerForm.controls.province.touched">
+                        Province is Required
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="yellow-button" type="submit" [disabled]="registerForm.invalid">REGISTER</button>
+            </div>
+        </form>
+    </div>
+</div>

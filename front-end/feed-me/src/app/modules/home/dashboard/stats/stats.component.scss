@@ -1,0 +1,32 @@
+@import '../../../../../assets/styles/variables.scss';
+
+.stats-container{
+    width: 90%;
+    box-shadow: var(--primary-box-shadow);
+    margin: auto;
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-evenly;
+    border-radius: 6px;
+    background-color: white;
+
+    @media(max-width: 850px){
+        margin-top: 6%;
+        .description{
+            display: none;
+
+            &:hover{
+                //Add tooltip
+            }
+        }
+    }
+
+    div{
+        text-align: center;
+        font-family: var(--secondary-font-family);
+
+        .stats{
+            color: var(--primary-green)
+        }
+    }
+}

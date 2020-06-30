@@ -2,9 +2,10 @@
 @import '../../../assets/styles/common.scss';
 
 header{
-    @extend .green-container;
     position: relative;
     z-index: 3;
+    height: 10%;
+    background-color: var(--primary-dark-blue);
 
     #burger-menu{
         display: none;
@@ -16,11 +17,8 @@ header{
     }
 }
 
-img{
-    display: inline;
-    width: 380px;
-
-    @media(max-width: 900px){width: 250px;}
+.cart{
+    width: 30px;
 }
 
 .top-nav{
@@ -46,5 +44,6 @@ img{
         width: 40px;
         float: right;
         padding-right: 20px;
+        padding-top: 12px;
     }
 }

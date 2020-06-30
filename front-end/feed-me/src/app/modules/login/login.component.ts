@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/core/authentication/authentication.service'
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  error: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.error = "";
     this.loginForm = this.initForm();
   }
 
@@ -28,7 +30,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.login(this.loginForm.value);
+    this.authService.login(this.loginForm.value)
+      .catch(error => {
+        this.error = error;
+      });
   }
 
 }

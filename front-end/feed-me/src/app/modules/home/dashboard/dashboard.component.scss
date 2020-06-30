@@ -1,0 +1,40 @@
+@import '../../../../assets/styles/variables.scss';
+@import '../../../../assets/styles/common.scss';
+
+main{
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .headings{
+        width: 90%;
+        margin: auto;
+        margin-top: 2%;
+    }
+
+    .business-name{
+        margin-bottom: 0px;
+    }
+
+    .user-name{
+        color: grey;
+        font-size: 2rem;
+        margin-top: 0px;
+
+        @media(max-width: 850px){font-size: 1.2rem;}
+    }
+}
+
+.home-chef{
+    width: 90%;
+    margin: auto;
+    margin-top: 2%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 4%;
+    flex-direction: row;
+}
+
+.spacer{
+    width: 2%;
+}

@@ -18,7 +18,7 @@ export class SideNavComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.userRole = this.authService.currentRole;
+    this.userRole = this.authService.getCurrentRole();
   }
 
   logout() {

@@ -1,18 +1,16 @@
 <div *ngIf="display" class="side-nav">
-    <img class="logo" src="../../../assets/logo/logo.png" alt="feedME_logo" /><img class="close" (click)="closeNav()"
-        src="../../../assets/icons/white-icons/close.png" alt="close" />
+    <img class="close" (click)="closeNav()" src="../../../assets/icons/white-icons/close.png" alt="close" />
     <ul>
         <li>
             <img src="../../../assets/icons/white-icons/home.png" alt="home" /><a [routerLink]="'/home'">Home</a>
         </li>
-        <li>
-            <img src="../../../assets/icons/white-icons/food.png" alt="food" /><a>Meal Categories</a>
+        <li *ngIf="userRole === 2">
+            <img src="../../../assets/icons/white-icons/dashboard.png" alt="food" /><a
+                [routerLink]="'/home/dashboard'">Home Chef</a>
         </li>
-        <li *ngIf="userRole === 'HomeChef'">
-            <img src="../../../assets/icons/white-icons/dashboard.png" alt="food" /><a>Home Chef</a>
-        </li>
-        <li *ngIf="userRole === 'Delivery'">
-            <img src="../../../assets/icons/white-icons/delivery.png" alt="food" /><a>Deliveries</a>
+        <li *ngIf="userRole === 3">
+            <img src="../../../assets/icons/white-icons/delivery.png" alt="food" /><a
+                [routerLink]="'/home/dashboard'">Deliveries</a>
         </li>
         <li>
             <img src="../../../assets/icons/white-icons/profile.png" alt="account" /><a>Account</a>

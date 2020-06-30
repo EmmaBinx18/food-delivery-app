@@ -1,39 +1,35 @@
-import { Component, ViewChild, AfterViewInit, ElementRef, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { NavService } from 'src/app/core/services/nav.service';
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss']
 })
-export class CategoryComponent implements AfterViewInit, OnInit {
+export class CategoryComponent implements OnInit {
 
   category: string;
-  displaySidenav: boolean = false;
   displayRegisterHomeChef: boolean = false;
   businesses: any;
 
-  @ViewChild('content') content: ElementRef;
+  constructor(
+    private route: ActivatedRoute,
+    public navService: NavService,
+    public router: Router,
+    public snackbar: SnackbarService
+  ) {
+    this.route.params.subscribe(params => {
+      this.category = params.category;
+      window.scroll(0, 0);
+    });
 
-  constructor(private route: ActivatedRoute) {
-    this.route.params.subscribe(params => this.category = params.category);
   }
 
   ngOnInit() {
     window.scroll(0, 0);
-    //need to fetch all businesses for category
-  }
-
-  ngAfterViewInit() {
-    this.content.nativeElement.style.backgroundImage = `url(/assets/meal-categories/${this.category}.jpg)`;
-  }
-
-  openNav() {
-    this.displaySidenav = true;
-  }
-
-  closeNav() {
-    this.displaySidenav = false;
   }
 
   registerHomeChef() {

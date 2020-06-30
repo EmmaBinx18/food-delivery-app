@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NavService } from 'src/app/core/services/nav.service';
+import { AuthService } from 'src/app/core/authentication/authentication.service';
+import { Role } from 'src/app/core/models/role.model';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
@@ -9,30 +12,38 @@ import { SnackbarService } from 'src/app/core/services/snackbar.service';
 })
 export class HomeComponent implements OnInit {
 
-  displaySidenav: boolean = false;
   displayRegisterHomeChef: boolean = false;
+  displayRegisterDeliveryDriver: boolean = false;
+  role: Role;
 
-  constructor(public snackbar: SnackbarService) { }
+  constructor(
+    public navService: NavService,
+    public authService: AuthService,
+    public snackbar: SnackbarService
+  ) { }
 
   ngOnInit() {
     window.scroll(0, 0);
+    this.role = this.authService.getCurrentRole();
   }
 
-  openNav() {
-    this.displaySidenav = true;
-  }
-
-  closeNav() {
-    this.displaySidenav = false;
-  }
-
-  registerHomeChef() {
+  openForm(option: string) {
     window.scroll(0, 0);
-    this.displayRegisterHomeChef = true;
+    if (option == 'homeChef') {
+      this.displayRegisterHomeChef = true;
+    }
+    else if (option == 'driver') {
+      this.displayRegisterDeliveryDriver = true;
+    }
   }
 
-  closeRegisterBusinessForm() {
-    this.displayRegisterHomeChef = false;
+  closeForm(option: string) {
+    if (option == 'homeChef') {
+      this.displayRegisterHomeChef = false;
+    }
+    else if (option == 'driver') {
+      this.displayRegisterDeliveryDriver = false;
+    }
   }
 
 }

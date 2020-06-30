@@ -1,23 +1,22 @@
 <header>
-    <img src="../../../assets/logo/logo.png" alt="feedME_logo" />
     <ul class="top-nav">
         <li>
             <a [routerLink]="'/home'">Home</a>
         </li>
+        <li *ngIf="userRole === 2">
+            <a [routerLink]="'/home/dashboard'">Home Chef</a>
+        </li>
+        <li *ngIf="userRole === 3">
+            <a [routerLink]="'/home/dashboard'">Deliveries</a>
+        </li>
         <li>
-            <a (click)="scroll('categories')">Meal Categories</a>
-        </li>
-        <li *ngIf="userRole === 'HomeChef'">
-            <a>Home Chef</a>
-        </li>
-        <li *ngIf="userRole === 'Delivery'">
-            <a>Deliveries</a>
+            <a>Cart</a>
         </li>
         <li>
             <a>Account</a>
         </li>
         <li>
-            <a (click)="logout()">Logout</a>
+            <a class="blue-outline" (click)="logout()">Logout</a>
         </li>
     </ul>
     <div *ngIf="!display" id="burger-menu" (click)="openNav()">

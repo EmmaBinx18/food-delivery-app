@@ -1,53 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { CategoriesService } from 'src/app/core/services/categories.service';
 
 @Component({
   selector: 'app-meal-categories',
   templateUrl: './meal-categories.component.html',
   styleUrls: ['./meal-categories.component.scss']
 })
-export class MealCategoriesComponent implements OnInit {
+export class MealCategoriesComponent implements OnInit, OnChanges {
 
-  categories = [
-    {
-      id: 'asian',
-      src: '/assets/meal-categories/asian.jpg',
-      text: 'ASIAN'
-    },
-    {
-      id: 'indian',
-      src: '/assets/meal-categories/indian.jpg',
-      text: 'INDIAN'
-    },
-    {
-      id: 'italian',
-      src: '/assets/meal-categories/italian.jpg',
-      text: 'ITALIAN'
-    },
-    {
-      id: 'mexican',
-      src: '/assets/meal-categories/mexican.jpg',
-      text: 'MEXICAN'
-    },
-    {
-      id: 'greek',
-      src: '/assets/meal-categories/greek.jpg',
-      text: 'GREEK'
-    },
-    {
-      id: 'classics',
-      src: '/assets/meal-categories/classics.jpg',
-      text: 'CLASSICS'
-    }
-  ]
+  @Input() removeCategory?: string;
 
-  constructor(public router: Router) { }
+  categories: any = [];
+  filteredCategories: any = [];
+
+  @Output() errorEmitter = new EventEmitter<string>();
+
+  constructor(
+    public router: Router,
+    public categoryService: CategoriesService
+  ) { }
 
   ngOnInit() {
-    //TODO: fetch images from server
+    this.categoryService.getAllCategories()
+      .then(response => {
+        this.validateImages(response);
+        this.filterCategories();
+      })
+      .catch(() => {
+        this.errorEmitter.emit('Could not load categories. Please try again later');
+      });
+  }
+
+  ngOnChanges() {
+    this.filterCategories();
   }
 
   openCategory(category: string) {
-    this.router.navigate(['/home', category]);
+    this.router.navigate(['/home', category.toLowerCase()]);
+  }
+
+  validateImages(categories: any) {
+    categories.forEach(category => {
+      if (!category.src) {
+        let image = new Image();
+        image.src = `/assets/meal-categories/${category.name.toLowerCase()}.jpg`;
+        if (image.complete) {
+          category['src'] = '/assets/images/grey.png';
+        }
+        else {
+          category['src'] = `/assets/meal-categories/${category.name.toLowerCase()}.jpg`;
+        }
+      }
+    });
+    this.categories = categories;
+    this.filteredCategories = categories;
+  }
+
+  filterCategories() {
+    if (this.removeCategory) {
+      this.filteredCategories = this.categories.filter(category => {
+        return category.name.toLowerCase() != this.removeCategory;
+      });
+    }
   }
 }

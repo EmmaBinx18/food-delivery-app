@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userRole = this.authService.currentRole;
+    this.userRole = this.authService.getCurrentRole();
   }
 
   logout() {
@@ -30,12 +30,7 @@ export class HeaderComponent implements OnInit {
   }
 
   scroll(element: string) {
-    if (this.router.url.match(/home[/]/g)) {
-      this.router.navigate(['/home']);
-    }
-    else {
-      document.getElementById(element).scrollIntoView({ behavior: "smooth" });
-    }
+    document.getElementById(element).scrollIntoView({ behavior: "smooth" });
   }
 
   openNav() {

@@ -1,0 +1,52 @@
+<div class="overlay" (click)="closeModal()"></div>
+<div class="register-container flex-container">
+    <div class="form-container">
+        <h1>ADD MEAL</h1>
+        <form [formGroup]="addMealForm" (ngSubmit)="addMeal()">
+            <div class="form-group">
+                <div class="controls">
+                    <input type="text" id="name" placeholder="Meal Name" class="form-control full-width"
+                        formControlName="name" />
+                    <p class="error"
+                        *ngIf="addMealForm.controls.name.errors?.required && addMealForm.controls.name.touched">
+                        Meal Name is Required
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="controls">
+                    <input type="text" id="description" placeholder="Description" class="form-control full-width"
+                        formControlName="description" />
+                    <p class="error"
+                        *ngIf="addMealForm.controls.description.errors?.required && addMealForm.controls.description.touched">
+                        Description is Required
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="controls">
+                    <input type="number" min="0" id="price" placeholder="Price" class="form-control"
+                        formControlName="price" />
+                    <p class="error"
+                        *ngIf="addMealForm.controls.price.errors?.required && addMealForm.controls.price.touched">
+                        Price is Required
+                    </p>
+                </div>
+                <div class="controls">
+                    <input type="number" min="0" id="minPrepareTime" placeholder="Prep Time" class="form-control"
+                        formControlName="minPrepareTime" />
+                    <p class="error"
+                        *ngIf="addMealForm.controls.minPrepareTime.errors?.required && addMealForm.controls.minPrepareTime.touched">
+                        Prep time is Required
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="yellow-button" type="submit" [disabled]="addMealForm.invalid">ADD MEAL</button>
+            </div>
+        </form>
+    </div>
+</div>
