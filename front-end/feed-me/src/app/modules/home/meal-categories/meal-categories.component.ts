@@ -25,11 +25,15 @@ export class MealCategoriesComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.categoryService.getAllCategories()
       .then(response => {
-        this.validateImages(response);
+        this.categories = response;
+        this.filteredCategories = this.categories;
         this.filterCategories();
       })
       .catch(() => {
-        this.errorEmitter.emit('Could not load categories. Please try again later');
+        this.errorEmitter.emit('Could not load categories. Only the defaults will be available.');
+        this.categories = this.categoryService.getDefaultCategories();
+        this.filteredCategories = this.categories;
+        this.filterCategories();
       });
   }
 
@@ -39,23 +43,6 @@ export class MealCategoriesComponent implements OnInit, OnChanges {
 
   openCategory(category: string) {
     this.router.navigate(['/home', category.toLowerCase()]);
-  }
-
-  validateImages(categories: any) {
-    categories.forEach(category => {
-      if (!category.src) {
-        let image = new Image();
-        image.src = `/assets/meal-categories/${category.name.toLowerCase()}.jpg`;
-        if (image.complete) {
-          category['src'] = '/assets/images/grey.png';
-        }
-        else {
-          category['src'] = `/assets/meal-categories/${category.name.toLowerCase()}.jpg`;
-        }
-      }
-    });
-    this.categories = categories;
-    this.filteredCategories = categories;
   }
 
   filterCategories() {

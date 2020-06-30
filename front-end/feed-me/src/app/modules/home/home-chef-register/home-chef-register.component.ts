@@ -15,7 +15,6 @@ import { AddressService } from 'src/app/core/services/address.service';
 export class HomeChefRegisterComponent implements OnInit {
 
   registerForm: FormGroup;
-  uid: string;
   categories: any;
   provinces: string[] = [];
 
@@ -32,7 +31,6 @@ export class HomeChefRegisterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.uid = this.authService.getCurrentUser().uid;
     this.setSelectOptions();
     this.initForm();
   }
@@ -44,13 +42,13 @@ export class HomeChefRegisterComponent implements OnInit {
         this.categories = response;
       })
       .catch(() => {
-        this.openSnackbarEmitter.emit({ message: 'Could not load categories. Please try again later', class: 'snackbar-error' });
+        this.categories = this.categoryService.getDefaultCategories();
       });
   }
 
   initForm() {
     this.registerForm = this.formBuilder.group({
-      uid: [this.uid],
+      uid: [this.authService.getCurrentUser().uid],
       businessName: ['', [Validators.required]],
       category: ['', [Validators.required]],
       street: ['', [Validators.required]],
