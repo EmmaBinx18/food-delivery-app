@@ -28,21 +28,25 @@ CREATE PROCEDURE p_Start_With_Order_Product
 AS
 BEGIN
 	SET NOCOUNT ON;
+	BEGIN TRY
+		DECLARE @OrderProductStatusP INT, @BusinessId INT, @productId INT, @orderId INT
+		SELECT @OrderProductStatusP = OrderProductStatusId FROM OrderProductStatus WHERE [Name] LIKE 'In_progress'
 
-	DECLARE @OrderProductStatusP INT, @BusinessId INT, @productId INT, @orderId INT
-	SELECT @OrderProductStatusP = OrderProductStatusId FROM OrderProductStatus WHERE [Name] LIKE 'In_progress'
+		SELECT @productId = productId, @orderId = orderId
+		FROM OPENJSON(@JSON)
+		WITH (productId INT, orderId INT)
 
-	SELECT @productId = productId, @orderId = orderId
-	FROM OPENJSON(@JSON)
-	WITH (productId INT, orderId INT)
+		UPDATE [OrderProduct]
+			SET OrderProductStatusId = @OrderProductStatusP,
+				[orderItemStarted] = GETDATE()
+		WHERE productId = @productId AND  orderId = @orderId 
 
-	UPDATE [OrderProduct]
-		SET OrderProductStatusId = @OrderProductStatusP,
-			[orderItemStarted] = GETDATE()
-	WHERE productId = @productId AND  orderId = @orderId 
-
-	SELECT @@ROWCOUNT
-
-	SET @Error = 0
+		SET @Error = 0
+		SELECT 1 [success] , NULL [error] FOR JSON PATH, INCLUDE_NULL_VALUES 
+	END TRY
+	BEGIN CATCH
+		EXEC p_Insert_Error @Error OUTPUT
+		SELECT 0 [success] , @Error [error] FOR JSON PATH, INCLUDE_NULL_VALUES 
+	END CATCH
 END
 GO

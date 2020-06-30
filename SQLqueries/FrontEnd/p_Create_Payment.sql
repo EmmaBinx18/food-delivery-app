@@ -49,12 +49,13 @@ BEGIN
 			WHERE orderId =	@orderId 	
 
 			SET @Error = 0 
-
+			SELECT @paymentId [paymentId] , 1 [success] , NULL [error] FOR JSON PATH, INCLUDE_NULL_VALUES 
 			COMMIT
 		END TRY
 		BEGIN CATCH
 			ROLLBACK
 			EXEC p_Insert_Error @Error OUTPUT
+			SELECT null [paymentId], 0 [success] , @Error [error] FOR JSON PATH, INCLUDE_NULL_VALUES 
 		END CATCH
 
 END

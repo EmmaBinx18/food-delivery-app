@@ -28,29 +28,34 @@ CREATE PROCEDURE p_Approve_Business
 AS
 BEGIN
 	SET NOCOUNT ON;
+	BEGIN TRY
+		DECLARE @operationalStatusOId  INT,  @operationalStatusPId  INT
+		SELECT TOP 1 @operationalStatusOId = operationalStatusId FROM [OperationalStatus] WHERE [Name] LIKE 'Open'
+		SELECT TOP 1 @operationalStatusPId = operationalStatusId FROM [OperationalStatus] WHERE [Name] LIKE 'Pending_Approval'
 
-	DECLARE @operationalStatusOId  INT,  @operationalStatusPId  INT
-	SELECT TOP 1 @operationalStatusOId = operationalStatusId FROM [OperationalStatus] WHERE [Name] LIKE 'Open'
-	SELECT TOP 1 @operationalStatusPId = operationalStatusId FROM [OperationalStatus] WHERE [Name] LIKE 'Pending_Approval'
+		DECLARE	@businessId INT
+		SELECT @businessId = businessId
+		FROM OPENJSON(@JSON)
+		WITH (businessId INT)
 
-	DECLARE	@businessId INT
-	SELECT @businessId = businessId
-	FROM OPENJSON(@JSON)
-	WITH (businessId INT)
-
-	IF (@BusinessId IS NULL)
-		BEGIN
-			UPDATE [Business]
-				SET operationalStatusId = @operationalStatusOId
-			WHERE operationalStatusId = @operationalStatusPId
-		END
-	ELSE
-		BEGIN
-			UPDATE [Business]
-				SET operationalStatusId = @operationalStatusOId
-			WHERE businessId = @businessId			
-		END
-	SELECT @@ROWCOUNT
-	SET @Error = 0
+		IF (@BusinessId IS NULL)
+			BEGIN
+				UPDATE [Business]
+					SET operationalStatusId = @operationalStatusOId
+				WHERE operationalStatusId = @operationalStatusPId
+			END
+		ELSE
+			BEGIN
+				UPDATE [Business]
+					SET operationalStatusId = @operationalStatusOId
+				WHERE businessId = @businessId			
+			END
+		SET @Error = 0
+		SELECT 1 [success] , NULL [error] FOR JSON PATH, INCLUDE_NULL_VALUES 
+	END TRY
+	BEGIN CATCH
+		EXEC p_Insert_Error @Error OUTPUT
+		SELECT  0 [success] , @Error [error] FOR JSON PATH, INCLUDE_NULL_VALUES 
+	END CATCH
 END
 GO

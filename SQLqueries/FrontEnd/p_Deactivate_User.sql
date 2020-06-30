@@ -27,17 +27,23 @@ CREATE PROCEDURE p_Deactivate_User
 
 AS
 BEGIN
+	BEGIN TRY
+		DECLARE	@userId VARCHAR(128)
+		SELECT @userId = userId
+		FROM OPENJSON(@JSON)
+		WITH (userId VARCHAR(128) )
 
-	DECLARE	@userId VARCHAR(128)
-	SELECT @userId = userId
-	FROM OPENJSON(@JSON)
-	WITH (userId VARCHAR(128) )
+		SET NOCOUNT ON;
+		UPDATE [User]
+		SET [isActive] = 0
+		WHERE userId = @userId			
 
-	SET NOCOUNT ON;
-	UPDATE [User]
-	SET [isActive] = 0
-	WHERE userId = @userId			
-
-	SET @Error = 0
+		SET @Error = 0
+		SELECT 1 [success] , NULL [error] FOR JSON PATH, INCLUDE_NULL_VALUES 
+	END TRY
+	BEGIN CATCH
+		EXEC p_Insert_Error @Error OUTPUT
+		SELECT 0 [success] , @Error [error] FOR JSON PATH, INCLUDE_NULL_VALUES 
+	END CATCH
 END
 GO

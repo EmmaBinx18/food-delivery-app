@@ -41,8 +41,6 @@ BEGIN
 				[orderItemReady] = GETDATE()
 		WHERE productId = @productId AND  orderId = @orderId 
 
-		SELECT @@ROWCOUNT
-
 		--Check if all items are ready in particular order id
 		DECLARE @OrderStatusPId INT,@OrderStatusRId INT, @outstandingProducts INT
 		SELECT @OrderStatusRId = OrderStatusId FROM [OrderStatus] WHERE [Name] LIKE 'Waiting_for_driver';
@@ -63,9 +61,11 @@ BEGIN
 		END
 
 		SET @Error = 0
+		SELECT  1 [success] , NULL [error] FOR JSON PATH, INCLUDE_NULL_VALUES 
 	END TRY
 	BEGIN CATCH
 		EXEC p_Insert_Error @Error OUTPUT
+		SELECT 0 [success] , @Error [error] FOR JSON PATH, INCLUDE_NULL_VALUES 
 	END CATCH
 END
 GO

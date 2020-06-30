@@ -50,6 +50,6 @@ BEGIN
 			FOR JSON PATH	 
 		END
 
-	--SET @Error = 0
+	SET @Error = 0
 END
 GO

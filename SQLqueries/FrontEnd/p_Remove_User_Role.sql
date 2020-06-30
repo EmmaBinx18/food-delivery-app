@@ -10,31 +10,28 @@ GO
 -- Usage: 
  /*
     DECLARE @Error int 
-	EXEC p_Add_To_Driver_Role '{ "userId" : "driver_uid"}', @Error OUTPUT
+	EXEC p_Remove_User_Role '{ "userId" : "driver_uid", "roleId": 2}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [UserRole]
 */
 -- =============================================
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Add_To_Driver_Role')
-	DROP PROCEDURE [dbo].p_Add_To_Driver_Role
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Remove_User_Role')
+	DROP PROCEDURE [dbo].p_Remove_User_Role
 GO
 
-CREATE PROCEDURE p_Add_To_Driver_Role 
+CREATE PROCEDURE p_Remove_User_Role 
 	@JSON VARCHAR(MAX),
 	@Error INT OUTPUT
 AS
 BEGIN
 	SET NOCOUNT ON;
 	BEGIN TRY
-		DECLARE @RoleDId INT, @userId VARCHAR(128)
-		SELECT @RoleDId = roleId FROM [Role] WHERE [Name] LIKE 'Driver'
-
-		SELECT @userId = userId
+		DECLARE @userId VARCHAR(128), @roleId INT
+		SELECT @userId = userId, @roleId = roleId
 		FROM OPENJSON(@JSON)
-		WITH (userId VARCHAR(128))
+		WITH (userId VARCHAR(128), roleId INT)
 
-		INSERT INTO [UserRole]
-		VALUES (@userId, @RoleDId)
+		DELETE FROM [UserRole] WHERE [UserId]  = @userId
 
 		SET @Error = 0
 		SELECT 1 [success] , NULL [error] FOR JSON PATH, INCLUDE_NULL_VALUES 

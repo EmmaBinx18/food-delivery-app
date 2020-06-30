@@ -53,7 +53,7 @@ BEGIN
 	
 			SELECT
 				OrderId,
-				JSON_QUERY(Cars,'$') AS [locations]
+				JSON_QUERY(Locations,'$') AS [locations]
 			FROM
 				available_orders h
 				CROSS APPLY
@@ -67,7 +67,7 @@ BEGIN
 					WHERE
 						c.orderId = h.orderId
 						FOR JSON PATH
-					) AS Cars
+					) AS Locations
 				) d	
 	) oa ON ao.orderId = oa.orderId
 	ORDER BY orderDateTime, ao.orderid

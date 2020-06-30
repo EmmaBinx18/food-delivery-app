@@ -30,19 +30,26 @@ AS
 BEGIN
 
 	SET NOCOUNT ON;
+	BEGIN TRY
+		DECLARE	@businessId INT, @OperationalStatusCid INT
 
-	DECLARE	@businessId INT, @OperationalStatusCid INT
+		SELECT @businessId = businessId
+		FROM OPENJSON(@JSON)
+		WITH (businessId INT)
 
-	SELECT @businessId = businessId
-	FROM OPENJSON(@JSON)
-	WITH (businessId INT)
+		SELECT @OperationalStatusCid = OperationalStatusId  FROM OperationalStatus WHERE [Name] LIKE 'Closed'
 
-	SELECT @OperationalStatusCid = OperationalStatusId  FROM OperationalStatus WHERE [Name] LIKE 'Closed'
+		UPDATE [Business]
+			SET OperationalStatusId = @OperationalStatusCid
+		WHERE businessId = @businessId			
 
-	UPDATE [Business]
-		SET OperationalStatusId = @OperationalStatusCid
-	WHERE businessId = @businessId			
+		SET @Error = 0
+		SELECT 1 [success] , NULL [error] FOR JSON PATH, INCLUDE_NULL_VALUES 
+	END TRY
+	BEGIN CATCH
+		EXEC p_Insert_Error @Error OUTPUT
+		SELECT 0 [success] , @Error [error] FOR JSON PATH, INCLUDE_NULL_VALUES 
+	END CATCH
 
-	SET @Error = 0
 END
 GO

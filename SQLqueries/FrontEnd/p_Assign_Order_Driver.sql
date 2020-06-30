@@ -48,14 +48,14 @@ BEGIN
 					deliveryId = @deliveryId
 			WHERE orderId = @orderId
 
-			SELECT @@ROWCOUNT
-
-			SET @Error = 0
 			COMMIT
+			SET @Error = 0
+			SELECT 1 [success] , NULL [error] FOR JSON PATH, INCLUDE_NULL_VALUES 
 		END TRY
 		BEGIN CATCH
 			ROLLBACK
 			EXEC p_Insert_Error @Error OUTPUT
+			SELECT 0 [success] , @Error [error] FOR JSON PATH, INCLUDE_NULL_VALUES 
 		END CATCH
 	
 END
