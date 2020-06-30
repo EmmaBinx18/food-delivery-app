@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NavService } from 'src/app/core/services/nav.service';
+import { NavService } from 'src/app/shared/services/nav.service';
 import { Role } from 'src/app/core/models/role.model';
 
 import { AuthService } from '../../../core/authentication/authentication.service';
 import { HomeChefService } from '../../../core/services/home-chef.service';
 import { DeliveryService } from '../../../core/services/delivery.service';
-import { SnackbarService } from '../../../core/services/snackbar.service';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-dashboard',

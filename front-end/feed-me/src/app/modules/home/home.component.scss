@@ -14,25 +14,16 @@
 
     @media(max-width: 900px){
         background-size: contain;
-        margin-top: 10%;
         height: 440px;
     }
 
     @media(max-width: 600px){
         background-size: contain;
-        margin-top: 10%;
         height: 240px;
     }
 }
 
 main{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    text-align: center;
-
     section{
         scroll-margin: 160px;
     }
@@ -49,6 +40,10 @@ main{
 .categories{
     margin-top: 4%;
     margin-bottom: 7%;
+
+    h1{
+        text-align: center;
+    }
 }
 
 .buttons{

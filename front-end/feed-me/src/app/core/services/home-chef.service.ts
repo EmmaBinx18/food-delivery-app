@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Business } from '../models/business.model';
-import { UserService } from './user.service';
-import { ProductsService } from './products.service';
 import { AddressService } from './address.service';
 
 @Injectable({
@@ -13,8 +11,6 @@ export class HomeChefService {
 
   constructor(
     private http: HttpClient,
-    private userService: UserService,
-    private productsService: ProductsService,
     private addressService: AddressService
   ) { }
 
@@ -31,14 +27,26 @@ export class HomeChefService {
 
     return this.addressService.insertAddress(address)
       .then(response => {
-        console.log(response);
-        // return this.http.post(`api/business`, { params: 
-        //   { name: business.businessName, categoryId: business.category, addressId: '', userId: business.uid } 
-        // }).toPromise();
+        return this.insertBusiness(business, response[0].addressId);
       })
-      .catch(() => {
-        throw ('Could not register business. Please try again later');
+      .catch(error => {
+        throw (error);
       });
+  }
+
+  insertBusiness(business: any, addressId: string) {
+    return this.http.post(`api/business`, {
+      params:
+        { name: business.businessName, categoryId: business.category, addressId, userId: business.uid }
+    }).toPromise();
+  }
+
+  getAllOperationalStatuses() {
+    return this.http.get(`api/business/operationalStatus`).toPromise();
+  }
+
+  getOperationalStatusById(operationId: string) {
+    return this.http.post(`api/business/operationalStatus`, { params: operationId }).toPromise();
   }
 
   getBusinessMeals() {
@@ -77,28 +85,6 @@ export class HomeChefService {
 
   getBusinessesByCategory(categoryId: string) {
     return this.http.post(`api/business/category`, { params: categoryId }).toPromise();
-  }
-
-  getBusinessesFiltered(categoryId: string) {
-    return this.getBusinessesByCategory(categoryId)
-      .then(businesses => {
-        let filtered = [];
-        Object.keys(businesses).forEach(business => {
-          let obj = { name: '', user: '', products: [] };
-          obj.name = business['name'];
-          this.userService.getUser(business['userId'])
-            .then(user => {
-              obj.user = user['firstname'] + ' ' + user['lastname'];
-            });
-          this.productsService.getAllProducts()
-            .then(products => {
-
-            });
-        });
-      })
-      .catch(() => {
-        throw new Error();
-      });
   }
 
   getStats() {

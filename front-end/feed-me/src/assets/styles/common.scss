@@ -25,7 +25,7 @@ h4{
 }
 
 .blue-outline{
-    border: 2px solid var(--primary-light-blue);
+    border: 1.2px solid var(--primary-light-blue);
     border-radius: 6px;
     padding: 5px 10px 5px 10px;
 
@@ -49,12 +49,27 @@ h4{
     }
 }
 
+.back-button{
+    background-image: url('/assets/icons/grey-icons/back.svg');
+    background-size: cover;
+    width: 40px;
+    height: 40px;
+    outline: none;
+    border: none;
+    background-color: var(--primary-light-grey);
+
+    &:hover{
+        width: 44px;
+        cursor: pointer;
+    }
+}
+
 .form-headings{
     font-family: var(--primary-font-family);
 }
 
 .error{
-    color: var(--primary-error);
+    color: var(--primary-error-label);
     font-family: var(--secondary-font-family);
 }
 

@@ -1,0 +1,18 @@
+<div class="business">
+    <app-spinner *ngIf="address == '' && operational == ''"></app-spinner>
+    <div class="content">
+        <button class="back-button" (click)="back()">
+            <p>Back</p>
+        </button>
+        <h1>{{business.name}}</h1>
+        <div class="info">
+            <h3>{{category}}</h3>
+            <h3>{{address}}</h3>
+            <h3 [ngClass]="{'closed': operational == 'Closed', 'open': operational == 'Open'}">
+                {{operational}}</h3>
+        </div>
+        <table>
+
+        </table>
+    </div>
+</div>

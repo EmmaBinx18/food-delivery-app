@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NavService } from 'src/app/core/services/nav.service';
+import { NavService } from 'src/app/shared/services/nav.service';
 import { AuthService } from 'src/app/core/authentication/authentication.service';
 import { Role } from 'src/app/core/models/role.model';
-import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-home',

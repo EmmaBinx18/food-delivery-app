@@ -22,7 +22,7 @@ export class CategoriesService {
     return DEFAULT_CATEGORIES;
   }
 
-  createCategory() {
+  insertCategory() {
 
   }
 

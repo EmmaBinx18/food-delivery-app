@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/authentication/authentication.service';
 import { HomeChefService } from 'src/app/core/services/home-chef.service';
 import { CategoriesService } from 'src/app/core/services/categories.service';
-import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { AddressService } from 'src/app/core/services/address.service';
 
 @Component({
@@ -76,9 +76,8 @@ export class HomeChefRegisterComponent implements OnInit {
           this.openSnackbarEmitter.emit({ message: 'Successfully sent business registration request.', class: 'snackbar-success' });
           this.closeForm();
         })
-        .catch(error => {
-          console.log(error);
-          // this.openSnackbarEmitter.emit({ message: 'Could not load categories. Please try again later', class: 'snackbar-error' });
+        .catch(() => {
+          this.openSnackbarEmitter.emit({ message: 'Could not register business. Please try again later', class: 'snackbar-error' });
         });
     }
   }

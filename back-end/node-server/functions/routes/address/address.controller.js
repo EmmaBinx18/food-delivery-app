@@ -6,17 +6,31 @@ const sp = require('../../database/stored-procedures');
 
 const logger = require('../../logger/winstin.logger');
 
+router.get('/:addressId', (req, res) => {
+    logger.info('GET ADDRESS BY ID');
+    try{
+        db.executeStoredProcedure(sp.GET_ADDRESS, {addressId:req.params.addressId}, (data) => {
+            return res.status(200).send(JSON.parse(data));
+        });
+    }
+    catch(error){
+        logger.error('GET ADDRESS BY ID ERROR', error);
+        return res.status(500).send(error);
+    }
+});
+
 router.post('/', (req, res) => {
     logger.info('INSERT NEW ADDRESS');
     const newAddress = {
         addressId: -1,
-        street: req.body.params.street,
-        suburb: req.body.params.suburb,
-        complex: req.body.params.complex,
-        zipcode: req.body.params.zipcode,
-        city: req.body.params.city,
-        province: req.body.params.province,
-        country: req.body.params.country
+        streetName : req.body.params.street,
+        suburb : req.body.params.suburb,
+        complexName: req.body.params.complex,
+        zipCode: req.body.params.zipcode,
+        cityId: 1
+        // city: req.body.params.city,
+        // province: req.body.params.province,
+        // country: req.body.params.country
     }
 
     try{

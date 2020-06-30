@@ -17,9 +17,9 @@ import { MealsComponent } from './dashboard/meals/meals.component';
 import { DeliveriesComponent } from './dashboard/deliveries/deliveries.component';
 import { AddMealComponent } from './dashboard/meals/add-meal/add-meal.component';
 
-
 import { SharedModule } from '../../shared/shared.module';
 import { OrderCartComponent } from './order-cart/order-cart.component';
+import { BusinessComponent } from './category/business/business.component';
 
 @NgModule({
     declarations: [
@@ -37,7 +37,8 @@ import { OrderCartComponent } from './order-cart/order-cart.component';
         MealsComponent,
         DeliveriesComponent,
         AddMealComponent,
-        OrderCartComponent
+        OrderCartComponent,
+        BusinessComponent
     ],
     imports: [
         SharedModule,

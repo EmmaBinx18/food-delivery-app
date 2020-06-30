@@ -18,10 +18,10 @@
     </section>
     <section id="categories" class="categories">
         <h1>MEAL CATEGORIES</h1>
-        <app-meal-categories (errorEmitter)="snackbar.open($event, 'snackbar-error')"></app-meal-categories>
+        <app-meal-categories (openSnackbarEmitter)="snackbar.open($event.message, $event.class)"></app-meal-categories>
     </section>
-    <app-footer (registerHomeChefEmitter)="registerHomeChef()"></app-footer>
 </main>
+<app-footer (registerHomeChefEmitter)="openForm('homeChef')"></app-footer>
 <app-home-chef-register *ngIf="displayRegisterHomeChef"
     (openSnackbarEmitter)="snackbar.open($event.message, $event.class)" (closeFormEmitter)="closeForm('homeChef')">
 </app-home-chef-register>

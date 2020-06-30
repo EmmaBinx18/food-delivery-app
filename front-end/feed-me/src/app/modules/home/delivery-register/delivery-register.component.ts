@@ -45,6 +45,10 @@ export class DeliveryRegisterComponent implements OnInit {
     });
   }
 
+  setProvince(event: any) {
+    this.registerForm.get('province').setValue(event.target.value, { onlySelf: true });
+  }
+
   closeForm() {
     this.closeFormEmitter.emit();
   }

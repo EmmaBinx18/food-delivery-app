@@ -15,7 +15,7 @@ export class MealCategoriesComponent implements OnInit, OnChanges {
   categories: any = [];
   filteredCategories: any = [];
 
-  @Output() errorEmitter = new EventEmitter<string>();
+  @Output() openSnackbarEmitter = new EventEmitter<{ message: string, class: string }>();
 
   constructor(
     public router: Router,
@@ -30,7 +30,7 @@ export class MealCategoriesComponent implements OnInit, OnChanges {
         this.filterCategories();
       })
       .catch(() => {
-        this.errorEmitter.emit('Could not load categories. Only the defaults will be available.');
+        this.openSnackbarEmitter.emit({ message: 'Could not load categories. Only the defaults will be available.', class: 'snackbar-error' });
         this.categories = this.categoryService.getDefaultCategories();
         this.filteredCategories = this.categories;
         this.filterCategories();
@@ -42,7 +42,7 @@ export class MealCategoriesComponent implements OnInit, OnChanges {
   }
 
   openCategory(category: string) {
-    this.router.navigate(['/home', category.toLowerCase()]);
+    this.router.navigate(['/home', category]);
   }
 
   filterCategories() {

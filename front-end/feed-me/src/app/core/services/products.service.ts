@@ -11,4 +11,8 @@ export class ProductsService {
   getAllProducts() {
     return this.http.get(`api/products`).toPromise();
   }
+
+  getProductsForABusiness(businessId: string) {
+
+  }
 }
