@@ -30,7 +30,7 @@ BEGIN
 	SET NOCOUNT ON;
 	BEGIN TRY
 		DECLARE @OrderProductStatusR INT, @BusinessId INT, @productId INT, @orderId INT
-		SELECT @OrderProductStatusR = OrderProductStatusId FROM OrderProductStatus WHERE [Name] LIKE 'Ready'
+		SET @OrderProductStatusR = 3 -- 'Ready'
 
 		SELECT @productId = productId, @orderId = orderId
 		FROM OPENJSON(@JSON)
@@ -43,9 +43,9 @@ BEGIN
 
 		--Check if all items are ready in particular order id
 		DECLARE @OrderStatusPId INT,@OrderStatusRId INT, @outstandingProducts INT
-		SELECT @OrderStatusRId = OrderStatusId FROM [OrderStatus] WHERE [Name] LIKE 'Waiting_for_driver';
+		SET @OrderStatusRId = 3 -- 'Waiting_for_driver';
 
-		WITH selected_order AS
+		;WITH selected_order AS
 		(
 			SELECT orderId, orderDateTime FROM [Order] WHERE orderId = @orderId 
 		)

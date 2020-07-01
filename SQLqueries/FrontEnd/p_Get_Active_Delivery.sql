@@ -28,7 +28,7 @@ BEGIN
 	SET NOCOUNT ON;
 
 	DECLARE @OrderStatusDId INT
-	SELECT @OrderStatusDId = OrderStatusId FROM OrderStatus WHERE [Name] = 'Delivery_In_Progess'
+	SET @OrderStatusDId = 4 --'Delivery_In_Progess'
 
 	DECLARE @driverId VARCHAR(128)
 

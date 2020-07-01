@@ -42,7 +42,7 @@ BEGIN
 
 			SET @paymentId = SCOPE_IDENTITY()
 			
-			SELECT @orderStatusId = orderStatusId FROM [OrderStatus] WHERE [Name] LIKE 'Products_not_ready'
+			SELECT @orderStatusId = 2 --'Products_not_ready'
 
 			UPDATE [Order] 
 			SET orderStatusId = @orderStatusId

@@ -31,7 +31,8 @@ BEGIN
 	SET NOCOUNT ON;
 	BEGIN TRY
 		DECLARE @OrderProductStatusPId INT,  @productId INT, @orderId INT
-		SELECT @OrderProductStatusPId = OrderProductStatusId FROM OrderProductStatus WHERE [Name] LIKE 'Picked_up'
+		SET @OrderProductStatusPId = 4 -- 'Picked_up'
+
 
 		SELECT @productId = productId, @orderId = orderId
 		FROM OPENJSON(@JSON)
@@ -44,9 +45,9 @@ BEGIN
 
 		--Check if all items are picked up in particular order id
 		DECLARE @DeliveryStatusOId INT, @outstandingProducts INT
-		SELECT @DeliveryStatusOId = DeliveryStatusId FROM [DeliveryStatus] WHERE [Name] LIKE 'On_its_way';
+		SET @DeliveryStatusOId = 2 -- 'On_its_way';
 
-		WITH selected_order AS
+		;WITH selected_order AS
 		(
 			SELECT orderId, orderDateTime FROM [Order] WHERE orderId = @orderId 
 		)

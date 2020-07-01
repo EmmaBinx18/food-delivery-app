@@ -53,7 +53,7 @@ BEGIN
 			END
 		ELSE
 			BEGIN		
-				SET @availabilityStatusId = (SELECT availabilityStatusId FROM [AvailabilityStatus] WHERE [Name] LIKE 'Available')
+				SET @availabilityStatusId = 1
 
 				INSERT INTO [Product]
 				VALUES (@name,	@description, @businessId, @availabilityStatusId, @price, @minPrepareTime)

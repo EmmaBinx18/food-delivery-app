@@ -52,9 +52,9 @@ BEGIN
 					@orderProductStatusId INT 
 			
 
-			SELECT TOP 1 @orderStatusId = orderStatusId FROM OrderStatus WHERE [name] LIKE 'Awaiting_Payment'
+			SET @orderStatusId = 1 -- 'Awaiting_Payment'
 
-			SELECT TOP 1  @orderProductStatusId = orderProductStatusId FROM [OrderProductStatus] WHERE [name] LIKE 'Pending_Acceptance'
+			SET  @orderProductStatusId = 1 --  'Pending_Acceptance'
 						
 			INSERT INTO [Order] (customerId, addressId, orderDateTime, orderPlacedDateTime, orderStatusId)
 			SELECT customerId, addressId, orderDateTime, @orderPlacedDateTime, @orderStatusId
@@ -84,10 +84,11 @@ BEGIN
 			LEFT OUTER JOIN Product P ON P.productId = op.ProductId
 	
 			DECLARE @availabilityStatusNAId INT 
-			SELECT @availabilityStatusNAId = availabilityStatusId FROM AvailabilityStatus WHERE [name] LIKE 'Not_Available'
+			SET @availabilityStatusNAId =  2 --Not available
+
 
 			DECLARE @availabilityStatusOSId INT 
-			SELECT @availabilityStatusOSId = availabilityStatusId FROM AvailabilityStatus WHERE [name] LIKE 'Out_Of_Stock'
+			SET @availabilityStatusOSId = 3 --'Out_Of_Stock'
 
 			IF EXISTS (SELECT productId FROM @Temp WHERE availabilityStatusId = @availabilityStatusNAId OR availabilityStatusId = @availabilityStatusOSId)
 				BEGIN

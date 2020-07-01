@@ -29,7 +29,7 @@ BEGIN
 	SET NOCOUNT ON;
 
 	DECLARE @orderProductStatusRId INT, @BusinessId INT
-	SELECT @orderProductStatusRId = [orderProductStatusId] FROM [OrderProductStatus] WHERE [Name] LIKE 'Ready'
+	SET @orderProductStatusRId = 3  --'Ready'
 	
 	DECLARE @orderId INT
 
@@ -57,7 +57,7 @@ BEGIN
 	
 			SELECT
 				OrderId,
-				JSON_QUERY(Cars,'$') AS [locations]
+				JSON_QUERY(Locations,'$') AS [locations]
 			FROM
 				selected_order h
 				CROSS APPLY
@@ -71,7 +71,7 @@ BEGIN
 					WHERE
 						c.orderId = h.orderId
 						FOR JSON PATH
-					) AS Cars
+					) AS Locations
 				) d	
 	) oa ON so.orderId = oa.orderId
 	ORDER BY orderDateTime, so.orderid

@@ -30,7 +30,7 @@ BEGIN
 	SET NOCOUNT ON;
 
 	DECLARE @OrderStatusRId INT, @BusinessId INT
-	SELECT @OrderStatusRId = OrderStatusId FROM [OrderStatus] WHERE [Name] LIKE 'Waiting_for_driver';
+	SET @OrderStatusRId = 3 --'Waiting_for_driver';
 
 	WITH available_orders AS
 	(

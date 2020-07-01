@@ -13,7 +13,7 @@ GO
     DECLARE @Error int 
 	EXEC p_Assign_Order_Driver '{ "orderId" : 1, "driverId" : "driver_uid"}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
-	SELECT * FROM [OrderProduct]
+	SELECT * FROM [deliveryStatus], orderstatus
 */
 -- =============================================
 
@@ -31,8 +31,8 @@ BEGIN
 	BEGIN TRANSACTION
 		BEGIN TRY
 			DECLARE @OrderStatusDId INT, @orderId INT,  @driverId VARCHAR(128), @deliveryStatusPId INT, @deliveryId INT
-			SELECT @OrderStatusDId = OrderStatusId FROM OrderStatus WHERE [Name] LIKE 'Delivery_In_Progess';
-			SELECT @deliveryStatusPId = deliveryStatusId FROM deliveryStatus WHERE [Name] LIKE  'Picking_up_items';
+			SET @OrderStatusDId = 4  --'Delivery_In_Progess';
+			SET @deliveryStatusPId = 1 --'Picking_up_items';
 
 			SELECT @orderId = orderId, @driverId = driverId
 			FROM OPENJSON(@JSON)

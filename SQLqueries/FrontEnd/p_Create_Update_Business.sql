@@ -59,9 +59,9 @@ BEGIN
 				ELSE
 				BEGIN
 				    DECLARE @RoleCId INT;
-					SELECT @RoleCId = roleID FROM [Role] WHERE [Name] LIKE 'Home_Chef'
+					@RoleCId = 3 --  'Home_Chef'
 
-					SET @OperationalStatusId = (SELECT operationalStatusId FROM OperationalStatus WHERE [Name] LIKE 'Pending_Approval')
+					SET @OperationalStatusId = 1
 					INSERT INTO [Business] ( [Name], CategoryId, AddressId, OperationalStatusId)
 					VALUES ( @name, @categoryId, @addressId, 1)
 

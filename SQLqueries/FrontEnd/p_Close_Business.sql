@@ -37,7 +37,7 @@ BEGIN
 		FROM OPENJSON(@JSON)
 		WITH (businessId INT)
 
-		SELECT @OperationalStatusCid = OperationalStatusId  FROM OperationalStatus WHERE [Name] LIKE 'Closed'
+		SET @OperationalStatusCid = 3 -- 'Closed'
 
 		UPDATE [Business]
 			SET OperationalStatusId = @OperationalStatusCid

@@ -30,7 +30,7 @@ BEGIN
 	SET NOCOUNT ON;
 	BEGIN TRY
 		DECLARE @OrderProductStatusP INT, @BusinessId INT, @productId INT, @orderId INT
-		SELECT @OrderProductStatusP = OrderProductStatusId FROM OrderProductStatus WHERE [Name] LIKE 'In_progress'
+		SET @OrderProductStatusP = 2 --'In_progress'
 
 		SELECT @productId = productId, @orderId = orderId
 		FROM OPENJSON(@JSON)

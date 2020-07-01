@@ -14,6 +14,7 @@ GO
 	EXEC p_Approve_Business '{ "businessId" : null}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [Business]
+	select * from [OperationalStatus]
 */
 -- =============================================
 
@@ -30,8 +31,8 @@ BEGIN
 	SET NOCOUNT ON;
 	BEGIN TRY
 		DECLARE @operationalStatusOId  INT,  @operationalStatusPId  INT
-		SELECT TOP 1 @operationalStatusOId = operationalStatusId FROM [OperationalStatus] WHERE [Name] LIKE 'Open'
-		SELECT TOP 1 @operationalStatusPId = operationalStatusId FROM [OperationalStatus] WHERE [Name] LIKE 'Pending_Approval'
+		SET @operationalStatusOId = 2 --open
+		SET @operationalStatusPId = 1 --pending approval
 
 		DECLARE	@businessId INT
 		SELECT @businessId = businessId

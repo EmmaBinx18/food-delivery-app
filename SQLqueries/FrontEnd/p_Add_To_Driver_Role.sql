@@ -12,7 +12,7 @@ GO
     DECLARE @Error int 
 	EXEC p_Add_To_Driver_Role '{ "userId" : "driver_uid"}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
-	SELECT * FROM [UserRole]
+	SELECT * FROM [Role]
 */
 -- =============================================
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Add_To_Driver_Role')
@@ -27,7 +27,7 @@ BEGIN
 	SET NOCOUNT ON;
 	BEGIN TRY
 		DECLARE @RoleDId INT, @userId VARCHAR(128)
-		SELECT @RoleDId = roleId FROM [Role] WHERE [Name] LIKE 'Driver'
+		SELECT @RoleDId = 2  --driver roleid
 
 		SELECT @userId = userId
 		FROM OPENJSON(@JSON)
