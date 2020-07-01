@@ -4,6 +4,7 @@ import { NavService } from 'src/app/shared/services/nav.service';
 import { AuthService } from 'src/app/core/authentication/authentication.service';
 import { Role } from 'src/app/core/models/role.model';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +13,8 @@ import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 })
 export class HomeComponent implements OnInit {
 
-  displayRegisterHomeChef: boolean = false;
-  displayRegisterDeliveryDriver: boolean = false;
   role: Role;
+  modalSubject: Subject<string> = new Subject<string>();
 
   constructor(
     public navService: NavService,
@@ -29,21 +29,7 @@ export class HomeComponent implements OnInit {
 
   openForm(option: string) {
     window.scroll(0, 0);
-    if (option == 'homeChef') {
-      this.displayRegisterHomeChef = true;
-    }
-    else if (option == 'driver') {
-      this.displayRegisterDeliveryDriver = true;
-    }
-  }
-
-  closeForm(option: string) {
-    if (option == 'homeChef') {
-      this.displayRegisterHomeChef = false;
-    }
-    else if (option == 'driver') {
-      this.displayRegisterDeliveryDriver = false;
-    }
+    this.modalSubject.next(option);
   }
 
 }

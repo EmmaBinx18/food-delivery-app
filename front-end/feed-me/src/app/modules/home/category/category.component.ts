@@ -5,6 +5,7 @@ import { NavService } from '../../../shared/services/nav.service';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { CategoriesService } from '../../../core/services/categories.service';
 import { HomeChefService } from '../../../core/services/home-chef.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-category',
@@ -15,11 +16,13 @@ export class CategoryComponent implements OnInit {
 
   chosenCategory: string;
   chosenCategoryId: string;
-  displayRegisterHomeChef: boolean = false;
-  displayBusiness: boolean = false;
   business: any = {};
   businesses: any = [];
   categories: any = [];
+  error: boolean = false;
+  displayBusiness: boolean = false;
+
+  modalSubject: Subject<string> = new Subject<string>();
 
   constructor(
     private route: ActivatedRoute,
@@ -31,6 +34,7 @@ export class CategoryComponent implements OnInit {
   ) {
     this.route.params.subscribe(params => {
       this.chosenCategory = params.category;
+      this.chosenCategory = this.chosenCategory.charAt(0).toUpperCase() + this.chosenCategory.slice(1);
       this.scrollAndGet();
     });
 
@@ -42,37 +46,18 @@ export class CategoryComponent implements OnInit {
 
   scrollAndGet() {
     window.scroll(0, 0);
+    this.error = false;
     this.getCategories();
   }
 
   getBusinesses() {
     return this.homeChefService.getBusinessesByCategory(this.chosenCategoryId)
       .then(response => {
-        this.businesses = response;
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
+        // this.businesses = response;
         this.filterBusinesses();
       })
       .catch(() => {
+        this.error = true;
         this.snackbar.open('Could not load businesses. Please try again later.', 'snackbar-error');
       });
   }
@@ -85,28 +70,25 @@ export class CategoryComponent implements OnInit {
     this.categoryService.getAllCategories()
       .then(response => {
         this.categories = response;
-        this.chosenCategoryId = this.categories.find(category => category.name == this.chosenCategory).categoryId;
+        this.chosenCategoryId = this.categories.find(category => category.name === this.chosenCategory).categoryId;
         this.getBusinesses();
       })
       .catch(() => {
         this.snackbar.open('Could not load categories. Only the defaults will be available.', 'snackbar-error');
-        this.categories = this.categoryService.getDefaultCategories();
+        this.categories = [...this.categoryService.getDefaultCategories()];
         this.chosenCategoryId = this.categories.find(category => category.name === this.chosenCategory).categoryId;
         this.getBusinesses();
       });
   }
 
-  registerHomeChef() {
+  openForm(option: string) {
     window.scroll(0, 0);
-    this.displayRegisterHomeChef = true;
+    this.modalSubject.next(option);
   }
 
   changeCategory(category: string) {
+    this.displayBusiness = false;
     this.router.navigate(['/home', category]);
-  }
-
-  closeRegisterBusinessForm() {
-    this.displayRegisterHomeChef = false;
   }
 
   openBusiness(business: any) {

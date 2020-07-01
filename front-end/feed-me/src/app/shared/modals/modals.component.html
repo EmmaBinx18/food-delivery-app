@@ -1,0 +1,7 @@
+<app-home-chef-register *ngIf="displayRegisterHomeChef"
+    (openSnackbarEmitter)="snackbar.open($event.message, $event.class)" (closeFormEmitter)="closeForm('homeChef')">
+</app-home-chef-register>
+
+<app-delivery-register *ngIf="displayRegisterDeliveryDriver"
+    (openSnackbarEmitter)="snackbar.open($event.message, $event.class)" (closeFormEmitter)="closeForm('driver')">
+</app-delivery-register>

@@ -1,5 +1,6 @@
 <app-header [display]="navService.displaySidenav" (openNavEmitter)="navService.openNav()"></app-header>
 <app-side-nav [display]="navService.displaySidenav" (closeNavEmitter)="navService.closeNav()"></app-side-nav>
+
 <main>
     <div class="image">
         <div class="buttons">
@@ -21,11 +22,9 @@
         <app-meal-categories (openSnackbarEmitter)="snackbar.open($event.message, $event.class)"></app-meal-categories>
     </section>
 </main>
-<app-footer (registerHomeChefEmitter)="openForm('homeChef')"></app-footer>
-<app-home-chef-register *ngIf="displayRegisterHomeChef"
-    (openSnackbarEmitter)="snackbar.open($event.message, $event.class)" (closeFormEmitter)="closeForm('homeChef')">
-</app-home-chef-register>
-<app-delivery-register *ngIf="displayRegisterDeliveryDriver"
-    (openSnackbarEmitter)="snackbar.open($event.message, $event.class)" (closeFormEmitter)="closeForm('driver')">
-</app-delivery-register>
+
+<app-footer (openFormEmitter)="openForm($event)"></app-footer>
+
+<app-modals [modalSubscription]="modalSubject.asObservable()"></app-modals>
+
 <app-snackbar></app-snackbar>

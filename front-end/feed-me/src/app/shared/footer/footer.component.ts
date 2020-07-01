@@ -9,7 +9,7 @@ import { AuthService } from '../../core/authentication/authentication.service';
 })
 export class FooterComponent {
 
-  @Output() registerHomeChefEmitter = new EventEmitter();
+  @Output() openFormEmitter = new EventEmitter<string>();
 
   constructor(private authService: AuthService) { }
 
@@ -21,8 +21,7 @@ export class FooterComponent {
     document.getElementById(`${element}`).scrollIntoView({ behavior: "smooth" });
   }
 
-  registerHomeChef() {
-    this.registerHomeChefEmitter.emit();
+  openForm(option: string) {
+    this.openFormEmitter.emit(option);
   }
-
 }

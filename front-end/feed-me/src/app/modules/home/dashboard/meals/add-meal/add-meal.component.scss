@@ -1,5 +1,6 @@
 @import '../../../../../../assets/styles/variables.scss';
 @import '../../../../../../assets/styles/common.scss';
+@import '../../../../../../assets/styles/forms.scss';
 
 .register-container{
     width: 100%;
@@ -45,19 +46,5 @@ input{
 
     > .controls{
         display: block;
-    }
-}
-
-button[type="submit"]{
-    width: 38%;
-    @extend .submit-button;
-
-    &:disabled{
-        background-color: rgb(167, 167, 167);
-        color: white;
-
-        &:hover{
-            box-shadow: none;
-        }
     }
 }

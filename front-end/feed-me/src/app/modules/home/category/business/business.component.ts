@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { HomeChefService } from 'src/app/core/services/home-chef.service';
 import { AddressService } from 'src/app/core/services/address.service';
+import { ProductsService } from 'src/app/core/services/products.service';
+import { CartService } from 'src/app/core/services/cart.service';
 
 @Component({
   selector: 'app-business',
@@ -18,15 +20,21 @@ export class BusinessComponent implements OnInit {
 
   address: any = '';
   operational: any = '';
+  products: any = [];
+  error: boolean = false;
 
   constructor(
     private homeChefService: HomeChefService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    private productsService: ProductsService,
+    private cartService: CartService
   ) { }
 
   ngOnInit() {
+    this.error = false;
     this.getOperationalStatus();
     this.getAddress();
+    this.getProducts();
   }
 
   getOperationalStatus() {
@@ -35,7 +43,7 @@ export class BusinessComponent implements OnInit {
         this.operational = response[0].name;
       })
       .catch(() => {
-        this.openSnackbarEmitter.emit({ message: 'Could not load this business. Please try again later.', class: 'snackbar-error' });
+        this.handleError();
       });
   }
 
@@ -45,12 +53,33 @@ export class BusinessComponent implements OnInit {
         this.address = `${response[0].suburb} ${response[0].city} - ${response[0].zipcode}`
       })
       .catch(() => {
-        this.openSnackbarEmitter.emit({ message: 'Could not load this business. Please try again later.', class: 'snackbar-error' });
+        this.handleError();
+      });
+  }
+
+  getProducts() {
+    //need to filter by availability
+    this.productsService.getProductsForABusiness(this.business.businessId)
+      .then(response => {
+        this.products = response;
+      })
+      .catch(() => {
+        this.handleError();
       });
   }
 
   back() {
     this.backEmitter.emit();
+  }
+
+  handleError() {
+    this.error = true;
+    this.openSnackbarEmitter.emit({ message: 'Could not load this business. Please try again later.', class: 'snackbar-error' });
+  }
+
+  addtoCart(product: any) {
+    this.cartService.addToCart(product);
+    this.openSnackbarEmitter.emit({ message: `Added ${product.name} to cart`, class: 'snackbar-success' });
   }
 
 }

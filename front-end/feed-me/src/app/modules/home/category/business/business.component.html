@@ -1,5 +1,5 @@
 <div class="business">
-    <app-spinner *ngIf="address == '' && operational == ''"></app-spinner>
+    <app-spinner *ngIf="products.length == 0"></app-spinner>
     <div class="content">
         <button class="back-button" (click)="back()">
             <p>Back</p>
@@ -11,8 +11,16 @@
             <h3 [ngClass]="{'closed': operational == 'Closed', 'open': operational == 'Open'}">
                 {{operational}}</h3>
         </div>
-        <table>
-
+        <h2 *ngIf="error">There was an error loading this business. Please try again later.</h2>
+        <table *ngIf="products.length !== 0">
+            <tr *ngFor="let product of products">
+                <td>{{product.name}}</td>
+                <td class="description">{{product.description}}</td>
+                <td>R{{product.price}}</td>
+                <td class="prep-time">{{product.minPrepareTime}} minutes</td>
+                <td (click)="addtoCart(product)"><img class="icon" src="/assets/icons/grey-icons/cart.svg"
+                        alt="add_to_cart" /></td>
+            </tr>
         </table>
     </div>
 </div>

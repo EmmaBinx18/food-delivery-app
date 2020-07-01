@@ -10,48 +10,72 @@ app-spinner{
 .content{
     text-align: start;
     margin-left: 1%;
-    background-color: white;
+    margin-top: 1%;
+    padding-left: 2%;
+    min-height: 80vh;
+    max-height: 80vh;
+
+    h1{
+        margin-left: 1%;
+        margin-block-end: 10px;
+    }
+
+    h2{
+        text-align: center;
+        padding-bottom: 4%;
+        padding-top: 4%;
+
+        @media(max-width: 900px){font-size: 1.2rem;}
+        @media(max-width: 600px){font-size: 1rem;}
+    }
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }
 
 .info{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    width: 100%;
+    margin-left: 1%;
 
     h3{
-        padding-right: 8%;
-        padding-left: 20px;
-        color: var(--primary-dark-grey);
+        padding: 5px 10px 5px 10px;
+        padding-right: 4%;
+        color: var(--primary-dark-blue);
         font-family: var(--secondary-font-family);
         font-size: 1rem;
 
         @media(max-width: 500px){
             font-size: 0.8rem;
-            padding-right: 4%;
-            padding-left: 10px;
+            padding-right: 3%;
         }
     }
 }
 
 .open{
     background-color: var(--primary-success);
+    width: 2%;
+
+    @media(max-width: 900px){width: 3%;}
+    @media(max-width: 600px){width: 4%;}
 }
 
 .closed{
     background-color: var(--primary-error);
+    width: 3%;
+
+    @media(max-width: 900px){width: 5%;}
+    @media(max-width: 600px){width: 7%;}
 }
 
 .open, .closed{
-    padding: 5px 10px 5px 10px;
     border-radius: 6px;
     color: white !important;
-    width: 21px;
     padding-right: 30px !important;
 }
 
 .back-button{
-    margin-top: 2%;
+    margin-top: 1%;
 
     p{
         margin-left: 40px;
@@ -60,6 +84,41 @@ app-spinner{
 
         &:hover{
             font-size: 14px;
+            cursor: pointer;
+        }
+    }
+}
+
+table{
+    width: 98%;
+    text-align: center;
+    margin: auto;
+    margin-top: 2%;
+    border-collapse:separate; 
+    border-spacing:0 15px;
+
+    tr{
+        box-shadow: var(--primary-box-shadow);
+        border-radius: 6px;
+        background-color: white;
+    }
+
+    td{
+        font-size: 1.1rem;
+        font-family: var(--secondary-font-family);
+        padding: 20px;
+
+        @media(max-width: 900px){font-size: 1rem;}
+        @media(max-width: 600px){font-size: 0.8rem;}
+    }
+
+    .description, .prep-time{
+        @media(max-width: 600px){display: none;}
+    }
+
+    .icon{
+        &:hover{
+            //Need tooltip
             cursor: pointer;
         }
     }

@@ -1,30 +1,30 @@
 import { Injectable } from '@angular/core';
 
-import { Meal } from '../models/meal.model';
-import { CartItem } from '../models/cart-item.model';
+import { Product } from '../models/product.model';
+import { Cart } from '../models/cart.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  cart: CartItem[] = [];
+  cart: Cart[] = [];
 
   constructor() { }
 
-  addToCart(meal: Meal) {
+  addToCart(product: Product) {
     this.cart.forEach(item => {
-      if (item.meal == meal) {
+      if (item.product == product) {
         item.quantity += 1;
         return;
       }
     });
-    this.cart.push({ meal, quantity: 1 });
+    this.cart.push({ product, quantity: 1 });
   }
 
-  removeFromCart(mealId: number) {
+  removeFromCart(product: Product) {
     this.cart.forEach(item => {
-      if (item.meal.id == mealId) {
+      if (item.product == product) {
         if (item.quantity > 1) {
           item.quantity -= 1;
         }

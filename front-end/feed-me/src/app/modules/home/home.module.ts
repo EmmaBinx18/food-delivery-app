@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
@@ -9,8 +8,6 @@ import { OurServicesComponent } from './our-services/our-services.component';
 import { AccountComponent } from './account/account.component';
 import { CategoryComponent } from './category/category.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HomeChefRegisterComponent } from './home-chef-register/home-chef-register.component';
-import { DeliveryRegisterComponent } from './delivery-register/delivery-register.component';
 import { StatsComponent } from './dashboard/stats/stats.component';
 import { OrdersComponent } from './dashboard/orders/orders.component';
 import { MealsComponent } from './dashboard/meals/meals.component';
@@ -30,8 +27,6 @@ import { BusinessComponent } from './category/business/business.component';
         AccountComponent,
         CategoryComponent,
         DashboardComponent,
-        HomeChefRegisterComponent,
-        DeliveryRegisterComponent,
         StatsComponent,
         OrdersComponent,
         MealsComponent,
@@ -42,8 +37,7 @@ import { BusinessComponent } from './category/business/business.component';
     ],
     imports: [
         SharedModule,
-        HomeRoutingModule,
-        FormsModule, ReactiveFormsModule
+        HomeRoutingModule
     ]
 })
 export class HomeModule { }

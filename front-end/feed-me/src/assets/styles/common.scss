@@ -64,41 +64,9 @@ h4{
     }
 }
 
-.form-headings{
-    font-family: var(--primary-font-family);
-}
-
 .error{
     color: var(--primary-error-label);
     font-family: var(--secondary-font-family);
-}
-
-form{
-    margin-top: 6%;
-    width: 100%;
-    margin-top: 0;
-
-    .form-group{
-        margin-top: 2%;
-    }
-
-    input::placeholder{
-        color: var(--primary-dark-blue);
-    }
-}
-
-.submit-button{
-    margin-top: 6%;
-    margin-bottom: 6%;
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-.form-input{
-    border: 1px solid var(--primary-dark-blue);
-    border-radius: 8px;
-    font-size: 1rem;
-    padding: 10px;
 }
 
 .white-container{

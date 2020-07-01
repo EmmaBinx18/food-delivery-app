@@ -1,6 +1,7 @@
 @import '../../../../assets/styles/variables.scss';
 @import '../../../../assets/styles/common.scss';
 
+
 main{
     width: 96%;
     margin: auto;
@@ -8,8 +9,13 @@ main{
     margin-bottom: 2%;
     min-height: 80vh;
     max-height: 80vh;
-    overflow-y: auto;
     text-align: center;
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }
 
 app-spinner{
@@ -21,7 +27,7 @@ app-spinner{
 .buttons {
     text-align: start;
     display: flex;
-    overflow: scroll;
+    overflow-x: scroll;
 
     button{
         padding-left: 20px;

@@ -12,10 +12,13 @@
             <h2>{{business.name}}</h2>
         </div>
     </div>
+    <h2 *ngIf="error">There was an error loading the businesses in this category. Please try again later.</h2>
     <app-business [business]="business" [category]="chosenCategory" (backEmitter)="hideBusiness()"
         *ngIf="displayBusiness" (openSnackbarEmitter)="snackbar.open($event.message, $event.class)"></app-business>
 </main>
-<app-footer (registerHomeChefEmitter)="registerHomeChef()"></app-footer>
-<app-home-chef-register *ngIf="displayRegisterHomeChef" (closeFormEmitter)="closeRegisterBusinessForm()">
-</app-home-chef-register>
+
+<app-footer (openFormEmitter)="openForm($event)"></app-footer>
+
+<app-modals [modalSubscription]="modalSubject.asObservable()"></app-modals>
+
 <app-snackbar></app-snackbar>

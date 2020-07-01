@@ -13,6 +13,6 @@ export class ProductsService {
   }
 
   getProductsForABusiness(businessId: string) {
-
+    return this.http.get(`api/products/${businessId}`).toPromise();
   }
 }
