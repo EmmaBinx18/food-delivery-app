@@ -21,7 +21,7 @@ GO
     DECLARE @Error int 
 	EXEC p_Create_Update_User '{ "userId" : "uniqueidentifier", "firstname" : "Susan1", "lastname" : "van Zyl", "phone" : "0794920995", "email" : "susan0995@gmail.com"  }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
-	SELECT * FROM [User]
+	SELECT * FROM [Users]
 */
 -- =============================================
 
@@ -47,9 +47,9 @@ BEGIN
 			FROM OPENJSON(@JSON)
 			WITH (userId VARCHAR(128), firstname NVARCHAR(100),lastname NVARCHAR(100), phone  NVARCHAR(15), email VARCHAR(255))
 			
-			IF EXISTS (SELECT userId FROM [User] WHERE userId = @userId)
+			IF EXISTS (SELECT userId FROM [Users] WHERE userId = @userId)
 				BEGIN
-					UPDATE [User]
+					UPDATE [Users]
 					SET [firstname] = @firstname,
 						[lastname] = @lastname,
 						[phone] = @phone,
@@ -58,7 +58,7 @@ BEGIN
 				END
 			ELSE
 				BEGIN
-					INSERT INTO [User] (userId, [firstname], lastname, phone, email)
+					INSERT INTO [Users] (userId, [firstname], lastname, phone, email)
 					VALUES (@userId, @firstname, @lastname, @phone, @email)
 				END	
 					

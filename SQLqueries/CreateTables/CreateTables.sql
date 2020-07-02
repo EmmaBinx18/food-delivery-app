@@ -151,6 +151,16 @@ BEGIN
 	[description] VARCHAR(MAX),
 	[image] VARCHAR(MAX),
 	PRIMARY KEY ([categoryId]));
+
+	
+	INSERT INTO Category ([name], [description])
+	VALUES ('Asian', 'Asian cuisine is an important part of Chinese culture, which includes cuisine originating from the diverse regions of China. Asian food includes a large variety of ingredients, which can be reflected well in the saying (although it is a bit exaggerated): "the Chinese eat everything with four legs, except for tables, and everything that flies, except for airplanes". The Chinese food types mainly include rice, noodles, vegetables, eggs and fishes, which vary from one region to another.'),
+		   ('Indian', 'Indian cuisine consists of a variety of regional and traditional cuisines native to the Indian subcontinent. Given the diversity in soil, climate, culture, ethnic groups, and occupations, these cuisines vary substantially and use locally available spices, herbs, vegetables, and fruits.'),
+		   ('Italian', 'Traditional Central Italian cuisine uses ingredients such as tomatoes, all kinds of meat, fish, and pecorino cheese. In Tuscany, pasta (especially pappardelle) is traditionally served with meat sauce (including game meat). ... The word pasta is also used to refer to dishes in which pasta products are a primary ingredient.'),
+		   ('Mexican', 'Traditional Mexican cuisine is so much more than authentic dishes and spices; it’s a vibrant, lovingly preserved, cultural heritage. Among the staples of Mexican food are beans and corn. Corn is used to make masa, a dough that is then turned into tortillas and tamales, whereas beans and corn feature prominently in many dishes. Mexican cooking is packed with flavour; among the herbs and spices that give it its distinct kick are a variety of chillies (fresh, dried, smoked and pickled), alongside oregano, coriander (known as cilantro in North America), cinnamon and cocoa. Garlic, onions, lemons and limes are also used generously.'),
+		   ('Greek', 'Greek cuisine is a Mediterranean cuisine. Greek cookery makes wide use of vegetables, olive oil, grains, fish, wine, and meat. Other important ingredients include olives, pasta, cheese, lemon juice, herbs, bread, and yogurt. The most commonly used grain is wheat; barley is also used.'),
+		   ('Classics','South African cuisine is a unique fusion of many different external cultural influences. These include Dutch, French, Indian and Malaysian flavours and techniques that continue to make their way onto the menus of restaurants and into the homes of locals all over the country. ')
+
 END
 GO
 
