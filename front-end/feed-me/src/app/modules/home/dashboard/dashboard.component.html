@@ -1,5 +1,5 @@
-<app-header [display]="navService.displaySidenav" (openNavEmitter)="navService.openNav()"></app-header>
-<app-side-nav [display]="navService.displaySidenav" (closeNavEmitter)="navService.closeNav()"></app-side-nav>
+<app-header></app-header>
+
 <main>
     <div class="headings">
         <h1 class="business-name" *ngIf="role == 2">{{businessName}}</h1>

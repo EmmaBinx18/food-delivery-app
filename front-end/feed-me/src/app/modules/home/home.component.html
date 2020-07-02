@@ -1,5 +1,4 @@
-<app-header [display]="navService.displaySidenav" (openNavEmitter)="navService.openNav()"></app-header>
-<app-side-nav [display]="navService.displaySidenav" (closeNavEmitter)="navService.closeNav()"></app-side-nav>
+<app-header></app-header>
 
 <main>
     <div class="image">
@@ -25,6 +24,7 @@
 
 <app-footer (openFormEmitter)="openForm($event)"></app-footer>
 
-<app-modals [modalSubscription]="modalSubject.asObservable()"></app-modals>
+<app-modals [modalSubscription]="modalSubject.asObservable()">
+</app-modals>
 
 <app-snackbar></app-snackbar>

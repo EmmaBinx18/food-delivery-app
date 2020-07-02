@@ -13,6 +13,8 @@ import { OrdersComponent } from './dashboard/orders/orders.component';
 import { MealsComponent } from './dashboard/meals/meals.component';
 import { DeliveriesComponent } from './dashboard/deliveries/deliveries.component';
 import { AddMealComponent } from './dashboard/meals/add-meal/add-meal.component';
+import { HomeChefRegisterComponent } from './home-chef-register/home-chef-register.component';
+import { DeliveryRegisterComponent } from './delivery-register/delivery-register.component';
 
 import { SharedModule } from '../../shared/shared.module';
 import { OrderCartComponent } from './order-cart/order-cart.component';
@@ -33,11 +35,17 @@ import { BusinessComponent } from './category/business/business.component';
         DeliveriesComponent,
         AddMealComponent,
         OrderCartComponent,
-        BusinessComponent
+        BusinessComponent,
+        HomeChefRegisterComponent,
+        DeliveryRegisterComponent
     ],
     imports: [
         SharedModule,
         HomeRoutingModule
+    ],
+    entryComponents: [
+        HomeChefRegisterComponent,
+        DeliveryRegisterComponent
     ]
 })
 export class HomeModule { }

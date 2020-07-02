@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { NavService } from '../../../shared/services/nav.service';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { CategoriesService } from '../../../core/services/categories.service';
 import { HomeChefService } from '../../../core/services/home-chef.service';
@@ -26,7 +25,6 @@ export class CategoryComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    public navService: NavService,
     public router: Router,
     public snackbar: SnackbarService,
     public categoryService: CategoriesService,

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NavService } from 'src/app/shared/services/nav.service';
 import { Role } from 'src/app/core/models/role.model';
 
 import { AuthService } from '../../../core/authentication/authentication.service';
@@ -27,7 +26,6 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    public navService: NavService,
     private homeChefService: HomeChefService,
     private deliveryService: DeliveryService,
     public snackbar: SnackbarService
