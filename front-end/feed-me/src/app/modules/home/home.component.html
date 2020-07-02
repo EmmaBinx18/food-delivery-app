@@ -20,7 +20,7 @@
         <h1>MEAL CATEGORIES</h1>
         <app-meal-categories (errorEmitter)="snackbar.open($event, 'snackbar-error')"></app-meal-categories>
     </section>
-    <app-footer (registerHomeChefEmitter)="registerHomeChef()"></app-footer>
+    <app-footer (registerHomeChefEmitter)="openForm('homeChef')"></app-footer>
 </main>
 <app-home-chef-register *ngIf="displayRegisterHomeChef"
     (openSnackbarEmitter)="snackbar.open($event.message, $event.class)" (closeFormEmitter)="closeForm('homeChef')">
