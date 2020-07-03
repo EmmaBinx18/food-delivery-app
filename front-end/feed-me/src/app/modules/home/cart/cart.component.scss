@@ -11,6 +11,27 @@
     overflow-y: scroll;
     padding-top: 0;
     padding-bottom: 0;
+    z-index: 200;
+
+    // @media(max-width: 800px){
+    //     top: 30%;
+    //     width: 50%;
+    //     left: 25%;
+    // }
+
+    .close{
+        width: 25px;
+        margin-top: 17%;
+        display: flex;
+        align-self: flex-end;
+        margin-right: 5%;
+        margin-bottom: 1%;
+
+        &:hover{
+            width: 27px;
+            cursor: pointer;
+        }
+    }
 
     div{
         width: 100%;

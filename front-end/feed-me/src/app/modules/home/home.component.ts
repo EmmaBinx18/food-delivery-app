@@ -2,8 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { SnackbarService } from "src/app/shared/snackbar/snackbar.service";
 import { Subject } from "rxjs";
 
-import { AuthService } from "src/app/core/authentication/authentication.service";
-import { Role } from "src/app/core/models/role.model";
 import { ModalService } from "src/app/shared/modal/modal.service";
 
 @Component({
@@ -12,20 +10,25 @@ import { ModalService } from "src/app/shared/modal/modal.service";
   styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
-  role: Role;
-  cart: boolean = false;
   modalSubject: Subject<any> = new Subject<any>();
 
+  cart: boolean = false;
+  category: any;
+
+  display = {
+    main: true,
+    category: false,
+    dashboard: false
+  }
+
   constructor(
-    public authService: AuthService,
     public snackbar: SnackbarService,
     public modalService: ModalService
   ) { }
 
   ngOnInit() {
+    this.category = '';
     window.scroll(0, 0);
-    this.cart = false;
-    this.role = this.authService.getCurrentRole();
   }
 
   openForm(option: string) {
@@ -35,5 +38,21 @@ export class HomeComponent implements OnInit {
 
   openCart() {
     this.cart = true;
+  }
+
+  closeCart() {
+    this.cart = false;
+  }
+
+  setAllFalse() {
+    Object.keys(this.display).forEach(key => {
+      this.display[key] = false;
+    });
+  }
+
+  changeDisplay(option: string, category?: any) {
+    this.setAllFalse();
+    this.display[option] = true;
+    this.category = category;
   }
 }

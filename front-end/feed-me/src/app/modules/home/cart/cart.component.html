@@ -1,4 +1,5 @@
 <div class="cart-container">
+    <img class="close" src="/assets/icons/grey-icons/close.svg" alt="close" (click)="closeCart()" />
     <div *ngIf="cart.length != 0">
         <div class="cart-item" *ngFor="let item of cart">
             <h4>{{item.product.name}}</h4>

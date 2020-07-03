@@ -1,27 +1,16 @@
-<app-header (openCartEmitter)="openCart()"></app-header>
-<app-cart *ngIf="cart" (openSnackbarEmitter)="snackbar.open($event.message, $event.class)"></app-cart>
+<app-header (openCartEmitter)="openCart()" (changeDisplayEmitter)="changeDisplay($event)"></app-header>
 
-<main>
-  <div class="image">
-    <div class="buttons">
-      <button class="yellow-button" (click)="openForm('homeChef')" *ngIf="role == 1">
-        Register as a Home Chef
-      </button>
-      <button class="delivery-driver yellow-button" (click)="openForm('driver')" *ngIf="role == 1">
-        Register as a Delivery Driver
-      </button>
-    </div>
-  </div>
-  <section id="services">
-    <app-our-services></app-our-services>
-  </section>
-  <section id="aboutUs">
-    <app-about-us></app-about-us>
-  </section>
-  <section id="categories">
-    <app-meal-categories (openSnackbarEmitter)="snackbar.open($event.message, $event.class)"></app-meal-categories>
-  </section>
-</main>
+<app-cart *ngIf="cart" (openSnackbarEmitter)="snackbar.open($event.message, $event.class)"
+  (closeCartEmitter)="closeCart()"></app-cart>
+
+<app-main *ngIf="display.main" (openFormEmitter)="openForm($event)"
+  (openSnackbarEmitter)="snackbar.open($event.message, $event.class)"
+  (openCategoryEmitter)="changeDisplay('category', $event)">
+</app-main>
+<app-category *ngIf="display.category" (openFormEmitter)="openForm($event)"
+  (openSnackbarEmitter)="snackbar.open($event.message, $event.class)" [category]="category">
+</app-category>
+<app-dashboard *ngIf="display.dashboard"></app-dashboard>
 
 <app-footer (openFormEmitter)="openForm($event)"></app-footer>
 

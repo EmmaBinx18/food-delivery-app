@@ -1,0 +1,22 @@
+<main>
+    <div class="image">
+        <div class="buttons">
+            <button class="yellow-button" (click)="openForm('homeChef')" *ngIf="role == 1">
+                Register as a Home Chef
+            </button>
+            <button class="delivery-driver yellow-button" (click)="openForm('driver')" *ngIf="role == 1">
+                Register as a Delivery Driver
+            </button>
+        </div>
+    </div>
+    <section id="services">
+        <app-our-services></app-our-services>
+    </section>
+    <section id="aboutUs">
+        <app-about-us></app-about-us>
+    </section>
+    <section id="categories">
+        <app-meal-categories (openSnackbarEmitter)="openSnackbar($event)" (openCategoryEmitter)="openCategory($event)">
+        </app-meal-categories>
+    </section>
+</main>

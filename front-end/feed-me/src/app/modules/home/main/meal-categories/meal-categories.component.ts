@@ -16,6 +16,7 @@ export class MealCategoriesComponent implements OnInit, OnChanges {
   filteredCategories: any = [];
 
   @Output() openSnackbarEmitter = new EventEmitter<{ message: string, class: string }>();
+  @Output() openCategoryEmitter = new EventEmitter<any>();
 
   constructor(
     public router: Router,
@@ -42,7 +43,7 @@ export class MealCategoriesComponent implements OnInit, OnChanges {
   }
 
   openCategory(category: string) {
-    this.router.navigate(['/home', category]);
+    this.openCategoryEmitter.emit(category);
   }
 
   filterCategories() {

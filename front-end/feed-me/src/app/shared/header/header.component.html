@@ -9,22 +9,26 @@
                     <img src="../../../assets/icons/white-icons/close.png" alt="menu" />
                 </div>
                 <li>
-                    <a [routerLink]="'/home'">Home</a>
+                    <img src="/assets/icons/white-icons/home.png" alt="home" /><a
+                        (click)="changeDisplay('main')">Home</a>
                 </li>
                 <li *ngIf="userRole === 2">
-                    <a [routerLink]="'/home/dashboard'">Home Chef</a>
+                    <img src="/assets/icons/white-icons/dashboard.png" alt="dashboard" /><a
+                        (click)="changeDisplay('dashboard')">Home Chef</a>
                 </li>
                 <li *ngIf="userRole === 3">
-                    <a [routerLink]="'/home/dashboard'">Deliveries</a>
+                    <img src="/assets/icons/white-icons/dashboard.png" alt="dashboard" /><a
+                        (click)="changeDisplay('dashboard')">Deliveries</a>
                 </li>
                 <li>
-                    <a (click)="openCart()">Cart</a>
+                    <img src="/assets/icons/white-icons/cart.png" alt="cart" /><a (click)="openCart()">Cart</a>
                 </li>
                 <li>
-                    <a>Account</a>
+                    <img src="/assets/icons/white-icons/profile.png" alt="profile" /><a
+                        (click)="changeDisplay('account')">Account</a>
                 </li>
                 <li>
-                    <a (click)="logout()">Logout</a>
+                    <img src="/assets/icons/white-icons/logout.png" alt="logout" /><a (click)="logout()">Logout</a>
                 </li>
             </ul>
         </nav>

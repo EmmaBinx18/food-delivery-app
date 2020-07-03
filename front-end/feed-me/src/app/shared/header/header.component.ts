@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Renderer2, HostListener, Output } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { AuthService } from '../../core/authentication/authentication.service';
 import { Role } from 'src/app/core/models/role.model';
@@ -17,10 +16,10 @@ export class HeaderComponent implements OnInit {
   @ViewChild('header', { static: false }) header: ElementRef;
 
   @Output() openCartEmitter = new EventEmitter();
+  @Output() changeDisplayEmitter = new EventEmitter<string>();
 
   constructor(
     private authService: AuthService,
-    private router: Router,
     private renderer: Renderer2
   ) { }
 
@@ -52,6 +51,10 @@ export class HeaderComponent implements OnInit {
 
   openCart() {
     this.openCartEmitter.emit();
+  }
+
+  changeDisplay(option: string) {
+    this.changeDisplayEmitter.emit(option);
   }
 
 }

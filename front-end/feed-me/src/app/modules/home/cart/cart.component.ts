@@ -13,6 +13,7 @@ export class CartComponent implements OnInit {
   cart: Cart[] = [];
 
   @Output() openSnackbarEmitter = new EventEmitter<{ message: string, class: string }>();
+  @Output() closeCartEmitter = new EventEmitter();
 
   constructor(private cartService: CartService) { }
 
@@ -25,8 +26,12 @@ export class CartComponent implements OnInit {
   }
 
   removeCartItem(item: Cart) {
-    this.cartService.removeFromCart(item.product);
+    this.cartService.removeFromCart(item);
     this.openSnackbarEmitter.emit({ message: 'Removed item from cart', class: 'snackbar-success' });
+  }
+
+  closeCart() {
+    this.closeCartEmitter.emit();
   }
 
 }

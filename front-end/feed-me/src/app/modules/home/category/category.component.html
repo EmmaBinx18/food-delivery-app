@@ -1,11 +1,8 @@
-<app-header (openCartEmitter)="openCart()"></app-header>
-<app-cart *ngIf="cart" (openSnackbarEmitter)="snackbar.open($event.message, $event.class)"></app-cart>
-
 <main>
   <app-spinner *ngIf="businesses.length == 0"></app-spinner>
   <div class="buttons">
-    <button class="yellow-button" *ngFor="let category of categories"
-      [ngClass]="{ active: category.name == chosenCategory }" (click)="changeCategory(category.name)">
+    <button class="yellow-button" *ngFor="let item of categories" [ngClass]="{ active: item.name == category.name }"
+      (click)="changeCategory(item)">
       {{ category.name }}
     </button>
   </div>
@@ -18,11 +15,6 @@
     There was an error loading the businesses in this category. Please try again
     later.
   </h2>
-  <app-business [business]="business" [category]="chosenCategory" (backEmitter)="hideBusiness()" *ngIf="displayBusiness"
-    (openSnackbarEmitter)="snackbar.open($event.message, $event.class)"></app-business>
+  <app-business [business]="business" [category]="category" (backEmitter)="hideBusiness()" *ngIf="displayBusiness"
+    (openSnackbarEmitter)="openSnackbar($event)"></app-business>
 </main>
-
-<app-footer (openFormEmitter)="openForm($event)"></app-footer>
-
-<app-modal [modalSubscription]="modalSubject.asObservable()"></app-modal>
-<app-snackbar></app-snackbar>

@@ -1,10 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 
 import { SnackbarService } from "../../../shared/snackbar/snackbar.service";
 import { CategoriesService } from "../../../core/services/categories.service";
 import { HomeChefService } from "../../../core/services/home-chef.service";
-import { Subject } from "rxjs";
 import { ModalService } from "src/app/shared/modal/modal.service";
 
 @Component({
@@ -13,8 +11,6 @@ import { ModalService } from "src/app/shared/modal/modal.service";
   styleUrls: ["./category.component.scss"],
 })
 export class CategoryComponent implements OnInit {
-  chosenCategory: string;
-  chosenCategoryId: string;
   business: any = {};
   businesses: any = [];
   categories: any = [];
@@ -22,24 +18,18 @@ export class CategoryComponent implements OnInit {
   displayBusiness: boolean = false;
 
   cart: boolean = false;
-  modalSubject: Subject<any> = new Subject<any>();
+
+  @Input() category: any;
+
+  @Output() openFormEmitter = new EventEmitter<string>();
+  @Output() openSnackbarEmitter = new EventEmitter<any>();
 
   constructor(
-    private route: ActivatedRoute,
-    public router: Router,
     public snackbar: SnackbarService,
     public categoryService: CategoriesService,
     private homeChefService: HomeChefService,
     public modalService: ModalService
-  ) {
-    this.route.params.subscribe((params) => {
-      this.chosenCategory = params.category;
-      this.chosenCategory =
-        this.chosenCategory.charAt(0).toUpperCase() +
-        this.chosenCategory.slice(1);
-      this.scrollAndGet();
-    });
-  }
+  ) { }
 
   ngOnInit() {
     this.cart = false;
@@ -54,7 +44,7 @@ export class CategoryComponent implements OnInit {
 
   getBusinesses() {
     return this.homeChefService
-      .getBusinessesByCategory(this.chosenCategoryId)
+      .getBusinessesByCategory(this.category)
       .then((response) => {
         // this.businesses = response;
         this.filterBusinesses();
@@ -79,9 +69,6 @@ export class CategoryComponent implements OnInit {
       .getAllCategories()
       .then((response) => {
         this.categories = response;
-        this.chosenCategoryId = this.categories.find(
-          (category) => category.name === this.chosenCategory
-        ).categoryId;
         this.getBusinesses();
       })
       .catch(() => {
@@ -90,21 +77,14 @@ export class CategoryComponent implements OnInit {
           "snackbar-error"
         );
         this.categories = [...this.categoryService.getDefaultCategories()];
-        this.chosenCategoryId = this.categories.find(
-          (category) => category.name === this.chosenCategory
-        ).categoryId;
         this.getBusinesses();
       });
   }
 
-  openForm(option: string) {
-    window.scroll(0, 0);
-    this.modalSubject.next(this.modalService.open(option));
-  }
-
-  changeCategory(category: string) {
+  changeCategory(category: any) {
     this.displayBusiness = false;
-    this.router.navigate(["/home", category]);
+    this.category = category;
+    this.scrollAndGet();
   }
 
   openBusiness(business: any) {
@@ -116,7 +96,11 @@ export class CategoryComponent implements OnInit {
     this.displayBusiness = false;
   }
 
-  openCart() {
-    this.cart = true;
+  openForm(option: string) {
+    this.openFormEmitter.emit(option);
+  }
+
+  openSnackbar(event: any) {
+    this.openSnackbarEmitter.emit(event);
   }
 }
