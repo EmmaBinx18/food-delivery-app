@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Renderer2, HostListener, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../core/authentication/authentication.service';
@@ -15,6 +15,8 @@ export class HeaderComponent implements OnInit {
 
   @ViewChild('nav', { static: false }) nav: ElementRef;
   @ViewChild('header', { static: false }) header: ElementRef;
+
+  @Output() openCartEmitter = new EventEmitter();
 
   constructor(
     private authService: AuthService,
@@ -46,6 +48,10 @@ export class HeaderComponent implements OnInit {
   closeNav() {
     this.renderer.setStyle(this.nav.nativeElement, 'left', '-200rem');
     this.renderer.removeClass(this.header.nativeElement, 'full-height');
+  }
+
+  openCart() {
+    this.openCartEmitter.emit();
   }
 
 }

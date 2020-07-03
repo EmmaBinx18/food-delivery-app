@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-import { Role } from 'src/app/core/models/role.model';
+import { Role } from "src/app/core/models/role.model";
 
-import { AuthService } from '../../../core/authentication/authentication.service';
-import { HomeChefService } from '../../../core/services/home-chef.service';
-import { DeliveryService } from '../../../core/services/delivery.service';
-import { SnackbarService } from '../../../shared/services/snackbar.service';
+import { AuthService } from "../../../core/authentication/authentication.service";
+import { HomeChefService } from "../../../core/services/home-chef.service";
+import { DeliveryService } from "../../../core/services/delivery.service";
+import { SnackbarService } from "../../../shared/snackbar/snackbar.service";
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: "app-dashboard",
+  templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.scss"],
 })
 export class DashboardComponent implements OnInit {
-
   stats: any = [];
   products: any = [];
 
@@ -29,7 +28,7 @@ export class DashboardComponent implements OnInit {
     private homeChefService: HomeChefService,
     private deliveryService: DeliveryService,
     public snackbar: SnackbarService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.role = this.authService.getCurrentRole();
@@ -67,15 +66,14 @@ export class DashboardComponent implements OnInit {
   }
 
   openModal(option: string) {
-    if (option === 'meal') {
+    if (option === "meal") {
       this.addMealModal = true;
     }
   }
 
   closeModal(option: string) {
-    if (option === 'meal') {
+    if (option === "meal") {
       this.addMealModal = false;
     }
   }
-
 }

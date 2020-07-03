@@ -18,6 +18,7 @@ import { DeliveryRegisterComponent } from './delivery-register/delivery-register
 import { BusinessComponent } from './category/business/business.component';
 
 import { SharedModule } from '../../shared/shared.module';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { SharedModule } from '../../shared/shared.module';
         AddMealComponent,
         BusinessComponent,
         HomeChefRegisterComponent,
-        DeliveryRegisterComponent
+        DeliveryRegisterComponent,
+        CartComponent
     ],
     imports: [
         SharedModule,

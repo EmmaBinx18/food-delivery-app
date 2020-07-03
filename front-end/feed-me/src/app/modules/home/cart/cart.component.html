@@ -1,0 +1,13 @@
+<div class="cart-container">
+    <div *ngIf="cart.length != 0">
+        <div class="cart-item" *ngFor="let item of cart">
+            <h4>{{item.product.name}}</h4>
+            <h4>{{item.quantity}}</h4>
+            <h4>R{{item.product.price * item.quantity}}</h4>
+            <img src="/assets/icons/grey-icons/trash.svg" alt="delete" (click)="removeCartItem(item)" />
+        </div>
+    </div>
+    <div *ngIf=" cart.length==0">
+        <h3>There are no items in your cart.</h3>
+    </div>
+</div>

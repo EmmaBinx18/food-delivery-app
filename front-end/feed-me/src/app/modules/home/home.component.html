@@ -1,30 +1,29 @@
-<app-header></app-header>
+<app-header (openCartEmitter)="openCart()"></app-header>
+<app-cart *ngIf="cart" (openSnackbarEmitter)="snackbar.open($event.message, $event.class)"></app-cart>
 
 <main>
-    <div class="image">
-        <div class="buttons">
-            <button class="yellow-button" (click)="openForm('homeChef')" *ngIf="role == 1">Register as a Home
-                Chef</button>
-            <button class="delivery-driver yellow-button" (click)="openForm('driver')" *ngIf="role == 1">Register
-                as
-                a Delivery Driver</button>
-        </div>
+  <div class="image">
+    <div class="buttons">
+      <button class="yellow-button" (click)="openForm('homeChef')" *ngIf="role == 1">
+        Register as a Home Chef
+      </button>
+      <button class="delivery-driver yellow-button" (click)="openForm('driver')" *ngIf="role == 1">
+        Register as a Delivery Driver
+      </button>
     </div>
-    <section id="services" class="services">
-        <app-our-services></app-our-services>
-    </section>
-    <section id="aboutUs" class="about-us">
-        <app-about-us></app-about-us>
-    </section>
-    <section id="categories" class="categories">
-        <h1>MEAL CATEGORIES</h1>
-        <app-meal-categories (openSnackbarEmitter)="snackbar.open($event.message, $event.class)"></app-meal-categories>
-    </section>
+  </div>
+  <section id="services">
+    <app-our-services></app-our-services>
+  </section>
+  <section id="aboutUs">
+    <app-about-us></app-about-us>
+  </section>
+  <section id="categories">
+    <app-meal-categories (openSnackbarEmitter)="snackbar.open($event.message, $event.class)"></app-meal-categories>
+  </section>
 </main>
 
 <app-footer (openFormEmitter)="openForm($event)"></app-footer>
 
-<app-modals [modalSubscription]="modalSubject.asObservable()">
-</app-modals>
-
+<app-modal [modalSubscription]="modalSubject.asObservable()"> </app-modal>
 <app-snackbar></app-snackbar>

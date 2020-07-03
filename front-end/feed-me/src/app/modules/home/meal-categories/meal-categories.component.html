@@ -1,4 +1,5 @@
 <div class="categories">
+    <h1>MEAL CATEGORIES</h1>
     <app-spinner *ngIf="categories.length == 0"></app-spinner>
     <div *ngFor="let category of filteredCategories" [style.background-image]="'url(&quot;' + category.src + '&quot;)'"
         (click)="openCategory(category.name)">

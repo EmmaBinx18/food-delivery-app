@@ -10,7 +10,29 @@ export class CartService {
 
   cart: Cart[] = [];
 
-  constructor() { }
+  constructor() {
+    const product = {
+      id: 1,
+      name: 'product',
+      description: '',
+      businessId: 2,
+      availabilityStatusId: 2,
+      price: 200,
+      minPrepareTime: 60
+    }
+    const cp = {
+      product,
+      quantity: 1
+    }
+    const cp2 = {
+      product,
+      quantity: 2
+    }
+    this.cart.push(cp);
+    this.cart.push(cp);
+    this.cart.push(cp);
+    this.cart.push(cp2);
+  }
 
   addToCart(product: Product) {
     this.cart.forEach(item => {
