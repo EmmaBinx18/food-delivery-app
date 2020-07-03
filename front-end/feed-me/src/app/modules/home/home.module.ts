@@ -15,10 +15,9 @@ import { DeliveriesComponent } from './dashboard/deliveries/deliveries.component
 import { AddMealComponent } from './dashboard/meals/add-meal/add-meal.component';
 import { HomeChefRegisterComponent } from './home-chef-register/home-chef-register.component';
 import { DeliveryRegisterComponent } from './delivery-register/delivery-register.component';
+import { BusinessComponent } from './category/business/business.component';
 
 import { SharedModule } from '../../shared/shared.module';
-import { OrderCartComponent } from './order-cart/order-cart.component';
-import { BusinessComponent } from './category/business/business.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +33,6 @@ import { BusinessComponent } from './category/business/business.component';
         MealsComponent,
         DeliveriesComponent,
         AddMealComponent,
-        OrderCartComponent,
         BusinessComponent,
         HomeChefRegisterComponent,
         DeliveryRegisterComponent

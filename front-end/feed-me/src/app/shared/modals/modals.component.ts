@@ -10,28 +10,13 @@ import { Observable, Subscription } from 'rxjs';
 export class ModalsComponent {
 
   private eventsSubscription: Subscription;
-  @Input() modalSubscription: Observable<string>;
+  @Input() modalSubscription: Observable<any>;
 
-  component: any
-
-  // displayRegisterHomeChef: boolean = false;
-  // displayRegisterDeliveryDriver: boolean = false;
-
-
-  // hide = {
-  //   homeChef: () => { this.displayRegisterHomeChef = false; },
-  //   driver: () => { this.displayRegisterDeliveryDriver = false; }
-  // }
-
-  // show = {
-  //   homeChef: () => { this.displayRegisterHomeChef = true; },
-  //   driver: () => { this.displayRegisterDeliveryDriver = true; }
-  // }
+  component: any = null;
 
   constructor(public snackbar: SnackbarService) { }
 
   ngOnInit() {
-    // this.eventsSubscription = this.modalSubscription.subscribe((data) => this.show[data]());
     this.eventsSubscription = this.modalSubscription.subscribe((data) => {
       this.component = data;
     });
@@ -41,12 +26,8 @@ export class ModalsComponent {
     this.eventsSubscription.unsubscribe();
   }
 
-  // closeForm(option: string) {
-  //   this.hide[option]();
-  // }
-
-  // closeForm() {
-  //   this.display = false;
-  // }
+  closeForm() {
+    this.component = null;
+  }
 
 }

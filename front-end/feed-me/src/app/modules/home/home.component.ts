@@ -4,8 +4,7 @@ import { Subject } from 'rxjs';
 
 import { AuthService } from 'src/app/core/authentication/authentication.service';
 import { Role } from 'src/app/core/models/role.model';
-import { HomeChefRegisterComponent } from './home-chef-register/home-chef-register.component';
-import { DeliveryRegisterComponent } from './delivery-register/delivery-register.component';
+import { ModalsService } from 'src/app/shared/services/modals.service';
 
 @Component({
   selector: 'app-home',
@@ -15,14 +14,12 @@ import { DeliveryRegisterComponent } from './delivery-register/delivery-register
 export class HomeComponent implements OnInit {
 
   role: Role;
-
-  displayModal: boolean = false;
-  modalComponent: any = null;
-  modalSubject: Subject<string> = new Subject<string>();
+  modalSubject: Subject<any> = new Subject<any>();
 
   constructor(
     public authService: AuthService,
-    public snackbar: SnackbarService
+    public snackbar: SnackbarService,
+    public modalService: ModalsService
   ) { }
 
   ngOnInit() {
@@ -30,14 +27,9 @@ export class HomeComponent implements OnInit {
     this.role = this.authService.getCurrentRole();
   }
 
-  // openForm(option: string) {
-  //   window.scroll(0, 0);
-  //   this.modalSubject.next(option);
-  // }
-
-  openForm() {
+  openForm(option: string) {
     window.scroll(0, 0);
-    this.modalSubject.next(option);
+    this.modalSubject.next(this.modalService.open(option));
   }
 
 }

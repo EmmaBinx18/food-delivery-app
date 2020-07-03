@@ -5,6 +5,7 @@ import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { CategoriesService } from '../../../core/services/categories.service';
 import { HomeChefService } from '../../../core/services/home-chef.service';
 import { Subject } from 'rxjs';
+import { ModalsService } from 'src/app/shared/services/modals.service';
 
 @Component({
   selector: 'app-category',
@@ -21,14 +22,15 @@ export class CategoryComponent implements OnInit {
   error: boolean = false;
   displayBusiness: boolean = false;
 
-  modalSubject: Subject<string> = new Subject<string>();
+  modalSubject: Subject<any> = new Subject<any>();
 
   constructor(
     private route: ActivatedRoute,
     public router: Router,
     public snackbar: SnackbarService,
     public categoryService: CategoriesService,
-    private homeChefService: HomeChefService
+    private homeChefService: HomeChefService,
+    public modalService: ModalsService
   ) {
     this.route.params.subscribe(params => {
       this.chosenCategory = params.category;
@@ -81,7 +83,7 @@ export class CategoryComponent implements OnInit {
 
   openForm(option: string) {
     window.scroll(0, 0);
-    this.modalSubject.next(option);
+    this.modalSubject.next(this.modalService.open(option));
   }
 
   changeCategory(category: string) {

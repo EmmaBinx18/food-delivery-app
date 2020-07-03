@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   userRole: Role;
 
   @ViewChild('nav', { static: false }) nav: ElementRef;
-  @ViewChild('burgerMenu', { static: false }) burgerMenu: ElementRef;
+  @ViewChild('header', { static: false }) header: ElementRef;
 
   constructor(
     private authService: AuthService,
@@ -30,21 +30,22 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
   }
 
-  // @HostListener('window:resize', ['$event'])
-  // onResize(event) {
-  //   if (event.target.innerWidth > 800 && this.burgerMenu.nativeElement.style.display == "block") {
-  //     this.renderer.setStyle(this.nav.nativeElement, 'display', 'inline');
-  //   }
-  // }
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    if (event.target.innerWidth > 800 && this.nav.nativeElement.style.left == "-200rem") {
+      this.renderer.setStyle(this.nav.nativeElement, 'left', '0');
+      this.renderer.removeClass(this.header.nativeElement, 'full-height');
+    }
+  }
 
   openNav() {
-    this.renderer.setStyle(this.nav.nativeElement, 'display', 'block');
-    this.renderer.setStyle(this.burgerMenu.nativeElement, 'display', 'none');
+    this.renderer.setStyle(this.nav.nativeElement, 'left', '0');
+    this.renderer.addClass(this.header.nativeElement, 'full-height');
   }
 
   closeNav() {
-    this.renderer.setStyle(this.nav.nativeElement, 'display', 'none');
-    this.renderer.setStyle(this.burgerMenu.nativeElement, 'display', 'block');
+    this.renderer.setStyle(this.nav.nativeElement, 'left', '-200rem');
+    this.renderer.removeClass(this.header.nativeElement, 'full-height');
   }
 
 }
