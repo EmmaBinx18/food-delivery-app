@@ -1,4 +1,4 @@
-<main>
+<div class="main">
     <div class="image">
         <div class="buttons">
             <button class="yellow-button" (click)="openForm('homeChef')" *ngIf="role == 1">
@@ -16,7 +16,6 @@
         <app-about-us></app-about-us>
     </section>
     <section id="categories">
-        <app-meal-categories (openSnackbarEmitter)="openSnackbar($event)" (openCategoryEmitter)="openCategory($event)">
-        </app-meal-categories>
+        <app-meal-categories (openCategoryEmitter)="openCategory($event)"></app-meal-categories>
     </section>
-</main>
+</div>

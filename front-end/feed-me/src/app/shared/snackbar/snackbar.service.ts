@@ -1,42 +1,25 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SnackbarService {
 
-  constructor() { }
+  snackbar: any = null;
+  snackbarSubject: Subject<string> = new Subject<string>();
 
-  open(message: string, snackbarClass?: string) {
-    const snackbar = document.querySelector('#snackbar');
-    const snackBarMessage = document.querySelector('#snackbar-message');
-    snackBarMessage.innerHTML = message;
-
-    this.removeClasses(snackbar);
-    if (snackbarClass) {
-      this.addClass(snackbar, snackbarClass);
-    }
-
-    this.show(snackbar);
-    this.hide(snackbar);
+  constructor() {
+    this.snackbarSubject.subscribe(value => {
+      this.snackbar = value;
+    });
   }
 
-  show(snackbar: any) {
-    snackbar.classList.add('show');
+  show(value: any) {
+    this.snackbarSubject.next(value);
   }
 
-  hide(snackbar: any) {
-    setTimeout(() => {
-      snackbar.classList.remove('show');
-      snackbar.classList.add('hide');
-    }, 4000);
-  }
-
-  removeClasses(snackbar: any) {
-    snackbar.classList.remove('snackbar-error');
-  }
-
-  addClass(snackbar: any, snackbarClass: string) {
-    snackbar.classList.add(snackbarClass);
+  hide() {
+    this.snackbarSubject.next(null);
   }
 }

@@ -69,7 +69,7 @@ router.patch('/', (req, res) => {
 router.post('/category', (req, res) => {
     logger.info('GET BUSINESSES BY CATEGORY');
     try{
-        db.executeStoredProcedure(sp.GET_BUSINESS_CATEGORY, {categoryid:req.body.params}, (data) => {
+        db.executeStoredProcedure(sp.GET_BUSINESS_CATEGORY, {categoryId:req.body.params}, (data) => {
             return res.status(200).send(JSON.parse(data));
         });
     }

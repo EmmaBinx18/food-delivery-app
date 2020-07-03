@@ -1,8 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { SnackbarService } from "src/app/shared/snackbar/snackbar.service";
-import { Subject } from "rxjs";
-
-import { ModalService } from "src/app/shared/modal/modal.service";
 
 @Component({
   selector: "app-home",
@@ -10,8 +6,6 @@ import { ModalService } from "src/app/shared/modal/modal.service";
   styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
-  modalSubject: Subject<any> = new Subject<any>();
-
   cart: boolean = false;
   category: any;
 
@@ -21,19 +15,11 @@ export class HomeComponent implements OnInit {
     dashboard: false
   }
 
-  constructor(
-    public snackbar: SnackbarService,
-    public modalService: ModalService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
     this.category = '';
     window.scroll(0, 0);
-  }
-
-  openForm(option: string) {
-    window.scroll(0, 0);
-    this.modalSubject.next(this.modalService.open(option));
   }
 
   openCart() {

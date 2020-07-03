@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { AuthService } from "src/app/core/authentication/authentication.service";
@@ -6,6 +6,7 @@ import { HomeChefService } from "src/app/core/services/home-chef.service";
 import { CategoriesService } from "src/app/core/services/categories.service";
 import { SnackbarService } from "src/app/shared/snackbar/snackbar.service";
 import { AddressService } from "src/app/core/services/address.service";
+import { ModalService } from 'src/app/shared/modal/modal.service';
 
 @Component({
   selector: "app-home-chef-register",
@@ -17,20 +18,15 @@ export class HomeChefRegisterComponent implements OnInit {
   categories: any;
   provinces: string[] = [];
 
-  @Output() closeFormEmitter = new EventEmitter();
-  @Output() openSnackbarEmitter = new EventEmitter<{
-    message: string;
-    class: string;
-  }>();
-
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private homeChefService: HomeChefService,
     private categoryService: CategoriesService,
     public snackbar: SnackbarService,
-    private addressService: AddressService
-  ) {}
+    private addressService: AddressService,
+    public modalService: ModalService
+  ) { }
 
   ngOnInit() {
     this.setSelectOptions();
@@ -84,22 +80,12 @@ export class HomeChefRegisterComponent implements OnInit {
       this.homeChefService
         .registerBusiness(this.registerForm.value)
         .then(() => {
-          this.openSnackbarEmitter.emit({
-            message: "Successfully sent business registration request.",
-            class: "snackbar-success",
-          });
-          this.closeForm();
+          this.snackbar.show({ message: "Successfully sent business registration request.", class: "snackbar-success" });
+          this.modalService.close();
         })
         .catch(() => {
-          this.openSnackbarEmitter.emit({
-            message: "Could not register business. Please try again later",
-            class: "snackbar-error",
-          });
+          this.snackbar.show({ message: "Could not register business. Please try again later.", class: "snackbar-error" });
         });
     }
-  }
-
-  closeForm() {
-    this.closeFormEmitter.emit();
   }
 }

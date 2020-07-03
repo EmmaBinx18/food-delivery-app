@@ -1,3 +1,2 @@
-<div *ngIf="component !== null" class="overlay" (click)="closeForm()"></div>
-<ng-template *ngIf="component !== null" [ngComponentOutlet]="component"
-    (openSnackbarEmitter)="snackbar.open($event.message, $event.class)" (closeFormEmitter)="closeForm()"></ng-template>
+<div *ngIf="component !== null" class="overlay" (click)="modalService.close()"></div>
+<ng-template *ngIf="component !== null" [ngComponentOutlet]="component"></ng-template>

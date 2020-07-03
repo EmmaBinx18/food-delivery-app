@@ -1,20 +1,25 @@
 import { Injectable } from "@angular/core";
-
-import { HomeChefRegisterComponent } from "../../modules/home/home-chef-register/home-chef-register.component";
-import { DeliveryRegisterComponent } from "../../modules/home/delivery-register/delivery-register.component";
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: "root",
 })
 export class ModalService {
-  components = {
-    homeChef: HomeChefRegisterComponent,
-    driver: DeliveryRegisterComponent,
-  };
 
-  constructor() {}
+  component: any = null;
+  componentSubject: Subject<string> = new Subject<string>();
+
+  constructor() {
+    this.componentSubject.subscribe(option => {
+      this.component = option;
+    });
+  }
 
   open(option: string) {
-    return this.components[option];
+    this.componentSubject.next(option);
+  }
+
+  close() {
+    this.componentSubject.next(null);
   }
 }

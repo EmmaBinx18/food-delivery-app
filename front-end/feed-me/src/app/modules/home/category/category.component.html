@@ -1,9 +1,9 @@
-<main>
+<div class="category">
   <app-spinner *ngIf="businesses.length == 0"></app-spinner>
   <div class="buttons">
     <button class="yellow-button" *ngFor="let item of categories" [ngClass]="{ active: item.name == category.name }"
       (click)="changeCategory(item)">
-      {{ category.name }}
+      {{ item.name }}
     </button>
   </div>
   <div class="businesses" *ngIf="!displayBusiness">
@@ -15,6 +15,6 @@
     There was an error loading the businesses in this category. Please try again
     later.
   </h2>
-  <app-business [business]="business" [category]="category" (backEmitter)="hideBusiness()" *ngIf="displayBusiness"
-    (openSnackbarEmitter)="openSnackbar($event)"></app-business>
-</main>
+  <app-business [business]="business" [category]="category.name" (backEmitter)="hideBusiness()" *ngIf="displayBusiness">
+  </app-business>
+</div>

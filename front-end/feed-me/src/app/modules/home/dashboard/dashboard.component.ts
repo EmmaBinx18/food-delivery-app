@@ -14,21 +14,18 @@ import { SnackbarService } from "../../../shared/snackbar/snackbar.service";
 })
 export class DashboardComponent implements OnInit {
   stats: any = [];
-  products: any = [];
 
   businessName: string = "New Business";
   userName: string = "Emma Coetzer";
 
   role: Role;
 
-  addMealModal: boolean = false;
-
   constructor(
     public authService: AuthService,
     private homeChefService: HomeChefService,
     private deliveryService: DeliveryService,
     public snackbar: SnackbarService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.role = this.authService.getCurrentRole();
@@ -42,38 +39,11 @@ export class DashboardComponent implements OnInit {
     // }
   }
 
-  loadHomeChef() {
-    // this.homeChefService.getBusiness(this.authService.getCurrentUser().uid)
-    //   .then(response => {
-    //     this.businessName = response['name'];
-    //     this.setHomeChefStats();
-    //   })
-    //   .catch(() => {
-    //     this.snackbar.open('Your business would not be loaded. Please try again later.');
-    //   });
-  }
-
-  loadDelivery() {
-    this.setDeliveryStats();
-  }
-
   setHomeChefStats() {
     this.stats = this.homeChefService.getStats();
   }
 
   setDeliveryStats() {
     this.stats = this.deliveryService.getStats();
-  }
-
-  openModal(option: string) {
-    if (option === "meal") {
-      this.addMealModal = true;
-    }
-  }
-
-  closeModal(option: string) {
-    if (option === "meal") {
-      this.addMealModal = false;
-    }
   }
 }

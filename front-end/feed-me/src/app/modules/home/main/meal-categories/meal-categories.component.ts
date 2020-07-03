@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angu
 import { Router } from '@angular/router';
 
 import { CategoriesService } from 'src/app/core/services/categories.service';
+import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-meal-categories',
@@ -15,12 +16,12 @@ export class MealCategoriesComponent implements OnInit, OnChanges {
   categories: any = [];
   filteredCategories: any = [];
 
-  @Output() openSnackbarEmitter = new EventEmitter<{ message: string, class: string }>();
   @Output() openCategoryEmitter = new EventEmitter<any>();
 
   constructor(
     public router: Router,
-    public categoryService: CategoriesService
+    public categoryService: CategoriesService,
+    public snackbarService: SnackbarService
   ) { }
 
   ngOnInit() {
@@ -31,7 +32,7 @@ export class MealCategoriesComponent implements OnInit, OnChanges {
         this.filterCategories();
       })
       .catch(() => {
-        this.openSnackbarEmitter.emit({ message: 'Could not load categories. Only the defaults will be available.', class: 'snackbar-error' });
+        this.snackbarService.show({ message: 'Could not load categories. Only the defaults will be available.', class: 'snackbar-error' });
         this.categories = this.categoryService.getDefaultCategories();
         this.filteredCategories = this.categories;
         this.filterCategories();

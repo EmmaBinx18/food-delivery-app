@@ -1,5 +1,5 @@
 <div class="business">
-    <app-spinner *ngIf="products.length == 0"></app-spinner>
+    <app-spinner *ngIf="products.length == 0 && !error"></app-spinner>
     <div class="content">
         <button class="back-button" (click)="back()">
             <p>Back</p>

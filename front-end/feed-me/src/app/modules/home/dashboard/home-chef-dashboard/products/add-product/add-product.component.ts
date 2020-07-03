@@ -2,11 +2,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-add-meal',
-  templateUrl: './add-meal.component.html',
-  styleUrls: ['./add-meal.component.scss']
+  selector: 'app-add-product',
+  templateUrl: './add-product.component.html',
+  styleUrls: ['./add-product.component.scss']
 })
-export class AddMealComponent implements OnInit {
+export class AddProductComponent implements OnInit {
 
   @Output() closeModalEmitter = new EventEmitter();
 

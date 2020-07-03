@@ -1,47 +1,48 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 import { Product } from '../models/product.model';
 import { Cart } from '../models/cart.model';
+import { OrdersService } from './orders.service';
+import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
+export class CartService implements OnInit {
 
   cart: Cart[] = [];
 
-  constructor() {
-    const product = {
-      id: 1,
-      name: 'product',
-      description: '',
-      businessId: 2,
-      availabilityStatusId: 2,
-      price: 200,
-      minPrepareTime: 60
+  constructor(
+    private orderService: OrdersService,
+    public snackbarService: SnackbarService
+  ) { }
+
+  ngOnInit() {
+    const storage = localStorage.getItem('cart');
+    if (storage !== null) {
+      this.cart = JSON.parse(localStorage.getItem('cart'));
     }
-    const cp = {
-      product,
-      quantity: 1
+    else {
+      this.setStorage();
     }
-    const cp2 = {
-      product,
-      quantity: 2
-    }
-    this.cart.push(cp);
-    this.cart.push(cp);
-    this.cart.push(cp);
-    this.cart.push(cp2);
+  }
+
+  setStorage() {
+    localStorage.setItem('cart', JSON.stringify(this.cart));
+  }
+
+  clearStorage() {
+    localStorage.removeItem('cart');
   }
 
   addToCart(product: Product) {
-    this.cart.forEach(item => {
-      if (item.product == product) {
-        item.quantity += 1;
-        return;
-      }
-    });
-    this.cart.push({ product, quantity: 1 });
+    const index = this.cart.findIndex(item => item.product == product);
+    if (index > -1) {
+      this.cart[index].quantity += 1;
+    }
+    else {
+      this.cart.push({ product, quantity: 1 });
+    }
   }
 
   removeFromCart(item: Cart) {
@@ -56,5 +57,16 @@ export class CartService {
         }
       }
     });
+  }
+
+  checkout() {
+    this.orderService.insertOrder(this.cart)
+      .then(() => {
+        this.clearStorage();
+        this.snackbarService.show({ message: 'Successfully submitted order', class: 'snackbar-success' });
+      })
+      .catch(() => {
+        this.snackbarService.show({ message: 'Your order could not be submitted. Please try again later.', class: 'snackbar-error' });
+      });
   }
 }

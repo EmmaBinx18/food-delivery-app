@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 
 import { SnackbarService } from "../../../shared/snackbar/snackbar.service";
 import { CategoriesService } from "../../../core/services/categories.service";
@@ -21,9 +21,6 @@ export class CategoryComponent implements OnInit {
 
   @Input() category: any;
 
-  @Output() openFormEmitter = new EventEmitter<string>();
-  @Output() openSnackbarEmitter = new EventEmitter<any>();
-
   constructor(
     public snackbar: SnackbarService,
     public categoryService: CategoriesService,
@@ -39,22 +36,19 @@ export class CategoryComponent implements OnInit {
   scrollAndGet() {
     window.scroll(0, 0);
     this.error = false;
-    this.getCategories();
-  }
-
-  getBusinesses() {
-    return this.homeChefService
-      .getBusinessesByCategory(this.category)
-      .then((response) => {
-        // this.businesses = response;
+    this.businesses = [];
+    Promise.all([
+      this.categoryService.getAllCategories(),
+      this.homeChefService.getBusinessesByCategory(this.category.categoryId)
+    ])
+      .then(response => {
+        this.categories = response[0];
+        this.businesses = response[1];
         this.filterBusinesses();
       })
       .catch(() => {
         this.error = true;
-        this.snackbar.open(
-          "Could not load businesses. Please try again later.",
-          "snackbar-error"
-        );
+        this.snackbar.show({ message: "Could not load this page. Please try again later.", class: "snackbar-error" })
       });
   }
 
@@ -62,23 +56,6 @@ export class CategoryComponent implements OnInit {
     this.businesses = this.businesses.filter(
       (business) => business.operationalStatusId !== 1
     );
-  }
-
-  getCategories() {
-    this.categoryService
-      .getAllCategories()
-      .then((response) => {
-        this.categories = response;
-        this.getBusinesses();
-      })
-      .catch(() => {
-        this.snackbar.open(
-          "Could not load categories. Only the defaults will be available.",
-          "snackbar-error"
-        );
-        this.categories = [...this.categoryService.getDefaultCategories()];
-        this.getBusinesses();
-      });
   }
 
   changeCategory(category: any) {
@@ -94,13 +71,5 @@ export class CategoryComponent implements OnInit {
 
   hideBusiness() {
     this.displayBusiness = false;
-  }
-
-  openForm(option: string) {
-    this.openFormEmitter.emit(option);
-  }
-
-  openSnackbar(event: any) {
-    this.openSnackbarEmitter.emit(event);
   }
 }

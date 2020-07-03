@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
 import { AuthService } from '../../core/authentication/authentication.service';
+import { ModalService } from '../modal/modal.service';
 
 @Component({
   selector: 'app-footer',
@@ -11,7 +12,7 @@ export class FooterComponent {
 
   @Output() openFormEmitter = new EventEmitter<string>();
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, public modalService: ModalService) { }
 
   logout() {
     this.authService.logout();
@@ -22,6 +23,6 @@ export class FooterComponent {
   }
 
   openForm(option: string) {
-    this.openFormEmitter.emit(option);
+    this.modalService.open(option);
   }
 }

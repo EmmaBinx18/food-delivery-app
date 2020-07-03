@@ -55,6 +55,7 @@ export class HeaderComponent implements OnInit {
 
   changeDisplay(option: string) {
     this.changeDisplayEmitter.emit(option);
+    this.closeNav();
   }
 
 }

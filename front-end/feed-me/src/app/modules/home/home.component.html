@@ -1,18 +1,16 @@
 <app-header (openCartEmitter)="openCart()" (changeDisplayEmitter)="changeDisplay($event)"></app-header>
 
-<app-cart *ngIf="cart" (openSnackbarEmitter)="snackbar.open($event.message, $event.class)"
-  (closeCartEmitter)="closeCart()"></app-cart>
+<app-cart *ngIf="cart" (closeCartEmitter)="closeCart()"></app-cart>
 
-<app-main *ngIf="display.main" (openFormEmitter)="openForm($event)"
-  (openSnackbarEmitter)="snackbar.open($event.message, $event.class)"
-  (openCategoryEmitter)="changeDisplay('category', $event)">
-</app-main>
-<app-category *ngIf="display.category" (openFormEmitter)="openForm($event)"
-  (openSnackbarEmitter)="snackbar.open($event.message, $event.class)" [category]="category">
-</app-category>
-<app-dashboard *ngIf="display.dashboard"></app-dashboard>
+<main>
+  <app-main *ngIf="display.main" (openCategoryEmitter)="changeDisplay('category', $event)">
+  </app-main>
+  <app-category *ngIf="display.category" [category]="category">
+  </app-category>
+  <app-dashboard *ngIf="display.dashboard"></app-dashboard>
+</main>
 
-<app-footer (openFormEmitter)="openForm($event)"></app-footer>
+<app-footer></app-footer>
 
-<app-modal [modalSubscription]="modalSubject.asObservable()"> </app-modal>
+<app-modal></app-modal>
 <app-snackbar></app-snackbar>
