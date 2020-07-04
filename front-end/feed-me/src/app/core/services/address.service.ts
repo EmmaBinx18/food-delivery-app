@@ -10,6 +10,14 @@ export class AddressService {
 
   constructor(private http: HttpClient) { }
 
+  getAllAddresses() {
+
+  }
+
+  getAddressById(addressId: string) {
+    return this.http.get(`api/address/${addressId}`).toPromise();
+  }
+
   insertAddress(address: Address) {
     return this.http.post(`api/address`, { params: { ...address } }).toPromise();
   }

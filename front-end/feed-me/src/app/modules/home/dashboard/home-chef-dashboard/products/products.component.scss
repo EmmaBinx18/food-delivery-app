@@ -1,0 +1,72 @@
+.meals-container{
+    box-shadow: var(--primary-box-shadow);
+    border-radius: 6px;
+    background-color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 2%;
+
+    h3{
+        font-size: 1.3rem;
+    }
+
+    h3, td{
+        font-family: var(--secondary-font-family);
+    }
+}
+
+.meals-table{
+    padding: 30px;
+    overflow-y: scroll;
+    min-height: auto;
+    max-height: 300px;
+
+    table{
+        border-collapse: separate;
+        border-spacing: 14px;
+    }
+
+    table td{
+        padding: 4px 30px 4px 30px;
+    }
+
+    .meal-name{
+        color: white;
+        background-color: var(--primary-green);
+        border-radius: 6px;
+    }
+
+    .delete:hover{
+        width: 18px;
+        cursor: pointer;
+    }
+
+    .description{
+        @media(max-width: 850px){display: none;}
+    }
+}
+
+.add-product{
+    width: 100%;
+    text-align: end;
+}
+
+button{
+    width: 35%;
+    margin-bottom: 4%;
+    font-size: 2.2rem;
+    border-radius: 50%;
+    color: white;
+    width: 44px;
+    border: none;
+    background-color: var(--primary-dark-blue);
+    margin-right: 6%;
+    margin-top: 2%;
+    align-self: flex-end;
+
+    &:hover{
+        box-shadow: var(--primary-box-shadow);
+        cursor: pointer;
+        font-size: 2.3rem;
+    }
+}

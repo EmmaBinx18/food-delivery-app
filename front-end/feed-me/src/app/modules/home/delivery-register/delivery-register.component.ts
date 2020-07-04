@@ -1,9 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from 'src/app/core/authentication/authentication.service';
 import { DeliveryService } from 'src/app/core/services/delivery.service';
 import { AddressService } from 'src/app/core/services/address.service';
+import { ModalService } from 'src/app/shared/modal/modal.service';
+import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-delivery-register',
@@ -16,14 +18,13 @@ export class DeliveryRegisterComponent implements OnInit {
   uid: string;
   provinces: string[] = [];
 
-  @Output() closeFormEmitter = new EventEmitter();
-  @Output() openSnackbarEmitter = new EventEmitter<{ message: string, class: string }>();
-
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private deliveryService: DeliveryService,
-    private addressService: AddressService
+    private addressService: AddressService,
+    public modalService: ModalService,
+    public snackbarService: SnackbarService
   ) { }
 
   ngOnInit() {
@@ -49,19 +50,15 @@ export class DeliveryRegisterComponent implements OnInit {
     this.registerForm.get('province').setValue(event.target.value, { onlySelf: true });
   }
 
-  closeForm() {
-    this.closeFormEmitter.emit();
-  }
-
   register() {
     if (this.registerForm.valid) {
       this.deliveryService.registerDeliveryDriver(this.registerForm.value)
         .then(() => {
-          this.openSnackbarEmitter.emit({ message: 'Successfully sent registration request.', class: 'snackbar-success' });
-          this.closeForm();
+          this.snackbarService.show({ message: 'Successfully sent registration request.', class: 'snackbar-success' });
+          this.modalService.close();
         })
         .catch(() => {
-          this.openSnackbarEmitter.emit({ message: 'Could not submit your request. Please try again later.', class: 'snackbar-error' });
+          this.snackbarService.show({ message: 'Could not submit your request. Please try again later.', class: 'snackbar-error' });
         });
     }
   }

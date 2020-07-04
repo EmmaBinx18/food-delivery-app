@@ -1,30 +1,29 @@
 <footer>
-    <div class="menu-list list">
+    <div>
         <ul>
             <li><a [routerLink]="'/home'">Home</a></li>
-            <li><a (click)="registerHomeChef()">Register as a Home Chef</a></li>
-            <li><a>Register as a Delivery Driver</a></li>
+            <li><a (click)="openForm('homeChef')">Register as a Home Chef</a></li>
+            <li><a (click)="openForm('driver')">Register as a Delivery Driver</a></li>
             <li><a (click)="scroll('services')">Our Services</a></li>
         </ul>
-        <ul class="second-list">
+        <ul>
             <li><a (click)="scroll('aboutUs')">About Us</a></li>
             <li><a (click)="scroll('categories')">Meal Categries</a></li>
             <li><a>Account</a></li>
             <li><a (click)="logout()">Logout</a></li>
         </ul>
     </div>
-    <div class="list">
-        <h2>Contact Us</h2>
+    <div>
         <ul>
+            <h3>Contact Us</h3>
             <li><a>feedme@gmail.com</a></li>
             <li><a>011 798 5478</a></li>
         </ul>
-    </div>
-    <div class="list">
-        <h2>Legal</h2>
         <ul>
+            <h3>Legal</h3>
             <li><a>Privacy</a></li>
             <li><a>Terms and Conditions</a></li>
+            <li><a href="https://icons8.com/">Icons used</a></li>
         </ul>
     </div>
 </footer>

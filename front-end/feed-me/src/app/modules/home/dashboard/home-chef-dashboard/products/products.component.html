@@ -1,0 +1,20 @@
+<div class="meals-container">
+    <h3>Your Products</h3>
+    <div *ngIf="products !== null" class="meals-table">
+        <table>
+            <tr *ngFor="let meal of products">
+                <td class="meal-name">{{meal.name}}</td>
+                <td class="description">{{meal.description}}</td>
+                <td>R{{meal.price}}</td>
+                <td>{{meal.minPrepareTime}} minutes</td>
+                <td><img class="delete" src="/assets/icons/trash.png" alt="delete" /></td>
+            </tr>
+        </table>
+    </div>
+    <div *ngIf="products == null">
+        <h4>Add products to your business</h4>
+    </div>
+    <div class="add-product">
+        <button (click)="openForm()">+</button>
+    </div>
+</div>

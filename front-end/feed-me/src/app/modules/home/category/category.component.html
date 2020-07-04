@@ -1,19 +1,20 @@
-<app-header [display]="navService.displaySidenav" (openNavEmitter)="navService.openNav()"></app-header>
-<app-side-nav [display]="navService.displaySidenav" (closeNavEmitter)="navService.closeNav()"></app-side-nav>
-<main>
-    <h1>{{category}}</h1>
-    <section class="category-table">
-        <table>
-            <tr *ngFor="let business of businesses">
-                <td>{{business.name}}</td>
-            </tr>
-        </table>
-    </section>
-    <app-meal-categories [removeCategory]="category" (errorEmitter)="snackbar.open($event, 'snackbar-error')">
-    </app-meal-categories>
-    <br /><br />
-    <app-footer (registerHomeChefEmitter)="registerHomeChef()"></app-footer>
-</main>
-<app-home-chef-register *ngIf="displayRegisterHomeChef" (closeFormEmitter)="closeRegisterBusinessForm()">
-</app-home-chef-register>
-<app-snackbar></app-snackbar>
+<div class="category">
+  <app-spinner *ngIf="businesses.length == 0 && !error"></app-spinner>
+  <div class="buttons">
+    <button class="button" *ngFor="let item of categoryService.categories"
+      [ngClass]="{ active: item.name == category.name }" (click)="changeCategory(item)">
+      <img [src]="item.icon" alt="icon" />{{ item.name }}
+    </button>
+  </div>
+  <div class="businesses" *ngIf="!displayBusiness">
+    <div *ngFor="let business of businesses" (click)="openBusiness(business)">
+      <h2>{{ business.name }}</h2>
+    </div>
+  </div>
+  <h2 *ngIf="error">
+    There was an error loading the businesses in this category. Please try again
+    later.
+  </h2>
+  <app-business [business]="business" [category]="category.name" (backEmitter)="hideBusiness()" *ngIf="displayBusiness">
+  </app-business>
+</div>

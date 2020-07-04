@@ -1,31 +1,17 @@
-<app-header [display]="navService.displaySidenav" (openNavEmitter)="navService.openNav()"></app-header>
-<app-side-nav [display]="navService.displaySidenav" (closeNavEmitter)="navService.closeNav()"></app-side-nav>
+<app-header (openCartEmitter)="openCart()" (changeDisplayEmitter)="changeDisplay($event)"></app-header>
+
+<app-cart *ngIf="cart" (closeCartEmitter)="closeCart()"></app-cart>
+
 <main>
-    <div class="image">
-        <div class="buttons">
-            <button class="yellow-button" (click)="openForm('homeChef')" *ngIf="role == 1">Register as a Home
-                Chef</button>
-            <button class="delivery-driver yellow-button" (click)="openForm('driver')" *ngIf="role == 1">Register
-                as
-                a Delivery Driver</button>
-        </div>
-    </div>
-    <section id="services" class="services">
-        <app-our-services></app-our-services>
-    </section>
-    <section id="aboutUs" class="about-us">
-        <app-about-us></app-about-us>
-    </section>
-    <section id="categories" class="categories">
-        <h1>MEAL CATEGORIES</h1>
-        <app-meal-categories (errorEmitter)="snackbar.open($event, 'snackbar-error')"></app-meal-categories>
-    </section>
-    <app-footer (registerHomeChefEmitter)="openForm('homeChef')"></app-footer>
+  <app-main *ngIf="display.main" (openCategoryEmitter)="changeDisplay('category', $event)"
+    (changeDisplatEmitter)="changeDisplay($event)">
+  </app-main>
+  <app-category *ngIf="display.category" [category]="category">
+  </app-category>
+  <app-dashboard *ngIf="display.dashboard"></app-dashboard>
 </main>
-<app-home-chef-register *ngIf="displayRegisterHomeChef"
-    (openSnackbarEmitter)="snackbar.open($event.message, $event.class)" (closeFormEmitter)="closeForm('homeChef')">
-</app-home-chef-register>
-<app-delivery-register *ngIf="displayRegisterDeliveryDriver"
-    (openSnackbarEmitter)="snackbar.open($event.message, $event.class)" (closeFormEmitter)="closeForm('driver')">
-</app-delivery-register>
+
+<app-footer></app-footer>
+
+<app-modal></app-modal>
 <app-snackbar></app-snackbar>

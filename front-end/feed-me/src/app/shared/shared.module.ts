@@ -1,29 +1,32 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { SideNavComponent } from './side-nav/side-nav.component';
-import { SnackbarComponent } from './snackbar/snackbar.component';
+import { HeaderComponent } from "./header/header.component";
+import { FooterComponent } from "./footer/footer.component";
+import { SnackbarComponent } from "./snackbar/snackbar.component";
+import { SpinnerComponent } from "./spinner/spinner.component";
+import { ModalComponent } from "./modal/modal.component";
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule
-    ],
-    declarations: [
-        HeaderComponent,
-        FooterComponent,
-        SideNavComponent,
-        SnackbarComponent
-    ],
-    exports: [
-        HeaderComponent,
-        FooterComponent,
-        SideNavComponent,
-        SnackbarComponent,
-        CommonModule
-    ]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    SnackbarComponent,
+    SpinnerComponent,
+    ModalComponent,
+  ],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    SnackbarComponent,
+    SpinnerComponent,
+    ModalComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}
