@@ -1,57 +1,52 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { CategoriesService } from 'src/app/core/services/categories.service';
 import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-meal-categories',
   templateUrl: './meal-categories.component.html',
   styleUrls: ['./meal-categories.component.scss']
 })
-export class MealCategoriesComponent implements OnInit, OnChanges {
+export class MealCategoriesComponent implements OnInit {
 
-  @Input() removeCategory?: string;
-
-  categories: any = [];
   filteredCategories: any = [];
 
+  @Input() removeCategory?: string;
   @Output() openCategoryEmitter = new EventEmitter<any>();
 
   constructor(
     public router: Router,
     public categoryService: CategoriesService,
-    public snackbarService: SnackbarService
+    public snackbarService: SnackbarService,
+    private sanitization: DomSanitizer
   ) { }
 
   ngOnInit() {
     this.categoryService.getAllCategories()
       .then(response => {
-        this.categories = response;
-        this.filteredCategories = this.categories;
-        this.filterCategories();
+        this.categoryService.categories = response;
+        this.setSrc();
       })
       .catch(() => {
         this.snackbarService.show({ message: 'Could not load categories. Only the defaults will be available.', class: 'snackbar-error' });
-        this.categories = this.categoryService.getDefaultCategories();
-        this.filteredCategories = this.categories;
-        this.filterCategories();
+        this.categoryService.categories = this.categoryService.getDefaultCategories();
+        this.categoryService.categories.forEach(element => {
+          element.image = `url(${element.image})`
+        });
       });
   }
 
-  ngOnChanges() {
-    this.filterCategories();
+  setSrc() {
+    this.categoryService.categories.forEach(element => {
+      element.image = this.sanitization.bypassSecurityTrustStyle(`url(data:image/jpg+xml;base64,${element.image})`);
+      element['icon'] = `/assets/icons/meals/${element.name.toLowercase()}.png`;
+    });
   }
 
   openCategory(category: string) {
     this.openCategoryEmitter.emit(category);
-  }
-
-  filterCategories() {
-    if (this.removeCategory) {
-      this.filteredCategories = this.categories.filter(category => {
-        return category.name.toLowerCase() != this.removeCategory;
-      });
-    }
   }
 }

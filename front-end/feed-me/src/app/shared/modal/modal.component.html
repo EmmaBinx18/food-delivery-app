@@ -1,2 +1,6 @@
-<div *ngIf="component !== null" class="overlay" (click)="modalService.close()"></div>
-<ng-template *ngIf="component !== null" [ngComponentOutlet]="component"></ng-template>
+<div class="modal" *ngIf="component !== null">
+    <div class="overlay" (click)="modalService.close()"></div>
+    <div class="container">
+        <ng-template [ngComponentOutlet]="component"></ng-template>
+    </div>
+</div>

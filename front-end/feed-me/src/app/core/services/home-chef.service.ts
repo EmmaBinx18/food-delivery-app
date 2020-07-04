@@ -49,38 +49,16 @@ export class HomeChefService {
     return this.http.post(`api/business/operationalStatus`, { params: operationId }).toPromise();
   }
 
-  getBusinessMeals() {
-    return [
-      {
-        name: 'Meal 1',
-        description: 'Description for meal 1',
-        availabilityStatusId: 1,
-        price: 200,
-        minPrepareTime: 90
-      },
-      {
-        name: 'Meal 2',
-        description: 'Description for meal 2',
-        availabilityStatusId: 1,
-        price: 120,
-        minPrepareTime: 30
-      },
-      {
-        name: 'Meal 3',
-        description: 'Description for meal 3',
-        availabilityStatusId: 0,
-        price: 400,
-        minPrepareTime: 120
-      }
-    ]
-  }
-
   getAllBusinesses() {
     return this.http.get(`api/business`).toPromise();
   }
 
   getBusinessById(businessId: string) {
     return this.http.get(`api/business/${businessId}`).toPromise();
+  }
+
+  getBusinessByUserId(userId: string) {
+    return this.http.post(`api/business/user`, { params: userId }).toPromise();
   }
 
   getBusinessesByCategory(categoryId: string) {

@@ -37,19 +37,22 @@ export class CategoryComponent implements OnInit {
     window.scroll(0, 0);
     this.error = false;
     this.businesses = [];
-    Promise.all([
-      this.categoryService.getAllCategories(),
-      this.homeChefService.getBusinessesByCategory(this.category.categoryId)
-    ])
+    this.getBusinesses();
+  }
+
+  getBusinesses() {
+    this.homeChefService.getBusinessesByCategory(this.category.id)
       .then(response => {
-        this.categories = response[0];
-        this.businesses = response[1];
+        response[0].operationalStatusId = 2;
+        this.businesses = response;
+        this.businesses.push(response[0]);
+        this.businesses.push(response[0]);
         this.filterBusinesses();
       })
       .catch(() => {
         this.error = true;
         this.snackbar.show({ message: "Could not load this page. Please try again later.", class: "snackbar-error" })
-      });
+      })
   }
 
   filterBusinesses() {

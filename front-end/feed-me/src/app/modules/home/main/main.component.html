@@ -1,11 +1,14 @@
 <div class="main">
     <div class="image">
         <div class="buttons">
-            <button class="yellow-button" (click)="openForm('homeChef')" *ngIf="role == 1">
+            <button class="button yellow" (click)="openForm('homeChef')" *ngIf="role == 1">
                 Register as a Home Chef
             </button>
-            <button class="delivery-driver yellow-button" (click)="openForm('driver')" *ngIf="role == 1">
+            <button class="delivery-driver button yellow" (click)="openForm('driver')" *ngIf="role == 1">
                 Register as a Delivery Driver
+            </button>
+            <button class="button yellow" (click)="changeDisplay('dashboard')" *ngIf="role != 1">
+                Go to dashboard
             </button>
         </div>
     </div>
@@ -16,6 +19,7 @@
         <app-about-us></app-about-us>
     </section>
     <section id="categories">
-        <app-meal-categories (openCategoryEmitter)="openCategory($event)"></app-meal-categories>
+        <app-meal-categories (openCategoryEmitter)="openCategory($event)">
+        </app-meal-categories>
     </section>
 </div>

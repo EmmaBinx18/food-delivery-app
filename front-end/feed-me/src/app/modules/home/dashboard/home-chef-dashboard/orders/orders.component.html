@@ -1,8 +1,13 @@
 <div class="orders-container">
     <h3>Your Orders</h3>
-    <div class="orders-table">
-        <table>
+    <div *ngIf="orders !== null">
+        <div class="orders-table">
+            <table>
 
-        </table>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="orders == null">
+        <h4>You don't have an orders currently</h4>
     </div>
 </div>

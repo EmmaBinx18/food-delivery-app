@@ -4,7 +4,6 @@
 
 header{
     width: 100%;
-    position: absolute;
     top: 0;
     left: 0;
     z-index: 3;
@@ -46,7 +45,7 @@ header{
                         position: relative;
                         @media(max-width: 800px){
                             font-size: 1.4rem;
-                            margin-left: 2rem;
+                            margin-left: 2.4rem;
                         }
                         @media(max-width: 600px){font-size: 1rem;}
                     }
@@ -56,16 +55,11 @@ header{
 
                     img{
                         display: none;
-                        width: 35px;
                         @media(max-width: 800px){
                             display: inline;
-                            width: 30px;
+                            width: 35px;
                         }
-                        @media(max-width: 500px){width: 25px;}
-                    }
-
-                    &:first-child{
-                        margin-top: 4%;
+                        @media(max-width: 550px){width: 30px;}
                     }
                 }
 
@@ -76,13 +70,12 @@ header{
                     left: -200rem;
                     flex-direction: column;
                     z-index: 10;
-                    transition: all 650ms ease-in-out;
                     background-color: var(--primary-dark-blue);
                     
                     margin-block-start: 0;
         
                     li{
-                        margin-left: 8%;
+                        margin-left: 10%;
                         margin-bottom: 2rem;
                     }
                 }
@@ -95,9 +88,9 @@ header{
     display: none;
     cursor: pointer;
     @media(max-width: 800px){display: block;}
-
     img{
-        width: 2rem;
-        @media(max-width: 500px){width: 1.4rem;}
+        width: 35px;
+        @media(max-width: 800px){width: 30px;}
+        @media(max-width: 500px){width: 25px;}
     }
 }

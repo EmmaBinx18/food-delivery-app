@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 import { Role } from 'src/app/core/models/role.model';
 import { AuthService } from 'src/app/core/authentication/authentication.service';
@@ -13,6 +13,7 @@ export class MainComponent {
   role: Role;
 
   @Output() openCategoryEmitter = new EventEmitter<any>();
+  @Output() changeDisplatEmitter = new EventEmitter<any>();
 
   constructor(
     private authService: AuthService,
@@ -27,6 +28,10 @@ export class MainComponent {
 
   openCategory(event: any) {
     this.openCategoryEmitter.emit(event);
+  }
+
+  changeDisplay(option: string) {
+    this.changeDisplatEmitter.emit(option);
   }
 
 }

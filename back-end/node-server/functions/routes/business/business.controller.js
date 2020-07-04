@@ -32,6 +32,19 @@ router.get('/:businessId', (req, res) => {
     }
 });
 
+router.post('/user', (req, res) => {
+    logger.info('GET BUSINESS BY USER ID');
+    try{
+        db.executeStoredProcedure(sp.GET_BUSINESS_USER, {userId:req.body.params}, (data) => {
+            return res.status(200).send(data);
+        });
+    }
+    catch(error){
+        logger.error('GET BUSINESS BY USER ID ERROR', error);
+        return res.status(500).send(error);
+    }
+});
+
 router.post('/', (req, res) => {
     logger.info('INSERT NEW BUSINESS');
     const newBusiness = {

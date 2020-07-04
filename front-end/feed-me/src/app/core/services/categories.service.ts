@@ -8,6 +8,8 @@ import DEFAULT_CATEGORIES from '../models/default-categories.model';
 })
 export class CategoriesService {
 
+  categories: any = [];
+
   constructor(private http: HttpClient) { }
 
   getAllCategories() {

@@ -21,16 +21,12 @@ form{
     padding: 10px;
 }
 
-.submit-button{
+button[type="submit"]{
+    width: 40%;
     margin-top: 6%;
     margin-bottom: 6%;
     font-size: 1rem;
     font-weight: bold;
-}
-
-button[type="submit"]{
-    width: 40%;
-    @extend .submit-button;
 
     &:disabled{
         background-color: rgb(167, 167, 167);
@@ -51,6 +47,8 @@ select{
         margin-top: 3%;
     }
 
+    @media(max-width: 500px){width: 73.6%}
+    @media(max-width: 460px){width: 74.5%}
     @media(max-height: 850px) and (min-width: 600px){
         width: 53.5%;
         margin-top: 3%;

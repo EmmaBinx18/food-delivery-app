@@ -10,7 +10,7 @@ ul{
     @extend .flex-container;
     margin-left: 2%;
 
-    @media(max-width: 850px){
+    @media(max-width: 800px){
         flex-direction: column;
     }
 
@@ -18,7 +18,7 @@ ul{
         display: inline;
         padding-top: 20px;
         padding-bottom: 20px;
-        @media(min-width: 860px){height: 320px;}
+        @media(min-width: 880px){height: 260px;}
         &:hover{
             font-weight: normal;
             cursor: default;
@@ -32,20 +32,19 @@ ul{
     padding: 20px;
     text-align: center;
     box-shadow: var(--primary-box-shadow);
-    @media(max-width: 850px){width: 80%;}
+    @media(max-width: 800px){width: 85%;}
 
     p{
         font-size: 1.3rem;
         font-family: var(--secondary-font-family);
         padding: 16px;
-
         @media(max-width: 900px){font-size: 1rem;}
     }
 }
 
 .spacer{
     width: 3% !important;
-    @media(max-width: 850px){display: none;}
+    @media(max-width: 800px){display: none;}
 }
 
 .circle{

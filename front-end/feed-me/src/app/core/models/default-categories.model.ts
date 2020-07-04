@@ -2,32 +2,38 @@ const DEFAULT_CATEGORIES = [
     {
         id: 1,
         name: 'Asian',
-        src: '/assets/meal-categories/asian.jpg'
+        image: '/assets/meal-categories/asian.jpg',
+        icon: '/assets/icons/meals/asian.png'
     },
     {
         id: 2,
         name: 'Indian',
-        src: '/assets/meal-categories/indian.jpg'
+        image: '/assets/meal-categories/indian.jpg',
+        icon: '/assets/icons/meals/indian.png'
     },
     {
         id: 3,
         name: 'Italian',
-        src: '/assets/meal-categories/italian.jpg'
+        image: '/assets/meal-categories/italian.jpg',
+        icon: '/assets/icons/meals/italian.png'
     },
     {
         id: 4,
         name: 'Mexican',
-        src: '/assets/meal-categories/mexican.jpg'
+        image: '/assets/meal-categories/mexican.jpg',
+        icon: '/assets/icons/meals/mexican.png'
     },
     {
         id: 5,
         name: 'Greek',
-        src: '/assets/meal-categories/greek.jpg'
+        image: '/assets/meal-categories/greek.jpg',
+        icon: '/assets/icons/meals/greek.png'
     },
     {
         id: 6,
         name: 'Classics',
-        src: '/assets/meal-categories/classics.jpg'
+        image: '/assets/meal-categories/classics.jpg',
+        icon: '/assets/icons/meals/classics.png'
     }
 ];
 

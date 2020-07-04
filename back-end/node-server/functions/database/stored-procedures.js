@@ -16,6 +16,7 @@ const GET_BUSINESS = 'p_Get_Business';
 const ADD_TO_BUSINESS = 'p_Add_To_Business';
 const GET_OPERATIONAL_STATUS = 'p_Get_Operational_Status';
 const GET_PRODUCTS_BUSINESS = 'p_Get_Products_Business';
+const GET_BUSINESS_USER = 'p_Get_Business_User';
 
 const CREATE_UPDATE_PRODUCT = 'p_Create_Update_Product';
 const GET_PRODUCTS_CATEGORY = 'p_Get_Products_Category';
@@ -50,5 +51,6 @@ module.exports = {
     ADD_TO_DRIVER_ROLE,
     GET_OPERATIONAL_STATUS,
     GET_ADDRESS,
-    GET_PRODUCTS_BUSINESS
+    GET_PRODUCTS_BUSINESS,
+    GET_BUSINESS_USER
 }

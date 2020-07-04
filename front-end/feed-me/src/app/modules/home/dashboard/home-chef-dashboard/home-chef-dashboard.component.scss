@@ -1,0 +1,19 @@
+.home-chef-dashboard{
+    display: flex;
+    width: 92%;
+    margin: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 4%;
+    min-height: 70vh;
+
+    app-products, app-orders{
+        flex-grow: 1;
+        margin: 1%;
+    }
+}
+
+app-spinner{
+    margin: auto;
+    margin-top: 4%;
+}

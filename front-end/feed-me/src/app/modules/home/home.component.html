@@ -3,7 +3,8 @@
 <app-cart *ngIf="cart" (closeCartEmitter)="closeCart()"></app-cart>
 
 <main>
-  <app-main *ngIf="display.main" (openCategoryEmitter)="changeDisplay('category', $event)">
+  <app-main *ngIf="display.main" (openCategoryEmitter)="changeDisplay('category', $event)"
+    (changeDisplatEmitter)="changeDisplay($event)">
   </app-main>
   <app-category *ngIf="display.category" [category]="category">
   </app-category>

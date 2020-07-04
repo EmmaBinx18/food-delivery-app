@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-orders',
@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdersComponent implements OnInit {
 
+  @Input() orders: any;
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.orders);
   }
 
 }

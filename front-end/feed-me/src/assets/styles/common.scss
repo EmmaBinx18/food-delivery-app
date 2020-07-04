@@ -34,37 +34,24 @@ h1, h2, h3, h4, h5{
     color: var(--primary-dark-blue);
 }
 
-h4{
-    font-weight: bolder;
-    &:hover{
-        font-size: 1.1rem;
-        cursor: pointer;
-    }
-}
-
-.blue-outline{
-    border: 1.2px solid var(--primary-light-blue);
-    border-radius: 6px;
-    padding: 5px 10px 5px 10px;
-
-    &:hover{
-        background-color: var(--primary-light-blue);
-    }
-}
-
-.yellow-button{
-    background-color: var(--primary-yellow);
+.button{
+    background-color: white;
     color: var(--primary-dark-blue);
     border: none;
     border-radius: 8px;
     text-align: center;
     padding: 10px;
+    white-space: nowrap;
     font-family: var(--primary-font-family);
 
     &:hover{
         box-shadow: var(--primary-box-shadow);
         cursor: pointer;
     }
+}
+
+.yellow{
+    background-color: var(--primary-yellow);
 }
 
 .back-button{
@@ -96,14 +83,6 @@ h4{
     padding-bottom: 4%;
     flex-direction: column;
     @extend .flex-container;
-}
-
-.green-container{
-    border: none;
-    background-color: var(--primary-green);
-    width: 100%;
-    display: flex;
-    align-items: center;
 }
 
 .overlay{

@@ -33,16 +33,8 @@ export class OrdersService {
     return order;
   }
 
-  getOrdersForBusiness(businessId: number) {
-    return [
-      {
-        id: 0,
-        orderDateTime: '',
-        orderPlaceddateTime: '',
-        orderStatusId: 0,
-        deliveryId: 0
-      }
-    ]
+  getOrdersForBusiness(businessId: string) {
+    return this.http.get(`api/orders/${businessId}`).toPromise();
   }
 
   getProductsForOrder(orderId: number) {
