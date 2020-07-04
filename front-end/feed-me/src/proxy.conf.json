@@ -5,5 +5,12 @@
     "changeOrigin": true, 
     "logLevel": "debug",
     "pathRewrite": {"^/api" : ""}  
-   }  
+   },
+   "/mapbox/*": {
+    "target": "geocoding/v5",  
+    "secure": false, 
+    "changeOrigin": true, 
+    "logLevel": "debug",
+    "pathRewrite": {"^/mapbox" : ""}
+   }
  }

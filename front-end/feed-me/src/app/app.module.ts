@@ -11,10 +11,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AuthService } from './core/authentication/authentication.service';
+import { AddressMapComponent } from './modules/map/address-map/address-map.component';
+import { TrackingMapComponent } from './modules/map/tracking-map/tracking-map.component';
 //import { MapComponent } from './modules/map/map.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AddressMapComponent, TrackingMapComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

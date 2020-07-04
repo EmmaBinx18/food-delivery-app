@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MapboxService } from "../../core/services/mapbox.service";
+import * as mapboxgl from 'mapbox-gl'
 
 
 @Component({
@@ -9,11 +10,12 @@ import { MapboxService } from "../../core/services/mapbox.service";
 })
 export class MapComponent implements OnInit {
 
-  constructor(private map: MapboxService) { }
+  map: mapboxgl.Map;
+
+  constructor(private mapService: MapboxService) { }
 
   ngOnInit(): void {
-    this.map.buildMap()
-
+    this.mapService.buildMap(this.map,'address')
   }
 
 }
