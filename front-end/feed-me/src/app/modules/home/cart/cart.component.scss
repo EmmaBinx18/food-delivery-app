@@ -14,12 +14,10 @@
     .checkout{
         width: 30%;
         margin: auto;
-        border: none;
-        border-radius: 8px;
-        text-align: center;
-        padding: 10px;
-        margin-bottom: 10px;
         font-family: var(--primary-font-family);
+        color: white;
+        margin-top: 6%;
+        margin-bottom: 2%;
         
         &:hover{
             box-shadow: var(--primary-box-shadow);
@@ -62,9 +60,15 @@
                 cursor: default;
             }
 
+            img{
+                height: 45px;
+                width: 40px;
+                display: flex;
+                align-self: center;
+            }
+
             img:hover{
                 cursor: pointer;
-                width: 18px;
             }
         }
     }

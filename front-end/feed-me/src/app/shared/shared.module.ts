@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from "./footer/footer.component";
 import { SnackbarComponent } from "./snackbar/snackbar.component";
-import { SpinnerComponent } from "./spinner/spinner.component";
+import { LoaderComponent } from "./loader/loader.component";
 import { ModalComponent } from "./modal/modal.component";
 
 @NgModule({
@@ -15,18 +15,18 @@ import { ModalComponent } from "./modal/modal.component";
     HeaderComponent,
     FooterComponent,
     SnackbarComponent,
-    SpinnerComponent,
+    LoaderComponent,
     ModalComponent,
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
     SnackbarComponent,
-    SpinnerComponent,
+    LoaderComponent,
     ModalComponent,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
   ],
 })
-export class SharedModule {}
+export class SharedModule { }
