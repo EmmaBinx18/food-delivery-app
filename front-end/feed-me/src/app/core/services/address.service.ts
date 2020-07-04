@@ -22,6 +22,10 @@ export class AddressService {
     return this.http.post(`api/address`, { params: { ...address } }).toPromise();
   }
 
+  getMapBoxAddress(lat: string, long: string){
+    return this.http.get(`mapbox/address/${JSON.stringify({long, lat})}`).toPromise();
+  }
+
   updateAddress(address: Address) {
     return this.http.patch(`api/address`, { params: { ...address } }).toPromise();
   }
