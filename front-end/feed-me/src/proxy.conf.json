@@ -3,7 +3,6 @@
     "target": "http://localhost:5001/feedme-208a2/us-central1/app",  
     "secure": false, 
     "changeOrigin": true, 
-    "logLevel": "debug",
     "pathRewrite": {"^/api" : ""}  
    },
    "/mapbox/*": {

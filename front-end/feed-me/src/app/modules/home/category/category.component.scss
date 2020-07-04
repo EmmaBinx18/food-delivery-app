@@ -1,46 +1,89 @@
-@import '../../../../assets/styles/variables.scss';
 @import '../../../../assets/styles/common.scss';
 
-main{
-    width: 100%;
+.category{
+    width: 96%;
+    margin: auto;
+    margin-bottom: 2%;
+    min-height: 80vh;
+    max-height: 80vh;
     text-align: center;
+    overflow: auto;
+    margin-top: 2%;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+app-spinner{
     position: absolute;
+    margin: auto;
+    margin-top: 14%;
+}
 
-    h1{
-        color: white;
-        text-transform: uppercase;
-        padding-top: 1%;
-        padding-bottom: 1%;
-        margin-left: 2%;
-        position: absolute;
-        width: 17%;
-        border-radius: 8px;
-        margin-block-start: 1%;
-        background-color: var(--primary-light-blue);
-        font-size: 2.2rem;
+.buttons {
+    text-align: start;
+    display: flex;
+    overflow-x: scroll;
 
-        @media(max-width: 1500px){width: 22%;}
+    button{
+        margin-left: 15px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
 
-        @media(max-width: 900px){font-size: 1.3rem;}
-
-        @media(max-width: 600px){
-            font-size: 1rem;
-            border-radius: 4px;
+        img{
+            padding-right: 10px;
         }
+    }
+    
+    .active{
+        background-color: var(--primary-light-blue) !important;
+        color: white;
     }
 }
 
-.category-table{
-    background-color: white;
-    box-shadow: var(--primary-box-shadow);
-    width: 96%;
-    height: auto;
-    min-height: 70vh;
-    margin: auto;
-    margin-top: 4%;
-    margin-bottom: 4%;
+.businesses{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 
-    table{
-        width: 100%;
+    div{
+        width: 300px;
+        height: 240px;
+        @extend .flex-container;
+        box-shadow: var(--primary-box-shadow);
+        background-color: white;
+        margin: 8px 8px 8px 8px;
+
+        @media(max-width: 900px){
+            width: 180px;
+            height: 180px;
+        }
+
+        @media(max-width: 700px){
+            width: 140px;
+            height: 140px;
+        }
+
+        @media(max-width: 500px){
+            width: 100%;
+            height: 60px;
+        }
+
+        h2{
+            background-color: white;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+
+            @media(max-width: 900px){font-size: 1.1rem;}
+        }
+
+        &:hover{
+            cursor: pointer;
+            opacity: 0.7;
+        }
     }
 }

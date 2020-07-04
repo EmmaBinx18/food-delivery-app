@@ -1,44 +1,78 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, Input } from "@angular/core";
 
-import { NavService } from 'src/app/core/services/nav.service';
-import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import { SnackbarService } from "../../../shared/snackbar/snackbar.service";
+import { CategoriesService } from "../../../core/services/categories.service";
+import { HomeChefService } from "../../../core/services/home-chef.service";
+import { ModalService } from "src/app/shared/modal/modal.service";
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  selector: "app-category",
+  templateUrl: "./category.component.html",
+  styleUrls: ["./category.component.scss"],
 })
 export class CategoryComponent implements OnInit {
+  business: any = {};
+  businesses: any = [];
+  categories: any = [];
+  error: boolean = false;
+  displayBusiness: boolean = false;
 
-  category: string;
-  displayRegisterHomeChef: boolean = false;
-  businesses: any;
+  cart: boolean = false;
+
+  @Input() category: any;
 
   constructor(
-    private route: ActivatedRoute,
-    public navService: NavService,
-    public router: Router,
-    public snackbar: SnackbarService
-  ) {
-    this.route.params.subscribe(params => {
-      this.category = params.category;
-      window.scroll(0, 0);
-    });
-
-  }
+    public snackbar: SnackbarService,
+    public categoryService: CategoriesService,
+    private homeChefService: HomeChefService,
+    public modalService: ModalService
+  ) { }
 
   ngOnInit() {
+    this.cart = false;
+    this.scrollAndGet();
+  }
+
+  scrollAndGet() {
     window.scroll(0, 0);
+    this.error = false;
+    this.businesses = [];
+    this.getBusinesses();
   }
 
-  registerHomeChef() {
-    window.scroll(0, 0);
-    this.displayRegisterHomeChef = true;
+  getBusinesses() {
+    this.homeChefService.getBusinessesByCategory(this.category.id)
+      .then(response => {
+        response[0].operationalStatusId = 2;
+        this.businesses = response;
+        this.businesses.push(response[0]);
+        this.businesses.push(response[0]);
+        this.filterBusinesses();
+      })
+      .catch(() => {
+        this.error = true;
+        this.snackbar.show({ message: "Could not load this page. Please try again later.", class: "snackbar-error" })
+      })
   }
 
-  closeRegisterBusinessForm() {
-    this.displayRegisterHomeChef = false;
+  filterBusinesses() {
+    this.businesses = this.businesses.filter(
+      (business) => business.operationalStatusId !== 1
+    );
   }
 
+  changeCategory(category: any) {
+    this.displayBusiness = false;
+    this.category = category;
+    this.scrollAndGet();
+  }
+
+  openBusiness(business: any) {
+    this.displayBusiness = true;
+    this.business = business;
+  }
+
+  hideBusiness() {
+    this.displayBusiness = false;
+  }
 }

@@ -1,0 +1,82 @@
+@import '../../../../assets/styles/common.scss';
+
+.cart-container{
+    @extend .white-container;
+    width: 25%;
+    top: 10%;
+    position: absolute;
+    right: 3%;
+    padding-top: 0;
+    padding-bottom: 0;
+    z-index: 200;
+    text-align: initial;
+
+    .checkout{
+        width: 30%;
+        margin: auto;
+        border: none;
+        border-radius: 8px;
+        text-align: center;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-family: var(--primary-font-family);
+        
+        &:hover{
+            box-shadow: var(--primary-box-shadow);
+            cursor: pointer;
+        }
+    }
+
+    .close{
+        width: 25px;
+        margin-bottom: 1%;
+        margin-top: 4%;
+        margin-right: 4%;
+        align-self: flex-end;
+
+        &:hover{
+            width: 27px;
+            cursor: pointer;
+        }
+    }
+
+    .items{
+        overflow-y: scroll;
+    }
+
+    div{
+        width: 100%;
+        max-height: 18rem;
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+
+        .cart-item{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 90%;
+            margin: auto;
+
+            h4:hover{
+                cursor: default;
+            }
+
+            img:hover{
+                cursor: pointer;
+                width: 18px;
+            }
+        }
+    }
+
+    .empty{
+        h4{
+            text-align: center;
+        }
+    }
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}

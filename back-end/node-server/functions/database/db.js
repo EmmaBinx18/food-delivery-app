@@ -22,10 +22,7 @@ module.exports = {
                 }
                 else{
                     sql.close();
-                    if(recordSets.recordset !== undefined){
-                        return callback(this.mapReturnData(recordSets.recordset));
-                    }
-                    return {};
+                    return callback(this.mapReturnData(recordSets.recordset));
                 }
             });
         });

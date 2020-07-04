@@ -6,7 +6,7 @@ const sp = require('../../database/stored-procedures');
 
 const logger = require('../../logger/winstin.logger');
 
-router.get('/products', (req, res) => {
+router.get('/', (req, res) => {
     logger.info('GET ALL PRODUCTS');
     try{
         db.executeStoredProcedure(sp.GET_PRODUCTS_CATEGORY, {categoryid:null}, (data) => {
@@ -15,6 +15,19 @@ router.get('/products', (req, res) => {
     }
     catch(error){
         logger.error('GET ALL PRODUCTS ERROR', error);
+        return res.status(500).send(error);
+    }
+});
+
+router.get('/:businessId', (req, res) => {
+    logger.info('GET ALL PRODUCTS FOR A BUSINESS');
+    try{
+        db.executeStoredProcedure(sp.GET_PRODUCTS_BUSINESS, {businessId:req.params.businessId}, (data) => {
+            return res.status(200).send(data);
+        });
+    }
+    catch(error){
+        logger.error('GET ALL PRODUCTS FOR A BUSINESS ERROR', error);
         return res.status(500).send(error);
     }
 });

@@ -32,6 +32,19 @@ router.get('/:businessId', (req, res) => {
     }
 });
 
+router.post('/user', (req, res) => {
+    logger.info('GET BUSINESS BY USER ID');
+    try{
+        db.executeStoredProcedure(sp.GET_BUSINESS_USER, {userId:req.body.params}, (data) => {
+            return res.status(200).send(data);
+        });
+    }
+    catch(error){
+        logger.error('GET BUSINESS BY USER ID ERROR', error);
+        return res.status(500).send(error);
+    }
+});
+
 router.post('/', (req, res) => {
     logger.info('INSERT NEW BUSINESS');
     const newBusiness = {
@@ -75,6 +88,32 @@ router.post('/category', (req, res) => {
     }
     catch(error){
         logger.error('GET BUSINESSES BY CATEGORY ERROR', error);
+        return res.status(500).send(error);
+    }
+});
+
+router.get('/operationalStatus', (req, res) => {
+    logger.info('GET ALL OPERATIONAL STATUSES');
+    try{
+        db.executeStoredProcedure(sp.GET_OPERATIONAL_STATUS, {operationalStatusId:null}, (data) => {
+            return res.status(200).send(JSON.parse(data));
+        });
+    }
+    catch(error){
+        logger.error('GET ALL OPERATIONAL STATUSES ERROR', error);
+        return res.status(500).send(error);
+    }
+});
+
+router.post('/operationalStatus', (req, res) => {
+    logger.info('GET OPERATIONAL STATUS');
+    try{
+        db.executeStoredProcedure(sp.GET_OPERATIONAL_STATUS, {operationalStatusId:req.body.params}, (data) => {
+            return res.status(200).send(JSON.parse(data));
+        });
+    }
+    catch(error){
+        logger.error('GET OPERATIONAL STATUS ERROR', error);
         return res.status(500).send(error);
     }
 });

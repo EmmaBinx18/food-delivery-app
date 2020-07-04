@@ -1,0 +1,28 @@
+<div class="business">
+    <app-spinner *ngIf="products.length == 0 && !error"></app-spinner>
+    <div class="content">
+        <button class="back-button" (click)="back()">
+            <p>Back</p>
+        </button>
+        <div *ngIf="products.length !== 0">
+            <h1>{{business.name}}</h1>
+            <div class="info">
+                <h3>{{category}}</h3>
+                <h3>{{address}}</h3>
+                <h3 [ngClass]="{'closed': operational == 'Closed', 'open': operational == 'Open'}">
+                    {{operational}}</h3>
+            </div>
+        </div>
+        <h2 *ngIf="error">There was an error loading this business. Please try again later.</h2>
+        <table *ngIf="products.length !== 0">
+            <tr *ngFor="let product of products">
+                <td>{{product.name}}</td>
+                <td class="description">{{product.description}}</td>
+                <td>R{{product.price}}</td>
+                <td class="prep-time">{{product.minPrepareTime}} minutes</td>
+                <td (click)="addtoCart(product)"><img class="icon" src="/assets/icons/cart.png" alt="add_to_cart" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

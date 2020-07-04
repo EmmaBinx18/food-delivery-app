@@ -1,0 +1,56 @@
+@import './variables.scss';
+
+form{
+    margin-top: 6%;
+    width: 100%;
+    margin-top: 0;
+
+    .form-group{
+        margin-top: 2%;
+    }
+
+    input::placeholder{
+        color: var(--primary-dark-blue);
+    }
+}
+
+.form-input{
+    border: 1px solid var(--primary-dark-blue);
+    border-radius: 8px;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+button[type="submit"]{
+    width: 40%;
+    margin-top: 6%;
+    margin-bottom: 6%;
+    font-size: 1rem;
+    font-weight: bold;
+
+    &:disabled{
+        background-color: rgb(167, 167, 167);
+        color: white;
+
+        &:hover{
+            box-shadow: none;
+        }
+    }
+}
+
+select{
+    @extend .form-input;
+    width: 40.5%;
+
+    @media(max-width: 600px){
+        width: 75.5%;
+        margin-top: 3%;
+    }
+
+    @media(max-width: 500px){width: 73.6%}
+    @media(max-width: 460px){width: 74.5%}
+    @media(max-height: 850px) and (min-width: 600px){
+        width: 53.5%;
+        margin-top: 3%;
+    }
+}

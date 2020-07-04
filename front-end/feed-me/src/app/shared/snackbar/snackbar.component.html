@@ -1,5 +1,5 @@
-<div class="snackbar-container">
-    <div id="snackbar">
+<div #snackbar class="snackbar-container">
+    <div *ngIf="snackbar != null" id="snackbar">
         <h4 id="snackbar-message"></h4>
         <br />
     </div>
