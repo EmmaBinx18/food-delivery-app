@@ -162,8 +162,7 @@ export class MapboxService {
 
     var geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
-      mapboxgl: mapboxgl,
-      
+      mapboxgl: mapboxgl
     });
 
     map.addControl(geocoder);
@@ -171,13 +170,13 @@ export class MapboxService {
     map.on('load', () => {
       console.log('calling map.onload');
 
-      // map.addSource('single-point', {
-      //   'type': 'geojson',
-      //   'data': {
-      //     'type': 'FeatureCollection',
-      //     'features': []
-      //   }
-      // });
+      map.addSource('single-point', {
+        'type': 'geojson',
+        'data': {
+          'type': 'FeatureCollection',
+          'features': []
+        }
+      });
       // map.addLayer({
       //   id: 'point',
       //   source: 'single-point',
@@ -252,7 +251,7 @@ export class MapboxService {
 
           this.marker
             .setPopup(new mapboxgl.Popup({
-              offset: 0,
+              offset: 25,
               closeButton: false,
               closeOnClick: false
             })// add popups
