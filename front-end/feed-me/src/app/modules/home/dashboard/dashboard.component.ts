@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
-import { Role } from "src/app/core/models/role.model";
+import { Role } from "src/app/core/models/role.enum";
 
 import { AuthService } from "../../../core/authentication/authentication.service";
 import { HomeChefService } from "../../../core/services/home-chef.service";

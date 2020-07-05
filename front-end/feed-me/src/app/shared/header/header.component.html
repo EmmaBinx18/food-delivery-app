@@ -8,7 +8,7 @@
                 <div class="menu-icons closed" (click)="closeNav()">
                     <img src="../../../assets/icons/close.png" alt="close" />
                 </div>
-                <li></li>
+                <li class="spacer"></li>
                 <li>
                     <img src="/assets/icons/home.png" alt="home" /><a (click)="changeDisplay('main')">Home</a>
                 </li>
@@ -29,6 +29,13 @@
                 </li>
                 <li>
                     <img src="/assets/icons/logout.png" alt="logout" /><a (click)="logout()">Logout</a>
+                </li>
+
+                <li *ngIf="userRole == 0" class="buttons">
+                    <button (click)="openForm('homeChef')" class="button yellow home-chef">Register as a Home
+                        Chef</button>
+                    <button (click)="openForm('driver')" class="button yellow driver">Register
+                        as a Driver</button>
                 </li>
             </ul>
         </nav>

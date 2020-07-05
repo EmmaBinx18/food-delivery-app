@@ -1,4 +1,5 @@
-@import './variables.scss';
+@import './forms.scss';
+@import './map.scss';
 
 .flex-container{
     display: flex;
@@ -27,6 +28,19 @@ ul{
 h1{
     font-size: 3rem;
     @media(max-width: 850px){font-size: 2rem;}
+    @media(max-width: 600px){font-size: 1.4rem;}
+}
+
+h2{
+    font-size: 2rem;
+    @media(max-width: 850px){font-size: 1.2rem;}
+    @media(max-width: 600px){font-size: 1rem;}
+}
+
+h3{
+    font-size: 1rem;
+    @media(max-width: 850px){font-size: 0.9rem;}
+    @media(max-width: 600px){font-size: 0.8rem;}
 }
 
 h1, h2, h3, h4, h5{
@@ -48,6 +62,8 @@ h1, h2, h3, h4, h5{
         box-shadow: var(--primary-box-shadow);
         cursor: pointer;
     }
+
+    @media(max-width: 600px){font-size: 0.8rem;}
 }
 
 .yellow{
@@ -83,8 +99,6 @@ h1, h2, h3, h4, h5{
     border: none;
     box-shadow: var(--primary-box-shadow);
     text-align: center;
-    padding-top: 4%;
-    padding-bottom: 4%;
     flex-direction: column;
     @extend .flex-container;
 }

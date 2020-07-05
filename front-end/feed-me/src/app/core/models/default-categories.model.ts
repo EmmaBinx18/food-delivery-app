@@ -1,36 +1,36 @@
 const DEFAULT_CATEGORIES = [
     {
-        id: 1,
+        categoryId: 1,
         name: 'Asian',
         image: '/assets/meal-categories/asian.jpg',
         icon: '/assets/icons/meals/asian.png'
     },
     {
-        id: 2,
+        categoryId: 2,
         name: 'Indian',
         image: '/assets/meal-categories/indian.jpg',
         icon: '/assets/icons/meals/indian.png'
     },
     {
-        id: 3,
+        categoryId: 3,
         name: 'Italian',
         image: '/assets/meal-categories/italian.jpg',
         icon: '/assets/icons/meals/italian.png'
     },
     {
-        id: 4,
+        categoryId: 4,
         name: 'Mexican',
         image: '/assets/meal-categories/mexican.jpg',
         icon: '/assets/icons/meals/mexican.png'
     },
     {
-        id: 5,
+        categoryId: 5,
         name: 'Greek',
         image: '/assets/meal-categories/greek.jpg',
         icon: '/assets/icons/meals/greek.png'
     },
     {
-        id: 6,
+        categoryId: 6,
         name: 'Classics',
         image: '/assets/meal-categories/classics.jpg',
         icon: '/assets/icons/meals/classics.png'

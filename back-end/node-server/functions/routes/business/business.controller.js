@@ -47,16 +47,8 @@ router.post('/user', (req, res) => {
 
 router.post('/', (req, res) => {
     logger.info('INSERT NEW BUSINESS');
-    const newBusiness = {
-        businessId: -1,
-        name: req.body.params.name,
-        categoryId: req.body.params.category,
-        addressId: req.body.params.addressId,
-        userId: req.body.params.userId
-    }
-
     try{
-        db.executeStoredProcedure(sp.CREATE_UPDATE_BUSINESS, newBusiness, (data) => {
+        db.executeStoredProcedure(sp.CREATE_UPDATE_BUSINESS, req.body.params, (data) => {
             return res.status(200).send(data);
         });
     }

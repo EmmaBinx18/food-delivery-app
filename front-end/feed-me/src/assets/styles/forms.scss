@@ -4,6 +4,8 @@ form{
     margin-top: 6%;
     width: 100%;
     margin-top: 0;
+    @media(max-width: 700px){margin-top: 2%;}
+    @media(max-width: 600px){margin-top: 5%;}
 
     .form-group{
         margin-top: 2%;
@@ -19,6 +21,7 @@ form{
     border-radius: 8px;
     font-size: 1rem;
     padding: 10px;
+    @media(max-width: 600px){font-size: 0.8rem;}
 }
 
 button[type="submit"]{
@@ -36,6 +39,8 @@ button[type="submit"]{
             box-shadow: none;
         }
     }
+
+    @media(max-width: 600px){font-size: 0.8rem;}
 }
 
 select{

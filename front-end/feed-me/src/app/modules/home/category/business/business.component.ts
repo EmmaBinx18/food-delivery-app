@@ -40,7 +40,7 @@ export class BusinessComponent implements OnInit {
     ])
       .then(response => {
         this.operational = response[0][0].name;
-        this.address = `${response[1][0].suburb} ${response[1][0].city} - ${response[1][0].zipcode}`;
+        this.address = response[1][0].address;
         this.products = response[2];
       })
       .catch(() => {
@@ -54,8 +54,10 @@ export class BusinessComponent implements OnInit {
   }
 
   addtoCart(product: any) {
-    this.cartService.addToCart(product);
-    this.snackbarService.show({ message: `Added ${product.name} to cart`, class: 'snackbar-success' });
+    if (this.operational != 'Closed') {
+      this.cartService.addToCart(product);
+      this.snackbarService.show({ message: `Added ${product.name} to cart`, class: 'snackbar-success' });
+    }
   }
 
 }

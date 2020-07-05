@@ -10,10 +10,6 @@ export class AddressService {
 
   constructor(private http: HttpClient) { }
 
-  getAllAddresses() {
-
-  }
-
   getAddressById(addressId: string) {
     return this.http.get(`api/address/${addressId}`).toPromise();
   }
@@ -22,15 +18,7 @@ export class AddressService {
     return this.http.post(`api/address`, { params: { ...address } }).toPromise();
   }
 
-  getMapBoxAddress(lat: string, long: string){
-    return this.http.get(`mapbox/address/${JSON.stringify({long, lat})}`).toPromise();
-  }
-
   updateAddress(address: Address) {
     return this.http.patch(`api/address`, { params: { ...address } }).toPromise();
-  }
-
-  getProvinces() {
-    return ['Western Cape', 'EasternCape', 'NorthernCape', 'NorthWest', 'FreeState', 'Kwazulu Natal', 'Gauteng', 'Limpopo', 'Mpumlanga']
   }
 }

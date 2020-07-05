@@ -8,6 +8,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { SnackbarComponent } from "./snackbar/snackbar.component";
 import { LoaderComponent } from "./loader/loader.component";
 import { ModalComponent } from "./modal/modal.component";
+import { MapComponent } from "./map/map.component";
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
@@ -17,6 +18,7 @@ import { ModalComponent } from "./modal/modal.component";
     SnackbarComponent,
     LoaderComponent,
     ModalComponent,
+    MapComponent,
   ],
   exports: [
     HeaderComponent,
@@ -25,6 +27,7 @@ import { ModalComponent } from "./modal/modal.component";
     LoaderComponent,
     ModalComponent,
     FormsModule,
+    MapComponent,
     ReactiveFormsModule,
     CommonModule,
   ],

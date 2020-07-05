@@ -5,7 +5,7 @@ import { User } from '../models/user.model';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import { UserService } from '../services/user.service';
-import { Role } from '../models/role.model';
+import { Role } from '../models/role.enum';
 
 @Injectable({
     providedIn: 'root'
@@ -20,14 +20,15 @@ export class AuthService {
         public router: Router,
         private userService: UserService
     ) {
-        this._currentRole = Role.HomeChef;
         this.firebaseAuth.authState.subscribe(user => {
             if (user) {
                 this._currentUser = user;
                 localStorage.setItem('user', JSON.stringify(this._currentUser));
+                this._currentRole = JSON.parse(localStorage.getItem('role'));
             } else {
                 this._currentUser = null;
                 localStorage.removeItem('user');
+                localStorage.removeItem('role');
                 this.router.navigate(['/login']);
             }
         });
@@ -54,21 +55,18 @@ export class AuthService {
     login(login: any) {
         return this.firebaseAuth.signInWithEmailAndPassword(login.email, login.password)
             .then(response => {
-                this._currentUser = response.user;
-                this._currentRole = Role.HomeChef;
-                localStorage.setItem('user', JSON.stringify(this._currentUser));
-                this.router.navigate(['/home']);
-                // this.getUser(response.user.uid)
-                //     .then(res => {
-                //         this._currentUser = response.user;
-                //         this._currentRole = res[0].roleid;
-                //         localStorage.setItem('user', JSON.stringify(this._currentUser));
-                //         this.router.navigate(['/home']);
-                //         //TODO: Check is user is active or not
-                //     })
-                //     .catch(error => {
-                //         throw (error);
-                //     });
+                this.getUser(response.user.uid)
+                    .then(res => {
+                        this._currentUser = response.user;
+                        this._currentRole = res[0].roleid;
+                        localStorage.setItem('user', JSON.stringify(this._currentUser));
+                        localStorage.setItem('role', res[0].roleid);
+                        this.router.navigate(['/home']);
+                        //TODO: Check is user is active or not
+                    })
+                    .catch(error => {
+                        throw (error);
+                    });
             })
             .catch(error => {
                 throw (error.message);
@@ -83,20 +81,17 @@ export class AuthService {
                 });
 
                 user.uid = response.user.uid;
-                this._currentUser = response.user;
-                this._currentRole = Role.HomeChef;
-                localStorage.setItem('user', JSON.stringify(this._currentUser));
-                this.router.navigate(['/home']);
-                // this.userService.insertUser(user)
-                //     .then(() => {
-                //         this._currentUser = response.user;
-                //         this._currentRole = Role.Customer;
-                //         localStorage.setItem('user', JSON.stringify(this._currentUser));
-                //         this.router.navigate(['/home']);
-                //     })
-                //     .catch(error => {
-                //         throw (error);
-                //     });
+                this.userService.insertUser(user)
+                    .then(() => {
+                        this._currentRole = Role.Customer;
+                        this._currentUser = response.user;
+                        localStorage.setItem('user', JSON.stringify(this._currentUser));
+                        localStorage.setItem('role', JSON.stringify(Role.Customer));
+                        this.router.navigate(['/home']);
+                    })
+                    .catch(error => {
+                        throw (error);
+                    });
             })
             .catch(error => {
                 throw (error.message);
@@ -108,6 +103,7 @@ export class AuthService {
             .then(() => {
                 this._currentUser = null;
                 localStorage.removeItem('user');
+                localStorage.removeItem('role');
                 this.router.navigate(['/login']);
             });
     }

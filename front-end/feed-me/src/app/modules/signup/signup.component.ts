@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/authentication/authentication.service';
 
-import { Role } from '../../core/models/role.model';
+import { Role } from '../../core/models/role.enum';
 import { FormValidationService } from 'src/app/shared/services/form-validation.service';
 
 @Component({

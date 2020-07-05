@@ -7,7 +7,6 @@
     min-height: 80vh;
     max-height: 80vh;
     text-align: center;
-    overflow: auto;
     margin-top: 2%;
 }
 
@@ -56,6 +55,7 @@ app-loader{
         box-shadow: var(--primary-box-shadow);
         background-color: white;
         margin: 8px 8px 8px 8px;
+        padding: 10px;
 
         @media(max-width: 900px){
             width: 180px;
@@ -63,22 +63,20 @@ app-loader{
         }
 
         @media(max-width: 700px){
-            width: 140px;
+            width: 145px;
             height: 140px;
         }
 
         @media(max-width: 500px){
-            width: 100%;
+            width: 92%;
             height: 60px;
         }
 
         h2{
             background-color: white;
             width: 100%;
-            padding: 10px;
             text-align: center;
-
-            @media(max-width: 900px){font-size: 1.1rem;}
+            overflow-wrap: break-word;
         }
 
         &:hover{

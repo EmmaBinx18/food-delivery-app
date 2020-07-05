@@ -1,11 +1,18 @@
 @import '../../../../assets/styles/common.scss';
-@import '../../../../assets/styles/forms.scss';
 
 .form-container{
     .controls{
         display: inline;
         margin-left: 2%;
     }
+
+    h1{
+        padding: 1%;
+        @media(max-width: 600px){padding: 0;}
+    }
+
+    @media(max-width: 600px){margin-top: 10%;}
+    @media(max-width: 400px){margin-top: 20%;}
 }
 
 input{
@@ -23,8 +30,12 @@ input{
     }
 }
 
+button[type=submit]{
+    margin-top: 4%;
+}
+
 p{
     color: var(--primary-dark-blue);
     font-family: var(--secondary-font-family);
-    padding: 6%;
+    padding: 4%;
 }

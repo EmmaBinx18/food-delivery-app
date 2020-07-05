@@ -37,16 +37,21 @@ export class CategoryComponent implements OnInit {
     window.scroll(0, 0);
     this.error = false;
     this.businesses = [];
+    this.sortCategories();
     this.getBusinesses();
   }
 
+  sortCategories() {
+    this.categoryService.categories.sort(category => {
+      return category == this.category ? -1 : 1;
+    });
+  }
+
   getBusinesses() {
-    this.homeChefService.getBusinessesByCategory(this.category.id)
+    this.homeChefService.getBusinessesByCategory(this.category.categoryId)
       .then(response => {
-        response[0].operationalStatusId = 2;
+        response[0].operationalStatusId = 3; //TODO : REMOVE THIS
         this.businesses = response;
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
         this.filterBusinesses();
       })
       .catch(() => {

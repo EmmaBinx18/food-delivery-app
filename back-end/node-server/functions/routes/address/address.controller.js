@@ -21,20 +21,8 @@ router.get('/:addressId', (req, res) => {
 
 router.post('/', (req, res) => {
     logger.info('INSERT NEW ADDRESS');
-    const newAddress = {
-        addressId: -1,
-        streetName : req.body.params.street,
-        suburb : req.body.params.suburb,
-        complexName: req.body.params.complex,
-        zipCode: req.body.params.zipcode,
-        cityId: 1
-        // city: req.body.params.city,
-        // province: req.body.params.province,
-        // country: req.body.params.country
-    }
-
     try{
-        db.executeStoredProcedure(sp.CREATE_UPDATE_ADDRESS, newAddress, (data) => {
+        db.executeStoredProcedure(sp.CREATE_UPDATE_ADDRESS, req.body.params, (data) => {
             return res.status(200).send(data);
         });
     }

@@ -8,22 +8,17 @@ app-loader{
     text-align: start;
     margin-left: 1%;
     margin-top: 1%;
-    padding-left: 2%;
     min-height: 80vh;
     max-height: 80vh;
 
     h1{
-        margin-left: 1%;
+        margin-left: 2%;
         margin-block-end: 10px;
     }
 
     h2{
         text-align: center;
-        padding-bottom: 4%;
         padding-top: 4%;
-
-        @media(max-width: 900px){font-size: 1.2rem;}
-        @media(max-width: 600px){font-size: 1rem;}
     }
 }
 
@@ -40,12 +35,8 @@ app-loader{
         padding-right: 4%;
         color: var(--primary-dark-blue);
         font-family: var(--secondary-font-family);
-        font-size: 1rem;
 
-        @media(max-width: 500px){
-            font-size: 0.8rem;
-            padding-right: 3%;
-        }
+        @media(max-width: 500px){padding-right: 3%;}
     }
 }
 
@@ -69,6 +60,7 @@ app-loader{
     border-radius: 6px;
     color: white !important;
     padding-right: 30px !important;
+    margin-left: 1%;
 }
 
 .back-button{
@@ -98,6 +90,17 @@ table{
         box-shadow: var(--primary-box-shadow);
         border-radius: 6px;
         background-color: white;
+    }
+
+    .disabled{
+        background-color: var(--primary-medium-grey) !important;
+        opacity: 0.5;
+
+        .icon{
+            &:hover{
+                cursor: not-allowed;
+            }
+        }
     }
 
     td{

@@ -19,6 +19,19 @@ router.get('/deliveryReady', (req, res) => {
     }
 });
 
+router.post('/activeOrderReadyProducts', (req, res) => {
+    logger.info('GET ACTIVE ORDER READY PRODUCTS');
+    try{
+        db.executeStoredProcedure(sp.GET_ACTIVE_ORDER_READY_PRODUCTS, {orderId: req.body.params}, (data) => {
+            return res.status(200).send(JSON.parse(data));
+        });
+    }
+    catch(error){
+        logger.error('GET ACTIVE ORDER READY PRODUCTS ERROR', error);
+        return res.status(500).send(error);
+    }
+});
+
 router.get('/:businessId', (req, res) => {
     logger.info('GET ACTIVE ORDERS FOR BUSINESS');
     try{

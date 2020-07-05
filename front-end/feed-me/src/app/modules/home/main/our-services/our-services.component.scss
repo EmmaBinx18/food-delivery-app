@@ -18,7 +18,9 @@ ul{
         display: inline;
         padding-top: 20px;
         padding-bottom: 20px;
-        @media(min-width: 880px){height: 260px;}
+        height: 320px;
+        @media(max-width: 900px){height: 260px;}
+        @media(max-width: 800px){height: 200px; margin-bottom: 4%;}
         &:hover{
             font-weight: normal;
             cursor: default;
@@ -43,8 +45,8 @@ ul{
 }
 
 .spacer{
-    width: 3% !important;
-    @media(max-width: 800px){display: none;}
+    width: 3%;
+    @media(max-width: 800px){display: none !important;}
 }
 
 .circle{

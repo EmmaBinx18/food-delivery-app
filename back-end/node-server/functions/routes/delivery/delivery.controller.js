@@ -9,7 +9,7 @@ const logger = require('../../logger/winstin.logger');
 router.post('/register', (req, res) => {
     logger.info('CHANGE USER ROLE TO DELIVERY DRIVER');
     try{
-        db.executeStoredProcedure(sp.ADD_TO_DRIVER_ROLE, {userId:req.body.params}, (data) => {
+        db.executeStoredProcedure(sp.ADD_TO_DRIVER_ROLE, req.body.params, (data) => {
             return res.status(200).send(JSON.parse(data));
         });
     }

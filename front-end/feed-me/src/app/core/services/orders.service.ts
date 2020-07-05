@@ -15,10 +15,10 @@ export class OrdersService {
   ) { }
 
   insertOrder(cart: Cart[]) {
-    return this.http.post(`api/orders`, { params: this.mappOrderObject(cart) }).toPromise();
+    return this.http.post(`api/orders`, { params: this.mapOrderObject(cart) }).toPromise();
   }
 
-  mappOrderObject(cart: Cart[]) {
+  mapOrderObject(cart: Cart[]) {
     const order = {
       customerId: this.authService.getCurrentUser().uid,
       addressId: '',
@@ -37,17 +37,21 @@ export class OrdersService {
     return this.http.get(`api/orders/${businessId}`).toPromise();
   }
 
-  getProductsForOrder(orderId: number) {
-    return [
-      {
-        prderId: 0,
-        productId: 0,
-        quantity: 3,
-        orderProductStatusId: 2,
-        productPrice: 20,
-        orderItemsStarted: '',
+  getActiveOrderReadyProducts(orderId: string) {
+    return this.http.post(`api/orders/activeOrderReadyProducts`, { params: orderId }).toPromise();
+  }
 
+  mapOrderReadyProduct(location: any) {
+    return {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: location.coordinates
+      },
+      properties: {
+        title: location.businessName,
+        description: ''
       }
-    ]
+    }
   }
 }

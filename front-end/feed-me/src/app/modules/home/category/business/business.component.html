@@ -14,8 +14,9 @@
             </div>
         </div>
         <h2 *ngIf="error">There was an error loading this business. Please try again later.</h2>
+        <h2 *ngIf="operational == 'Closed'">Sorry, this business is currently closed.</h2>
         <table *ngIf="products.length !== 0">
-            <tr *ngFor="let product of products">
+            <tr *ngFor="let product of products" [ngClass]="{'disabled': operational == 'Closed'}">
                 <td>{{product.name}}</td>
                 <td class="description">{{product.description}}</td>
                 <td>R{{product.price}}</td>
