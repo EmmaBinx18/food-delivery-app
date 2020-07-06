@@ -1,6 +1,6 @@
 <app-header (openCartEmitter)="openCart()" (changeDisplayEmitter)="changeDisplay($event)"></app-header>
 
-<app-cart *ngIf="cart" (closeCartEmitter)="closeCart()"></app-cart>
+<app-cart *ngIf="cart" (closeCartEmitter)="closeCart()" (checkoutEmitter)="changeDisplay('account')"></app-cart>
 
 <main>
   <app-main *ngIf="display.main" (openCategoryEmitter)="changeDisplay('category', $event)"
@@ -9,6 +9,7 @@
   <app-category *ngIf="display.category" [category]="category">
   </app-category>
   <app-dashboard *ngIf="display.dashboard"></app-dashboard>
+  <app-account *ngIf="display.account"></app-account>
 </main>
 
 <app-footer></app-footer>

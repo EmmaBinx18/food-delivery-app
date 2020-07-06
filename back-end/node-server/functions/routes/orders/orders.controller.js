@@ -3,6 +3,7 @@ const router = express.Router();
 
 const db = require('../../database/db');
 const sp = require('../../database/stored-procedures');
+const orderHelper = require('./order.helper');
 
 const logger = require('../../logger/winstin.logger');
 
@@ -46,16 +47,20 @@ router.get('/:businessId', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    logger.info('INSERT NEW ORDER');
-    try{
-        db.executeStoredProcedure(sp.CREATE_ORDER, req.body.params, (data) => {
-            return res.status(200).send(JSON.parse(data));
-        });
-    }
-    catch(error){
-        logger.error('INSERT NEW ORDER ERROR', error);
-        return res.status(500).send(error);
-    }
+    console.log(req.body.params);
+    // logger.info('INSERT NEW ORDER');
+    // try{
+    //     db.executeStoredProcedure(sp.CREATE_ORDER, req.body.params, (data) => {
+    //         const driverId = orderHelper.getClosesDriver(req.body.params.customerId);
+    //         const orderId = data[0].orderId;
+    //         const assign = orderHelper.assignDriver(orderId, driverId);
+    //         return res.status(200).send(assign);
+    //     });
+    // }
+    // catch(error){
+    //     logger.error('INSERT NEW ORDER ERROR', error);
+    //     return res.status(500).send(error);
+    // }
 });
 
 router.post('/completeProduct', (req, res) => {
@@ -67,19 +72,6 @@ router.post('/completeProduct', (req, res) => {
     }
     catch(error){
         logger.error('COMPLETE ORDER PRODUCT ERROR', error);
-        return res.status(500).send(error);
-    }
-});
-
-router.post('/assignDriver', (req, res) => {
-    logger.info('ASSIGN ORDER DRIVER');
-    try{
-        db.executeStoredProcedure(sp.ASSIGN_ORDER_DRIVER, req.body.params, (data) => {
-            return res.status(200).send(JSON.parse(data));
-        });
-    }
-    catch(error){
-        logger.error('ASSIGN ORDER DRIVER ERROR', error);
         return res.status(500).send(error);
     }
 });

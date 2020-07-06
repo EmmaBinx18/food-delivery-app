@@ -14,20 +14,20 @@ export class OrdersService {
     private http: HttpClient
   ) { }
 
-  insertOrder(cart: Cart[]) {
-    return this.http.post(`api/orders`, { params: this.mapOrderObject(cart) }).toPromise();
+  insertOrder(cart: Cart[], addressId) {
+    return this.http.post(`api/orders`, { params: this.mapOrderObject(cart, addressId) }).toPromise();
   }
 
-  mapOrderObject(cart: Cart[]) {
+  mapOrderObject(cart: Cart[], addressId: string) {
     const order = {
       customerId: this.authService.getCurrentUser().uid,
-      addressId: '',
+      addressId: addressId,
       orderDateTime: Date.now(),
       products: []
     }
 
     cart.forEach(item => {
-      order.products.push({ productId: item.product.id, quantity: item.quantity });
+      order.products.push({ productId: item.product.productId, quantity: item.quantity });
     });
 
     return order;

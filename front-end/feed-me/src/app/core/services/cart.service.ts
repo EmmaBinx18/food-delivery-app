@@ -2,8 +2,6 @@ import { Injectable, OnInit } from '@angular/core';
 
 import { Product } from '../models/product.model';
 import { Cart } from '../models/cart.model';
-import { OrdersService } from './orders.service';
-import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +10,7 @@ export class CartService implements OnInit {
 
   cart: Cart[] = [];
 
-  constructor(
-    private orderService: OrdersService,
-    public snackbarService: SnackbarService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
     const storage = localStorage.getItem('cart');
@@ -33,6 +28,10 @@ export class CartService implements OnInit {
 
   clearStorage() {
     localStorage.removeItem('cart');
+  }
+
+  clearCart() {
+    this.cart = [];
   }
 
   addToCart(product: Product) {
@@ -57,16 +56,5 @@ export class CartService implements OnInit {
         }
       }
     });
-  }
-
-  checkout() {
-    this.orderService.insertOrder(this.cart)
-      .then(() => {
-        this.clearStorage();
-        this.snackbarService.show({ message: 'Successfully submitted order', class: 'snackbar-success' });
-      })
-      .catch(() => {
-        this.snackbarService.show({ message: 'Your order could not be submitted. Please try again later.', class: 'snackbar-error' });
-      });
   }
 }

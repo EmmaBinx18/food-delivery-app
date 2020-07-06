@@ -12,7 +12,8 @@ export class HomeComponent implements OnInit {
   display = {
     main: true,
     category: false,
-    dashboard: false
+    dashboard: false,
+    account: false
   }
 
   constructor() { }
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit {
   changeDisplay(option: string, category?: any) {
     this.setAllFalse();
     this.display[option] = true;
-    this.category = category;
+
+    if (category) { this.category = category; }
   }
 }

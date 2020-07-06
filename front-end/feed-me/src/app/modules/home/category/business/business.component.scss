@@ -109,7 +109,10 @@ table{
         padding: 20px;
 
         @media(max-width: 900px){font-size: 1rem;}
-        @media(max-width: 600px){font-size: 0.8rem;}
+        @media(max-width: 600px){
+            font-size: 0.8rem;
+            padding: 8px;
+        }
     }
 
     .description, .prep-time{
@@ -120,5 +123,6 @@ table{
         &:hover{
             cursor: pointer;
         }
+        @media(max-width: 600px){width: 40px;}
     }
 }

@@ -1,0 +1,52 @@
+<div class="profile">
+    <div class="flex-container">
+        <div class="form-container">
+            <h2>Profile Details</h2>
+            <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
+                <div class="form-group">
+                    <div class="controls">
+                        <input type="text" id="firstname" placeholder="Firstname" class="form-control"
+                            formControlName="firstname">
+                        <p class="error"
+                            *ngIf="profileForm.controls.firstname.errors?.required && profileForm.controls.firstname.dirty">
+                            Firstname is Required
+                        </p>
+                    </div>
+                    <div class="controls">
+                        <input type="text" id="lastname" placeholder="Lastname" class="form-control"
+                            formControlName="lastname">
+                        <p class="error"
+                            *ngIf="profileForm.controls.lastname.errors?.required && profileForm.controls.lastname.dirty">
+                            Lastname is Required
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="controls">
+                        <input type="text" id="phone" placeholder="Phone" class="form-control" formControlName="phone">
+                        <p class="error"
+                            *ngIf="profileForm.controls.phone.errors?.required && profileForm.controls.phone.dirty">
+                            Phone Number is Required
+                        </p>
+                    </div>
+                    <div class="controls">
+                        <input type="text" id="email" placeholder="Email" class="form-control" formControlName="email">
+                        <p class="error"
+                            *ngIf="profileForm.controls.email.errors?.required && profileForm.controls.email.dirty">
+                            Email is Required
+                        </p>
+                        <p class="error"
+                            *ngIf="profileForm.controls.email.errors?.pattern && profileForm.controls.email.dirty">
+                            Please enter a valid email
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <button class="button yellow" type="submit" [disabled]="profileForm.dirty">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+@import '../../../../../assets/styles/common.scss';
+
+.profile{
+    width: 100%;
+    @extend .flex-container;
+    flex-direction: column;
+
+    .flex-container{width: 95%;}
+}
+
+.form-container{
+    width: 100%;
+    @extend .white-container;
+
+    .controls{
+        display: inline;
+        margin-left: 2%;
+    }
+}
+
+input{
+    @extend .form-input;
+    width: 38%;
+
+    @media(max-width: 600px){
+        width: 70%;
+        margin-top: 3%;
+    }
+
+    @media(max-height: 850px) and (min-width: 600px){
+        width: 50%;
+        margin-top: 3%;
+    }
+}
+
+.error{
+    margin-top: 3%;
+}

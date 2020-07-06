@@ -8,8 +8,7 @@
   </div>
   <div class="businesses" *ngIf="!displayBusiness">
     <div *ngFor="let business of businesses" (click)="openBusiness(business)">
-      <!-- <h2>{{ business.name }}</h2> -->
-      <h2>Realllllllllllly long business name</h2>
+      <h2>{{ business.name }}</h2>
     </div>
   </div>
   <h2 *ngIf="error">

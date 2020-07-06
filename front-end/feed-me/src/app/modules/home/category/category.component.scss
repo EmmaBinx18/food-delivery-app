@@ -19,6 +19,7 @@ app-loader{
     position: absolute;
     margin: auto;
     margin-top: 14%;
+    @media(max-width:600px){margin-top: 30%;}
 }
 
 .buttons {

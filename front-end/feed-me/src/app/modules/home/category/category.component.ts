@@ -50,7 +50,7 @@ export class CategoryComponent implements OnInit {
   getBusinesses() {
     this.homeChefService.getBusinessesByCategory(this.category.categoryId)
       .then(response => {
-        response[0].operationalStatusId = 3; //TODO : REMOVE THIS
+        response[0].operationalStatusId = 2; //TODO : REMOVE THIS
         this.businesses = response;
         this.filterBusinesses();
       })

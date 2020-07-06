@@ -1,0 +1,19 @@
+<div class="orders">
+    <div *ngIf="currentOrder.length != 0" class="current-order">
+        <h2>Current Cart Items</h2>
+        <table>
+            <tr *ngFor="let item of currentOrder">
+                <td>{{item.product.name}}</td>
+                <td>{{item.quantity}}</td>
+                <td>R{{item.product.price * item.quantity}}</td>
+                <img class="icon" src="/assets/icons/trash.png" alt="delete" (click)="removeCartItem(item)" />
+            </tr>
+        </table>
+        <div>
+
+        </div>
+    </div>
+    <div class="order-history">
+        <h3 *ngIf="orders.length == 0">You don't have any previous orders</h3>
+    </div>
+</div>

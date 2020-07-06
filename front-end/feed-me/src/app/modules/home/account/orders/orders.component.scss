@@ -1,0 +1,55 @@
+@import '../../../../../assets/styles/common.scss';
+
+.orders{
+    width: 100%;
+    @extend .flex-container;
+    flex-direction: column;
+
+    div{
+        width: 95%;
+        @extend .white-container;
+    }
+
+    .order-history{
+        margin-top: 2%;
+        min-height: auto;
+        max-height: 58vh;
+    }
+}
+
+table{
+    width: 92%;
+    text-align: center;
+    margin: auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-collapse: separate; 
+    border-spacing: 0 8px;
+
+    tr{
+        box-shadow: var(--primary-box-shadow);
+        border-radius: 6px;
+        background-color: white;
+    }
+
+    td{
+        font-size: 1.1rem;
+        font-family: var(--secondary-font-family);
+        padding: 20px;
+
+        @media(max-width: 900px){font-size: 1rem;}
+        @media(max-width: 600px){
+            font-size: 0.8rem;
+            padding: 8px;
+        }
+    }
+
+    .icon{
+        &:hover{
+            cursor: pointer;
+        }
+        width: 35px;
+        margin-top: 11%;
+        @media(max-width: 600px){width: 40px;}
+    }
+}
