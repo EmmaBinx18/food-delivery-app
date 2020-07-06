@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MapboxService } from '../../../core/services/mapbox.service';
+import * as mapboxgl from 'mapbox-gl'
+
 
 @Component({
   selector: 'app-tracking-map',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrackingMapComponent implements OnInit {
 
-  constructor() { }
+  constructor(private mapService: MapboxService ) { }
+
+  map: mapboxgl.Map;
 
   ngOnInit(): void {
+    this.mapService.buildMap(this.map,'tracking')
   }
 
 }

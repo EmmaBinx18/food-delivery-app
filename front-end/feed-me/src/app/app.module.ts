@@ -16,7 +16,7 @@ import { TrackingMapComponent } from './modules/map/tracking-map/tracking-map.co
 //import { MapComponent } from './modules/map/map.component';
 
 @NgModule({
-  declarations: [AppComponent, AddressMapComponent, TrackingMapComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
