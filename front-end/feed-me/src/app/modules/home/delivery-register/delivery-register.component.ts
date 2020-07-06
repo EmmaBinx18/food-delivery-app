@@ -52,11 +52,11 @@ export class DeliveryRegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       this.deliveryService.registerDeliveryDriver(this.registerForm.value)
         .then(() => {
-          this.snackbarService.show({ message: 'Successfully sent registration request', class: 'snackbar-success' });
+          this.snackbarService.show({ message: 'Successfully sent registration request', class: 'success' });
           this.modalService.close();
         })
         .catch(() => {
-          this.snackbarService.show({ message: 'Could not submit your request. Please try again later', class: 'snackbar-error' });
+          this.snackbarService.show({ message: 'Could not submit your request. Please try again later', class: 'error' });
         });
     }
   }

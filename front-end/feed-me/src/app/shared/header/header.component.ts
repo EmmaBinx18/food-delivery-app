@@ -1,20 +1,27 @@
-import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Renderer2, HostListener, Output } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  EventEmitter,
+  Renderer2,
+  Output,
+} from "@angular/core";
 
-import { AuthService } from '../../core/authentication/authentication.service';
-import { Role } from 'src/app/core/models/role.enum';
-import { ModalService } from '../modal/modal.service';
+import { AuthService } from "../../core/authentication/authentication.service";
+import { Role } from "src/app/core/models/role.enum";
+import { ModalService } from "../modal/modal.service";
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
+  role: Role;
 
-  userRole: Role;
-
-  @ViewChild('nav', { static: false }) nav: ElementRef;
-  @ViewChild('header', { static: false }) header: ElementRef;
+  @ViewChild("nav", { static: false }) nav: ElementRef;
+  @ViewChild("header", { static: false }) header: ElementRef;
 
   @Output() openCartEmitter = new EventEmitter();
   @Output() changeDisplayEmitter = new EventEmitter<string>();
@@ -26,19 +33,12 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userRole = this.authService.getCurrentRole();
+    this.role = this.authService.getCurrentRole();
+    this.role = Role.HomeChef;
   }
 
   logout() {
     this.authService.logout();
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    if (event.target.innerWidth > 800 && this.nav.nativeElement.style.left == "-200rem") {
-      this.renderer.setStyle(this.nav.nativeElement, 'left', '0');
-      this.renderer.removeClass(this.header.nativeElement, 'full-height');
-    }
   }
 
   openForm(option: string) {
@@ -47,22 +47,15 @@ export class HeaderComponent implements OnInit {
   }
 
   openNav() {
-    this.renderer.setStyle(this.nav.nativeElement, 'left', '0');
-    this.renderer.addClass(this.header.nativeElement, 'full-height');
+    this.renderer.setStyle(this.nav.nativeElement, "left", "0");
   }
 
   closeNav() {
-    this.renderer.setStyle(this.nav.nativeElement, 'left', '-200rem');
-    this.renderer.removeClass(this.header.nativeElement, 'full-height');
-  }
-
-  openCart() {
-    this.openCartEmitter.emit();
+    this.renderer.setStyle(this.nav.nativeElement, "left", "-200rem");
   }
 
   changeDisplay(option: string) {
     this.changeDisplayEmitter.emit(option);
     this.closeNav();
   }
-
 }

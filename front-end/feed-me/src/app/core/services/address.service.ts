@@ -14,6 +14,10 @@ export class AddressService {
     return this.http.get(`api/address/${addressId}`).toPromise();
   }
 
+  getUserAddresses(userId: string) {
+    return this.http.post('api/address/user', { params: userId }).toPromise();
+  }
+
   insertAddress(address: Address) {
     return this.http.post(`api/address`, { params: { ...address } }).toPromise();
   }

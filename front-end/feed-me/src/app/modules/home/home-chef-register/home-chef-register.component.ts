@@ -22,7 +22,7 @@ export class HomeChefRegisterComponent implements OnInit {
     private authService: AuthService,
     private homeChefService: HomeChefService,
     private categoryService: CategoriesService,
-    public snackbar: SnackbarService,
+    public snackbarService: SnackbarService,
     public modalService: ModalService,
     private mapService: MapboxService
   ) { }
@@ -64,11 +64,11 @@ export class HomeChefRegisterComponent implements OnInit {
       this.homeChefService
         .registerBusiness(this.registerForm.value)
         .then(() => {
-          this.snackbar.show({ message: "Successfully sent business registration request", class: "snackbar-success" });
+          this.snackbarService.show({ message: "Successfully sent business registration request", class: "success" });
           this.modalService.close();
         })
         .catch(() => {
-          this.snackbar.show({ message: "Could not register business. Please try again later", class: "snackbar-error" });
+          this.snackbarService.show({ message: "Could not register business. Please try again later", class: "error" });
         });
     }
   }

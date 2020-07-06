@@ -26,6 +26,7 @@
     }
 
     input, a{
+        height: auto !important;
         @media(max-width: 600px){font-size: 0.8rem !important;}
     }
 

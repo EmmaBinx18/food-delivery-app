@@ -23,9 +23,8 @@ export class SnackbarComponent implements AfterViewInit, OnDestroy {
     this.subscription = this.snackbarSubscription.subscribe(value => {
       if (value == null) { this.snackbar = null; return; }
       this.snackbar = value;
-      this.renderer.removeClass(component, 'snackbar-error');
-      this.renderer.removeClass(component, 'snackbar-success');
-      this.renderer.addClass(component, this.snackbar.class);
+      this.removeClasses(component);
+      this.addClass(component, this.snackbar.class)
       component.querySelector('#snackbar-message').innerHTML = this.snackbar.message;
       this.show();
     });
@@ -43,5 +42,14 @@ export class SnackbarComponent implements AfterViewInit, OnDestroy {
       this.renderer.addClass(component, 'hide');
       this.snackbarService.hide();
     }, 4000);
+  }
+
+  removeClasses(snackbar: HTMLElement) {
+    this.renderer.removeClass(snackbar, 'snackbar-error');
+    this.renderer.removeClass(snackbar, 'snackbar-success');
+  }
+
+  addClass(snackbar: HTMLElement, type: string) {
+    this.renderer.addClass(snackbar, `snackbar-${type}`);
   }
 }

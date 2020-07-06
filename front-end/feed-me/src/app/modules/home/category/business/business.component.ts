@@ -45,7 +45,7 @@ export class BusinessComponent implements OnInit {
       })
       .catch(() => {
         this.error = true;
-        this.snackbarService.show({ message: 'Could not load this business. Please try again later.', class: 'snackbar-error' });
+        this.snackbarService.show({ message: 'Could not load this business. Please try again later.', class: 'error' });
       });
   }
 
@@ -56,7 +56,7 @@ export class BusinessComponent implements OnInit {
   addtoCart(product: any) {
     if (this.operational != 'Closed') {
       this.cartService.addToCart(product);
-      this.snackbarService.show({ message: `Added ${product.name} to cart`, class: 'snackbar-success' });
+      this.snackbarService.show({ message: `Added ${product.name} to cart`, class: 'success' });
     }
   }
 

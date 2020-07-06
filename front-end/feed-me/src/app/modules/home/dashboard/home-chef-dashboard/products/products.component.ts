@@ -19,4 +19,8 @@ export class ProductsComponent {
     this.modalService.open('product');
   }
 
+  removeProduct(product: any) {
+
+  }
+
 }

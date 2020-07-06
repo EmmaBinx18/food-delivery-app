@@ -21,7 +21,7 @@ export class CartComponent {
 
   removeCartItem(item: Cart) {
     this.cartService.removeFromCart(item);
-    this.snackbarService.show({ message: `Removed ${item.product.name} from cart`, class: 'snackbar-success' });
+    this.snackbarService.show({ message: `Removed ${item.product.name} from cart`, class: 'success' });
   }
 
   closeCart() {
@@ -35,26 +35,6 @@ export class CartComponent {
   checkout() {
     this.checkoutEmitter.emit();
     this.closeCartEmitter.emit();
-
-    // this.userService.getUser(this.authService.getCurrentUser().uid)
-    //   .then(response => {
-    //     console.log(response);
-    //     this.createOrder(response[0].addressId);
-    //   })
-    //   .catch(() => {
-    //     this.snackbarService.show({ message: 'Your order could not be submitted. Please try again later.', class: 'snackbar-error' });
-    //   })
-  }
-
-  createOrder(addressId: string) {
-    // this.orderService.insertOrder(this.cartService.cart, addressId)
-    //   .then(() => {
-    //     this.cartService.clearStorage();
-    //     this.snackbarService.show({ message: 'Your order has been created and should be on its way shortly', class: 'snackbar-success' });
-    //   })
-    //   .catch(() => {
-    //     this.snackbarService.show({ message: 'Your order could not be submitted. Please try again later.', class: 'snackbar-error' });
-    //   });
   }
 
 }

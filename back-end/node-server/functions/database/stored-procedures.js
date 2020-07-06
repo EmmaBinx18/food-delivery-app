@@ -4,8 +4,10 @@ const GET_ADDRESS = 'p_Get_Address';
 const GET_USER = 'p_Get_User';
 const CREATE_UPDATE_USER = 'p_Create_Update_User';
 const DEACTIVATE_USER = 'p_Deactivate_User';
+const GET_USER_ADDRESS = 'p_Get_User_Address';
 
 const ADD_TO_ROLE = 'p_Add_To_Role';
+const GET_USER_ROLE = 'p_Get_User_Role';
 
 const CREATE_UPDATE_CATEGORY = 'p_Create_Update_Category';
 const GET_CATEGORY = 'p_Get_Category';
@@ -54,5 +56,7 @@ module.exports = {
     GET_ADDRESS,
     GET_PRODUCTS_BUSINESS,
     GET_BUSINESS_USER,
-    GET_ACTIVE_ORDER_READY_PRODUCTS
+    GET_ACTIVE_ORDER_READY_PRODUCTS,
+    GET_USER_ROLE,
+    GET_USER_ADDRESS
 }

@@ -1,19 +1,39 @@
 <div class="orders">
-    <div *ngIf="currentOrder.length != 0" class="current-order">
-        <h2>Current Cart Items</h2>
-        <table>
-            <tr *ngFor="let item of currentOrder">
-                <td>{{item.product.name}}</td>
-                <td>{{item.quantity}}</td>
-                <td>R{{item.product.price * item.quantity}}</td>
-                <img class="icon" src="/assets/icons/trash.png" alt="delete" (click)="removeCartItem(item)" />
-            </tr>
-        </table>
-        <div>
-
-        </div>
+  <div *ngIf="currentOrder.length != 0" class="current-order">
+    <h2>Current Cart Items</h2>
+    <div class="order-table">
+      <table>
+        <tr *ngFor="let item of currentOrder">
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>R{{ item.product.price * item.quantity }}</td>
+          <img class="icon" src="/assets/icons/trash.png" alt="delete" (click)="removeCartItem(item)" />
+        </tr>
+      </table>
     </div>
-    <div class="order-history">
-        <h3 *ngIf="orders.length == 0">You don't have any previous orders</h3>
+    <!-- <div *ngIf="addresses.length != 0"></div> -->
+    <div class="info">
+      <div class="address">
+        <h3>Your order will be sent to the following address:</h3>
+        <!-- <h3>{{ addresses[0].address }}</h3> -->
+        <h3>24 Northfields Estas, scott street, randpark ridge</h3>
+        <br />
+      </div>
+      <div class="checkout">
+        <h3>Subtotal: R{{ subtotal }}</h3>
+        <h4>{{ itemsTotal }} items</h4>
+        <button class="button yellow" (click)="checkout()">Checkout</button>
+      </div>
     </div>
+    <!-- <h3 *ngIf="addresses.length == 0">
+        There is no address assigned to your account. Please assign an address
+        before continuing
+        <button class="button yellow add-address" (click)="addAddress()">
+          Add address
+        </button>
+      </h3> -->
+  </div>
+  <div class="order-history">
+    <h3 *ngIf="orders.length == 0">You don't have any previous orders</h3>
+  </div>
 </div>

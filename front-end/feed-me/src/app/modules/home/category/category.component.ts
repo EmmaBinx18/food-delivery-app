@@ -22,7 +22,7 @@ export class CategoryComponent implements OnInit {
   @Input() category: any;
 
   constructor(
-    public snackbar: SnackbarService,
+    public snackbarService: SnackbarService,
     public categoryService: CategoriesService,
     private homeChefService: HomeChefService,
     public modalService: ModalService
@@ -50,13 +50,12 @@ export class CategoryComponent implements OnInit {
   getBusinesses() {
     this.homeChefService.getBusinessesByCategory(this.category.categoryId)
       .then(response => {
-        response[0].operationalStatusId = 2; //TODO : REMOVE THIS
         this.businesses = response;
         this.filterBusinesses();
       })
       .catch(() => {
         this.error = true;
-        this.snackbar.show({ message: "Could not load this page. Please try again later.", class: "snackbar-error" })
+        this.snackbarService.show({ message: "Could not load this page. Please try again later.", class: "error" })
       })
   }
 

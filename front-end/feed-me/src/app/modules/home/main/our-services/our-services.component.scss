@@ -40,11 +40,11 @@ ul{
     }
 
     p{
-        font-size: 1.3rem;
         font-family: var(--secondary-font-family);
         padding: 16px;
+        font-weight: normal;
+        font-size: 1.3rem;
         @media(max-width: 900px){font-size: 1rem;}
-        @media(max-width: 600px){font-size: 0.8rem;}
     }
 }
 

@@ -18,20 +18,13 @@ export class CartService implements OnInit {
       this.cart = JSON.parse(localStorage.getItem('cart'));
     }
     else {
-      this.setStorage();
+      localStorage.setItem('cart', JSON.stringify(this.cart));
     }
-  }
-
-  setStorage() {
-    localStorage.setItem('cart', JSON.stringify(this.cart));
-  }
-
-  clearStorage() {
-    localStorage.removeItem('cart');
   }
 
   clearCart() {
     this.cart = [];
+    localStorage.removeItem('cart');
   }
 
   addToCart(product: Product) {

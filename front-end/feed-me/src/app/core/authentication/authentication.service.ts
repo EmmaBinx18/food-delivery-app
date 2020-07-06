@@ -57,6 +57,7 @@ export class AuthService {
             .then(response => {
                 this.getUser(response.user.uid)
                     .then(res => {
+                        console.log(res);
                         this._currentUser = response.user;
                         this._currentRole = res[0].roleid;
                         localStorage.setItem('user', JSON.stringify(this._currentUser));

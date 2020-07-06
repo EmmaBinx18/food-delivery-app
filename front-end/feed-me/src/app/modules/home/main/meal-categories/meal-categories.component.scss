@@ -11,8 +11,8 @@ h1{
     margin-bottom: 4%;
 
     div{
-        width: 240px;
-        height: 240px;
+        width: 20rem;
+        height: 20rem;
         background-size: cover;
         background-repeat: no-repeat;
         margin: 10px 20px 10px 20px;
@@ -20,10 +20,19 @@ h1{
         @extend .flex-container;
         box-shadow: var(--primary-box-shadow);
 
+        @media(max-width: 1500px){
+            width: 14rem;
+            height: 14rem;
+        }
+
         @media(max-width: 900px){
-            width: 100px;
-            height: 100px;
-            margin: 10px 15px 10px 15px;
+            width: 10rem;
+            height: 10rem;
+        }
+
+        @media(max-width: 500px){
+            width: 6rem;
+            height: 6rem;
         }
 
         h2{

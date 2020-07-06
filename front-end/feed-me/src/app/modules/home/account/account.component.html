@@ -1,15 +1,15 @@
 <div class="main">
-    <div class="nav">
-        <ul>
-            <li><a (click)="changeDisplay('orders')">Orders</a></li>
-            <li><a (click)="changeDisplay('profile')">Profile</a></li>
-            <li><a (click)="changeDisplay('addresses')">Addresses</a></li>
-            <li><a (click)="logout()">Logout</a></li>
-        </ul>
-    </div>
-    <div class="items">
-        <app-orders [orders]="orders" *ngIf="display.orders"></app-orders>
-        <app-addresses *ngIf="display.addresses"></app-addresses>
-        <app-profile [profile]="profile" *ngIf="display.profile"></app-profile>
-    </div>
+  <div class="nav">
+    <ul>
+      <li (click)="changeDisplay('orders')"><img src="/assets/icons/cart2.png" alt="orders" /><a>Orders</a></li>
+      <li (click)="changeDisplay('profile')"><img src="/assets/icons/profile.png" alt="orders" /><a>Profile</a></li>
+      <li (click)="changeDisplay('addresses')"><img src="/assets/icons/home.png" alt="orders" /><a>Addresses</a></li>
+      <li (click)="logout()"><img src="/assets/icons/logout.png" alt="orders" /><a>Logout</a></li>
+    </ul>
+  </div>
+  <div class="items">
+    <app-orders [orders]="orders" *ngIf="display.orders" (changeDisplayEmitter)="changeDisplay('account')"></app-orders>
+    <app-addresses *ngIf="display.addresses" [addresses]="addresses"></app-addresses>
+    <app-profile [profile]="profile" *ngIf="display.profile"></app-profile>
+  </div>
 </div>

@@ -1,5 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModalService } from 'src/app/shared/modal/modal.service';
+import { HomeChefService } from 'src/app/core/services/home-chef.service';
+import { AuthService } from 'src/app/core/authentication/authentication.service';
+import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
+import { ProductsService } from 'src/app/core/services/products.service';
 
 @Component({
   selector: 'app-add-product',
@@ -8,37 +13,66 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddProductComponent implements OnInit {
 
-  @Output() closeModalEmitter = new EventEmitter();
+  addProductForm: FormGroup;
+  business: any;
 
-  addMealForm: FormGroup;
-  businessId: number;
-
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    public modalService: ModalService,
+    private homeChefService: HomeChefService,
+    private authService: AuthService,
+    public snackbarService: SnackbarService,
+    private productsService: ProductsService
+  ) { }
 
   ngOnInit() {
-    //Fetch businessId
-    this.addMealForm = this.initForm();
+    this.getUserBusiness();
+    this.addProductForm = this.initForm();
+  }
+
+  getUserBusiness() {
+    this.homeChefService.getBusinessByUserId(this.authService.getCurrentUser().uid)
+      .then(response => {
+        this.business = response[0];
+      })
+      .catch(() => {
+        this.snackbarService.show({ message: 'Could not load your business. Please try again later.' });
+      });
   }
 
   initForm() {
     return this.formBuilder.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      businessId: [this.businessId],
+      businessId: [''],
       availabilityStatusId: [1],
       price: [0, [Validators.required, Validators.min(0)]],
       minPrepareTime: [0, [Validators.required, Validators.min(0)]]
     });
   }
 
+  setBusinessId() {
+    this.addProductForm
+      .get("category")
+      .setValue(this.business.businessId, { onlySelf: true });
+  }
+
   addMeal() {
-    if (this.addMealForm.valid) {
-      //Add meal
+    this.setBusinessId();
+    if (this.addProductForm.valid) {
+      this.productsService.insertProduct(this.addProductForm.value)
+        .then(() => {
+          this.closeModal();
+          this.snackbarService.show({ message: 'Successfully added new product', class: 'success' });
+        })
+        .catch(() => {
+          this.snackbarService.show({ message: 'Could not add new product. Please try again later.' });
+        });
     }
   }
 
   closeModal() {
-    this.closeModalEmitter.emit();
+    this.modalService.close();
   }
 
 }
