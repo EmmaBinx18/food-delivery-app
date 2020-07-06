@@ -124,12 +124,29 @@ BEGIN
 END
 GO
 
+
+
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'DriverAddress')
 BEGIN
+
+	DECLARE @driverAddress TABLE
+	(
+		[userId] VARCHAR(128),
+		[addressId] int
+	)
+
+	INSERT INTO @driverAddress
+	SELECT * FROM [DriverAddress]
+
+	DROP TABLE [DriverAddress]
+
 	CREATE TABLE [DriverAddress] (
-	  [userId] VARCHAR(128) NOT NULL FOREIGN KEY REFERENCES [Users]([userId]),
+	  [userId] VARCHAR(128) NOT NULL FOREIGN KEY REFERENCES [Users]([userId])  PRIMARY KEY,
 	  [addressId] int NOT NULL FOREIGN KEY REFERENCES [Address]([addressId])
 	);
+
+	INSERT INTO [DriverAddress]
+	SELECT * FROM @driverAddress
 END
 GO
 
