@@ -106,23 +106,27 @@ GO
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Address')
 BEGIN
 	CREATE TABLE [Address] (
-	[addressId] INT IDENTITY(1,1),
-	[streetName] varchar(255),
-	[suburb] varchar(255),
-	[zipCode] varchar(7),
-	[streetNo] int,
-	[complexName] varchar(255),
-	[houseNo] int,
-	[cityId] int NOT NULL FOREIGN KEY REFERENCES [City]([cityId]),
-	PRIMARY KEY ([addressId]));
+		[addressId] INT IDENTITY(1,1),
+		[address] NVARCHAR(255),
+		[latLong] GEOGRAPHY,
+		PRIMARY KEY ([addressId])
+	);
 
 END
 GO
 
-
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'UserAddress')
 BEGIN
 	CREATE TABLE [UserAddress] (
+	  [userId] VARCHAR(128) NOT NULL FOREIGN KEY REFERENCES [Users]([userId]),
+	  [addressId] int NOT NULL FOREIGN KEY REFERENCES [Address]([addressId])
+	);
+END
+GO
+
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'DriverAddress')
+BEGIN
+	CREATE TABLE [DriverAddress] (
 	  [userId] VARCHAR(128) NOT NULL FOREIGN KEY REFERENCES [Users]([userId]),
 	  [addressId] int NOT NULL FOREIGN KEY REFERENCES [Address]([addressId])
 	);
@@ -149,7 +153,7 @@ BEGIN
 	[categoryId] INT IDENTITY(1,1),
 	[name] varchar(55),
 	[description] VARCHAR(MAX),
-	[image] VARCHAR(MAX),
+	[image] VARBINARY(MAX),
 	PRIMARY KEY ([categoryId]));
 
 	
@@ -161,13 +165,17 @@ BEGIN
 		   ('Greek', 'Greek cuisine is a Mediterranean cuisine. Greek cookery makes wide use of vegetables, olive oil, grains, fish, wine, and meat. Other important ingredients include olives, pasta, cheese, lemon juice, herbs, bread, and yogurt. The most commonly used grain is wheat; barley is also used.'),
 		   ('Classics','South African cuisine is a unique fusion of many different external cultural influences. These include Dutch, French, Indian and Malaysian flavours and techniques that continue to make their way onto the menus of restaurants and into the homes of locals all over the country. ')
 
+	UPDATE C
+	SET [image] = img
+	FROM Category C 
+	INNER JOIN myimages mi ON mi.id = C.categoryId
 END
 GO
 
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Business')
 BEGIN
 	CREATE TABLE [Business] (
-	[BusinessId] INT IDENTITY(1,1),
+	[businessId] INT IDENTITY(1,1),
 	[name] varchar(55),
 	[categoryId] INT NOT NULL FOREIGN KEY REFERENCES [Category]([categoryId]),
 	[addressId] int NOT NULL FOREIGN KEY REFERENCES [Address]([addressId]),

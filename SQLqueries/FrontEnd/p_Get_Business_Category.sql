@@ -11,7 +11,7 @@ GO
 -- Usage:   
 /*
 	DECLARE @Error int 
-	EXEC p_Get_Business_Category '{ "categoryid" : 1 }', @Error OUTPUT
+	EXEC p_Get_Business_Category '{ "categoryId" : 4 }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [Business]
 */
@@ -30,11 +30,11 @@ BEGIN
 	DECLARE @categoryid VARCHAR(128)
 	SELECT @categoryid = categoryid
 	FROM OPENJSON(@JSON) 
-	WITH (categoryid INT )
+	WITH (categoryId INT )
 
 	SET NOCOUNT ON;
 	SELECT *
-	FROM [Business]
+	FROM [Business] B
 	WHERE categoryId = @categoryid
 	FOR JSON PATH	 
 
