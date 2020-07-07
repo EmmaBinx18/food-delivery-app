@@ -11,7 +11,7 @@ GO
 -- Usage : 
  /*
     DECLARE @Error int 
-	EXEC p_Create_Update_Product '{  "productId": -1,  "name": "product name",  "description": "product description",  "businessId": 1,  "availabilityStatusId": 1,  "price": 25,  "minPrepareTime": 15}', @Error OUTPUT
+	EXEC p_Create_Update_Product '{  "productId": -1,  "name": "product name",  "description": "product description",  "businessId": 1,   "price": 25,  "minPrepareTime": 15}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [Product]
 */
@@ -36,9 +36,9 @@ BEGIN
 				@minPrepareTime INT
 
 		
-		SELECT @productId = productId, @name=[name], @description = [description], @businessId = businessId,  @availabilityStatusId=availabilityStatusId, @price = price, @minPrepareTime = minPrepareTime 
+		SELECT @productId = productId, @name=[name], @description = [description], @businessId = businessId,  @price = price, @minPrepareTime = minPrepareTime 
 		FROM OPENJSON(@JSON)
-		WITH (productId INT, [name] VARCHAR(55),[description] VARCHAR(MAX), businessId INT, availabilityStatusId INT, price DECIMAL(9,2), minPrepareTime INT)
+		WITH (productId INT, [name] VARCHAR(55),[description] VARCHAR(MAX), businessId INT, price DECIMAL(9,2), minPrepareTime INT)
 			
 		IF EXISTS (SELECT productId FROM [Product] WHERE productId = @productId)
 			BEGIN
@@ -46,7 +46,7 @@ BEGIN
 				SET	[name]= @name, 
 					[description] = @description,
 					--[businessId= @businessId],
-					[availabilityStatusId] = @availabilityStatusId,
+					--[availabilityStatusId] = @availabilityStatusId,
 					[price] = @price,
 					[minPrepareTime] = @minPrepareTime
 				WHERE productId = @productId
