@@ -11,10 +11,10 @@ GO
 -- Usage:   
 /*
 	DECLARE @Error int 
-	EXEC p_Get_User '{ "userId" : null }', @Error OUTPUT 
+	EXEC p_Get_User '{ "userId" : "slxNSWygiaRMKB51u63ld4fQqh73" }', @Error OUTPUT 
 	--OR EXEC p_Get_User '{ "userId" : "admin_uid" }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
-	SELECT * FROM [User]
+	SELECT * FROM [Users]
 */
 -- =============================================
 
@@ -37,7 +37,7 @@ BEGIN
 	IF (@userId IS NULL)
 		BEGIN
 			SELECT U.*, ISNULL(UR.RoleId,0) [roleid]
-			FROM [User] U
+			FROM [Users] U
 			LEFT OUTER JOIN [UserRole] UR ON UR.UserId = U.userId 
 			FOR JSON PATH	 
 			
@@ -46,7 +46,7 @@ BEGIN
 	ELSE
 		BEGIN
 			SELECT U.*, ISNULL(UR.RoleId,0) [roleid]
-			FROM [User] U
+			FROM [Users] U
 			LEFT OUTER JOIN [UserRole] UR ON UR.UserId = U.userId 
 			WHERE U.userId = @userId
 			FOR JSON PATH	
