@@ -8,12 +8,12 @@ const logger = require('../../logger/winstin.logger');
 
 router.get('/', (req, res) => {
     logger.info('GET ALL PRODUCTS');
-    try{
-        db.executeStoredProcedure(sp.GET_PRODUCTS_CATEGORY, {categoryid:null}, (data) => {
+    try {
+        db.executeStoredProcedure(sp.GET_PRODUCTS_CATEGORY, { categoryid: null }, (data) => {
             return res.status(200).send(data);
         });
     }
-    catch(error){
+    catch (error) {
         logger.error('GET ALL PRODUCTS ERROR', error);
         return res.status(500).send(error);
     }
@@ -21,12 +21,12 @@ router.get('/', (req, res) => {
 
 router.get('/:businessId', (req, res) => {
     logger.info('GET ALL PRODUCTS FOR A BUSINESS');
-    try{
-        db.executeStoredProcedure(sp.GET_PRODUCTS_BUSINESS, {businessId:req.params.businessId}, (data) => {
+    try {
+        db.executeStoredProcedure(sp.GET_PRODUCTS_BUSINESS, { businessId: req.params.businessId }, (data) => {
             return res.status(200).send(data);
         });
     }
-    catch(error){
+    catch (error) {
         logger.error('GET ALL PRODUCTS FOR A BUSINESS ERROR', error);
         return res.status(500).send(error);
     }
@@ -34,22 +34,12 @@ router.get('/:businessId', (req, res) => {
 
 router.post('/', (req, res) => {
     logger.info('INSERT NEW PRODUCT');
-    const newBusiness = {
-        productId: -1,
-        name: req.body.params.name,
-        description: req.body.params.description,
-        businessId: req.body.params.businessId,
-        availabilityStatusId: 0,
-        price: req.body.params.price,
-        minPrepareTime: req.body.params.minPrepareTime
-    }
-
-    try{
-        db.executeStoredProcedure(sp.CREATE_UPDATE_PRODUCT, newBusiness, (data) => {
+    try {
+        db.executeStoredProcedure(sp.CREATE_UPDATE_PRODUCT, req.body.params, (data) => {
             return res.status(200).send(data);
         });
     }
-    catch(error){
+    catch (error) {
         logger.error('INSERT NEW PRODUCT ERROR', error);
         return res.status(500).send(error);
     }
@@ -57,12 +47,12 @@ router.post('/', (req, res) => {
 
 router.patch('/', (req, res) => {
     logger.info('UPDATE PRODUCT');
-    try{
+    try {
         db.executeStoredProcedure(sp.CREATE_UPDATE_PRODUCT, req.body.params, (data) => {
             return res.status(200).send(data);
         });
     }
-    catch(error){
+    catch (error) {
         logger.error('IUPDATE PRODUCT ERROR', error);
         return res.status(500).send(error);
     }

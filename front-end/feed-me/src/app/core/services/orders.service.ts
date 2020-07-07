@@ -14,20 +14,20 @@ export class OrdersService {
     private http: HttpClient
   ) { }
 
-  insertOrder(cart: Cart[]) {
-    return this.http.post(`api/orders`, { params: this.mappOrderObject(cart) }).toPromise();
+  insertOrder(cart: Cart[], addressId) {
+    return this.http.post(`api/orders`, { params: this.mapOrderObject(cart, addressId) }).toPromise();
   }
 
-  mappOrderObject(cart: Cart[]) {
+  mapOrderObject(cart: Cart[], addressId: string) {
     const order = {
       customerId: this.authService.getCurrentUser().uid,
-      addressId: '',
+      addressId: addressId,
       orderDateTime: Date.now(),
       products: []
     }
 
     cart.forEach(item => {
-      order.products.push({ productId: item.product.id, quantity: item.quantity });
+      order.products.push({ productId: item.product.productId, quantity: item.quantity });
     });
 
     return order;
@@ -37,17 +37,21 @@ export class OrdersService {
     return this.http.get(`api/orders/${businessId}`).toPromise();
   }
 
-  getProductsForOrder(orderId: number) {
-    return [
-      {
-        prderId: 0,
-        productId: 0,
-        quantity: 3,
-        orderProductStatusId: 2,
-        productPrice: 20,
-        orderItemsStarted: '',
+  getActiveOrderReadyProducts(orderId: string) {
+    return this.http.post(`api/orders/activeOrderReadyProducts`, { params: orderId }).toPromise();
+  }
 
+  mapOrderReadyProduct(location: any) {
+    return {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: location.coordinates
+      },
+      properties: {
+        title: location.businessName,
+        description: ''
       }
-    ]
+    }
   }
 }

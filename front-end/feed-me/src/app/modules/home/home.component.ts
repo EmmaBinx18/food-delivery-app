@@ -6,39 +6,51 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
-  cart: boolean = false;
   category: any;
 
   display = {
     main: true,
     category: false,
-    dashboard: false
-  }
+    dashboard: false,
+    account: false,
+    cart: false,
+  };
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
-    this.category = '';
+    this.category = "";
     window.scroll(0, 0);
   }
 
   openCart() {
-    this.cart = true;
+    if (window.innerWidth <= 800) {
+      this.changeDisplay("account");
+    } else {
+      this.display.cart = true;
+    }
   }
 
   closeCart() {
-    this.cart = false;
+    this.display.cart = false;
   }
 
   setAllFalse() {
-    Object.keys(this.display).forEach(key => {
+    Object.keys(this.display).forEach((key) => {
       this.display[key] = false;
     });
   }
 
   changeDisplay(option: string, category?: any) {
+    if (option == "cart") {
+      this.openCart();
+      return;
+    }
     this.setAllFalse();
     this.display[option] = true;
-    this.category = category;
+
+    if (category) {
+      this.category = category;
+    }
   }
 }

@@ -15,17 +15,7 @@ export class HomeChefService {
   ) { }
 
   registerBusiness(business: Business) {
-    const address = {
-      street: business.street,
-      complex: business.complex,
-      suburb: business.suburb,
-      zipcode: business.zipcode,
-      city: business.city,
-      province: business.province,
-      country: business.country
-    }
-
-    return this.addressService.insertAddress(address)
+    return this.addressService.insertAddress(business.address)
       .then(response => {
         return this.insertBusiness(business, response[0].addressId);
       })
@@ -37,7 +27,7 @@ export class HomeChefService {
   insertBusiness(business: any, addressId: string) {
     return this.http.post(`api/business`, {
       params:
-        { name: business.businessName, categoryId: business.category, addressId, userId: business.uid }
+        { businessId: -1, name: business.businessName, categoryId: business.category, addressId: addressId, userId: business.uid }
     }).toPromise();
   }
 

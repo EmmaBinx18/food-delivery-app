@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Observable, Subscription } from 'rxjs';
 
-import { SnackbarService } from "../snackbar/snackbar.service";
 import { ModalService } from './modal.service';
 
 import { HomeChefRegisterComponent } from "../../modules/home/home-chef-register/home-chef-register.component";
@@ -38,5 +37,9 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.modalSubscription.unsubscribe();
+  }
+
+  closeForm() {
+    this.modalService.close();
   }
 }

@@ -11,6 +11,9 @@ import { SharedModule } from '../../shared/shared.module';
 import { MainModule } from './main/main.module';
 import { CategoryModule } from './category/category.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { OrdersComponent } from './account/orders/orders.component';
+import { AddressesComponent } from './account/addresses/addresses.component';
+import { ProfileComponent } from './account/profile/profile.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +21,10 @@ import { DashboardModule } from './dashboard/dashboard.module';
         AccountComponent,
         HomeChefRegisterComponent,
         DeliveryRegisterComponent,
-        CartComponent
+        CartComponent,
+        OrdersComponent,
+        AddressesComponent,
+        ProfileComponent
     ],
     imports: [
         SharedModule,

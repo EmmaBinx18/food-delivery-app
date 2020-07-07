@@ -1,6 +1,6 @@
 <h1>MEAL CATEGORIES</h1>
 <div class="categories">
-    <app-spinner *ngIf="categoryService.categories.length == 0"></app-spinner>
+    <app-loader *ngIf="categoryService.categories.length == 0"></app-loader>
     <div *ngFor="let category of categoryService.categories" [style.background-image]="category.image"
         (click)="openCategory(category)">
         <h2>{{category.name}}</h2>

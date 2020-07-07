@@ -30,10 +30,6 @@ export class UserService {
     return this.http.post(`api/user/${uid}/deactivate`, {}).toPromise();
   }
 
-  reactivateUser(user: User) {
-
-  }
-
   private _mapUserObject(user: User) {
     return {
       userId: user.uid,

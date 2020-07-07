@@ -31,7 +31,6 @@ export class MealCategoriesComponent implements OnInit {
         this.setSrc();
       })
       .catch(() => {
-        this.snackbarService.show({ message: 'Could not load categories. Only the defaults will be available.', class: 'snackbar-error' });
         this.categoryService.categories = this.categoryService.getDefaultCategories();
         this.categoryService.categories.forEach(element => {
           element.image = `url(${element.image})`

@@ -1,83 +1,83 @@
-.full-height{
-    height: 100vh !important;
-}
-
 header{
     width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 3;
     background-color: var(--primary-dark-blue);
 
-    .container{
-        width: 100%;
-        max-width: 100%;
-        margin: 0 auto;
+    nav{
+        padding: 1rem 0;
 
-        .open, .closed{
-            margin-left: 1rem;
-        }
-
-        .closed{
-            padding-bottom: 2%;
-            margin-top: 1rem;
-        }
-
-        nav{
-            width: 100%;
+        .nav-list{
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem 0;
+            justify-content: flex-start;
+            flex-direction: row;
+            z-index: 200;
 
-            .nav-list{
-                width: 100%;
-                top: initial;
-                left: 0;
-                display: flex;
-                justify-content: flex-end;
-                flex-direction: row;
-    
-                li{
-                    margin: 0 2rem;
+            .spacer{
+                display: none;
+                @media(max-width: 800px){display: block;}
+            }
 
-                    a{
-                        position: relative;
-                        @media(max-width: 800px){
-                            font-size: 1.4rem;
-                            margin-left: 2.4rem;
-                        }
-                        @media(max-width: 600px){font-size: 1rem;}
-                    }
-
-                    display: flex;
-                    align-items: center;
-
-                    img{
-                        display: none;
-                        @media(max-width: 800px){
-                            display: inline;
-                            width: 35px;
-                        }
-                        @media(max-width: 550px){width: 30px;}
-                    }
+            .buttons{
+                position: absolute;
+                right: 0;
+                top: 2%;
+                padding-right: 30px;
+                .driver{margin-left: 6%;}
+                button{
+                    width: auto;
+                    margin-top: 2%;
                 }
 
                 @media(max-width: 800px){
-                    width: 100%;
-                    position: fixed;
-                    top: 0;
-                    left: -200rem;
+                    position: relative;
+                    padding-left: 0;
+                    display: flex;
                     flex-direction: column;
-                    z-index: 10;
-                    background-color: var(--primary-dark-blue);
-                    
-                    margin-block-start: 0;
-        
-                    li{
-                        margin-left: 10%;
-                        margin-bottom: 2rem;
+                    align-items: center;
+                    padding-right: 0;
+
+                    .home-chef{margin-top: 10%;}
+                    .driver{margin-left: 0;}
+                    button{
+                        width: 80%;
+                        margin-top: 4%;
                     }
+                }
+            }
+
+            li{
+                margin: 0 2rem;
+                display: flex;
+
+                a{
+                    @media(max-width: 800px){font-size: 1rem;}
+                }
+                
+                img{
+                    display: none;
+                    @media(max-width: 800px){
+                        display: inline;
+                        width: 35px;
+                    }
+                    @media(max-width: 550px){width: 30px;}
+                }
+            }
+
+            @media(max-width: 800px){
+                height: 100vh;
+                width: 62%;
+                position: fixed;
+                top: 0;
+                left: -200rem;
+                flex-direction: column;
+                background-color: var(--primary-dark-blue);
+                box-shadow: var(--secondary-box-shadow);
+                margin-block-start: 0;
+    
+                li{
+                    margin-bottom: 2rem;
+                    align-items: center;
+                    a{margin-left: 2rem}
+                    margin-left: 10%;
                 }
             }
         }
@@ -87,10 +87,13 @@ header{
 .menu-icons {
     display: none;
     cursor: pointer;
+    width: 35px;
+    margin-left: 1rem;
+    @media(max-width: 400px){width: 30px;}
     @media(max-width: 800px){display: block;}
-    img{
-        width: 35px;
-        @media(max-width: 800px){width: 30px;}
-        @media(max-width: 500px){width: 25px;}
+
+    &.closed{
+        padding-bottom: 2%;
+        margin-top: 1rem;
     }
 }

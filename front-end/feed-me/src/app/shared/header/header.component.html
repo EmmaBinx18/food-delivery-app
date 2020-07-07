@@ -1,36 +1,36 @@
 <header #header>
-    <div class="container">
-        <nav>
-            <div class="menu-icons open" (click)="openNav()">
-                <img src="../../../assets/icons/menu.png" alt="menu" />
-            </div>
-            <ul class="nav-list" #nav>
-                <div class="menu-icons closed" (click)="closeNav()">
-                    <img src="../../../assets/icons/close.png" alt="close" />
-                </div>
-                <li></li>
-                <li>
-                    <img src="/assets/icons/home.png" alt="home" /><a (click)="changeDisplay('main')">Home</a>
-                </li>
-                <li *ngIf="userRole === 2">
-                    <img src="/assets/icons/dashboard.png" alt="dashboard" /><a
-                        (click)="changeDisplay('dashboard')">Home Chef</a>
-                </li>
-                <li *ngIf="userRole === 3">
-                    <img src="/assets/icons/dashboard.png" alt="dashboard" /><a
-                        (click)="changeDisplay('dashboard')">Deliveries</a>
-                </li>
-                <li>
-                    <img src="/assets/icons/cart2.png" alt="cart" /><a (click)="openCart()">Cart</a>
-                </li>
-                <li>
-                    <img src="/assets/icons/profile.png" alt="profile" /><a
-                        (click)="changeDisplay('account')">Account</a>
-                </li>
-                <li>
-                    <img src="/assets/icons/logout.png" alt="logout" /><a (click)="logout()">Logout</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+  <nav>
+    <img src="../../../assets/icons/menu.png" alt="menu" class="menu-icons open" (click)="openNav()" />
+    <ul class="nav-list" #nav>
+      <img src="../../../assets/icons/close.png" alt="close" class="menu-icons closed" (click)="closeNav()" />
+      <li class="spacer"></li>
+      <li>
+        <img src="/assets/icons/home.png" alt="home" /><a (click)="changeDisplay('main')">Home</a>
+      </li>
+      <li *ngIf="role === 2">
+        <img src="/assets/icons/dashboard.png" alt="dashboard" /><a (click)="changeDisplay('dashboard')">Home Chef</a>
+      </li>
+      <li *ngIf="role === 3">
+        <img src="/assets/icons/dashboard.png" alt="dashboard" /><a (click)="changeDisplay('dashboard')">Deliveries</a>
+      </li>
+      <li>
+        <img src="/assets/icons/cart2.png" alt="cart" /><a (click)="changeDisplay('cart')">Cart</a>
+      </li>
+      <li>
+        <img src="/assets/icons/profile.png" alt="profile" /><a (click)="changeDisplay('account')">Account</a>
+      </li>
+      <li>
+        <img src="/assets/icons/logout.png" alt="logout" /><a (click)="logout()">Logout</a>
+      </li>
+
+      <li *ngIf="role == 0" class="buttons">
+        <button (click)="openForm('homeChef')" class="button yellow home-chef">
+          Register as a Home Chef
+        </button>
+        <button (click)="openForm('driver')" class="button yellow driver">
+          Register as a Driver
+        </button>
+      </li>
+    </ul>
+  </nav>
 </header>

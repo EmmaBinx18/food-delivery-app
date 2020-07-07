@@ -16,10 +16,12 @@ export class ModalService {
   }
 
   open(option: string) {
+    document.body.style.position = 'fixed';
     this.componentSubject.next(option);
   }
 
   close() {
+    document.body.style.position = 'relative';
     this.componentSubject.next(null);
   }
 }

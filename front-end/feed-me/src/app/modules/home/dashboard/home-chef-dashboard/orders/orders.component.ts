@@ -11,7 +11,7 @@ export class OrdersComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     console.log(this.orders);
   }
 

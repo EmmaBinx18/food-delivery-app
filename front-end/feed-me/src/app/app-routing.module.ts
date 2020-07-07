@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './core/guards/auth/auth.guard';
-import { Role } from './core/models/role.model';
+import { Role } from './core/models/role.enum';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },

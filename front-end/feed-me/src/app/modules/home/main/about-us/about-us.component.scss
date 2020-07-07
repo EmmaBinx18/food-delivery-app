@@ -1,31 +1,35 @@
 .who-are-we{
-    background-image: url('/assets/images/about-us.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 960px;
+    position: relative;
+}
 
-    @media(max-width: 1500px){height: 760px;}
-    @media(max-width: 1200px){background-size: contain;}
-    @media(max-width: 1100px){height: 600px;}
-    @media(max-width: 960px){height: 530px;}
-    @media(max-width: 820px){height: 450px;}
+.img{
+    width: 100%;
+    height: auto;
+    @media(max-width: 1300px){margin-top: 4%}
+    @media(max-width: 1200px){margin-top: 7%}
+    @media(max-width: 1150px){margin-top: 10%}
+    @media(max-width: 1080px){margin-top: 8%}
+    @media(max-width: 800px){margin-top: 10%}
+    @media(max-width: 750px){display: none;}
+}
 
-    @media(max-width: 720px){
-        background: none;
-        height: auto;
-    }
-
-    h1{
-        text-align: center;
-    }
+h1{
+    text-align: center;
+    margin-bottom: 4%;
 }
 
 .text{
     width: 48%;
     text-align: left;
     margin-left: 5%;
+    position: absolute;
+    top: 14%;
 
-    @media(max-width: 720px){width: 90%;}
+    @media(max-width: 1500px){top: 6%;}
+    @media(max-width: 750px){
+        width: 90%;
+        position: relative;
+    }
 
     h1, h2, h3{
         display: inline;

@@ -4,8 +4,10 @@ const GET_ADDRESS = 'p_Get_Address';
 const GET_USER = 'p_Get_User';
 const CREATE_UPDATE_USER = 'p_Create_Update_User';
 const DEACTIVATE_USER = 'p_Deactivate_User';
+const GET_USER_ADDRESS = 'p_Get_User_Address';
 
 const ADD_TO_ROLE = 'p_Add_To_Role';
+const GET_USER_ROLE = 'p_Get_User_Role';
 
 const CREATE_UPDATE_CATEGORY = 'p_Create_Update_Category';
 const GET_CATEGORY = 'p_Get_Category';
@@ -17,6 +19,7 @@ const ADD_TO_BUSINESS = 'p_Add_To_Business';
 const GET_OPERATIONAL_STATUS = 'p_Get_Operational_Status';
 const GET_PRODUCTS_BUSINESS = 'p_Get_Products_Business';
 const GET_BUSINESS_USER = 'p_Get_Business_User';
+const GET_ACTIVE_ORDER_READY_PRODUCTS = 'p_Get_Active_Order_Ready_Products';
 
 const CREATE_UPDATE_PRODUCT = 'p_Create_Update_Product';
 const GET_PRODUCTS_CATEGORY = 'p_Get_Products_Category';
@@ -52,5 +55,8 @@ module.exports = {
     GET_OPERATIONAL_STATUS,
     GET_ADDRESS,
     GET_PRODUCTS_BUSINESS,
-    GET_BUSINESS_USER
+    GET_BUSINESS_USER,
+    GET_ACTIVE_ORDER_READY_PRODUCTS,
+    GET_USER_ROLE,
+    GET_USER_ADDRESS
 }

@@ -22,7 +22,7 @@ export class CategoryComponent implements OnInit {
   @Input() category: any;
 
   constructor(
-    public snackbar: SnackbarService,
+    public snackbarService: SnackbarService,
     public categoryService: CategoriesService,
     private homeChefService: HomeChefService,
     public modalService: ModalService
@@ -37,21 +37,25 @@ export class CategoryComponent implements OnInit {
     window.scroll(0, 0);
     this.error = false;
     this.businesses = [];
+    this.sortCategories();
     this.getBusinesses();
   }
 
+  sortCategories() {
+    this.categoryService.categories.sort(category => {
+      return category == this.category ? -1 : 1;
+    });
+  }
+
   getBusinesses() {
-    this.homeChefService.getBusinessesByCategory(this.category.id)
+    this.homeChefService.getBusinessesByCategory(this.category.categoryId)
       .then(response => {
-        response[0].operationalStatusId = 2;
         this.businesses = response;
-        this.businesses.push(response[0]);
-        this.businesses.push(response[0]);
         this.filterBusinesses();
       })
       .catch(() => {
         this.error = true;
-        this.snackbar.show({ message: "Could not load this page. Please try again later.", class: "snackbar-error" })
+        this.snackbarService.show({ message: "Could not load this page. Please try again later.", class: "error" })
       })
   }
 

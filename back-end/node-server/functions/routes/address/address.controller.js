@@ -8,37 +8,38 @@ const logger = require('../../logger/winstin.logger');
 
 router.get('/:addressId', (req, res) => {
     logger.info('GET ADDRESS BY ID');
-    try{
-        db.executeStoredProcedure(sp.GET_ADDRESS, {addressId:req.params.addressId}, (data) => {
+    try {
+        db.executeStoredProcedure(sp.GET_ADDRESS, { addressId: req.params.addressId }, (data) => {
             return res.status(200).send(JSON.parse(data));
         });
     }
-    catch(error){
+    catch (error) {
         logger.error('GET ADDRESS BY ID ERROR', error);
+        return res.status(500).send(error);
+    }
+});
+
+router.post('/user', (req, res) => {
+    logger.info('GET ALL ADDRESSES FOR USER');
+    try {
+        db.executeStoredProcedure(sp.GET_USER_ADDRESS, { userId: req.body.params }, (data) => {
+            return res.status(200).send(JSON.parse(data));
+        });
+    }
+    catch (error) {
+        logger.error('GET ALL ADDRESSES FOR USER ERROR', error);
         return res.status(500).send(error);
     }
 });
 
 router.post('/', (req, res) => {
     logger.info('INSERT NEW ADDRESS');
-    const newAddress = {
-        addressId: -1,
-        streetName : req.body.params.street,
-        suburb : req.body.params.suburb,
-        complexName: req.body.params.complex,
-        zipCode: req.body.params.zipcode,
-        cityId: 1
-        // city: req.body.params.city,
-        // province: req.body.params.province,
-        // country: req.body.params.country
-    }
-
-    try{
-        db.executeStoredProcedure(sp.CREATE_UPDATE_ADDRESS, newAddress, (data) => {
+    try {
+        db.executeStoredProcedure(sp.CREATE_UPDATE_ADDRESS, req.body.params, (data) => {
             return res.status(200).send(data);
         });
     }
-    catch(error){
+    catch (error) {
         logger.error('INSERT NEW ADDRESS ERROR', error);
         return res.status(500).send(error);
     }
@@ -46,12 +47,12 @@ router.post('/', (req, res) => {
 
 router.patch('/', (req, res) => {
     logger.info('UPDATE ADDRESS');
-    try{
+    try {
         db.executeStoredProcedure(sp.CREATE_UPDATE_USER, req.body.params, (data) => {
             return res.status(200).send(data);
         });
     }
-    catch(error){
+    catch (error) {
         logger.error('UPDATE ADDRESS ERROR', error);
         return res.status(500).send(error);
     }

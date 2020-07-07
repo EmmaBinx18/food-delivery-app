@@ -1,17 +1,19 @@
 <div class="meals-container">
-    <h3>Your Products</h3>
-    <div *ngIf="products !== null" class="meals-table">
+    <h2>Your Products</h2>
+    <div *ngIf="products !== null && products.length != 0" class="meals-table">
         <table>
             <tr *ngFor="let meal of products">
-                <td class="meal-name">{{meal.name}}</td>
+                <td>
+                    <p class="meal-name">{{meal.name}}</p>
+                </td>
                 <td class="description">{{meal.description}}</td>
                 <td>R{{meal.price}}</td>
                 <td>{{meal.minPrepareTime}} minutes</td>
-                <td><img class="delete" src="/assets/icons/trash.png" alt="delete" /></td>
+                <td><img class="delete" src="/assets/icons/trash.png" alt="delete" (click)="removeProduct(meal)" /></td>
             </tr>
         </table>
     </div>
-    <div *ngIf="products == null">
+    <div *ngIf="products == null || products.length == 0">
         <h4>Add products to your business</h4>
     </div>
     <div class="add-product">

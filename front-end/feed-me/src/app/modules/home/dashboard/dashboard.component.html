@@ -1,9 +1,10 @@
 <div class="dashboard">
     <div class="headings">
-        <h1 class="business-name" *ngIf="role == 2">{{businessName}}</h1>
+        <h1 class="business-name" *ngIf="role == 2">{{business.name}}</h1>
         <h1 class="user-name">{{userName}}</h1>
     </div>
     <app-stats [stats]="stats"></app-stats>
-    <app-home-chef-dashboard *ngIf="role == 2"></app-home-chef-dashboard>
+    <app-home-chef-dashboard [business]="business"></app-home-chef-dashboard>
+    <!-- <app-home-chef-dashboard *ngIf="role == 2" [business]="business"></app-home-chef-dashboard> -->
     <app-delivery-dashboard *ngIf="role == 3"></app-delivery-dashboard>
 </div>
