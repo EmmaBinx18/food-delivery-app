@@ -3,7 +3,6 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/core/authentication/authentication.service";
 import { SnackbarService } from "src/app/shared/snackbar/snackbar.service";
 import { UserService } from "src/app/core/services/user.service";
-import { AddressService } from "src/app/core/services/address.service";
 
 @Component({
   selector: "app-account",
