@@ -11,17 +11,17 @@ GO
 -- Usage:   
 /*
 	DECLARE @Error int 
-	EXEC p_Get_User_Orders '{ "userId" : 1 }', @Error OUTPUT 
+	EXEC p_Get_Previous_User_Orders '{ "userId" : 1 }', @Error OUTPUT 
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [User]
 */
 -- =============================================
 
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Get_User_Orders')
-	DROP PROCEDURE [dbo].[p_Get_User_Orders]
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Get_Previous_User_Orders')
+	DROP PROCEDURE [dbo].p_Get_Previous_User_Orders
 GO
 
-CREATE PROCEDURE p_Get_User_Orders 
+CREATE PROCEDURE p_Get_Previous_User_Orders 
 	@JSON VARCHAR(MAX),
 	@Error INT OUTPUT
 AS

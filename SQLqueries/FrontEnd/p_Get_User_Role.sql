@@ -12,7 +12,6 @@ GO
 /*
 	DECLARE @Error int 
 	EXEC p_Get_User_Role '{ "roleId" : 2 }', @Error OUTPUT 
-	--OR EXEC p_Get_User_Role '{ "roleId" : "admin_uid" }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [UserRole]
 */
@@ -34,8 +33,9 @@ BEGIN
 	FROM OPENJSON(@JSON) 
 	WITH (roleId INT)
 
-	SELECT UR.UserId
+	SELECT U.*
 	FROM [UserRole] UR 
+	INNER JOIN [User] U ON U.userId = UR.userId
 	WHERE roleId = @roleId
 	FOR JSON PATH	 
 			
