@@ -13,11 +13,8 @@ import { ModalService } from "src/app/shared/modal/modal.service";
 export class CategoryComponent implements OnInit {
   business: any = {};
   businesses: any = [];
-  categories: any = [];
   error: boolean = false;
   displayBusiness: boolean = false;
-
-  cart: boolean = false;
 
   @Input() category: any;
 
@@ -29,7 +26,6 @@ export class CategoryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cart = false;
     this.scrollAndGet();
   }
 
@@ -51,7 +47,7 @@ export class CategoryComponent implements OnInit {
     this.homeChefService.getBusinessesByCategory(this.category.categoryId)
       .then(response => {
         this.businesses = response;
-        this.filterBusinesses();
+        // this.filterBusinesses();
       })
       .catch(() => {
         this.error = true;

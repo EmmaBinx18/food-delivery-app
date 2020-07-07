@@ -2,23 +2,15 @@
 
 .category{
     width: 96%;
-    margin: auto;
-    margin-bottom: 2%;
+    margin: 2% auto 2%;
     min-height: 80vh;
     max-height: 80vh;
     text-align: center;
-    margin-top: 2%;
-}
-
-::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
 }
 
 app-loader{
     position: absolute;
-    margin: auto;
-    margin-top: 14%;
+    margin: 14% auto;
     @media(max-width:600px){margin-top: 30%;}
 }
 
@@ -50,32 +42,17 @@ app-loader{
     width: 100%;
 
     div{
-        width: 300px;
-        height: 240px;
-        @extend .flex-container;
-        box-shadow: var(--primary-box-shadow);
-        background-color: white;
+        width: 20%;
+        height: 13rem;
+        @extend .white-container;
         margin: 8px 8px 8px 8px;
         padding: 10px;
 
-        @media(max-width: 900px){
-            width: 180px;
-            height: 180px;
-        }
-
-        @media(max-width: 700px){
-            width: 145px;
-            height: 140px;
-        }
-
-        @media(max-width: 500px){
-            width: 92%;
-            height: 60px;
-        }
+        @media(max-width: 900px){height: 10rem;}
+        @media(max-width: 700px){height: 8rem;}
+        @media(max-width: 500px){height: 3rem; width: 100%}
 
         h2{
-            background-color: white;
-            width: 100%;
             text-align: center;
             overflow-wrap: break-word;
         }

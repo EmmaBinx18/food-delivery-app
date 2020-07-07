@@ -1,5 +1,5 @@
 <div class="category">
-  <app-loader *ngIf="businesses.length == 0 && !error"></app-loader>
+  <app-loader *ngIf="businesses.length == 0"></app-loader>
   <div class="buttons">
     <button class="button" *ngFor="let item of categoryService.categories"
       [ngClass]="{ active: item.name == category.name }" (click)="changeCategory(item)">

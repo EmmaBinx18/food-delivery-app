@@ -1,15 +1,14 @@
 @import '../../../../../assets/styles/common.scss';
+@import '../../../../../assets/styles/forms.scss';
 
 .profile{
     width: 100%;
     @extend .flex-container;
-    flex-direction: column;
 
     .flex-container{width: 95%;}
 }
 
 .form-container{
-    width: 100%;
     @extend .white-container;
 }
 

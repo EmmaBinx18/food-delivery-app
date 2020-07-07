@@ -1,17 +1,14 @@
-@import '../../../../../assets/styles/variables.scss';
+@import '../../../../../assets/styles/common.scss';
 
 .stats-container{
     width: 90%;
-    box-shadow: var(--primary-box-shadow);
-    margin: auto;
-    margin-top: 2%;
-    display: flex;
-    justify-content: space-evenly;
+    margin: 2% auto;
     border-radius: 6px;
-    background-color: white;
+    @extend .white-container;
+    justify-content: space-evenly;
+    flex-direction: row;
 
     @media(max-width: 850px){
-        margin-top: 6%;
         .description{
             display: none;
 

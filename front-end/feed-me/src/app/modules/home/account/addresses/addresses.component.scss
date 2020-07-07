@@ -17,11 +17,6 @@
   }
 }
 
-table {
-  width: 98%;
-  border-spacing: 0 15px;
-}
-
 .addresses-table {
   max-height: 40vh;
   overflow: scroll;
@@ -32,7 +27,7 @@ table {
 
     .icon{
       margin-top: 11%;
-      @media(max-width: 600px){margin-top: 0}
+      @media(max-width: 600px){margin-top: 0; width: 2.2rem;}
     }
   }
 }
