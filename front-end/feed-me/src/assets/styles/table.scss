@@ -16,11 +16,8 @@ table {
     font-family: var(--secondary-font-family);
     padding: 20px;
 
-    @media (max-width: 900px) {font-size: 0.9rem;}
-    @media (max-width: 600px) {
-      font-size: 0.8rem;
-      padding: 8px;
-    }
+    @media (max-width: 900px) {font-size: 0.9rem; padding: 12px;}
+    @media (max-width: 600px) {font-size: 0.8rem; padding: 8px;}
   }
 
   .disabled {

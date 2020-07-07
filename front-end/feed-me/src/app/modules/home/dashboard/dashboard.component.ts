@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
   getUserBusiness() {
     this.homeChefService.getBusinessByUserId(this.authService.getCurrentUser().uid)
       .then(response => {
-        this.business = response[0];
+        this.business = response;
       })
       .catch(() => {
         this.snackbarService.show({ message: 'Your business could not be loaded. Please try again later.' });

@@ -1,13 +1,18 @@
-<div class="orders-container">
-    <h2>Your Orders</h2>
-    <div *ngIf="orders.length !== 0  && orders !== null">
-        <div class="orders-table">
-            <table>
-
-            </table>
+<div class="orders">
+    <app-loader *ngIf="loading && !error"></app-loader>
+    <div *ngIf="!loading && !error" class="orders-table">
+        <h2>Your Orders</h2>
+        <table *ngIf="orders.length !== 0">
+            <tr *ngFor="let order of orders">
+                <td>Order Number {{order.OrderId}}</td>
+                <td>{{order.Name}}</td>
+                <td>{{order.quantity}}</td>
+                <td (click)="completeOrder(order)"><img src="/assets/icons/checked.png" /></td>
+            </tr>
+        </table>
+        <div *ngIf="orders.length === 0">
+            <h4>You don't have an orders currently</h4>
         </div>
     </div>
-    <div *ngIf="orders.length === 0 || orders === null">
-        <h4>You don't have an orders currently</h4>
-    </div>
+    <h3 *ngIf="error">An error occurred loading your orders</h3>
 </div>

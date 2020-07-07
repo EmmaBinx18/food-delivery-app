@@ -1,12 +1,12 @@
 <div class="category">
-  <app-loader *ngIf="businesses.length == 0"></app-loader>
+  <app-loader *ngIf="loading"></app-loader>
   <div class="buttons">
     <button class="button" *ngFor="let item of categoryService.categories"
       [ngClass]="{ active: item.name == category.name }" (click)="changeCategory(item)">
       <img [src]="item.icon" alt="icon" />{{ item.name }}
     </button>
   </div>
-  <div class="businesses" *ngIf="!displayBusiness">
+  <div class="businesses" *ngIf="!displayBusiness && !loading">
     <div *ngFor="let business of businesses" (click)="openBusiness(business)">
       <h2>{{ business.name }}</h2>
     </div>

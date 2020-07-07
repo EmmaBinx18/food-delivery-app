@@ -2,55 +2,44 @@
 
 .main{
     width: 100%;
-    margin: 2% auto 2% auto;
+    margin: 2% auto;
     min-height: 80vh;
     max-height: 80vh;
     text-align: center;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    overflow: scroll;
 }
 
 .nav{
-    width: 22%;
-    border-right: 2px solid grey;
-    @media(max-width: 750px){
-        width: 12%;
-        border-right: none;
-    }
-
-    a{
-        color: black !important;
-        @media(max-width: 750px){display: none;}
-    }
+    margin-left: 3%;
+    margin-bottom: 3%;
+    width: 95%;
 
     ul{
-        margin-top: 20%;
-        li{
-            margin-bottom: 18%;
-            img{
-                display: none;
-                margin: auto;
-                width: 2rem;
-                @media(max-width: 750px){
-                    padding-top: 0.5rem;
-                    display: block;
-                }
-            }
+        display: flex;
+        flex-direction: row;
 
-            @media(max-width: 750px){
-                border-radius: 50%;
-                background-color: var(--primary-light-blue);
+        li{
+            border-radius: 50%;
+            background-color: var(--primary-light-blue);
+            width: 3.5rem;
+            height: 3.5rem;
+            margin-right: 2%;
+
+            @media(max-width: 550px){
                 width: 3rem;
                 height: 3rem;
-                margin: auto;
-                margin-bottom: 14%;
+            }
+
+            img{
+                width: 2.5rem;
+                margin-top: 10%;
+                @media(max-width: 550px){
+                    width: 2rem;
+                    margin-top: 13%;
+                }
             }
         }
     }
-}
-
-.items{
-    width: 78%;
-    overflow: scroll;
-    @media(max-width: 750px){width: 88%;}
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { ModalService } from 'src/app/shared/modal/modal.service';
 
@@ -7,13 +7,22 @@ import { ModalService } from 'src/app/shared/modal/modal.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnChanges {
 
   @Input() products: any;
+  @Input() error: boolean;
+
+  loading: boolean = true;
 
   constructor(
     public modalService: ModalService
   ) { }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.products.currentValue.length != 0) {
+      this.loading = false;
+    }
+  }
 
   openForm() {
     this.modalService.open('product');

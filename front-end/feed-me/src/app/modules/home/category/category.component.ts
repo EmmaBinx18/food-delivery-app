@@ -15,6 +15,7 @@ export class CategoryComponent implements OnInit {
   businesses: any = [];
   error: boolean = false;
   displayBusiness: boolean = false;
+  loading: boolean = true;
 
   @Input() category: any;
 
@@ -47,10 +48,12 @@ export class CategoryComponent implements OnInit {
     this.homeChefService.getBusinessesByCategory(this.category.categoryId)
       .then(response => {
         this.businesses = response;
+        this.loading = false;
         // this.filterBusinesses();
       })
       .catch(() => {
         this.error = true;
+        this.loading = false;
         this.snackbarService.show({ message: "Could not load this page. Please try again later.", class: "error" })
       })
   }

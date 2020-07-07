@@ -26,6 +26,20 @@ export class DeliveryService {
     return this.http.post(`api/delivery/register`, { params: { userId: driver.uid, addressId: addressId } }).toPromise();
   }
 
+  mapOrderReadyProduct(location: any) {
+    return {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: location.coordinates
+      },
+      properties: {
+        title: location.businessName,
+        description: ''
+      }
+    }
+  }
+
   getStats() {
     return [
       {

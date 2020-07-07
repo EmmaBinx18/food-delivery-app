@@ -1,15 +1,15 @@
 <div class="main">
   <div class="nav">
     <ul>
-      <li (click)="changeDisplay('orders')"><img src="/assets/icons/cart2.png" alt="orders" /><a>Orders</a></li>
-      <li (click)="changeDisplay('profile')"><img src="/assets/icons/profile.png" alt="orders" /><a>Profile</a></li>
-      <li (click)="changeDisplay('addresses')"><img src="/assets/icons/home.png" alt="orders" /><a>Addresses</a></li>
-      <li (click)="logout()"><img src="/assets/icons/logout.png" alt="orders" /><a>Logout</a></li>
+      <li (click)="changeDisplay('orders')"><img src="/assets/icons/cart2.png" alt="orders" /></li>
+      <li (click)="changeDisplay('profile')"><img src="/assets/icons/profile.png" alt="orders" /></li>
+      <li (click)="changeDisplay('addresses')"><img src="/assets/icons/home.png" alt="orders" /></li>
     </ul>
   </div>
   <div class="items">
-    <app-orders [orders]="orders" *ngIf="display.orders" (changeDisplayEmitter)="changeDisplay('account')"></app-orders>
-    <app-addresses *ngIf="display.addresses"></app-addresses>
-    <app-profile [profile]="profile" *ngIf="display.profile"></app-profile>
+    <app-orders [orders]="orders" [addresses]="addresses" [error]="ordersError" *ngIf="display.orders"
+      (changeDisplayEmitter)="changeDisplay('account')" (refreshOrderEmitter)="getOrderHistory()"></app-orders>
+    <app-addresses *ngIf="display.addresses" [addresses]="addresses" [error]="addressesError"></app-addresses>
+    <app-profile [profile]="profile" *ngIf="display.profile" [error]="profileError"></app-profile>
   </div>
 </div>

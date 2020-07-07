@@ -1,5 +1,5 @@
 <div class="form-container">
-    <h1>ADD MEAL</h1>
+    <h1>ADD PRODUCT</h1>
     <form [formGroup]="addProductForm" (ngSubmit)="addMeal()">
         <div class="form-group">
             <div class="controls">
@@ -10,9 +10,6 @@
                     Meal Name is Required
                 </p>
             </div>
-        </div>
-
-        <div class="form-group">
             <div class="controls">
                 <input type="text" id="description" placeholder="Description" class="form-control full-width"
                     formControlName="description" />
@@ -25,6 +22,7 @@
 
         <div class="form-group">
             <div class="controls">
+                <label for="price">Price</label>
                 <input type="number" min="0" id="price" placeholder="Price" class="form-control"
                     formControlName="price" />
                 <p class="error"
@@ -32,10 +30,8 @@
                     Price is Required
                 </p>
             </div>
-        </div>
-
-        <div class="form-group">
             <div class="controls">
+                <label for="minPrepareTime">Prep Time</label>
                 <input type="number" min="0" id="minPrepareTime" placeholder="Prep Time" class="form-control"
                     formControlName="minPrepareTime" />
                 <p class="error"

@@ -15,12 +15,16 @@
 
 .meals-table{
     overflow-y: scroll;
-    max-height: 40vh;
     width: 100%;
 
     table{
-        width: 96%;
+        width: 95%;
+        max-height: 40vh;
         border-spacing: 0 8px;
+    }
+
+    tr {
+        background-color: rgb(240, 240, 240);
     }
 
     .meal-name{

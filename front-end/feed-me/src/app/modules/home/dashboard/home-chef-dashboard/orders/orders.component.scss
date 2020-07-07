@@ -1,7 +1,7 @@
 @import '../../../../../../assets/styles/table.scss';
 @import '../../../../../../assets/styles/common.scss';
 
-.orders-container{
+.orders{
     border-radius: 6px;
     text-align: center;
     padding: 25px;
@@ -14,17 +14,17 @@
 }
 
 .orders-table{
-    padding: 30px;
     overflow-y: scroll;
     min-height: auto;
     max-height: 40vh;
+    width: 100%;
 
     table{
-        border-collapse: separate;
-        border-spacing: 14px;
+        width: 95%;
+        border-spacing: 0 8px;
     }
 
-    table td{
-        padding: 4px 30px 4px 30px;
+    tr {
+        background-color: rgb(240, 240, 240);
     }
 }

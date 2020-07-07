@@ -1,54 +1,53 @@
-const getDistance = require('geolib/es/getDistance');
+const geolib = require('geolib');
 
 const db = require('../../database/db');
 const sp = require('../../database/stored-procedures');
 
 const ordersHelper = {
-    getClosesDriver(customerId) {
-        db.executeStoredProcedure(sp.GET_USER, { userId: customerId }, (data) => {
-            const customerAddress = this.getAddress(data.addressId);
-            const coordinates = customerAddress[0].geometry.coordinates;
-            const drivers = this.getAllDrivers();
-            return this.getClosesDriver(drivers, coordinates);
+    getClosesDriver(addressId, orderId, res) {
+        let coordinates;
+        let drivers;
+
+        db.executeStoredProcedure(sp.GET_ADDRESS, { addressId: addressId }, async (data) => {
+            coordinates = data[0].coordinates;
         });
-    },
-    getAddress(addressId) {
-        db.executeStoredProcedure(sp.GET_ADDRESS, { addressId: addressId }, (data) => {
-            return JSON.parse(data);
-        });
-    },
-    assignDriver(orderId, driverId) {
-        try {
-            db.executeStoredProcedure(sp.ASSIGN_ORDER_DRIVER, { orderId, driverId }, (data) => {
-                return JSON.parse(data);
+
+        return db.executeStoredProcedure(sp.GET_DRIVER, { userId: null }, async (data) => {
+            drivers = data;
+            const driverId = this.getClosestDriver(drivers, coordinates);
+            return db.executeStoredProcedure(sp.ASSIGN_ORDER_DRIVER, { orderId: orderId, driverId: driverId }, (response) => {
+                return res.status(200).send(response);
             });
-        }
-        catch (error) {
-            throw (error);
-        }
+        });
     },
     getClosestDriver(drivers, coordinates) {
         const distances = [];
         drivers.forEach(driver => {
-            const coords = this.getAddress(driver.addressId)[0].geometry.coordinates;
             distances.push(
                 {
-                    distance: getDistance(
+                    distance: geolib.getDistance(
                         { latitude: coordinates[0], longitude: coordinates[1] },
-                        { latitude: coords[0], longitude: coords[1] }
+                        { latitude: driver.coordinates[0], longitude: driver.coordinates[1] }
                     ),
                     driverId: driver.userId
                 }
             );
         });
 
-        const obj = Math.min(...distances);
-        return obj.driverId;
-    },
-    getAllDrivers() {
-        db.executeStoredProcedure(sp.GET_USER_ROLE, { roleId: 2 }, (data) => {
-            return JSON.parse(data);
+        let arr = [];
+        distances.forEach(obj => {
+            arr.push(obj.distance);
         });
+        const distance = Math.min(...arr);
+
+        let id;
+        distances.forEach(obj => {
+            if (obj.distance == distance) {
+                id = obj.driverId;
+            }
+        });
+
+        return id;
     }
 }
 

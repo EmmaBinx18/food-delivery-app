@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
     cart: false,
   };
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     this.category = "";

@@ -4,14 +4,30 @@
 .profile{
     width: 100%;
     @extend .flex-container;
+    flex-direction: row;
+    max-height: 80vh;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
 
-    .flex-container{width: 95%;}
+    .flex-container{
+        width: 48%;
+        @media(max-width: 1000px){
+            width: 95%; 
+            margin-bottom: 4%;
+        }
+    }
 }
 
 .form-container{
     @extend .white-container;
+    margin-top: 0;
 }
 
 .error{
     margin-top: 3%;
+}
+
+app-loader{
+    margin: 2% auto;
 }

@@ -1,7 +1,8 @@
 <div class="profile">
     <div class="form-container">
-        <h2>Profile Details</h2>
-        <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
+        <app-loader *ngIf="loading && !error"></app-loader>
+        <form *ngIf="!loading && !error" [formGroup]="profileForm" (ngSubmit)="saveChanges()">
+            <h2>Profile Details</h2>
             <div class="form-group">
                 <div class="controls">
                     <input type="text" id="firstname" placeholder="Firstname" class="form-control"
@@ -43,9 +44,10 @@
             </div>
 
             <div class="form-control">
-                <button class="button yellow button-spacing" type="submit" [disabled]="profileForm.dirty">Save
+                <button class="button yellow button-spacing" type="submit" [disabled]="profileForm.invalid">Save
                     Changes</button>
             </div>
         </form>
+        <h3 *ngIf="!loading && error">An error occurred loading your profile.</h3>
     </div>
 </div>

@@ -15,7 +15,7 @@ export class AddressService {
   }
 
   getUserAddresses(userId: string) {
-    return this.http.post('api/address/user', { params: userId }).toPromise();
+    return this.http.get(`api/address/user/${userId}`).toPromise();
   }
 
   insertAddress(address: Address) {
@@ -24,5 +24,9 @@ export class AddressService {
 
   updateAddress(address: Address) {
     return this.http.patch(`api/address`, { params: { ...address } }).toPromise();
+  }
+
+  removeUserAddress(userId: string, addressId: string) {
+    return this.http.post(`api/address/user/${userId}`, { params: addressId }).toPromise();
   }
 }

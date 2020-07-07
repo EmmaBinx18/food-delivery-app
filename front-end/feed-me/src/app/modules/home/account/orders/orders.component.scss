@@ -4,31 +4,31 @@
 .orders {
   width: 100%;
   @extend .flex-container;
-  flex-direction: column;
+  flex-direction: row;
+  max-height: 80vh;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-wrap: wrap;
 
   .current-order,
   .order-history {
-    width: 95%;
+    width: 48%;
+    max-height: 70vh;
     @extend .white-container;
-  }
-
-  .current-order {
-    min-height: auto;
-    overflow: scroll;
-
-    .info {
-      width: 92%;
-      display: flex;
+    @media(max-width: 1000px){
+      width: 95%; 
       margin-bottom: 4%;
-      margin-right: 4%;
-      justify-content: space-between;
     }
   }
 
-  .order-history {
-    margin-top: 2%;
-    min-height: auto;
-    max-height: 58vh;
+  .current-order {
+    overflow: scroll;
+
+    .info {
+      width: 95%;
+      display: flex;
+      margin-bottom: 4%;
+    }
   }
 
   .add-address {
@@ -39,6 +39,8 @@
 
   .address {
     width: 50%;
+    text-align: start;
+    padding-left: 5%;
   }
 
   .checkout {
@@ -56,8 +58,7 @@
   }
 }
 
-.order-table {
-  max-height: 30vh;
+.order-table, .history-table {
   overflow: scroll;
   width: 100%;
 
@@ -70,4 +71,12 @@
       @media(max-width: 600px){margin-top: 0; width: 2.2rem;}
     }
   }
+
+  tr {
+    background-color: rgb(240, 240, 240);
+  }
+}
+
+app-loader{
+  margin: 4% auto auto;
 }

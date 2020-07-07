@@ -1,7 +1,8 @@
 <div class="meals-container">
-    <h2>Your Products</h2>
-    <div *ngIf="products !== null && products.length != 0" class="meals-table">
-        <table>
+    <app-loader *ngIf="loading && !error"></app-loader>
+    <div *ngIf="!loading && !error" class="meals-table">
+        <h2>Your Products</h2>
+        <table *ngIf="products.length != 0">
             <tr *ngFor="let meal of products">
                 <td>
                     <p class="meal-name">{{meal.name}}</p>
@@ -9,14 +10,16 @@
                 <td class="description">{{meal.description}}</td>
                 <td>R{{meal.price}}</td>
                 <td>{{meal.minPrepareTime}} minutes</td>
-                <td><img class="delete" src="/assets/icons/trash.png" alt="delete" (click)="removeProduct(meal)" /></td>
+                <td><img class="delete" src="/assets/icons/trash.png" alt="delete" (click)="removeProduct(meal)" />
+                </td>
             </tr>
         </table>
+        <div *ngIf="products.length == 0">
+            <h4>Add products to your business</h4>
+        </div>
+        <div class="add-product">
+            <button (click)="openForm()">+</button>
+        </div>
     </div>
-    <div *ngIf="products == null || products.length == 0">
-        <h4>Add products to your business</h4>
-    </div>
-    <div class="add-product">
-        <button (click)="openForm()">+</button>
-    </div>
+    <h3 *ngIf="!loading && error">An error occurred loading your products</h3>
 </div>

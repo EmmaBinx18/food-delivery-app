@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 import { MapboxService } from 'src/app/core/services/mapbox.service';
 import { AuthService } from 'src/app/core/authentication/authentication.service';
@@ -11,9 +11,12 @@ import { Address } from '../../../../core/models/address.model';
   templateUrl: './addresses.component.html',
   styleUrls: ['./addresses.component.scss']
 })
-export class AddressesComponent implements OnInit {
+export class AddressesComponent implements OnChanges {
 
   @Input() addresses: any = [];
+  @Input() error: boolean;
+
+  loading: boolean = true;
 
   constructor(
     public mapService: MapboxService,
@@ -22,19 +25,10 @@ export class AddressesComponent implements OnInit {
     private snackbarService: SnackbarService
   ) { }
 
-  ngOnInit() {
-    this.getAddresses();
-  }
-
-  getAddresses() {
-    this.addressService
-      .getUserAddresses(this.authService.getCurrentUser().uid)
-      .then(response => {
-        this.addresses = response[0].locations;
-      })
-      .catch(() => {
-        this.snackbarService.show({ message: 'Could not load your addresses. Please try again later', class: 'error' })
-      });
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.addresses.currentValue.length != 0) {
+      this.loading = false;
+    }
   }
 
   addAddress() {
@@ -48,7 +42,8 @@ export class AddressesComponent implements OnInit {
     this.addressService.insertAddress(address)
       .then(() => {
         this.snackbarService.show({ message: 'Successfully added address to profile', class: 'success' });
-        this.getAddresses();
+        this.addresses.push(address);
+
       })
       .catch(() => {
         this.snackbarService.show({ message: 'Could not add address to your profile. Please try again later', class: 'error' })
@@ -56,7 +51,19 @@ export class AddressesComponent implements OnInit {
   }
 
   removeAddress(address: Address) {
+    this.addressService.removeUserAddress(this.authService.getCurrentUser().uid, address.addressId.toString())
+      .then(() => {
+        this.snackbarService.show({ message: 'Successfully removed address from profile', class: 'success' });
+        this.updateAddresses(address);
+      })
+      .catch(() => {
+        this.snackbarService.show({ message: 'Could not remove address from your profile. Please try again later.', class: 'error' });
+      });
+  }
 
+  updateAddresses(address: Address) {
+    const index = this.addresses.indexOf(address);
+    this.addresses.splice(index, 1);
   }
 
 }

@@ -1,25 +1,36 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { AuthService } from 'src/app/core/authentication/authentication.service';
+import { UserService } from 'src/app/core/services/user.service';
+import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnChanges {
 
-  @Input() profile: any;
+  @Input() profile: any = [];
+  @Input() error: boolean;
+
   profileForm: FormGroup;
+  loading: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService,
+    private snackbarService: SnackbarService
   ) { }
 
-  ngOnInit() {
-    this.profileForm = this.initForm();
-    this.populateForm();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.profile.currentValue.length != 0) {
+      this.loading = false;
+      this.profileForm = this.initForm();
+      this.populateForm();
+    }
   }
 
   initForm() {
@@ -34,16 +45,24 @@ export class ProfileComponent implements OnInit {
 
   populateForm() {
     this.profileForm.setValue({
-      firstname: this.profile.firstname,
-      lastname: this.profile.lastname,
-      phone: this.profile.phone,
-      email: this.profile.email
+      uid: this.authService.getCurrentUser().uid,
+      firstname: this.profile[0].firstname,
+      lastname: this.profile[0].lastname,
+      phone: this.profile[0].phone,
+      email: this.profile[0].email
     })
   }
 
   saveChanges() {
     if (this.profileForm.valid) {
-
+      this.userService.updateUser(this.profileForm.value)
+        .then(() => {
+          this.snackbarService.show({ message: 'Successfully updated profile.', class: 'success' });
+          this.profile[0] = this.profileForm.value;
+        })
+        .catch(() => {
+          this.snackbarService.show({ message: 'Could not update your profile. Please try again later.', class: 'error' });
+        });
     }
   }
 

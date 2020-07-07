@@ -8,12 +8,12 @@ const logger = require('../../logger/winstin.logger');
 
 router.get('/', (req, res) => {
     logger.info('GET ALL CATEGORIES');
-    try{
-        db.executeStoredProcedure(sp.GET_CATEGORY, {categoryId:null}, (data) => {
-            return res.status(200).send(JSON.parse(data));
+    try {
+        db.executeStoredProcedure(sp.GET_CATEGORY, { categoryId: null }, (data) => {
+            return res.status(200).send(data);
         });
     }
-    catch(error){
+    catch (error) {
         logger.error('GET ALL CATEGORIES ERROR', error);
         return res.status(500).send(error);
     }
@@ -21,12 +21,12 @@ router.get('/', (req, res) => {
 
 router.get('/:categoryId', (req, res) => {
     logger.info('GET CATEGORY BY ID');
-    try{
-        db.executeStoredProcedure(sp.GET_CATEGORY, {categoryId:req.params.categoryId}, (data) => {
-            return res.status(200).send(JSON.parse(data));
+    try {
+        db.executeStoredProcedure(sp.GET_CATEGORY, { categoryId: req.params.categoryId }, (data) => {
+            return res.status(200).send(data);
         });
     }
-    catch(error){
+    catch (error) {
         logger.error('GET CATEGORY BY ID ERROR', error);
         return res.status(500).send(error);
     }
@@ -40,12 +40,12 @@ router.post('/', (req, res) => {
         description: req.body.params.description
     }
 
-    try{
+    try {
         db.executeStoredProcedure(sp.CREATE_UPDATE_CATEGORY, newCategory, () => {
             return res.status(200).send();
         });
     }
-    catch(error){
+    catch (error) {
         logger.error('INSERT NEW CATEGORY ERROR', error);
         return res.status(500).send(error);
     }
@@ -54,12 +54,12 @@ router.post('/', (req, res) => {
 router.patch('/', (req, res) => {
     logger.info('UPDATE CATEGORY');
 
-    try{
+    try {
         db.executeStoredProcedure(sp.CREATE_UPDATE_CATEGORY, req.body.params, () => {
             return res.status(200).send();
         });
     }
-    catch(error){
+    catch (error) {
         logger.error('UPDATE CATEGORY ERROR', error);
         return res.status(500).send(error);
     }

@@ -2,7 +2,7 @@
 
 .category{
     width: 96%;
-    margin: 2% auto 2%;
+    margin: 2% auto;
     min-height: 80vh;
     max-height: 80vh;
     text-align: center;
@@ -10,7 +10,7 @@
 
 app-loader{
     position: absolute;
-    margin: 14% auto;
+    margin: 14% auto auto;
     @media(max-width:600px){margin-top: 30%;}
 }
 
