@@ -30,23 +30,27 @@ BEGIN
 	SET NOCOUNT ON;
 
 	DECLARE @OrderStatusRId INT, @BusinessId INT
-	SET @OrderStatusRId = 3 --'Waiting_for_driver';
+	SET @OrderStatusRId = 3 ;--'Waiting_for_driver';
 
 	WITH available_orders AS
 	(
-		SELECT orderId, orderDateTime, [addressId] FROM [Order] WHERE [OrderStatusId] = @OrderStatusRId
+		SELECT orderId, orderDateTime, A.[addressId], A.[address], JSON_QUERY(CONCAT('[',A.LatLong.Lat,',',A.LatLong.Long,  ']')) [coordinates] 
+		FROM [Order] O
+		INNER JOIN [Address] A  ON A.addressId = O.addressId
+		WHERE [OrderStatusId] = @OrderStatusRId
 	),
 	pickup_locations AS
 	(
-			SELECT ao.orderId, b.businessId, B.addressId
+			SELECT ao.orderId, B.businessId, B.[name], B.addressId
 			FROM available_orders ao
 			INNER JOIN OrderProduct OP ON OP.orderId = ao.orderId
 			INNER JOIN Product P ON P.productId = OP.productId
-			INNER JOIN Business B ON B.businessId = p.businessId
-			GROUP BY  ao.orderId, b.businessId, B.addressId
+			INNER JOIN Business B ON B.businessId = P.businessId
+			
+			GROUP BY  ao.orderId, b.businessId, B.[name], B.addressId
 
 	)
-	SELECT ao.orderId, ao.orderDateTime, oa.locations, ao.addressId [dropOfLocation]
+	SELECT ao.orderId, ao.orderDateTime, ao.addressId, ao.coordinates, ao.[address], oa.locations
 	FROM available_orders ao
 	INNER JOIN 
 	(
@@ -61,9 +65,11 @@ BEGIN
 				SELECT 
 					(
 					SELECT  
-						c.businessId ,c.addressId
+						c.businessId , c.addressId, A.[address], JSON_QUERY(CONCAT('[',A.LatLong.Lat,',',A.LatLong.Long,  ']')) [coordinates] 
 					FROM
 						pickup_locations c
+					INNER JOIN [Address] A 
+						ON A.addressId = c.businessId
 					WHERE
 						c.orderId = h.orderId
 						FOR JSON PATH

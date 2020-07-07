@@ -33,7 +33,7 @@ BEGIN
 	FROM OPENJSON(@JSON) 
 	WITH (addressId INT )
 
-	SELECT A.*
+	SELECT A.[addressId], A.[address], JSON_QUERY(CONCAT('[',A.LatLong.Lat,',',A.LatLong.Long,  ']')) [coordinates] 
 	FROM [Address] A 
 	WHERE A.addressId = @addressId
 	FOR JSON PATH	 

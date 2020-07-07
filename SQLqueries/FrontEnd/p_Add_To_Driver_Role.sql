@@ -10,9 +10,10 @@ GO
 -- Usage: 
  /*
     DECLARE @Error int 
-	EXEC p_Add_To_Driver_Role '{ "userId" : "driver_uid"}', @Error OUTPUT
+	EXEC p_Add_To_Driver_Role '{ "userId" : "driver_uid", "addressId":1 }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [Role]
+	SELECT * FROM [DriverAddress]
 */
 -- =============================================
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Add_To_Driver_Role')
@@ -26,15 +27,18 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	BEGIN TRY
-		DECLARE @RoleDId INT, @userId VARCHAR(128)
+		DECLARE @RoleDId INT, @userId VARCHAR(128), @addressId INT
 		SELECT @RoleDId = 2  --driver roleid
 
-		SELECT @userId = userId
+		SELECT @userId = userId, @addressId = addressId
 		FROM OPENJSON(@JSON)
-		WITH (userId VARCHAR(128))
+		WITH (userId VARCHAR(128), addressId INT)
 
 		INSERT INTO [UserRole]
 		VALUES (@userId, @RoleDId)
+
+		INSERT INTO [DriverAddress]
+		VALUES (@userId, @addressId)
 
 		SET @Error = 0
 		SELECT 1 [success] , NULL [error] FOR JSON PATH, INCLUDE_NULL_VALUES 
