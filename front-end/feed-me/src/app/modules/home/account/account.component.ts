@@ -88,6 +88,6 @@ export class AccountComponent implements OnInit {
   }
 
   handleError() {
-    this.snackbarService.show({ message: 'Could not load your profile information. Please try again later.', class: 'error' });
+    this.snackbarService.error('Could not load your profile information. Please try again later.');
   }
 }

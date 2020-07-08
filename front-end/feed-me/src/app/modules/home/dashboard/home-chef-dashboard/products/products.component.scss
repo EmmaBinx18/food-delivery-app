@@ -34,11 +34,6 @@
         padding: 10px;
     }
 
-    .delete{
-        @media(max-width: 600px){width: 2.2rem;}
-        &:hover{cursor: pointer;}
-    }
-
     .description{
         @media(max-width: 850px){display: none;}
     }

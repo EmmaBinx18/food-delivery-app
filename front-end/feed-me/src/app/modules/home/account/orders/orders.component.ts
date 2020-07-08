@@ -71,10 +71,10 @@ export class OrdersComponent implements OnInit, OnChanges {
         this.refreshOrderEmitter.emit();
         this.currentOrder = [];
         this.loading = true;
-        this.snackbarService.show({ message: 'Your order has been created and should be on its way shortly', class: 'success' });
+        this.snackbarService.success('Your order has been created and should be on its way shortly');
       })
       .catch(() => {
-        this.snackbarService.show({ message: 'Your order could not be submitted. Please try again later.', class: 'error' });
+        this.snackbarService.error('Your order could not be submitted. Please try again later.');
       });
   }
 }

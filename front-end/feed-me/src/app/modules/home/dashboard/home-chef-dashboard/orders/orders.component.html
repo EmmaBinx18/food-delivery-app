@@ -7,7 +7,8 @@
                 <td>Order Number {{order.OrderId}}</td>
                 <td>{{order.Name}}</td>
                 <td>{{order.quantity}}</td>
-                <td (click)="completeOrder(order)"><img src="/assets/icons/checked.png" /></td>
+                <td (click)="completeOrder(order)"><img class="icon" src="/assets/icons/checked.png"
+                        alt="complete_order" /></td>
             </tr>
         </table>
         <div *ngIf="orders.length === 0">

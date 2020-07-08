@@ -41,23 +41,23 @@ export class AddressesComponent implements OnChanges {
 
     this.addressService.insertAddress(address)
       .then(() => {
-        this.snackbarService.show({ message: 'Successfully added address to profile', class: 'success' });
+        this.snackbarService.success('Successfully added address to profile');
         this.addresses.push(address);
 
       })
       .catch(() => {
-        this.snackbarService.show({ message: 'Could not add address to your profile. Please try again later', class: 'error' })
+        this.snackbarService.error('Could not add address to your profile. Please try again later')
       });
   }
 
   removeAddress(address: Address) {
     this.addressService.removeUserAddress(this.authService.getCurrentUser().uid, address.addressId.toString())
       .then(() => {
-        this.snackbarService.show({ message: 'Successfully removed address from profile', class: 'success' });
+        this.snackbarService.success('Successfully removed address from profile');
         this.updateAddresses(address);
       })
       .catch(() => {
-        this.snackbarService.show({ message: 'Could not remove address from your profile. Please try again later.', class: 'error' });
+        this.snackbarService.error('Could not remove address from your profile. Please try again later.');
       });
   }
 

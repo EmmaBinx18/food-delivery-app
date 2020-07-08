@@ -27,7 +27,7 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit() {
     this.getUserBusiness();
-    this.addProductForm = this.initForm();
+    this.initForm();
   }
 
   getUserBusiness() {
@@ -36,12 +36,12 @@ export class AddProductComponent implements OnInit {
         this.business = response[0];
       })
       .catch(() => {
-        this.snackbarService.show({ message: 'Could not load your business. Please try again later.' });
+        this.snackbarService.error('Could not load your business. Please try again later.');
       });
   }
 
   initForm() {
-    return this.formBuilder.group({
+    this.addProductForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
       businessId: [''],
@@ -63,10 +63,10 @@ export class AddProductComponent implements OnInit {
       this.productsService.insertProduct(this.addProductForm.value)
         .then(() => {
           this.closeModal();
-          this.snackbarService.show({ message: 'Successfully added new product', class: 'success' });
+          this.snackbarService.success('Successfully added new product');
         })
         .catch(() => {
-          this.snackbarService.show({ message: 'Could not add new product. Please try again later.' });
+          this.snackbarService.error('Could not add new product. Please try again later.');
         });
     }
   }

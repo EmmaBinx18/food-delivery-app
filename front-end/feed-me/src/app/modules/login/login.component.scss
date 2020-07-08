@@ -15,6 +15,7 @@
     }
 }
 
-.error{
-    margin-top: 3%;
+.login-error{
+    @extend .error;
+    margin-top: 5%;
 }

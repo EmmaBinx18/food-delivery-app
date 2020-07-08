@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from 'src/app/core/authentication/authentication.service';
@@ -28,17 +28,17 @@ export class ProfileComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.profile.currentValue.length != 0) {
       this.loading = false;
-      this.profileForm = this.initForm();
+      this.initProfileForm();
       this.populateForm();
     }
   }
 
-  initForm() {
-    return this.formBuilder.group({
+  initProfileForm() {
+    this.profileForm = this.formBuilder.group({
       uid: [this.authService.getCurrentUser().uid],
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}')]],
       email: ['', [Validators.required, Validators.pattern('[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,}')]]
     });
   }
@@ -57,13 +57,23 @@ export class ProfileComponent implements OnChanges {
     if (this.profileForm.valid) {
       this.userService.updateUser(this.profileForm.value)
         .then(() => {
-          this.snackbarService.show({ message: 'Successfully updated profile.', class: 'success' });
+          this.snackbarService.success('Successfully updated profile.');
           this.profile[0] = this.profileForm.value;
         })
         .catch(() => {
-          this.snackbarService.show({ message: 'Could not update your profile. Please try again later.', class: 'error' });
+          this.snackbarService.error('Could not update your profile. Please try again later.');
         });
     }
+  }
+
+  changePassword() {
+    this.authService.resetPassword(this.profile[0].email)
+      .then(() => {
+        this.snackbarService.success('Password reset has been sent to your email');
+      })
+      .catch(() => {
+        this.snackbarService.error('Could not send password reset email. Please try again later.')
+      })
   }
 
 }

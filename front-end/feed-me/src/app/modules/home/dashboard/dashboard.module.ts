@@ -8,6 +8,7 @@ import { OrdersComponent } from './home-chef-dashboard/orders/orders.component';
 import { ProductsComponent } from './home-chef-dashboard/products/products.component';
 import { DeliveriesComponent } from './delivery-dashboard/deliveries/deliveries.component';
 import { AddProductComponent } from './home-chef-dashboard/products/add-product/add-product.component';
+import { CurrentDeliveryComponent } from './delivery-dashboard/current-delivery/current-delivery.component';
 
 import { SharedModule } from '../../../shared/shared.module';
 
@@ -20,7 +21,8 @@ import { SharedModule } from '../../../shared/shared.module';
         DeliveriesComponent,
         AddProductComponent,
         HomeChefDashboardComponent,
-        DeliveryDashboardComponent
+        DeliveryDashboardComponent,
+        CurrentDeliveryComponent
     ],
     imports: [SharedModule],
     exports: [DashboardComponent]

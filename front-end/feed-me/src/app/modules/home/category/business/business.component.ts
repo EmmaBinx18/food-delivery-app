@@ -14,14 +14,13 @@ import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 export class BusinessComponent implements OnInit {
 
   @Input() business: any;
-  @Input() category: string;
-
   @Output() backEmitter = new EventEmitter();
 
   address: any = '';
   operational: any = '';
   products: any = [];
   error: boolean = false;
+  loading: boolean = true;
 
   constructor(
     private homeChefService: HomeChefService,
@@ -33,6 +32,7 @@ export class BusinessComponent implements OnInit {
 
   ngOnInit() {
     this.error = false;
+    this.loading = true;
     Promise.all([
       this.homeChefService.getOperationalStatusById(this.business.operationalStatusId),
       this.addressService.getAddressById(this.business.addressId),
@@ -42,10 +42,12 @@ export class BusinessComponent implements OnInit {
         this.operational = response[0][0].name;
         this.address = response[1][0].address;
         this.products = response[2];
+        this.loading = false;
       })
       .catch(() => {
         this.error = true;
-        this.snackbarService.show({ message: 'Could not load this business. Please try again later.', class: 'error' });
+        this.loading = false;
+        this.snackbarService.error('Could not load this business. Please try again later.');
       });
   }
 
@@ -54,10 +56,8 @@ export class BusinessComponent implements OnInit {
   }
 
   addtoCart(product: any) {
-    if (this.operational != 'Closed') {
-      this.cartService.addToCart(product);
-      this.snackbarService.show({ message: `Added ${product.name} to cart`, class: 'success' });
-    }
+    this.cartService.addToCart(product);
+    this.snackbarService.success(`Added ${product.name} to cart`);
   }
 
 }

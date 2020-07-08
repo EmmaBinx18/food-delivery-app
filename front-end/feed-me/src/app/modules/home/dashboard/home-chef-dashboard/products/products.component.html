@@ -10,7 +10,8 @@
                 <td class="description">{{meal.description}}</td>
                 <td>R{{meal.price}}</td>
                 <td>{{meal.minPrepareTime}} minutes</td>
-                <td><img class="delete" src="/assets/icons/trash.png" alt="delete" (click)="removeProduct(meal)" />
+                <td><img class="icon" src="/assets/icons/trash.png" alt="remove_product"
+                        (click)="removeProduct(meal)" />
                 </td>
             </tr>
         </table>

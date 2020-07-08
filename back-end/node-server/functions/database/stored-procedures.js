@@ -31,6 +31,7 @@ const GET_DELIVERY_READY_ORDERS = 'p_Get_Delivery_Ready_Orders';
 const GET_ACTIVE_ORDER_PRODUCTS = 'p_Get_Active_Order_Products';
 const COMPLETE_ORDER_PRODUCT = 'p_Complete_Order_Product';
 const ASSIGN_ORDER_DRIVER = 'p_Assign_Order_Driver';
+const GET_DRIVER_ORDER = 'p_Get_Driver_Order';
 
 const ADD_TO_DRIVER_ROLE = 'p_Add_To_Driver_Role';
 const GET_DRIVER = 'p_Get_Driver';
@@ -64,5 +65,6 @@ module.exports = {
     GET_USER_ADDRESS,
     GET_DRIVER,
     DELINK_USER_ADDRESS,
-    GET_PREVIOUS_USER_ORDERS
+    GET_PREVIOUS_USER_ORDERS,
+    GET_DRIVER_ORDER
 }

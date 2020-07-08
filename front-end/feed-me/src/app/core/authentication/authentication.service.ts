@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { UserService } from '../services/user.service';
 import { Role } from '../models/role.enum';
+import FIREBASE_ERRORS from '../models/firebase-error.model';
 
 @Injectable({
     providedIn: 'root'
@@ -69,7 +70,7 @@ export class AuthService {
                     });
             })
             .catch(error => {
-                throw (error.message);
+                throw (FIREBASE_ERRORS[error.code]);
             });
     }
 
@@ -94,8 +95,12 @@ export class AuthService {
                     });
             })
             .catch(error => {
-                throw (error.message);
+                throw (FIREBASE_ERRORS[error.code]);
             });
+    }
+
+    resetPassword(email: string) {
+        return this.firebaseAuth.sendPasswordResetEmail(email);
     }
 
     logout() {

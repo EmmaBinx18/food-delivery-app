@@ -8,7 +8,7 @@
           <td>{{ item.product.name }}</td>
           <td>{{ item.quantity }}</td>
           <td>R{{ item.product.price * item.quantity }}</td>
-          <img class="icon" src="/assets/icons/trash.png" alt="delete" (click)="removeCartItem(item)" />
+          <img class="icon" src="/assets/icons/trash.png" alt="remove_cart_item" (click)="removeCartItem(item)" />
         </tr>
       </table>
       <div class="info">

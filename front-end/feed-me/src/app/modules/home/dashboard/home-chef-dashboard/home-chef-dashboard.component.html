@@ -1,5 +1,4 @@
 <div class="home-chef-dashboard">
-    <app-loader *ngIf="loading"></app-loader>
-    <app-products *ngIf="!loading" [products]="products" [error]="productsError"></app-products>
-    <app-orders *ngIf="!loading" [orders]="orders" [error]="ordersError"></app-orders>
+    <app-products [products]="products" [error]="productsError"></app-products>
+    <app-orders [orders]="orders" [error]="ordersError"></app-orders>
 </div>

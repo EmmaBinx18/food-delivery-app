@@ -3,3 +3,19 @@
 :host{
     width: 100%;
 }
+
+.label{
+    font-family: var(--secondary-font-family);
+    margin-right: 2%;
+    display: inline;
+    @media(max-width: 600px){display: block;}
+}
+
+.price, .prep{
+    @media(max-width: 600px){display: block;}
+}
+
+input[type="number"]{
+    width: 26%;
+    @media(max-width: 600px){width: 60%;}
+}

@@ -4,40 +4,27 @@
         <div class="form-group">
             <div class="controls">
                 <input type="text" id="name" placeholder="Meal Name" class="form-control full-width"
-                    formControlName="name" />
-                <p class="error"
-                    *ngIf="addProductForm.controls.name.errors?.required && addProductForm.controls.name.touched">
-                    Meal Name is Required
-                </p>
+                    formControlName="name"
+                    [ngClass]="{ 'error-outline': (addProductForm.controls.name.errors?.required && addProductForm.controls.name.touched) }" />
             </div>
             <div class="controls">
                 <input type="text" id="description" placeholder="Description" class="form-control full-width"
-                    formControlName="description" />
-                <p class="error"
-                    *ngIf="addProductForm.controls.description.errors?.required && addProductForm.controls.description.touched">
-                    Description is Required
-                </p>
+                    formControlName="description"
+                    [ngClass]="{ 'error-outline': (addProductForm.controls.description.errors?.required && addProductForm.controls.description.touched) }" />
             </div>
         </div>
 
         <div class="form-group">
-            <div class="controls">
-                <label for="price">Price</label>
-                <input type="number" min="0" id="price" placeholder="Price" class="form-control"
-                    formControlName="price" />
-                <p class="error"
-                    *ngIf="addProductForm.controls.price.errors?.required && addProductForm.controls.price.touched">
-                    Price is Required
-                </p>
+            <div class="controls price">
+                <h3 class="label">Price</h3>
+                <input type="number" min="0" id="price" placeholder="Price" class="form-control" formControlName="price"
+                    [ngClass]="{ 'error-outline': (addProductForm.controls.price.errors?.required && addProductForm.controls.price.touched) }" />
             </div>
-            <div class="controls">
-                <label for="minPrepareTime">Prep Time</label>
+            <div class="controls prep">
+                <h3 class="label">Prep Time</h3>
                 <input type="number" min="0" id="minPrepareTime" placeholder="Prep Time" class="form-control"
-                    formControlName="minPrepareTime" />
-                <p class="error"
-                    *ngIf="addProductForm.controls.minPrepareTime.errors?.required && addProductForm.controls.minPrepareTime.touched">
-                    Prep time is Required
-                </p>
+                    formControlName="minPrepareTime"
+                    [ngClass]="{ 'error-outline': (addProductForm.controls.minPrepareTime.errors?.required && addProductForm.controls.minPrepareTime.touched) }" />
             </div>
         </div>
 

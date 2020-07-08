@@ -1,33 +1,25 @@
 @import '../../../../../assets/styles/common.scss';
 @import '../../../../../assets/styles/forms.scss';
+@import '../account.component.scss';
 
 .profile{
-    width: 100%;
-    @extend .flex-container;
-    flex-direction: row;
-    max-height: 80vh;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    @extend .container;
 
-    .flex-container{
+    .update-profile, .change-password{
         width: 48%;
+        max-height: 70vh;
+        @extend .white-container;
         @media(max-width: 1000px){
-            width: 95%; 
-            margin-bottom: 4%;
+          width: 95%; 
+          margin-bottom: 4%;
         }
     }
 }
 
 .form-container{
-    @extend .white-container;
-    margin-top: 0;
+    width: 100%;
 }
 
 .error{
     margin-top: 3%;
-}
-
-app-loader{
-    margin: 2% auto;
 }

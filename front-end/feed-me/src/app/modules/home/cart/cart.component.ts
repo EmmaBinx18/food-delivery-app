@@ -21,7 +21,7 @@ export class CartComponent {
 
   removeCartItem(item: Cart) {
     this.cartService.removeFromCart(item);
-    this.snackbarService.show({ message: `Removed ${item.product.name} from cart`, class: 'success' });
+    this.snackbarService.success(`Removed ${item.product.name} from cart`);
   }
 
   closeCart() {

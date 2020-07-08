@@ -97,14 +97,13 @@ h1, h2, h3, h4, h5{
 .back-button{
     background-image: url('/assets/icons/grey-icons/back.svg');
     background-size: cover;
-    width: 40px;
-    height: 40px;
+    width: 2rem;
     outline: none;
     border: none;
     background-color: var(--primary-light-grey);
 
     &:hover{
-        width: 44px;
+        width: 2.2rem;
         cursor: pointer;
     }
 }
@@ -129,8 +128,21 @@ h1, h2, h3, h4, h5{
     background-color: var(--primary-light-blue);
     position: absolute;
     top: 0;
-    opacity: 0.9;
+    opacity: 0.8;
     z-index: 4;
+}
+
+.icon {
+    &:hover {
+      cursor: pointer;
+    }
+    align-self: center;
+    width: 2.4rem;
+    @media(max-width: 600px){width: 2.2rem;}
+}
+
+app-loader{
+    margin: 4% auto auto;
 }
 
 .login-signup-image{

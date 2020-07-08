@@ -15,7 +15,7 @@ export class MapboxService {
   style = 'mapbox://styles/mapbox/streets-v11';
   zoom = 2;
   minzoom = 10;
-  address: any
+  address: any = null;
   marker: any
 
   constructor(public addressService: AddressService) {

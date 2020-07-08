@@ -30,11 +30,11 @@ export class OrdersComponent implements OnChanges {
   completeOrder(order: any) {
     this.ordersService.postCompleteOrder(order)
       .then(() => {
-        this.snackbarService.show({ message: 'Successfully completed order', class: 'success' });
+        this.snackbarService.success('Successfully completed order');
         this.updateOrders(order);
       })
       .catch(() => {
-        this.snackbarService.show({ message: 'Could not complete order. Please try again.', class: 'error' });
+        this.snackbarService.error('Could not complete order. Please try again.');
       })
   }
 

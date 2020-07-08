@@ -30,9 +30,9 @@ export class DashboardComponent implements OnInit {
     this.role = this.authService.getCurrentRole();
     this.userName = this.authService.getCurrentUser().displayName;
     this.stats = this.homeChefService.getStats();
-    if (this.authService.getCurrentRole() === Role.HomeChef) {
-      this.getUserBusiness();
-    }
+    // if (this.authService.getCurrentRole() === Role.HomeChef) {
+    this.getUserBusiness();
+    // }
   }
 
   setHomeChefStats() {
@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit {
         this.business = response;
       })
       .catch(() => {
-        this.snackbarService.show({ message: 'Your business could not be loaded. Please try again later.' });
+        this.snackbarService.error('Your business could not be loaded. Please try again later.');
       });
   }
 }

@@ -5,22 +5,25 @@
       <img src="../../../assets/icons/close.png" alt="close" class="menu-icons closed" (click)="closeNav()" />
       <li class="spacer"></li>
       <li>
-        <img src="/assets/icons/home.png" alt="home" /><a (click)="changeDisplay('main')">Home</a>
+        <img src="/assets/icons/home.png" alt="home" class="icon" /><a (click)="changeDisplay('main')">Home</a>
       </li>
       <li *ngIf="role === 2">
-        <img src="/assets/icons/dashboard.png" alt="dashboard" /><a (click)="changeDisplay('dashboard')">Home Chef</a>
+        <img src="/assets/icons/dashboard.png" alt="dashboard" class="icon" /><a
+          (click)="changeDisplay('dashboard')">Home Chef</a>
       </li>
       <li *ngIf="role === 3">
-        <img src="/assets/icons/dashboard.png" alt="dashboard" /><a (click)="changeDisplay('dashboard')">Deliveries</a>
+        <img src="/assets/icons/dashboard.png" alt="dashboard" class="icon" /><a
+          (click)="changeDisplay('dashboard')">Deliveries</a>
       </li>
       <li>
-        <img src="/assets/icons/cart2.png" alt="cart" /><a (click)="changeDisplay('cart')">Cart</a>
+        <img src="/assets/icons/cart2.png" alt="cart" class="icon" /><a (click)="changeDisplay('cart')">Cart</a>
       </li>
       <li>
-        <img src="/assets/icons/profile.png" alt="profile" /><a (click)="changeDisplay('account')">Account</a>
+        <img src="/assets/icons/profile.png" alt="profile" class="icon" /><a
+          (click)="changeDisplay('account')">Account</a>
       </li>
       <li>
-        <img src="/assets/icons/logout.png" alt="logout" /><a (click)="logout()">Logout</a>
+        <img src="/assets/icons/logout.png" alt="logout" class="icon" /><a (click)="logout()">Logout</a>
       </li>
 
       <li *ngIf="role == 0" class="buttons">

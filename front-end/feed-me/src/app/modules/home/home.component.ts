@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { CartService } from 'src/app/core/services/cart.service';
 
 @Component({
   selector: "app-home",
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
     cart: false,
   };
 
-  constructor() { }
+  constructor(private cartService: CartService) { }
 
   ngOnInit() {
     this.category = "";
@@ -28,6 +29,9 @@ export class HomeComponent implements OnInit {
       this.changeDisplay("account");
     } else {
       this.display.cart = true;
+      if (this.cartService.cart.length == 0) {
+        setTimeout(() => this.display.cart = false, 3000);
+      }
     }
   }
 
@@ -42,10 +46,11 @@ export class HomeComponent implements OnInit {
   }
 
   changeDisplay(option: string, category?: any) {
-    if (option == "cart") {
+    if (option === "cart") {
       this.openCart();
       return;
     }
+
     this.setAllFalse();
     this.display[option] = true;
 

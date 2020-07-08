@@ -1,7 +1,6 @@
 .dashboard{
     width: 100%;
     min-height: 80vh;
-    position: relative;
 
     .headings{
         width: 90%;
@@ -14,16 +13,8 @@
 
     .user-name{
         color: grey;
-        font-size: 2rem;
         margin-top: 0px;
-
-        @media(max-width: 850px){font-size: 1.2rem;}
     }
-}
-
-.home-chef{
-    width: 90%;
-    margin: 2% auto auto;
 }
 
 .spacer{

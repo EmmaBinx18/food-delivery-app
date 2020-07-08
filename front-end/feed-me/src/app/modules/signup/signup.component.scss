@@ -19,6 +19,7 @@ input{
     @media(max-height: 850px) and (min-width: 600px){width: 38%;}
 }
 
-.error{
-    margin-top: 3%;
+.signup-error{
+    @extend .error;
+    margin-top: 5%;
 }

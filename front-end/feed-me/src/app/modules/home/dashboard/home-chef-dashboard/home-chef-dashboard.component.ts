@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { ProductsService } from 'src/app/core/services/products.service';
 import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
@@ -15,7 +15,6 @@ export class HomeChefDashboardComponent implements OnChanges {
 
   products: any = [];
   orders: any = [];
-  loading: boolean = true;
 
   productsError: boolean = false;
   ordersError: boolean = false;
@@ -27,19 +26,18 @@ export class HomeChefDashboardComponent implements OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    // if (changes.business.currentValue.length != 0) {
-    this.getProducts('1');
-    this.getOrders('1');
-    // this.getProducts(this.business[0].businessId);
-    // this.getOrders(this.business[0].businessId);
-    // }
+    if (changes.business.currentValue.length != 0) {
+      this.getProducts('1');
+      this.getOrders('1');
+      // this.getProducts(this.business[0].businessId);
+      // this.getOrders(this.business[0].businessId);
+    }
   }
 
   getProducts(businessId: string) {
     this.productsService.getProductsForABusiness(businessId)
       .then(response => {
         this.products = response;
-        this.loading = false;
         this.productsError = false;
       })
       .catch(() => {
@@ -52,7 +50,6 @@ export class HomeChefDashboardComponent implements OnChanges {
     this.ordersService.getOrdersForBusiness(businessId)
       .then(response => {
         this.orders = response;
-        this.loading = false;
         this.ordersError = false;
       })
       .catch(() => {
@@ -62,6 +59,6 @@ export class HomeChefDashboardComponent implements OnChanges {
   }
 
   handleError() {
-    this.snackbarService.show({ message: 'We could not load your business. Please try again later.', class: 'error' });
+    this.snackbarService.error('Could not load your business. Please try again later.');
   }
 }

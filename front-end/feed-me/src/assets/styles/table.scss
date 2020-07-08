@@ -30,14 +30,4 @@ table {
       }
     }
   }
-
-  .icon {
-    &:hover {
-      cursor: pointer;
-    }
-    width: 35px;
-    @media (max-width: 600px) {
-      width: 40px;
-    }
-  }
 }

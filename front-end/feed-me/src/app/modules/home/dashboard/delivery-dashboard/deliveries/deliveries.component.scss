@@ -1,37 +1,29 @@
 @import '../../../../../../assets/styles/table.scss';
 @import '../../../../../../assets/styles/common.scss';
 
-.orders{
+.deliveries{
     border-radius: 6px;
+    @extend .white-container;
     text-align: center;
     padding: 25px;
     margin-top: 2%;
-    @extend .white-container;
 
     h2, td{
         font-family: var(--secondary-font-family);
     }
 }
 
-.orders-table{
+.deliveries-table{
     overflow-y: scroll;
-    min-height: auto;
-    max-height: 40vh;
     width: 100%;
 
     table{
         width: 95%;
+        max-height: 40vh;
         border-spacing: 0 8px;
     }
 
     tr {
         background-color: rgb(240, 240, 240);
-    }
-
-    .icon{
-        &:hover{
-            box-shadow: var(--primary-box-shadow);
-            cursor: pointer;    
-        }
     }
 }

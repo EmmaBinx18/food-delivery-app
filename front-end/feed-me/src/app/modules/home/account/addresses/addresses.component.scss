@@ -1,17 +1,12 @@
 @import '../../../../../assets/styles/common.scss';
 @import '../../../../../assets/styles/map.scss';
 @import '../../../../../assets/styles/table.scss';
+@import '../account.component.scss';
 
 .addresses{
-  width: 100%;
-  @extend .flex-container;
-  flex-direction: row;
-  max-height: 80vh;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  @extend .container;
 
-  .address, .add-address{
+  .view-address, .add-address{
     width: 48%;
     max-height: 70vh;
     @extend .white-container;
@@ -38,18 +33,9 @@
   table {
     width: 92%;
     border-spacing: 0 8px;
-
-    .icon{
-      margin-top: 11%;
-      @media(max-width: 600px){margin-top: 0; width: 2.2rem;}
-    }
   }
 
   tr {
     background-color: rgb(240, 240, 240);
   }
-}
-
-app-loader{
-  margin: 2% auto;
 }

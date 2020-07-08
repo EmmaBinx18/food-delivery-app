@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-deliveries',
   templateUrl: './deliveries.component.html',
-  styleUrls: ['./deliveries.component.css']
+  styleUrls: ['./deliveries.component.scss']
 })
-export class DeliveriesComponent implements OnInit {
+export class DeliveriesComponent implements OnChanges {
+
+  @Input() deliveries: any;
+  @Input() error: boolean;
+
+  loading: boolean = true;
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.deliveries.currentValue.length != 0) {
+      this.loading = false;
+      console.log(this.deliveries);
+    }
   }
 
 }

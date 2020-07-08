@@ -10,7 +10,7 @@
 
         <div class="form-group">
             <button class="button yellow button-spacing" type="submit"
-                [disabled]="registerForm.invalid">REGISTER</button>
+                [disabled]="registerForm.invalid || this.mapService.address == null">REGISTER</button>
         </div>
     </form>
 </div>

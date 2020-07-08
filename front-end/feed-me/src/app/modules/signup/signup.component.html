@@ -5,72 +5,45 @@
             <div class="form-group">
                 <div class="controls">
                     <input type="text" id="firstname" placeholder="Firstname" class="form-control"
-                        formControlName="firstname">
-                    <p class="error"
-                        *ngIf="signupForm.controls.firstname.errors?.required && signupForm.controls.firstname.touched">
-                        Firstname is Required
-                    </p>
+                        formControlName="firstname"
+                        [ngClass]="{ 'error-outline': (signupForm.controls.firstname.errors?.required && signupForm.controls.firstname.touched) }">
                 </div>
                 <div class="controls">
                     <input type="text" id="lastname" placeholder="Lastname" class="form-control"
-                        formControlName="lastname">
-                    <p class="error"
-                        *ngIf="signupForm.controls.lastname.errors?.required && signupForm.controls.lastname.touched">
-                        Lastname is Required
-                    </p>
+                        formControlName="lastname"
+                        [ngClass]="{ 'error-outline': (signupForm.controls.lastname.errors?.required && signupForm.controls.lastname.touched) }">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="controls">
-                    <input type="text" id="phone" placeholder="Phone" class="form-control" formControlName="phone">
-                    <p class="error"
-                        *ngIf="signupForm.controls.phone.errors?.required && signupForm.controls.phone.touched">
-                        Phone Number is Required
-                    </p>
+                    <input type="text" id="phone" placeholder="Phone" class="form-control" formControlName="phone"
+                        [ngClass]="{ 'error-outline': (signupForm.controls.phone.errors?.required && signupForm.controls.phone.touched) 
+                        || (signupForm.controls.phone.errors?.required && signupForm.controls.phone.touched) }">
                 </div>
                 <div class="controls">
-                    <input type="text" id="email" placeholder="Email" class="form-control" formControlName="email">
-                    <p class="error"
-                        *ngIf="signupForm.controls.email.errors?.required && signupForm.controls.email.touched">
-                        Email is Required
-                    </p>
-                    <p class="error"
-                        *ngIf="signupForm.controls.email.errors?.pattern && signupForm.controls.email.touched">
-                        Please enter a valid email
-                    </p>
+                    <input type="text" id="email" placeholder="Email" class="form-control" formControlName="email"
+                        [ngClass]="{ 'error-outline': (signupForm.controls.email.errors?.pattern && signupForm.controls.email.touched) 
+                        || (signupForm.controls.email.errors?.pattern && signupForm.controls.email.touched) }">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="controls">
                     <input type="password" id="password" placeholder="Password" class="form-control"
-                        formControlName="password">
-                    <p class="error"
-                        *ngIf="signupForm.controls.password.errors?.required && signupForm.controls.password.touched">
-                        Password is Required
-                    </p>
-                    <p class="error"
-                        *ngIf="signupForm.controls.password.errors?.minLength && signupForm.controls.password.touched">
-                        Password must be at least 8 characters
-                    </p>
+                        formControlName="password" [ngClass]="{ 'error-outline': (signupForm.controls.password.errors?.required && signupForm.controls.password.touched) 
+                        || (signupForm.controls.password.errors?.minLength && signupForm.controls.password.touched) }">
                 </div>
                 <div class="controls">
                     <input type="password" id="confirmPassword" placeholder="Confirm Password" class="form-control"
-                        formControlName="confirmPassword">
-                    <p class="error"
-                        *ngIf="signupForm.controls.confirmPassword.errors?.required && signupForm.controls.confirmPassword.touched">
-                        Confirm Password is Required
-                    </p>
-                    <p class="error"
-                        *ngIf="signupForm.controls.confirmPassword.errors?.passwordMismatch && signupForm.controls.confirmPassword.touched">
-                        Passwords don't match
-                    </p>
+                        formControlName="confirmPassword"
+                        [ngClass]="{ 'error-outline': (signupForm.controls.confirmPassword.errors?.required && signupForm.controls.confirmPassword.touched) 
+                        || (signupForm.controls.confirmPassword.errors?.passwordMismatch && signupForm.controls.confirmPassword.touched) }">
                 </div>
             </div>
 
             <div class="form-control">
-                <p class="error" *ngIf="error">{{error}}</p>
+                <p class="signup-error" *ngIf="error">{{error}}</p>
                 <button class="button yellow button-spacing" type="submit"
                     [disabled]="signupForm.invalid">SIGNUP</button>
             </div>

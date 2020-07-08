@@ -54,7 +54,7 @@ export class CategoryComponent implements OnInit {
       .catch(() => {
         this.error = true;
         this.loading = false;
-        this.snackbarService.show({ message: "Could not load this page. Please try again later.", class: "error" })
+        this.snackbarService.error("Could not load this page. Please try again later.")
       })
   }
 
