@@ -1,10 +1,10 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { MapboxService } from 'src/app/core/services/mapbox.service';
 import { AuthService } from 'src/app/core/authentication/authentication.service';
 import { AddressService } from 'src/app/core/services/address.service';
 import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
-import { Address } from '../../../../core/models/address.model';
+import { Address } from '../../../core/models/address.model';
 
 @Component({
   selector: 'app-addresses',

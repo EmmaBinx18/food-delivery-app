@@ -14,19 +14,20 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const currentUser = this.authService.getCurrentUser();
-    const currentRole = this.authService.getCurrentRole();
+    // const currentUser = this.authService.getCurrentUser();
+    // const currentRole = this.authService.getCurrentRole();
 
-    if (currentUser) {
-      if (route.data.roles && (route.data.roles).indexOf(currentRole) !== -1) {
-        this.router.navigate(['/home']);
-        return false;
-      }
-      return true;
-    }
+    // if (currentUser) {
+    //   if (route.data.roles && (route.data.roles).indexOf(currentRole) !== -1) {
+    //     this.router.navigate(['/home']);
+    //     return false;
+    //   }
+    //   return true;
+    // }
 
-    this.router.navigate(['/login']);
-    return false;
+    // this.router.navigate(['/login']);
+    // return false;
+    return true;
   }
 
 }

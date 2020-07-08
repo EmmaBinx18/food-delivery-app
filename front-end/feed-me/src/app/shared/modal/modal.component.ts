@@ -5,7 +5,7 @@ import { ModalService } from './modal.service';
 
 import { HomeChefRegisterComponent } from "../../modules/home/home-chef-register/home-chef-register.component";
 import { DeliveryRegisterComponent } from "../../modules/home/delivery-register/delivery-register.component";
-import { AddProductComponent } from '../../modules/home/dashboard/home-chef-dashboard/products/add-product/add-product.component';
+import { AddProductComponent } from '../../modules/dashboard/home-chef-dashboard/products/add-product/add-product.component';
 
 @Component({
   selector: "app-modal",

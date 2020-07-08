@@ -1,26 +1,25 @@
-<header #header>
+<header>
   <nav>
     <img src="../../../assets/icons/menu.png" alt="menu" class="menu-icons open" (click)="openNav()" />
     <ul class="nav-list" #nav>
       <img src="../../../assets/icons/close.png" alt="close" class="menu-icons closed" (click)="closeNav()" />
       <li class="spacer"></li>
       <li>
-        <img src="/assets/icons/home.png" alt="home" class="icon" /><a (click)="changeDisplay('main')">Home</a>
+        <img src="/assets/icons/home.png" alt="home" class="icon" /><a (click)="navigate('home')">Home</a>
       </li>
       <li *ngIf="role === 2">
-        <img src="/assets/icons/dashboard.png" alt="dashboard" class="icon" /><a
-          (click)="changeDisplay('dashboard')">Home Chef</a>
+        <img src="/assets/icons/dashboard.png" alt="dashboard" class="icon" /><a (click)="navigate('dashboard')">Home
+          Chef</a>
       </li>
       <li *ngIf="role === 3">
         <img src="/assets/icons/dashboard.png" alt="dashboard" class="icon" /><a
-          (click)="changeDisplay('dashboard')">Deliveries</a>
+          (click)="navigate('dashboard')">Deliveries</a>
       </li>
       <li>
-        <img src="/assets/icons/cart2.png" alt="cart" class="icon" /><a (click)="changeDisplay('cart')">Cart</a>
+        <img src="/assets/icons/cart2.png" alt="cart" class="icon" /><a (click)="openCart()">Cart</a>
       </li>
       <li>
-        <img src="/assets/icons/profile.png" alt="profile" class="icon" /><a
-          (click)="changeDisplay('account')">Account</a>
+        <img src="/assets/icons/profile.png" alt="profile" class="icon" /><a (click)="navigate('account')">Account</a>
       </li>
       <li>
         <img src="/assets/icons/logout.png" alt="logout" class="icon" /><a (click)="logout()">Logout</a>

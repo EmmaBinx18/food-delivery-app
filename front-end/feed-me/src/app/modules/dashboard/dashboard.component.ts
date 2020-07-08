@@ -2,10 +2,10 @@ import { Component, OnInit } from "@angular/core";
 
 import { Role } from "src/app/core/models/role.enum";
 
-import { AuthService } from "../../../core/authentication/authentication.service";
-import { HomeChefService } from "../../../core/services/home-chef.service";
-import { DeliveryService } from "../../../core/services/delivery.service";
-import { SnackbarService } from "../../../shared/snackbar/snackbar.service";
+import { AuthService } from "../../core/authentication/authentication.service";
+import { HomeChefService } from "../../core/services/home-chef.service";
+import { DeliveryService } from "../../core/services/delivery.service";
+import { SnackbarService } from "../../shared/snackbar/snackbar.service";
 
 @Component({
   selector: "app-dashboard",

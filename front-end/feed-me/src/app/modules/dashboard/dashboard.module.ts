@@ -10,7 +10,8 @@ import { DeliveriesComponent } from './delivery-dashboard/deliveries/deliveries.
 import { AddProductComponent } from './home-chef-dashboard/products/add-product/add-product.component';
 import { CurrentDeliveryComponent } from './delivery-dashboard/current-delivery/current-delivery.component';
 
-import { SharedModule } from '../../../shared/shared.module';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,9 @@ import { SharedModule } from '../../../shared/shared.module';
         DeliveryDashboardComponent,
         CurrentDeliveryComponent
     ],
-    imports: [SharedModule],
-    exports: [DashboardComponent]
+    imports: [
+        SharedModule,
+        DashboardRoutingModule
+    ]
 })
 export class DashboardModule { }

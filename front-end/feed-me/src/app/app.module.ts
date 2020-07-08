@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AuthService } from './core/authentication/authentication.service';
+import { SharedModule } from './shared/shared.module';
+import { CartModule } from './modules/home/cart/cart.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +21,9 @@ import { AuthService } from './core/authentication/authentication.service';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule,
+    CartModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
