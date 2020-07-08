@@ -22,6 +22,10 @@ export class ProductsService {
     return this.http.post('api/products', { params: this.mapProduct(product) }).toPromise();
   }
 
+  removeProduct(productId: string) {
+    return this.http.post(`api/products/remove`, { params: productId }).toPromise();
+  }
+
   mapProduct(product: Product) {
     return {
       productId: -1,

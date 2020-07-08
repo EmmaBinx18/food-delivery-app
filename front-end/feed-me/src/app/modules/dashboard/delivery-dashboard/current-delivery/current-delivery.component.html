@@ -1,1 +1,19 @@
-<p>current-delivery works!</p>
+<div class="current-delivery">
+    <div *ngIf="delivery" class="delivery">
+        <h2>Assigned Deliveries</h2>
+        <table>
+            <tr>
+                <!-- <td>
+                    <p class="meal-name">{{meal.name}}</p>
+                </td>
+                <td class="description">{{meal.description}}</td>
+                <td>R{{meal.price}}</td>
+                <td>{{meal.minPrepareTime}} minutes</td> -->
+                <td><img class="icon" src="/assets/icons/checked.png" alt="accept_delivery"
+                        (click)="acceptDelivery(delivery)" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <h3 *ngIf="!delivery">An error occurred loading your deliveries</h3>
+</div>

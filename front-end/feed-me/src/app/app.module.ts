@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 
 import { AuthService } from './core/authentication/authentication.service';
 import { SharedModule } from './shared/shared.module';
-import { CartModule } from './modules/home/cart/cart.module';
+import { CartModule } from './modules/cart/cart.module';
 
 @NgModule({
   declarations: [AppComponent],

@@ -24,6 +24,7 @@ export class DeliveryDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.deliveryDisplay = false;
     this.getDeliveries();
   }
 
@@ -37,6 +38,10 @@ export class DeliveryDashboardComponent implements OnInit {
         this.deliveriesError = true;
         this.snackbarService.error('Could not load your deliveries. Please try again later.');
       })
+  }
+
+  showDelivery(delivery: any) {
+    this.deliveryDisplay = true;
   }
 
 }

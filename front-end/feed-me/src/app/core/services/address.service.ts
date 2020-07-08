@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
-import { Address } from '../models/address.model';
+import { Address } from "../models/address.model";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AddressService {
-
   constructor(private http: HttpClient) { }
 
   getAddressById(addressId: string) {

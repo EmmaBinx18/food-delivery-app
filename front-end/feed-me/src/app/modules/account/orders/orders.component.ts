@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from "@angular/core";
 
-import { Cart } from "src/app/core/models/cart.model";
+import { CartItem } from "src/app/core/models/cart-item.model";
 import { CartService } from "src/app/core/services/cart.service";
 import { OrdersService } from 'src/app/core/services/orders.service';
 import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
@@ -15,7 +15,7 @@ export class OrdersComponent implements OnInit, OnChanges {
   @Input() addresses: any = [];
   @Input() error: boolean;
 
-  currentOrder: Cart[] = [];
+  currentOrder: CartItem[] = [];
   subtotal: number = 0;
   itemsTotal: number = 0;
   loading: boolean = true;
@@ -56,7 +56,7 @@ export class OrdersComponent implements OnInit, OnChanges {
     });
   }
 
-  removeCartItem(item: Cart) {
+  removeCartItem(item: CartItem) {
     this.cartService.removeFromCart(item);
   }
 
