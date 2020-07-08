@@ -27,11 +27,4 @@
     tr {
         background-color: rgb(240, 240, 240);
     }
-
-    .icon{
-        &:hover{
-            box-shadow: var(--primary-box-shadow);
-            cursor: pointer;    
-        }
-    }
 }

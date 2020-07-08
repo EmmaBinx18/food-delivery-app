@@ -1,5 +1,6 @@
 @import '../../../../../assets/styles/table.scss';
 @import '../../../../../assets/styles/common.scss';
+@import '../../../../../assets/styles/map.scss';
 
 .current-delivery{
     border-radius: 6px;
@@ -12,18 +13,3 @@
         font-family: var(--secondary-font-family);
     }
 }
-
-// .deliveries-table{
-//     overflow-y: scroll;
-//     width: 100%;
-
-//     table{
-//         width: 95%;
-//         max-height: 40vh;
-//         border-spacing: 0 8px;
-//     }
-
-//     tr {
-//         background-color: rgb(240, 240, 240);
-//     }
-// }

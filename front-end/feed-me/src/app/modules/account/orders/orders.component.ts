@@ -4,6 +4,7 @@ import { CartItem } from "src/app/core/models/cart-item.model";
 import { CartService } from "src/app/core/services/cart.service";
 import { OrdersService } from 'src/app/core/services/orders.service';
 import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
+import { CommonService } from 'src/app/core/services/common.service';
 
 @Component({
   selector: "app-orders",
@@ -26,6 +27,7 @@ export class OrdersComponent implements OnInit, OnChanges {
   constructor(
     private cartService: CartService,
     private orderService: OrdersService,
+    private commonService: CommonService,
     public snackbarService: SnackbarService
   ) { }
 
@@ -39,6 +41,7 @@ export class OrdersComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     Object.keys(changes).forEach(key => {
       if (changes[key].currentValue.length !== 0) {
+        this.commonService.formatDate(this.orders);
         this.loading = false;
       }
     });
@@ -76,5 +79,9 @@ export class OrdersComponent implements OnInit, OnChanges {
       .catch(() => {
         this.snackbarService.error('Your order could not be submitted. Please try again later.');
       });
+  }
+
+  pay(order: any) {
+
   }
 }

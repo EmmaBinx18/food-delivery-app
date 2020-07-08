@@ -12,12 +12,14 @@
         </tr>
       </table>
       <div class="info">
-        <div class="address">
+        <select>
+          <option *ngFor="let address of addresses">{{address.address}}</option>
+        </select>
+        <!-- <div class="address">
           <h3>Your order will be sent to the following address:</h3>
-          <!-- <h3>{{ addresses[0].address }}</h3> -->
-          <h3>24 Northfields Estas, scott street, randpark ridge</h3>
-          <br />
-        </div>
+        <h3>24 Northfields Estas, scott street, randpark ridge</h3>
+        <br /> -->
+        <!-- </div> -->
         <div class="checkout">
           <h3>Subtotal: R{{ subtotal }}</h3>
           <h4>{{ itemsTotal }} items</h4>
@@ -45,6 +47,7 @@
           <td>{{order.orderDateTime}}</td>
           <td>{{order.products.length}} items</td>
           <td>{{order.orderStatus}}</td>
+          <td><button (click)="pay(order)" class="button yellow pay">Pay</button></td>
         </tr>
       </table>
     </div>

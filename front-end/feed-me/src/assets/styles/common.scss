@@ -134,7 +134,8 @@ h1, h2, h3, h4, h5{
 
 .icon {
     &:hover {
-      cursor: pointer;
+        width: 2.5rem;
+        cursor: pointer;
     }
     align-self: center;
     width: 2.4rem;

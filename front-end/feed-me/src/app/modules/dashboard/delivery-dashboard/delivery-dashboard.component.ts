@@ -42,6 +42,7 @@ export class DeliveryDashboardComponent implements OnInit {
 
   showDelivery(delivery: any) {
     this.deliveryDisplay = true;
+    this.delivery = delivery;
   }
 
 }

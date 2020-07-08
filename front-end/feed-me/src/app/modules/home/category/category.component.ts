@@ -33,6 +33,7 @@ export class CategoryComponent implements OnInit {
   scrollAndGet() {
     window.scroll(0, 0);
     this.error = false;
+    this.loading = true;
     this.businesses = [];
     this.sortCategories();
     this.getBusinesses();

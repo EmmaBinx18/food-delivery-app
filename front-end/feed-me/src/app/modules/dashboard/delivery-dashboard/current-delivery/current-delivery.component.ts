@@ -12,10 +12,6 @@ export class CurrentDeliveryComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
-  }
-
-  acceptDelivery(delivery: any) {
 
   }
 
