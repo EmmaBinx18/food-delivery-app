@@ -5,6 +5,7 @@ import * as MapboxGeocoder from 'mapbox-gl-geocoder'
 import * as MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 import { AddressService } from './address.service';
 import { UserService } from './user.service';
+import { OrdersService } from './orders.service';
 
 
 @Injectable({
@@ -20,9 +21,41 @@ export class MapboxService {
   address: any
   marker: any
   coordinates : any
+  geoJson : any = {}
+  destination: any = [];
 
-  constructor(public addressService: AddressService, public userService: UserService) {
+  constructor(public addressService: AddressService, public userService: UserService, private ordersService : OrdersService) {
     mapboxgl.accessToken = environment.mapbox.accessToken;
+  }
+
+  loadLocationMarkers(){
+    return this.ordersService.getActiveOrderReadyProducts('1').then(response => {
+
+      this.destination = response[0].coordinates;
+      let features = [];
+      console.log(response)
+      response[0].locations.forEach(element => {
+        features.push(this.mapOrderReadyProduct(element))
+      });
+
+      Object.assign(this.geoJson,{type: 'FeatureCollection',features});
+      
+    });
+  }
+
+  mapOrderReadyProduct(location: any) {
+    return {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: location.coordinates
+      },
+      properties: {
+        title: location.businessName,
+        description: 'hi im a description',
+        icon: 'restaurant'
+      }
+    }
   }
 
   renderAddressMap(map: mapboxgl.Map){
@@ -182,12 +215,31 @@ export class MapboxService {
     map.on('load', () => {
       //console.log('calling map.onload');
 
+      map.addSource('points' , { 
+        'type' : 'geojson',
+        'data' : this.geoJson});
+        ;
+      map.addLayer({
+        'id': 'points',
+        'type': 'symbol',
+        'source': 'points',
+        'layout': {
+          // get the icon name from the source's "icon" property
+          // concatenate the name to get an icon from the style's sprite sheet
+          'icon-image': ['concat', ['get', 'icon'], '-15'],
+          // get the title name from the source's "title" property
+          'text-field': ['get', 'title'],
+          'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+          'text-offset': [0, 0.6],
+          'text-anchor': 'top'
+        }
+      });
       geolocate.trigger();
 
 
       geolocate.on('geolocate', (e) => {
         this.coordinates = [e.coords.longitude, e.coords.latitude];
-          console.log(this.coordinates)
+          //console.log(this.coordinates)
         //console.log(this.address)
       });
 
@@ -195,49 +247,22 @@ export class MapboxService {
 
     });
     
+    // console.log(geojson)
 
-    var geojson = {
-      type: 'FeatureCollection',
-      features: [{
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [18.5067, -33.8892]
-        },
-        properties: {
-          title: 'Canal Walk',
-          description: ''
-        }
-      },
-      {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [18.5098, -33.8825]
-        },
-        properties: {
-          title: 'Sable Square',
-          description: ''
-        }
-      }]
-    };
+    // this.geoJson.features.forEach( (marker)=> {
 
-    console.log(geojson)
-
-    geojson.features.forEach( (marker)=> {
-
-      console.log(marker);
-      // create a HTML element for each feature
-      var el = document.createElement('div');
-      el.className = 'marker';
+    //   // console.log(marker);
+    //   // create a HTML element for each feature
+    //   var el = document.createElement('div');
+    //   el.className = 'marker';
     
-      var m = new mapboxgl.Marker({
-        draggable: false
-      })
-      .setLngLat(marker.geometry.coordinates)
-      .addTo(map);
+    //   var m = new mapboxgl.Marker({
+    //     draggable: false
+    //   })
+    //   .setLngLat(marker.geometry.coordinates)
+    //   .addTo(map);
         
-    });
+    // });
   }
 
   renderDrivingMap(map: mapboxgl.Map){
@@ -274,11 +299,11 @@ export class MapboxService {
     var directions = new MapboxDirections({
       accessToken: mapboxgl.accessToken,
       interactive: false,
-      profile : 'mapbox/driving-traffic',
+      profile : 'mapbox/driving',
       unit  : 'metric',
       controls :{
         inputs : false,
-        instructions : false
+        instructions : true
       },
       zoom:20
 
@@ -290,93 +315,72 @@ export class MapboxService {
     map.on('load', () => {
       //console.log('calling map.onload');
 
+      
+      // this.geoJson.features.forEach( (marker)=> {
+  
+        
+      //   console.log(marker);
+      //   // create a HTML element for each feature
+      //   var el = document.createElement('div');
+      //   el.className = 'marker';
+      
+      //   var m = new mapboxgl.Marker({
+      //     draggable: false
+      //   })
+      //   .setLngLat(marker.geometry.coordinates)
+      //   .addTo(map);
+          
+      // });
+
       geolocate.trigger();
 
       var locationSet = false;
       geolocate.on('geolocate', (e) => {
         this.coordinates = [e.coords.longitude, e.coords.latitude];
-          console.log(this.coordinates)
+          // console.log(this.coordinates)
           if(this.coordinates && !locationSet){
             locationSet = true
             directions.setOrigin(this.coordinates);
-            directions.addWaypoint(0,[18.5067, -33.8892])
-            directions.setDestination([18.5098, -33.8825]);
 
-            console.log(directions)
-            // directions.query();
-
+            var i = 0;
+            this.geoJson.features.forEach( (marker)=> {         
+              directions.addWaypoint(i,marker.geometry.coordinates)
+              i++;
+              });
+            directions.setDestination(this.destination);
           }
-         
-        //console.log(this.address)
       });
-
-
-
-      
-
-
     });
-    
 
-    var geojson = {
-      type: 'FeatureCollection',
-      features: [{
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [18.5067, -33.8892]
-        },
-        properties: {
-          title: 'Canal Walk',
-          description: ''
-        }
-      },
-      {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [18.5098, -33.8825]
-        },
-        properties: {
-          title: 'Sable Square',
-          description: ''
-        }
-      }]
-    };
-
-    console.log(geojson)
-
-    geojson.features.forEach( (marker)=> {
-
-      console.log(marker);
-      // create a HTML element for each feature
-      var el = document.createElement('div');
-      el.className = 'marker';
-    
-      var m = new mapboxgl.Marker({
-        draggable: false
-      })
-      .setLngLat(marker.geometry.coordinates)
-      .addTo(map);
-        
-    });
   }
 
+  // renderTrackingMap(mapL)
   buildMap(map: mapboxgl.Map, type?: string) {
    
-    // if (type == 'address') {
-    //   this.renderAddressMap(map);
-    //   return;
-    // }
+    if (type == 'address') {
+      this.renderAddressMap(map);
+      return;
+    }
 
-    // if(type=='driver')
-    // {
-    //   this.renderDriverMap(map);
-    //   return;
-    // }
+    if(type=='driver')
+    {
+      this.loadLocationMarkers().then(() => {
+        this.renderDriverMap(map);
+        return;
+      });
+     
+      
+    }
 
-    // this.renderDrivingMap(map);
-    //   return;
+    if(type=='directions')
+    {
+      this.loadLocationMarkers().then(() => {
+        this.renderDrivingMap(map);
+        return;
+      });
+    }
+    
+    
   }
 
 }

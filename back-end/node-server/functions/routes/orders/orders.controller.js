@@ -71,4 +71,18 @@ router.post('/assignDriver', (req, res) => {
     }
 });
 
+router.get('/activeOrderReadyProducts/:orderId', (req, res) => {
+    logger.info('GET ACTIVE ORDER READY PRODUCTS');
+    try {
+        db.executeStoredProcedure(sp.GET_ACTIVE_ORDER_READY_PRODUCTS, { orderId: '1' }, (data) => {
+            console.log(data)
+            return res.status(200).send(data);
+        });
+    }
+    catch (error) {
+        logger.error('GET ACTIVE ORDER READY PRODUCTS ERROR', error);
+        return res.status(500).send(error);
+    }
+});
+
 module.exports = router;

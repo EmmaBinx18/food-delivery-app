@@ -15,7 +15,7 @@ export class TrackingMapComponent implements OnInit {
   map: mapboxgl.Map;
 
   ngOnInit(): void {
-    this.mapService.buildMap(this.map,'tracking')
+    this.mapService.buildMap(this.map,'driver')
   }
 
 }

@@ -23,7 +23,7 @@ const GET_PRODUCTS_CATEGORY = 'p_Get_Products_Category';
 
 const CREATE_ORDER = 'p_Create_Order';
 const GET_DELIVERY_READY_ORDERS = 'p_Get_Delivery_Ready_Orders';
-const GET_ACTIVE_ORDER_PRODUCTS = 'p_Get_Active_Order_Products';
+const GET_ACTIVE_ORDER_READY_PRODUCTS = 'p_Get_Active_Order_Ready_Products';
 const COMPLETE_ORDER_PRODUCT = 'p_Complete_Order_Product';
 const ASSIGN_ORDER_DRIVER = 'p_Assign_Order_Driver';
 
@@ -42,7 +42,7 @@ module.exports = {
     ADD_TO_BUSINESS,
     ADD_TO_ROLE,
     GET_DELIVERY_READY_ORDERS,
-    GET_ACTIVE_ORDER_PRODUCTS,
+    GET_ACTIVE_ORDER_READY_PRODUCTS,
     CREATE_ORDER,
     COMPLETE_ORDER_PRODUCT,
     ASSIGN_ORDER_DRIVER,

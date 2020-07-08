@@ -37,6 +37,10 @@ export class OrdersService {
     return this.http.get(`api/orders/${businessId}`).toPromise();
   }
 
+  getActiveOrderReadyProducts(orderId: string) {
+    return this.http.get(`api/orders/activeOrderReadyProducts/${orderId}`).toPromise();
+  }
+
   getProductsForOrder(orderId: number) {
     return [
       {
