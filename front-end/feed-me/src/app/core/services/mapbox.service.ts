@@ -15,7 +15,7 @@ export class MapboxService {
 
   lat = 45.899977;
   lng = 6.172652;
-  style = 'mapbox://styles/mapbox/streets-v11';
+  style = 'mapbox://styles/feedmewebapp/ckcdsif0n09pi1iqrf7lgp9ka';
   zoom = 5;
   minzoom = 10;
   address: any
@@ -53,7 +53,7 @@ export class MapboxService {
       properties: {
         title: location.businessName,
         description: 'hi im a description',
-        icon: 'restaurant'
+        icon: 'car'
       }
     }
   }
