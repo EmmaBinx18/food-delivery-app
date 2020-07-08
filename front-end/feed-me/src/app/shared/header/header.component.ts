@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.role = this.authService.getCurrentRole();
-    this.role = Role.Delivery;
+    this.role = Role.HomeChef;
   }
 
   logout() {

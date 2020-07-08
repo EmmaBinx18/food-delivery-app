@@ -33,6 +33,8 @@ const GET_ACTIVE_ORDER_PRODUCTS = 'p_Get_Active_Order_Products';
 const COMPLETE_ORDER_PRODUCT = 'p_Complete_Order_Product';
 const ASSIGN_ORDER_DRIVER = 'p_Assign_Order_Driver';
 const GET_DRIVER_ORDER = 'p_Get_Driver_Order';
+const CREATE_PAYMENT = 'p_Create_Payment';
+const TRACK_ORDER = 'p_Track_Order';
 
 const ADD_TO_DRIVER_ROLE = 'p_Add_To_Driver_Role';
 const GET_DRIVER = 'p_Get_Driver';
@@ -68,5 +70,7 @@ module.exports = {
     DELINK_USER_ADDRESS,
     GET_PREVIOUS_USER_ORDERS,
     GET_DRIVER_ORDER,
-    UPDATE_PRODUCT_STATUS
+    UPDATE_PRODUCT_STATUS,
+    CREATE_PAYMENT,
+    TRACK_ORDER
 }

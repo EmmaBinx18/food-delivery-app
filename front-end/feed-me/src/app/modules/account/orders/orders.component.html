@@ -46,11 +46,19 @@
         <tr *ngFor="let order of orders">
           <td>{{order.orderDateTime}}</td>
           <td>{{order.products.length}} items</td>
-          <td>{{order.orderStatus}}</td>
-          <td><button (click)="pay(order)" class="button yellow pay">Pay</button></td>
+          <td *ngIf="order.orderStatus == 'Awaiting_payment'"><button (click)="pay(order)"
+              class="button yellow pay">Pay</button></td>
+          <td *ngIf="order.orderStatus == 'Products_not_ready'"><button (click)="track(order)"
+              class="button yellow pay">Track Order</button></td>
         </tr>
       </table>
     </div>
     <h3 *ngIf="!loading && error">An error occurred loading your previous orders</h3>
+  </div>
+  <div class="tracking-order" id="tracking">
+    <div *ngIf="tracking">
+      <app-track-order [order]="order" (closeTrackingEmitter)="closeTracking()">
+      </app-track-order>
+    </div>
   </div>
 </div>

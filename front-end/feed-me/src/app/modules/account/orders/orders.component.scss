@@ -5,15 +5,20 @@
 .orders {
   @extend .container;
   
-  .current-order,
-  .order-history {
-    width: 48%;
-    max-height: 70vh;
+  .current-order, .order-history, .tracking-order {
+    width: 95%;
+    margin-bottom: 2%;
     @extend .white-container;
-    @media(max-width: 1000px){
-      width: 95%; 
-      margin-bottom: 4%;
-    }
+  }
+
+  .current-order, .order-history{
+    max-height: 65vh;
+    @media(max-width: 900px){max-height: 40vh;}
+  }
+
+  .tracking-order{
+    scroll-margin: -160px;
+    div{width: 100%}
   }
 
   .current-order {
@@ -54,17 +59,8 @@ button {
 }
 
 .order-table, .history-table {
-  overflow: scroll;
-  width: 100%;
-
-  table {
-    width: 92%;
-    border-spacing: 0 8px;
-  }
-
-  tr {
-    background-color: rgb(240, 240, 240);
-  }
+  @extend .table-container;
+  tr {background-color: rgb(240, 240, 240);}
 
   .icon{margin-top: 10%;}
   .pay{width: 100%;}

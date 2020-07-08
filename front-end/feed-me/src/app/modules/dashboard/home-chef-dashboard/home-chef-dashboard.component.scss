@@ -1,13 +1,17 @@
-.home-chef-dashboard{
-    display: flex;
-    width: 92%;
-    margin: auto;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 4%;
+@import '../../../../assets/styles/common.scss';
+@import '../dashboard.component.scss';
 
-    app-products, app-orders{
-        flex-grow: 1;
-        margin: 1%;
+.home-chef-dashboard{
+  @extend .container;
+  margin: auto;
+
+  app-products, app-orders{
+    width: 48%;
+    max-height: 70vh;
+    @extend .white-container;
+    @media(max-width: 1000px){
+      width: 100%; 
+      margin-bottom: 4%;
     }
+  }
 }

@@ -1,9 +1,17 @@
+.table-container{
+  width: 100%;
+  overflow: scroll;
+  min-height: auto;
+}
+
 table {
   text-align: center;
   margin: auto;
   margin-top: 2%;
   margin-bottom: 2%;
   border-collapse: separate;
+  width: 95%;
+  border-spacing: 0 8px;
 
   tr {
     box-shadow: var(--primary-box-shadow);
@@ -14,7 +22,7 @@ table {
   td {
     font-size: 1.1rem;
     font-family: var(--secondary-font-family);
-    padding: 16px;
+    padding: 14px;
 
     @media (max-width: 900px) {font-size: 0.9rem; padding: 12px;}
     @media (max-width: 600px) {font-size: 0.8rem; padding: 8px;}

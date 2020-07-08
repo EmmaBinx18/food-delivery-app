@@ -13,6 +13,7 @@ export class MapComponent implements OnInit {
 
   @Input() type: string;
   @Input() delivery?: any;
+  @Input() order?: any;
 
   map: mapboxgl.Map;
 
@@ -33,9 +34,9 @@ export class MapComponent implements OnInit {
   }
 
   trackingMap() {
-    // this.mapService.loadLocationMarkers().then(() => {
-    //   this.mapService.renderTrackingMap(this.map);
-    // });
+    this.mapService.getTrackingOrder(this.order.orderId).then(() => {
+      this.mapService.renderTrackingMap(this.map);
+    });
   }
 
   driverMap() {

@@ -72,6 +72,32 @@ router.post('/', (req, res) => {
     }
 });
 
+router.post('/pay', (req, res) => {
+    logger.info('MAKE ORDER PAYMENT');
+    try {
+        db.executeStoredProcedure(sp.CREATE_PAYMENT, req.body.params, (data) => {
+            return res.status(200).send(data);
+        });
+    }
+    catch (error) {
+        logger.error('MAKE ORDER PAYMENT ERROR', error);
+        return res.status(500).send(error);
+    }
+});
+
+router.post('/trackOrder', (req, res) => {
+    logger.info('TRACK ORDER PAYMENT');
+    try {
+        db.executeStoredProcedure(sp.TRACK_ORDER, { orderId: req.body.params }, (data) => {
+            return res.status(200).send(data);
+        });
+    }
+    catch (error) {
+        logger.error('TRACK ORDER ERROR', error);
+        return res.status(500).send(error);
+    }
+});
+
 router.post('/completeOrder', (req, res) => {
     logger.info('COMPLETE ORDER PRODUCT');
     try {
