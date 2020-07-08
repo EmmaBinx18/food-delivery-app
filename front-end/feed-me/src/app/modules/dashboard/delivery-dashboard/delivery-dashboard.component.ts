@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DeliveryService } from 'src/app/core/services/delivery.service';
 import { AuthService } from 'src/app/core/authentication/authentication.service';
 import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
+import { OrdersService } from 'src/app/core/services/orders.service';
 
 @Component({
   selector: 'app-delivery-dashboard',
@@ -12,6 +13,7 @@ import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 export class DeliveryDashboardComponent implements OnInit {
 
   delivery: any = {};
+  order: any = null;
   deliveries: any = [];
 
   deliveriesError: boolean = false;
@@ -19,6 +21,7 @@ export class DeliveryDashboardComponent implements OnInit {
 
   constructor(
     private deliveryService: DeliveryService,
+    private ordersService: OrdersService,
     private authService: AuthService,
     public snackbarService: SnackbarService
   ) { }
@@ -40,9 +43,20 @@ export class DeliveryDashboardComponent implements OnInit {
       })
   }
 
+  getOrder(orderId: string) {
+    this.ordersService.getActiveOrderReadyProducts(orderId)
+      .then(response => {
+        this.order = response;
+      })
+      .catch(() => {
+        this.snackbarService.error('Could not load your current delivery. Please try again.');
+      })
+  }
+
   showDelivery(delivery: any) {
     this.deliveryDisplay = true;
     this.delivery = delivery;
+    this.getOrder(delivery.orderId);
   }
 
 }

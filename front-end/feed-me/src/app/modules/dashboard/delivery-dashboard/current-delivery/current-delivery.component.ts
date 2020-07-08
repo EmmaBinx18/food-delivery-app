@@ -9,13 +9,19 @@ import { MapboxService } from 'src/app/core/services/mapbox.service';
 export class CurrentDeliveryComponent implements OnChanges {
 
   @Input() delivery: any;
+  @Input() order: any;
+
+  loading: boolean = true;
 
   constructor(public mapboxService: MapboxService) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.delivery.currentValue) {
-
-    }
+    Object.keys(changes).forEach(key => {
+      if (key == 'order' && changes[key].currentValue != null) {
+        this.order = this.order[0];
+        this.loading = false;
+      }
+    });
   }
 
 }

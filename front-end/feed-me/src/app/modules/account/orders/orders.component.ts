@@ -23,6 +23,7 @@ export class OrdersComponent implements OnInit, OnChanges {
   loading: boolean = true;
   tracking: boolean = false;
   order: any = null;
+  address: string = '';
 
   @Output() changeDisplayEmitter = new EventEmitter();
   @Output() refreshOrderEmitter = new EventEmitter();
@@ -49,6 +50,10 @@ export class OrdersComponent implements OnInit, OnChanges {
         this.loading = false;
       }
     });
+  }
+
+  setAddress(event: any) {
+    this.address = event.target.value;
   }
 
   getSubTotal(order: any, total: number) {

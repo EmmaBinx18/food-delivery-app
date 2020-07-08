@@ -13,6 +13,7 @@ import { ModalService } from "src/app/shared/modal/modal.service";
 export class CategoryComponent implements OnInit {
   business: any = {};
   businesses: any = [];
+
   error: boolean = false;
   displayBusiness: boolean = false;
   loading: boolean = true;
@@ -36,7 +37,7 @@ export class CategoryComponent implements OnInit {
     this.loading = true;
     this.businesses = [];
     this.sortCategories();
-    this.getBusinesses();
+    this.getBusinessesByCategory();
   }
 
   sortCategories() {
@@ -45,7 +46,7 @@ export class CategoryComponent implements OnInit {
     });
   }
 
-  getBusinesses() {
+  getBusinessesByCategory() {
     this.homeChefService.getBusinessesByCategory(this.category.categoryId)
       .then(response => {
         this.businesses = response;

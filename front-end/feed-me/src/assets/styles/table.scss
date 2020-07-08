@@ -11,7 +11,7 @@ table {
   margin-bottom: 2%;
   border-collapse: separate;
   width: 95%;
-  border-spacing: 0 8px;
+  border-spacing: 0 1rem;
 
   tr {
     box-shadow: var(--primary-box-shadow);
@@ -22,10 +22,10 @@ table {
   td {
     font-size: 1.1rem;
     font-family: var(--secondary-font-family);
-    padding: 14px;
+    padding: 0.4rem;
 
-    @media (max-width: 900px) {font-size: 0.9rem; padding: 12px;}
-    @media (max-width: 600px) {font-size: 0.8rem; padding: 8px;}
+    @media (max-width: 900px) {font-size: 0.9rem;}
+    @media (max-width: 600px) {font-size: 0.8rem;}
   }
 
   .disabled {
