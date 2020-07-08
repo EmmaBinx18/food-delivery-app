@@ -4,15 +4,11 @@
         <h2>Assigned Deliveries</h2>
         <table *ngIf="deliveries.length != 0">
             <tr *ngFor="let delivery of deliveries">
-                <!-- <td>
-                    <p class="meal-name">{{meal.name}}</p>
+                <td>Order {{delivery.orderId}}</td>
+                <td>{{delivery.OrderDateTime}}</td>
+                <td><img class="icon" src="/assets/icons/checked.png" alt="accept_delivery"
+                        (click)="acceptDelivery(delivery)" />
                 </td>
-                <td class="description">{{meal.description}}</td>
-                <td>R{{meal.price}}</td>
-                <td>{{meal.minPrepareTime}} minutes</td>
-                <td><img class="icon" src="/assets/icons/trash.png" alt="remove_product"
-                        (click)="removeProduct(meal)" />
-                </td> -->
             </tr>
         </table>
     </div>

@@ -29,7 +29,7 @@ module.exports = {
     },
     returnChecker(data) {
         const response = this.mapReturnData(data);
-        if (response == null || response == undefined) {
+        if (!response || response.length == 0) {
             return [];
         }
         return JSON.parse(response);

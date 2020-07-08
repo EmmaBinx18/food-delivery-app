@@ -25,6 +25,7 @@ const GET_ACTIVE_ORDER_READY_PRODUCTS = 'p_Get_Active_Order_Ready_Products';
 
 const CREATE_UPDATE_PRODUCT = 'p_Create_Update_Product';
 const GET_PRODUCTS_CATEGORY = 'p_Get_Products_Category';
+const UPDATE_PRODUCT_STATUS = 'p_Update_Product_Status';
 
 const CREATE_ORDER = 'p_Create_Order';
 const GET_DELIVERY_READY_ORDERS = 'p_Get_Delivery_Ready_Orders';
@@ -66,5 +67,6 @@ module.exports = {
     GET_DRIVER,
     DELINK_USER_ADDRESS,
     GET_PREVIOUS_USER_ORDERS,
-    GET_DRIVER_ORDER
+    GET_DRIVER_ORDER,
+    UPDATE_PRODUCT_STATUS
 }

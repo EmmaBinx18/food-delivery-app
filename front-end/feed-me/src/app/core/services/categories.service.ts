@@ -23,12 +23,4 @@ export class CategoriesService {
   getDefaultCategories() {
     return DEFAULT_CATEGORIES;
   }
-
-  insertCategory() {
-
-  }
-
-  updateCategory() {
-
-  }
 }

@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { OrdersService } from 'src/app/core/services/orders.service';
 import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
+import { CommonService } from 'src/app/core/services/common.service';
 
 @Component({
   selector: 'app-orders',
@@ -17,13 +18,14 @@ export class OrdersComponent implements OnChanges {
 
   constructor(
     private ordersService: OrdersService,
+    private commonService: CommonService,
     public snackbarService: SnackbarService
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.orders.currentValue.length != 0) {
       this.loading = false;
-      console.log(this.orders);
+      this.commonService.formatDate(this.orders);
     }
   }
 

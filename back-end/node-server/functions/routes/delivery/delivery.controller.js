@@ -22,7 +22,8 @@ router.post('/register', (req, res) => {
 router.get('/:driverId', (req, res) => {
     logger.info('GET DELIVERIES FOR DRIVER');
     try {
-        db.executeStoredProcedure(sp.GET_DRIVER_ORDER, { driverId: req.params.driverId, deliveryStatusId: 1 }, (data) => {
+        db.executeStoredProcedure(sp.GET_DRIVER_ORDER, { driverId: 'driver_uid', deliveryStatusId: 1 }, (data) => {
+            // db.executeStoredProcedure(sp.GET_DRIVER_ORDER, { driverId: req.params.driverId, deliveryStatusId: 1 }, (data) => {
             return res.status(200).send(data);
         });
     }

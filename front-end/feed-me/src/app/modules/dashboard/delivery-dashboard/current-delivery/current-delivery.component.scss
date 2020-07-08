@@ -1,0 +1,15 @@
+@import '../../../../../assets/styles/table.scss';
+@import '../../../../../assets/styles/common.scss';
+@import '../../../../../assets/styles/map.scss';
+
+.current-delivery{
+    border-radius: 6px;
+    @extend .white-container;
+    text-align: center;
+    padding: 25px;
+    margin-top: 2%;
+
+    h2, td{
+        font-family: var(--secondary-font-family);
+    }
+}

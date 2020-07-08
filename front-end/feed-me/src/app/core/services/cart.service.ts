@@ -1,20 +1,20 @@
 import { Injectable, OnInit } from '@angular/core';
 
 import { Product } from '../models/product.model';
-import { Cart } from '../models/cart.model';
+import { CartItem } from '../models/cart-item.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService implements OnInit {
 
-  cart: Cart[] = [];
+  cart: CartItem[] = [];
 
   constructor() { }
 
   ngOnInit() {
     const storage = localStorage.getItem('cart');
-    if (storage !== null) {
+    if (storage) {
       this.cart = JSON.parse(localStorage.getItem('cart'));
     }
     else {
@@ -37,7 +37,7 @@ export class CartService implements OnInit {
     }
   }
 
-  removeFromCart(item: Cart) {
+  removeFromCart(item: CartItem) {
     this.cart.forEach(cartItem => {
       if (cartItem == item) {
         if (item.quantity > 1) {

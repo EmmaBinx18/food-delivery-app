@@ -3,15 +3,15 @@
     <div *ngIf="!loading && !error" class="meals-table">
         <h2>Your Products</h2>
         <table *ngIf="products.length != 0">
-            <tr *ngFor="let meal of products">
+            <tr *ngFor="let product of products">
                 <td>
-                    <p class="meal-name">{{meal.name}}</p>
+                    <p class="meal-name">{{product.name}}</p>
                 </td>
-                <td class="description">{{meal.description}}</td>
-                <td>R{{meal.price}}</td>
-                <td>{{meal.minPrepareTime}} minutes</td>
+                <td class="description">{{product.description}}</td>
+                <td>R{{product.price}}</td>
+                <td>{{product.minPrepareTime}} minutes</td>
                 <td><img class="icon" src="/assets/icons/trash.png" alt="remove_product"
-                        (click)="removeProduct(meal)" />
+                        (click)="removeProduct(product)" />
                 </td>
             </tr>
         </table>

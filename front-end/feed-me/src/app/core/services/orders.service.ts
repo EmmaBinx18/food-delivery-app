@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Cart } from '../models/cart.model';
+import { CartItem } from '../models/cart-item.model';
 import { AuthService } from '../authentication/authentication.service';
 
 @Injectable({
@@ -14,11 +14,11 @@ export class OrdersService {
     private http: HttpClient
   ) { }
 
-  insertOrder(cart: Cart[], addressId) {
+  insertOrder(cart: CartItem[], addressId) {
     return this.http.post(`api/orders`, { params: this.mapOrderObject(cart, addressId) }).toPromise();
   }
 
-  mapOrderObject(cart: Cart[], addressId: string) {
+  mapOrderObject(cart: CartItem[], addressId: string) {
     const order = {
       customerId: this.authService.getCurrentUser().uid,
       addressId: addressId,
