@@ -1,12 +1,13 @@
 @import '../../../../assets/styles/common.scss';
 
 .stats-container{
-    width: 90%;
-    margin: 2% auto auto;
-    border-radius: 6px;
+    width: 92.5%;
+    margin: 2% auto;
     @extend .white-container;
     justify-content: space-evenly;
     flex-direction: row;
+
+    @media(max-width: 1000px){width: 95%;}
 
     @media(max-width: 850px){
         .description{

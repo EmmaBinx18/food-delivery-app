@@ -20,10 +20,6 @@ import { CategoryModule } from './category/category.module';
         HomeRoutingModule,
         MainModule,
         CategoryModule
-    ],
-    entryComponents: [
-        HomeChefRegisterComponent,
-        DeliveryRegisterComponent
     ]
 })
 export class HomeModule { }

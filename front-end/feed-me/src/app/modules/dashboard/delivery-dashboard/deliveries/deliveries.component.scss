@@ -2,28 +2,14 @@
 @import '../../../../../assets/styles/common.scss';
 
 .deliveries{
-    border-radius: 6px;
-    @extend .white-container;
-    text-align: center;
-    padding: 25px;
-    margin-top: 2%;
+    width: 100%;
 
-    h2, td{
+    h2{
         font-family: var(--secondary-font-family);
     }
 }
 
 .deliveries-table{
-    overflow-y: scroll;
-    width: 100%;
-
-    table{
-        width: 95%;
-        max-height: 40vh;
-        border-spacing: 0 8px;
-    }
-
-    tr {
-        background-color: rgb(240, 240, 240);
-    }
+    @extend .table-container;
+    tr {background-color: rgb(240, 240, 240);}
 }

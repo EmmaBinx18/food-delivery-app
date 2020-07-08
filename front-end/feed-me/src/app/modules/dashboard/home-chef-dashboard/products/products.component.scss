@@ -1,41 +1,21 @@
 @import '../../../../../assets/styles/table.scss';
-@import '../../../../../assets/styles/common.scss';
 
 .meals-container{
-    border-radius: 6px;
-    @extend .white-container;
-    text-align: center;
-    padding: 25px;
-    margin-top: 2%;
-
-    h2, td{
+    width: 100%;
+    h2{
         font-family: var(--secondary-font-family);
     }
 }
 
 .meals-table{
-    overflow-y: scroll;
-    width: 100%;
-
-    table{
-        width: 95%;
-        max-height: 40vh;
-        border-spacing: 0 8px;
-    }
-
-    tr {
-        background-color: rgb(240, 240, 240);
-    }
+    @extend .table-container;
+    tr {background-color: rgb(240, 240, 240);}
 
     .meal-name{
         color: white;
         background-color: var(--primary-green);
         border-radius: 6px;
         padding: 10px;
-    }
-
-    .description{
-        @media(max-width: 850px){display: none;}
     }
 }
 

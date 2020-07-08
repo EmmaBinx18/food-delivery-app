@@ -42,6 +42,32 @@ export class MapboxService {
     });
   }
 
+  getTrackingOrder(orderId: any) {
+    return this.ordersService.trackOrder(orderId)
+      .then(response => {
+        this.destination = response[0].coordinates;
+        let features = [];
+        response[0].locations.forEach(element => {
+          features.push(this.mapOrderReadyProduct(element))
+        });
+        const destination = {
+          businessName: 'Destination',
+          coordinates: this.destination
+        }
+        const driver = {
+          businesName: 'Driver',
+          coordinates: response[0].driverCoordinates
+        }
+        features.push(this.mapOrderReadyProduct(destination));
+
+        if (response[0].driverCoordinates) {
+          features.push(this.mapOrderReadyProduct(driver));
+        }
+
+        Object.assign(this.geoJson, { type: 'FeatureCollection', features });
+      });
+  }
+
   mapOrderReadyProduct(location: any) {
     return {
       type: 'Feature',
@@ -51,8 +77,8 @@ export class MapboxService {
       },
       properties: {
         title: location.businessName,
-        description: 'hi im a description',
-        icon: 'restaurant'
+        description: '',
+        icon: 'restaurant',
       }
     }
   }

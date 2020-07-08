@@ -48,4 +48,12 @@ export class OrdersService {
   postCompleteOrder(order: any) {
     return this.http.post(`api/orders/completeOrder`, { params: { productId: order.productId, orderId: order.OrderId } }).toPromise();
   }
+
+  makeOrderPayment(orderId: string, amount: number) {
+    return this.http.post(`api/orders/pay`, { params: { paymentTypeid: 1, amount, orderId } }).toPromise();
+  }
+
+  trackOrder(orderId: any) {
+    return this.http.post(`api/orders/trackOrder`, { params: orderId }).toPromise();
+  }
 }

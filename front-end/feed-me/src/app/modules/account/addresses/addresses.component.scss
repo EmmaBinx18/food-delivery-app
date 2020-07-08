@@ -26,16 +26,6 @@
 }
 
 .addresses-table {
-  width: 100%;
-  max-height: 40vh;
-  overflow: scroll;
-
-  table {
-    width: 92%;
-    border-spacing: 0 8px;
-  }
-
-  tr {
-    background-color: rgb(240, 240, 240);
-  }
+  @extend .table-container;
+  tr {background-color: rgb(240, 240, 240);}
 }

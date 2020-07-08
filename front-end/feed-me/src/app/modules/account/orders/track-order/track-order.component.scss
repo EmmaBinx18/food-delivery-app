@@ -1,0 +1,15 @@
+@import '../../../../../assets/styles/map.scss';
+
+:host, .track-order{
+    width: 100%;
+    position: relative;
+}
+
+.icon {
+    position: absolute;
+    right: 2%;
+}
+
+.map{
+    width: 100%;
+}

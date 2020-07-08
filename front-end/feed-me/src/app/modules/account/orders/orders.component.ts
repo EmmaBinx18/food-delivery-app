@@ -5,6 +5,7 @@ import { CartService } from "src/app/core/services/cart.service";
 import { OrdersService } from 'src/app/core/services/orders.service';
 import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 import { CommonService } from 'src/app/core/services/common.service';
+import { ModalService } from 'src/app/shared/modal/modal.service';
 
 @Component({
   selector: "app-orders",
@@ -20,6 +21,8 @@ export class OrdersComponent implements OnInit, OnChanges {
   subtotal: number = 0;
   itemsTotal: number = 0;
   loading: boolean = true;
+  tracking: boolean = false;
+  order: any = null;
 
   @Output() changeDisplayEmitter = new EventEmitter();
   @Output() refreshOrderEmitter = new EventEmitter();
@@ -28,13 +31,14 @@ export class OrdersComponent implements OnInit, OnChanges {
     private cartService: CartService,
     private orderService: OrdersService,
     private commonService: CommonService,
-    public snackbarService: SnackbarService
+    public snackbarService: SnackbarService,
+    public modalService: ModalService
   ) { }
 
   ngOnInit() {
     this.loading = true;
     this.currentOrder = this.cartService.cart;
-    this.getSubTotal();
+    this.getSubTotal(this.currentOrder, this.itemsTotal);
     this.getItemsTotal();
   }
 
@@ -47,9 +51,9 @@ export class OrdersComponent implements OnInit, OnChanges {
     });
   }
 
-  getSubTotal() {
-    this.currentOrder.forEach((item) => {
-      this.subtotal += item.product.price * item.quantity;
+  getSubTotal(order: any, total: number) {
+    order.forEach((item) => {
+      total += item.product.price * item.quantity;
     });
   }
 
@@ -82,6 +86,34 @@ export class OrdersComponent implements OnInit, OnChanges {
   }
 
   pay(order: any) {
+    this.orderService.makeOrderPayment(order.orderId, this.getOrderPrice(order))
+      .then(() => {
+        this.snackbarService.success('Payment successful');
+        this.refreshOrderEmitter.emit();
+      })
+      .catch(() => {
+        this.snackbarService.error('Could not make payment. Please try again later.');
+      });
+  }
 
+  getOrderPrice(order: any) {
+    let total = 0;
+    this.orders.forEach(item => {
+      if (item == order) {
+        this.getSubTotal(item, total);
+      }
+    });
+    return total;
+  }
+
+  track(order: any) {
+    this.tracking = true;
+    this.order = order;
+    document.getElementById('tracking').scrollIntoView({ behavior: "smooth" });
+  }
+
+  closeTracking() {
+    this.tracking = false;
+    this.order = null;
   }
 }

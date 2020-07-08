@@ -1,1 +1,10 @@
-<p>track-order works!</p>
+<div class="track-order">
+    <img src="/assets/icons/grey-icons/close.svg" class="icon" alt="close_tracking" (click)="closeTracking()" />
+    <h2>TRACKING ORDER</h2>
+    <app-loader *ngIf="loading"></app-loader>
+    <div *ngIf="!loading">
+        <div class="map">
+            <app-map [type]="'tracking'" [order]="order"></app-map>
+        </div>
+    </div>
+</div>
