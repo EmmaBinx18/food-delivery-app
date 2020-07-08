@@ -52,13 +52,9 @@ header{
                     @media(max-width: 800px){font-size: 1rem;}
                 }
                 
-                img{
+                .icon{
                     display: none;
-                    @media(max-width: 800px){
-                        display: inline;
-                        width: 35px;
-                    }
-                    @media(max-width: 550px){width: 30px;}
+                    @media(max-width: 800px){display: inline;}
                 }
             }
 
@@ -87,9 +83,8 @@ header{
 .menu-icons {
     display: none;
     cursor: pointer;
-    width: 35px;
+    width: 2rem;
     margin-left: 1rem;
-    @media(max-width: 400px){width: 30px;}
     @media(max-width: 800px){display: block;}
 
     &.closed{

@@ -1,4 +1,5 @@
 @import '../../../assets/styles/common.scss';
+@import '../../../assets/styles/forms.scss';
 
 .form-container{
     width: 60%;
@@ -14,6 +15,7 @@
     }
 }
 
-.error{
-    margin-top: 3%;
+.login-error{
+    @extend .error;
+    margin-top: 5%;
 }

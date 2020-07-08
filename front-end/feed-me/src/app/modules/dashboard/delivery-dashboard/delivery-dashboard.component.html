@@ -1,0 +1,4 @@
+<div class="delivery-dashboard">
+    <app-deliveries [deliveries]="deliveries" [error]="deliveriesError"></app-deliveries>
+    <app-current-delivery *ngIf="deliveryDisplay" [delivery]="delivery"></app-current-delivery>
+</div>

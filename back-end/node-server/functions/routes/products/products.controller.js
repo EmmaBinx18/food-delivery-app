@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
     }
 });
 
-router.get('/:businessId', (req, res) => {
+router.get('/business/:businessId', (req, res) => {
     logger.info('GET ALL PRODUCTS FOR A BUSINESS');
     try {
         db.executeStoredProcedure(sp.GET_PRODUCTS_BUSINESS, { businessId: req.params.businessId }, (data) => {

@@ -1,6 +1,5 @@
 @import './assets/styles/variables.scss';
 @import './assets/styles/common.scss';
-@import './assets/styles/forms.scss';
 
 body, html{
     padding: 0;
@@ -17,4 +16,9 @@ html{
 
 *:focus {
     outline: 0 !important;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }

@@ -1,0 +1,25 @@
+@import '../../../../assets/styles/common.scss';
+@import '../../../../assets/styles/forms.scss';
+@import '../account.component.scss';
+
+.profile{
+    @extend .container;
+
+    .update-profile, .change-password{
+        width: 48%;
+        max-height: 70vh;
+        @extend .white-container;
+        @media(max-width: 1000px){
+          width: 95%; 
+          margin-bottom: 4%;
+        }
+    }
+}
+
+.form-container{
+    width: 100%;
+}
+
+.error{
+    margin-top: 3%;
+}

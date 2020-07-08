@@ -1,0 +1,29 @@
+@import '../../../../assets/styles/common.scss';
+
+.stats-container{
+    width: 90%;
+    margin: 2% auto auto;
+    border-radius: 6px;
+    @extend .white-container;
+    justify-content: space-evenly;
+    flex-direction: row;
+
+    @media(max-width: 850px){
+        .description{
+            display: none;
+
+            &:hover{
+                //Add tooltip
+            }
+        }
+    }
+
+    div{
+        text-align: center;
+        font-family: var(--secondary-font-family);
+
+        .stats{
+            color: var(--primary-green)
+        }
+    }
+}

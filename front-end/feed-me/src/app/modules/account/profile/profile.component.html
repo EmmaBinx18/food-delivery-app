@@ -1,0 +1,46 @@
+<div class="profile">
+    <div class="update-profile">
+        <div class="form-container">
+            <app-loader *ngIf="loading && !error"></app-loader>
+            <form *ngIf="!loading && !error" [formGroup]="profileForm" (ngSubmit)="saveChanges()">
+                <h2>Profile Details</h2>
+                <div class="form-group">
+                    <div class="controls">
+                        <input type="text" id="firstname" placeholder="Firstname" class="form-control"
+                            formControlName="firstname"
+                            [ngClass]="{ 'error-outline': (profileForm.controls.firstname.errors?.required && profileForm.controls.firstname.dirty) }">
+                    </div>
+                    <div class="controls">
+                        <input type="text" id="lastname" placeholder="Lastname" class="form-control"
+                            formControlName="lastname"
+                            [ngClass]="{ 'error-outline': (profileForm.controls.lastname.errors?.required && profileForm.controls.lastname.dirty) }">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="controls">
+                        <input type="text" id="phone" placeholder="Phone" class="form-control" formControlName="phone"
+                            [ngClass]="{ 'error-outline': (profileForm.controls.phone.errors?.required && profileForm.controls.phone.dirty)
+                            || (profileForm.controls.phone.errors?.pattern && profileForm.controls.phone.dirty) }">
+                    </div>
+                    <div class="controls">
+                        <input type="text" id="email" placeholder="Email" class="form-control" formControlName="email"
+                            [ngClass]="{ 'error-outline': (profileForm.controls.email.errors?.required && profileForm.controls.email.dirty)
+                            || (profileForm.controls.email.errors?.pattern && profileForm.controls.email.dirty) }">
+
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <button class="button yellow button-spacing" type="submit" [disabled]="profileForm.invalid">Save
+                        Changes</button>
+                </div>
+            </form>
+            <h3 *ngIf="!loading && error">An error occurred loading your profile.</h3>
+        </div>
+    </div>
+    <div class="change-password">
+        <h2>Change Password</h2>
+        <button class="button yellow button-spacing" (click)="changePassword()">Change password</button>
+    </div>
+</div>

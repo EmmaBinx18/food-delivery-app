@@ -16,13 +16,8 @@ table {
     font-family: var(--secondary-font-family);
     padding: 20px;
 
-    @media (max-width: 900px) {
-      font-size: 1rem;
-    }
-    @media (max-width: 600px) {
-      font-size: 0.8rem;
-      padding: 8px;
-    }
+    @media (max-width: 900px) {font-size: 0.9rem; padding: 12px;}
+    @media (max-width: 600px) {font-size: 0.8rem; padding: 8px;}
   }
 
   .disabled {
@@ -33,16 +28,6 @@ table {
       &:hover {
         cursor: not-allowed;
       }
-    }
-  }
-
-  .icon {
-    &:hover {
-      cursor: pointer;
-    }
-    width: 35px;
-    @media (max-width: 600px) {
-      width: 40px;
     }
   }
 }

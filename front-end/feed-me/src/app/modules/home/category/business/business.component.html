@@ -1,29 +1,23 @@
 <div class="business">
-    <app-loader *ngIf="products.length == 0 && !error"></app-loader>
-    <div class="content">
+    <app-loader *ngIf="loading && !error"></app-loader>
+    <div *ngIf="!loading && products.length !== 0 && !error" class="info">
         <button class="back-button" (click)="back()">
             <p>Back</p>
         </button>
-        <div *ngIf="products.length !== 0">
-            <h1>{{business.name}}</h1>
-            <div class="info">
-                <h3>{{category}}</h3>
-                <h3>{{address}}</h3>
-                <h3 [ngClass]="{'closed': operational == 'Closed', 'open': operational == 'Open'}">
-                    {{operational}}</h3>
-            </div>
-        </div>
-        <h2 *ngIf="error">There was an error loading this business. Please try again later.</h2>
-        <h2 *ngIf="operational == 'Closed'">Sorry, this business is currently closed.</h2>
-        <table *ngIf="products.length !== 0">
-            <tr *ngFor="let product of products" [ngClass]="{'disabled': operational == 'Closed'}">
-                <td>{{product.name}}</td>
-                <td class="description">{{product.description}}</td>
-                <td>R{{product.price}}</td>
-                <td class="prep-time">{{product.minPrepareTime}} minutes</td>
-                <td (click)="addtoCart(product)"><img class="icon" src="/assets/icons/cart.png" alt="add_to_cart" />
-                </td>
-            </tr>
-        </table>
+        <h1>{{business.name}}</h1>
+        <h3>{{address}}</h3>
+        <h3 [ngClass]="{'closed': operational == 'Closed', 'open': operational == 'Open'}">
+            {{operational}}</h3>
     </div>
+    <table *ngIf="!loading && products.length !== 0 && !error">
+        <tr *ngFor="let product of products" [ngClass]="{'disabled': operational == 'Closed'}">
+            <td>{{product.name}}</td>
+            <td class="description">{{product.description}}</td>
+            <td>R{{product.price}}</td>
+            <td class="prep-time">{{product.minPrepareTime}} minutes</td>
+            <td (click)="addtoCart(product)"><img class="icon" src="/assets/icons/cart.png" alt="add_to_cart" />
+            </td>
+        </tr>
+    </table>
+    <h3 *ngIf="error">There was an error loading this business. Please try again later.</h3>
 </div>

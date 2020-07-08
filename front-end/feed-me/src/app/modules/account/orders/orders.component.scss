@@ -1,0 +1,68 @@
+@import "../../../../assets/styles/common.scss";
+@import "../../../../assets/styles/table.scss";
+@import '../account.component.scss';
+
+.orders {
+  @extend .container;
+  
+  .current-order,
+  .order-history {
+    width: 48%;
+    max-height: 70vh;
+    @extend .white-container;
+    @media(max-width: 1000px){
+      width: 95%; 
+      margin-bottom: 4%;
+    }
+  }
+
+  .current-order {
+    overflow: scroll;
+
+    .info {
+      width: 95%;
+      display: flex;
+      margin-bottom: 4%;
+    }
+  }
+
+  .add-address {
+    display: block;
+    margin: auto;
+    margin-top: 4%;
+  }
+
+  .address {
+    width: 50%;
+    text-align: start;
+    padding-left: 5%;
+  }
+
+  .checkout {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    h3 {margin-block-end: 0;}
+    h4 {margin-block-start: 0;}
+
+    button {
+      width: 40%;
+    }
+  }
+}
+
+.order-table, .history-table {
+  overflow: scroll;
+  width: 100%;
+
+  table {
+    width: 92%;
+    border-spacing: 0 8px;
+  }
+
+  tr {
+    background-color: rgb(240, 240, 240);
+  }
+}

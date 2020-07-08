@@ -1,0 +1,21 @@
+<div class="deliveries">
+    <app-loader *ngIf="loading && !error"></app-loader>
+    <div *ngIf="!loading && !error" class="deliveries-table">
+        <h2>Assigned Deliveries</h2>
+        <table *ngIf="deliveries.length != 0">
+            <tr *ngFor="let delivery of deliveries">
+                <!-- <td>
+                    <p class="meal-name">{{meal.name}}</p>
+                </td>
+                <td class="description">{{meal.description}}</td>
+                <td>R{{meal.price}}</td>
+                <td>{{meal.minPrepareTime}} minutes</td>
+                <td><img class="icon" src="/assets/icons/trash.png" alt="remove_product"
+                        (click)="removeProduct(meal)" />
+                </td> -->
+            </tr>
+        </table>
+    </div>
+    <h3 *ngIf="!loading && error">An error occurred loading your deliveries</h3>
+    <h3 *ngIf="!loading && deliveries.length == 0">You don't have any deliveries assigned to you yet</h3>
+</div>

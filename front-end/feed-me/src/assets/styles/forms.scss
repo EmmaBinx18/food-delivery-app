@@ -48,8 +48,12 @@ input{
         margin-top: 2%;
     }
 
-    @media(max-height: 850px) and (min-width: 600px){width: 50%;}
     @media(max-width: 500px){width: 80%;}
+
+    &.error-outline{
+        border: 1px solid var(--primary-error);
+        background-color: rgba(223, 79, 79, 0.274);
+    }
 }
 
 select{

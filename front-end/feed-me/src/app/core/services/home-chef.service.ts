@@ -35,8 +35,8 @@ export class HomeChefService {
     return this.http.get(`api/business/operationalStatus`).toPromise();
   }
 
-  getOperationalStatusById(operationId: string) {
-    return this.http.post(`api/business/operationalStatus`, { params: operationId }).toPromise();
+  getOperationalStatusById(operationalStatusId: string) {
+    return this.http.get(`api/business/operationalStatus/${operationalStatusId}`).toPromise();
   }
 
   getAllBusinesses() {
@@ -48,11 +48,11 @@ export class HomeChefService {
   }
 
   getBusinessByUserId(userId: string) {
-    return this.http.post(`api/business/user`, { params: userId }).toPromise();
+    return this.http.get(`api/business/user/${userId}`).toPromise();
   }
 
   getBusinessesByCategory(categoryId: string) {
-    return this.http.post(`api/business/category`, { params: categoryId }).toPromise();
+    return this.http.get(`api/business/category/${categoryId}`).toPromise();
   }
 
   getStats() {

@@ -22,7 +22,7 @@ export class DeliveryRegisterComponent implements OnInit {
     private deliveryService: DeliveryService,
     public modalService: ModalService,
     public snackbarService: SnackbarService,
-    private mapService: MapboxService
+    public mapService: MapboxService
   ) { }
 
   ngOnInit() {
@@ -52,11 +52,11 @@ export class DeliveryRegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       this.deliveryService.registerDeliveryDriver(this.registerForm.value)
         .then(() => {
-          this.snackbarService.show({ message: 'Successfully sent registration request', class: 'success' });
+          this.snackbarService.success('Successfully sent registration request');
           this.modalService.close();
         })
         .catch(() => {
-          this.snackbarService.show({ message: 'Could not submit your request. Please try again later', class: 'error' });
+          this.snackbarService.error('Could not submit your request. Please try again later');
         });
     }
   }

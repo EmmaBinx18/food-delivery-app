@@ -18,12 +18,12 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.error = "";
-    this.loginForm = this.initForm();
+    this.error = '';
+    this.initForm();
   }
 
   initForm() {
-    return this.formBuilder.group({
+    this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern('[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,}')]],
       password: ['', [Validators.required]]
     });

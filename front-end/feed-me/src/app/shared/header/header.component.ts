@@ -11,6 +11,7 @@ import {
 import { AuthService } from "../../core/authentication/authentication.service";
 import { Role } from "src/app/core/models/role.enum";
 import { ModalService } from "../modal/modal.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-header",
@@ -21,19 +22,19 @@ export class HeaderComponent implements OnInit {
   role: Role;
 
   @ViewChild("nav", { static: false }) nav: ElementRef;
-  @ViewChild("header", { static: false }) header: ElementRef;
 
   @Output() openCartEmitter = new EventEmitter();
-  @Output() changeDisplayEmitter = new EventEmitter<string>();
 
   constructor(
     private authService: AuthService,
     private renderer: Renderer2,
+    public router: Router,
     public modalService: ModalService
   ) { }
 
   ngOnInit() {
     this.role = this.authService.getCurrentRole();
+    this.role = Role.HomeChef;
   }
 
   logout() {
@@ -45,6 +46,10 @@ export class HeaderComponent implements OnInit {
     this.modalService.open(option);
   }
 
+  openCart() {
+    this.openCartEmitter.emit();
+  }
+
   openNav() {
     this.renderer.setStyle(this.nav.nativeElement, "left", "0");
   }
@@ -53,8 +58,7 @@ export class HeaderComponent implements OnInit {
     this.renderer.setStyle(this.nav.nativeElement, "left", "-200rem");
   }
 
-  changeDisplay(option: string) {
-    this.changeDisplayEmitter.emit(option);
-    this.closeNav();
+  navigate(option: string) {
+    this.router.navigate([`/${option}`]);
   }
 }

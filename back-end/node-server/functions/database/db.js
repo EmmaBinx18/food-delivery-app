@@ -3,31 +3,38 @@ const config = require("./db-config");
 const logger = require('../logger/winstin.logger');
 
 module.exports = {
-    executeStoredProcedure(storedProcedure, parameters, callback){
+    executeStoredProcedure(storedProcedure, parameters, callback) {
         sql.connect(config, (error) => {
-            if(error) {
+            if (error) {
                 sql.close();
                 logger.error("DATABASE ERROR", error);
                 throw new Error(error);
             }
-            
+
             const request = new sql.Request();
             request.input("JSON", sql.VarChar(sql.MAX), JSON.stringify(parameters));
             request.output("Error", sql.Int);
             request.execute(storedProcedure, (err, recordSets, returnValue) => {
-                if(err){
+                if (err) {
                     sql.close();
                     logger.error("DATABASE ERROR", err);
                     throw new Error(err);
                 }
-                else{
+                else {
                     sql.close();
-                    return callback(this.mapReturnData(recordSets.recordset));
+                    return callback(this.returnChecker(recordSets.recordset));
                 }
             });
         });
     },
-    mapReturnData(data){
+    returnChecker(data) {
+        const response = this.mapReturnData(data);
+        if (response == null || response == undefined) {
+            return [];
+        }
+        return JSON.parse(response);
+    },
+    mapReturnData(data) {
         return data[0]['JSON_F52E2B61-18A1-11d1-B105-00805F49916B'];
     }
 }

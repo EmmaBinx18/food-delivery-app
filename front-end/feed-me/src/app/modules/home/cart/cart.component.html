@@ -1,22 +1,18 @@
 <div class="cart-container">
-  <div>
-    <img class="close" src="/assets/icons/grey-icons/close.svg" alt="close" (click)="closeCart()" />
-    <div *ngIf="cartService.cart.length != 0" class="items">
-      <div class="cart-item" *ngFor="let item of cartService.cart">
-        <h4>{{ item.product.name }}</h4>
-        <h4>{{ item.quantity }}</h4>
-        <h4>R{{ item.product.price * item.quantity }}</h4>
-        <img src="/assets/icons/trash.png" alt="delete" (click)="removeCartItem(item)" />
-      </div>
-    </div>
-    <div class="buttons" *ngIf="cartService.cart.length != 0">
-      <button class="checkout button light-blue" (click)="clearCart()">
-        Clear</button><button class="checkout button yellow" (click)="checkout()">
-        Checkout
-      </button>
+  <div *ngIf="cartService.cart.length != 0" class="items">
+    <img class="close" src="/assets/icons/grey-icons/close.svg" alt="close_cart" (click)="closeCart()" />
+    <div class="cart-item" *ngFor="let item of cartService.cart">
+      <h4>{{ item.product.name }}</h4>
+      <h4>{{ item.quantity }}</h4>
+      <h4>R{{ item.product.price * item.quantity }}</h4>
+      <img src="/assets/icons/trash.png" alt="remove_cart_item" class="icon" (click)="removeCartItem(item)" />
     </div>
   </div>
-  <div class="empty" *ngIf="cartService.cart.length == 0">
-    <h4>There are no items in your cart.</h4>
+  <div class="buttons" *ngIf="cartService.cart.length != 0">
+    <button class="checkout button light-blue" (click)="clearCart()">
+      Clear</button><button class="checkout button yellow" (click)="checkout()">
+      Checkout
+    </button>
   </div>
+  <h4 *ngIf="cartService.cart.length == 0">There are no items in your cart.</h4>
 </div>

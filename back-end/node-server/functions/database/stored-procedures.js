@@ -1,10 +1,12 @@
 const CREATE_UPDATE_ADDRESS = 'p_Create_Update_Address';
 const GET_ADDRESS = 'p_Get_Address';
+const DELINK_USER_ADDRESS = 'p_Delink_User_Address';
 
 const GET_USER = 'p_Get_User';
 const CREATE_UPDATE_USER = 'p_Create_Update_User';
 const DEACTIVATE_USER = 'p_Deactivate_User';
 const GET_USER_ADDRESS = 'p_Get_User_Address';
+const GET_PREVIOUS_USER_ORDERS = 'p_Get_Previous_User_Orders';
 
 const ADD_TO_ROLE = 'p_Add_To_Role';
 const GET_USER_ROLE = 'p_Get_User_Role';
@@ -29,8 +31,10 @@ const GET_DELIVERY_READY_ORDERS = 'p_Get_Delivery_Ready_Orders';
 const GET_ACTIVE_ORDER_PRODUCTS = 'p_Get_Active_Order_Products';
 const COMPLETE_ORDER_PRODUCT = 'p_Complete_Order_Product';
 const ASSIGN_ORDER_DRIVER = 'p_Assign_Order_Driver';
+const GET_DRIVER_ORDER = 'p_Get_Driver_Order';
 
 const ADD_TO_DRIVER_ROLE = 'p_Add_To_Driver_Role';
+const GET_DRIVER = 'p_Get_Driver';
 
 module.exports = {
     CREATE_UPDATE_ADDRESS,
@@ -58,5 +62,9 @@ module.exports = {
     GET_BUSINESS_USER,
     GET_ACTIVE_ORDER_READY_PRODUCTS,
     GET_USER_ROLE,
-    GET_USER_ADDRESS
+    GET_USER_ADDRESS,
+    GET_DRIVER,
+    DELINK_USER_ADDRESS,
+    GET_PREVIOUS_USER_ORDERS,
+    GET_DRIVER_ORDER
 }

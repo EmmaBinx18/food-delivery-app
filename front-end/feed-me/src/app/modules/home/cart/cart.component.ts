@@ -3,6 +3,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { CartService } from 'src/app/core/services/cart.service';
 import { Cart } from 'src/app/core/models/cart.model';
 import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -12,16 +13,16 @@ import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 export class CartComponent {
 
   @Output() closeCartEmitter = new EventEmitter();
-  @Output() checkoutEmitter = new EventEmitter();
 
   constructor(
     public cartService: CartService,
-    public snackbarService: SnackbarService
+    public snackbarService: SnackbarService,
+    public router: Router
   ) { }
 
   removeCartItem(item: Cart) {
     this.cartService.removeFromCart(item);
-    this.snackbarService.show({ message: `Removed ${item.product.name} from cart`, class: 'success' });
+    this.snackbarService.success(`Removed ${item.product.name} from cart`);
   }
 
   closeCart() {
@@ -33,8 +34,8 @@ export class CartComponent {
   }
 
   checkout() {
-    this.checkoutEmitter.emit();
     this.closeCartEmitter.emit();
+    this.router.navigate(['/account']);
   }
 
 }

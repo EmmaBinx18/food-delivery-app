@@ -22,11 +22,8 @@ export class SnackbarComponent implements AfterViewInit, OnDestroy {
     const component = this.el.nativeElement.querySelector('#snackbar');
     this.subscription = this.snackbarSubscription.subscribe(value => {
       if (value == null) { this.snackbar = null; return; }
-      this.snackbar = value;
-      this.removeClasses(component);
-      this.addClass(component, this.snackbar.class)
-      component.querySelector('#snackbar-message').innerHTML = this.snackbar.message;
-      this.show();
+      this.setSnackbar(value, component);
+      this.show(component);
     });
   }
 
@@ -34,8 +31,14 @@ export class SnackbarComponent implements AfterViewInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  show() {
-    const component = this.el.nativeElement.querySelector('#snackbar');
+  setSnackbar(value: any, component: HTMLElement) {
+    this.snackbar = value;
+    this.removeClasses(component);
+    this.renderer.addClass(component, this.snackbar.class);
+    component.querySelector('#snackbar-message').innerHTML = this.snackbar.message;
+  }
+
+  show(component: HTMLElement) {
     this.renderer.addClass(component, 'show');
     setTimeout(() => {
       this.renderer.removeClass(component, 'show');
@@ -47,9 +50,5 @@ export class SnackbarComponent implements AfterViewInit, OnDestroy {
   removeClasses(snackbar: HTMLElement) {
     this.renderer.removeClass(snackbar, 'snackbar-error');
     this.renderer.removeClass(snackbar, 'snackbar-success');
-  }
-
-  addClass(snackbar: HTMLElement, type: string) {
-    this.renderer.addClass(snackbar, `snackbar-${type}`);
   }
 }

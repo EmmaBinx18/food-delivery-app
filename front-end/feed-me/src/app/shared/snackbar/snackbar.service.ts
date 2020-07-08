@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 export class SnackbarService {
 
   snackbar: any = null;
-  snackbarSubject: Subject<string> = new Subject<string>();
+  snackbarSubject: Subject<any> = new Subject<any>();
 
   constructor() {
     this.snackbarSubject.subscribe(value => {
@@ -15,8 +15,12 @@ export class SnackbarService {
     });
   }
 
-  show(value: any) {
-    this.snackbarSubject.next(value);
+  success(message: string) {
+    this.snackbarSubject.next({ message, class: 'snackbar-success' });
+  }
+
+  error(message: string) {
+    this.snackbarSubject.next({ message, class: 'snackbar-error' });
   }
 
   hide() {

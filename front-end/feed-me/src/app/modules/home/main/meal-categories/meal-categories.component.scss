@@ -5,9 +5,8 @@ h1{
 }
 
 .categories{
-    display: flex;
+    @extend .flex-container;
     flex-wrap: wrap;
-    justify-content: center;
     margin-bottom: 4%;
 
     div{

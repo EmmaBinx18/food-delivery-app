@@ -22,7 +22,7 @@ export class OrdersService {
     const order = {
       customerId: this.authService.getCurrentUser().uid,
       addressId: addressId,
-      orderDateTime: Date.now(),
+      orderDateTime: new Date().toISOString().slice(0, 19).replace('T', ' '),
       products: []
     }
 
@@ -34,24 +34,18 @@ export class OrdersService {
   }
 
   getOrdersForBusiness(businessId: string) {
-    return this.http.get(`api/orders/${businessId}`).toPromise();
+    return this.http.get(`api/orders/business/${businessId}`).toPromise();
   }
 
   getActiveOrderReadyProducts(orderId: string) {
-    return this.http.post(`api/orders/activeOrderReadyProducts`, { params: orderId }).toPromise();
+    return this.http.get(`api/orders/activeOrderReadyProducts/${orderId}`).toPromise();
   }
 
-  mapOrderReadyProduct(location: any) {
-    return {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: location.coordinates
-      },
-      properties: {
-        title: location.businessName,
-        description: ''
-      }
-    }
+  getUserOrderHistory(userId: string) {
+    return this.http.get(`api/orders/user/${userId}/history`).toPromise();
+  }
+
+  postCompleteOrder(order: any) {
+    return this.http.post(`api/orders/completeOrder`, { params: { productId: order.productId, orderId: order.OrderId } }).toPromise();
   }
 }
