@@ -1,7 +1,7 @@
 <div class="current-delivery">
     <div *ngIf="delivery" class="delivery">
         <div class="map">
-            <app-map [type]="'driver'"></app-map>
+            <app-map [type]="'driver'" [delivery]="delivery"></app-map>
         </div>
     </div>
     <h3 *ngIf="!delivery">An error occurred loading your deliveries</h3>

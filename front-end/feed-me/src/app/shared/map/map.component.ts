@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+
 import { MapboxService } from "../../core/services/mapbox.service";
 import * as mapboxgl from 'mapbox-gl'
-import { OrdersService } from 'src/app/core/services/orders.service';
 
 
 @Component({
@@ -12,34 +12,36 @@ import { OrdersService } from 'src/app/core/services/orders.service';
 export class MapComponent implements OnInit {
 
   @Input() type: string;
+  @Input() delivery?: any;
 
   map: mapboxgl.Map;
 
   types = {
-    "address": () => this.registerMap(),
-    "tracking": () => this.trackingMap(),
-    "driver": () => this.driverMap()
+    address: () => this.registerMap(),
+    tracking: () => this.trackingMap(),
+    driver: () => this.driverMap()
   }
 
-  constructor(
-    private mapService: MapboxService,
-    private ordersService: OrdersService
-  ) { }
+  constructor(private mapService: MapboxService) { }
 
   ngOnInit() {
     this.types[this.type]();
   }
 
   registerMap() {
-    this.mapService.buildRegisterMap(this.map);
+    this.mapService.renderAddressMap(this.map);
   }
 
   trackingMap() {
-
+    // this.mapService.loadLocationMarkers().then(() => {
+    //   this.mapService.renderTrackingMap(this.map);
+    // });
   }
 
   driverMap() {
-    // this.mapService.buildMap(this.map, 'address');
+    this.mapService.loadLocationMarkers(this.delivery.orderId).then(() => {
+      this.mapService.renderDriverMap(this.map);
+    });
   }
 
 }
