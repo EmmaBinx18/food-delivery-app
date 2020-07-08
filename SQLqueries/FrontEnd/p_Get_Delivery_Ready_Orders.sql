@@ -69,7 +69,7 @@ BEGIN
 					FROM
 						pickup_locations c
 					INNER JOIN [Address] A 
-						ON A.addressId = c.businessId
+						ON A.addressId = c.addressId
 					WHERE
 						c.orderId = h.orderId
 						FOR JSON PATH

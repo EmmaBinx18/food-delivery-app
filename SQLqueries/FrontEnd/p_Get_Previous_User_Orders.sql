@@ -11,14 +11,15 @@ GO
 -- Usage:   
 /*
 	DECLARE @Error int 
-	EXEC p_Get_Previous_User_Orders '{ "userId" : 1 }', @Error OUTPUT 
+	EXEC p_Get_Previous_User_Orders '{ "userId" : "user_uid" }', @Error OUTPUT 
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
-	SELECT * FROM [User]
+
+	select * from users
 */
 -- =============================================
 
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Get_Previous_User_Orders')
-	DROP PROCEDURE [dbo].p_Get_Previous_User_Orders
+	DROP PROCEDURE [dbo].[p_Get_Previous_User_Orders]
 GO
 
 CREATE PROCEDURE p_Get_Previous_User_Orders 
@@ -28,17 +29,65 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	DECLARE @businessId INT
-	SELECT @businessId = businessId
+	DECLARE @userId VARCHAR(128)
+	SELECT @userId = userId
 	FROM OPENJSON(@JSON) 
-	WITH (businessId INT)
+	WITH (userId VARCHAR(128))
 
-	SELECT TOP 10 O.OrderId, P.ProductId, P.[Name] , OP.[OrderItemStarted], OP.[OrderItemReady], [Quantity], OP.[OrderItemReady] - OP.[OrderItemStarted] [actualPrepareTime], [Quantity]*[estimatedPrepareTime] [estimatedPrepareTime]
-	FROM [Product] P
-	INNER JOIN [Business] B ON B.BusinessId = P.BusinessId AND B.BusinessId = @businessId
-	INNER JOIN [OrderProduct] OP ON OP.ProductId = P.ProductId
-	INNER JOIN [Order] O ON O.OrderId = OP.OrderId
-	WHERE OrderItemStarted IS NOT NULL OR OrderItemReady IS NOT NULL
+	DECLARE @count INT
+
+	IF EXISTS(SELECT * FROM [Order] O WHERE customerId = @userId)
+	BEGIN
+		;WITH available_orders AS
+		(
+			SELECT * FROM [Order] O WHERE customerId = @userId
+		),
+		order_products AS
+		(
+				SELECT ao.orderId, P.[Name], op.quantity, B.[name] [business]--,  
+				FROM available_orders ao
+				INNER JOIN OrderProduct OP ON OP.orderId = ao.orderId
+				INNER JOIN Product P ON P.ProductId = OP.productId
+				INNER JOIN Business B ON B.businessId = P.businessId
+		)
+		SELECT ao.orderId, ao.orderDateTime, a.[address],  oa.[products], OS.[name] [orderStatus], U.firstName [driverName], d.[startTime] [deliveryStartTime], d.[endTime] [deliveryEndTime]
+		FROM available_orders ao
+		INNER JOIN [Address] A ON ao.addressId = a.addressId 
+		INNER JOIN [OrderStatus] OS ON OS.orderStatusId = ao.orderStatusId
+		INNER JOIN 
+		(
+	
+				SELECT
+					OrderId,
+					JSON_QUERY(Products,'$') AS [products]
+				FROM
+					available_orders h
+					CROSS APPLY
+					(
+					SELECT 
+						(
+						SELECT  
+							c.[name], c.quantity, c.[business]
+						FROM
+							order_products c
+						WHERE
+							c.orderId = h.orderId
+							FOR JSON PATH
+						) AS Products
+					) d	
+		) oa ON ao.orderId = oa.orderId
+		LEFT OUTER JOIN Delivery D ON D.deliveryId = ao.deliveryId
+		LEFT OUTER JOIN [Users] U ON U.userId = D.[driverId]
+		ORDER BY orderDateTime, ao.orderid
+		FOR JSON PATH
+	END
+	--ELSE
+	--BEGIN
+	--	SELECT 1 [undefined]
+	--	FOR JSON PATH, INCLUDE_NULL_VALUES 
+	--END
+
 END
 GO
 
+	

@@ -247,7 +247,7 @@ BEGIN
 	[startTime] datetime,
 	[deliveryStatusId] int NOT NULL FOREIGN KEY REFERENCES [DeliveryStatus]([DeliveryStatusId]),
 	[driverId] VARCHAR(128) NOT NULL FOREIGN KEY REFERENCES [Users]([userId]),
-	[endTime] varchar(255),
+	[endTime] datetime,
 	[kmTraveled] int,
 	[etd] datetime,
 	PRIMARY KEY ([deliveryId])
@@ -258,11 +258,9 @@ GO
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Tracking')
 BEGIN
 	CREATE TABLE [Tracking] (
-	[trackingId] INT IDENTITY(1,1),
-	[latLong] geometry,
+	[latLong] GEOGRAPHY,
 	[timeStamp] datetime,
-	[deliveryId] int NOT NULL FOREIGN KEY REFERENCES [Delivery]([deliveryId]),
-	PRIMARY KEY ([trackingId])
+	[deliveryId] int NOT NULL FOREIGN KEY REFERENCES [Delivery]([deliveryId]) PRIMARY KEY
 	);
 END
 GO

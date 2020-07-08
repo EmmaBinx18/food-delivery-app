@@ -10,9 +10,10 @@ GO
 -- Usage : 
  /*
     DECLARE @Error int 
-	EXEC p_Create_Payment '{ "paymentTypeid" : 1, "amount" : 1234, "orderId" : 1}', @Error OUTPUT
+	EXEC p_Create_Payment '{ "paymentTypeid" : 1, "amount" : 1234, "orderId" : 24}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [Payment]
+	select * from [order]
 */
 -- =============================================
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Create_Payment')

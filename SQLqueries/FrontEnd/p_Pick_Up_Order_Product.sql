@@ -11,7 +11,7 @@ GO
 -- Usage: 
  /*
     DECLARE @Error int 
-	EXEC p_Pick_Up_Order_Product '{ "productId" : 2, "orderId" : 1}', @Error OUTPUT
+	EXEC p_Pick_Up_Order_Product '{ "productId" : 1, "orderId" : 1}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [OrderProduct]
 	SELECT * FROM [Order] O JOIN [Delivery] D ON D.DeliveryId = O.DeliveryId

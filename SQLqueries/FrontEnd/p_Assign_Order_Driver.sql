@@ -11,7 +11,7 @@ GO
 -- Usage: 
  /*
     DECLARE @Error int 
-	EXEC p_Assign_Order_Driver '{ "orderId" : 1, "driverId" : "driver_uid"}', @Error OUTPUT
+	EXEC p_Assign_Order_Driver '{ "orderId" : 2, "driverId" : "driver_uid"}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [deliveryStatus], orderstatus
 */

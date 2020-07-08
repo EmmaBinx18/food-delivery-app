@@ -11,10 +11,10 @@ GO
 -- Usage:   
 /*
 	DECLARE @Error int 
-	--EXEC p_Get_Driver '{ "userId" : "null" }', @Error OUTPUT 
+	--EXEC p_Get_Driver '{ "userId" : null }', @Error OUTPUT 
 	EXEC p_Get_Driver '{ "userId" : "driver_uid" }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
-	SELECT * FROM [DriverAddress]
+	SELECT * FROM [Driver]
 */
 -- =============================================
 

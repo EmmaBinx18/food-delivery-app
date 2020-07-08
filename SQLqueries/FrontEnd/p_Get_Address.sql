@@ -13,7 +13,7 @@ GO
 	DECLARE @Error int 
 	EXEC p_Get_Address '{ "addressId" : 1 }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
-	SELECT * FROM [Product]
+	SELECT * FROM [Address]
 */
 -- =============================================
 

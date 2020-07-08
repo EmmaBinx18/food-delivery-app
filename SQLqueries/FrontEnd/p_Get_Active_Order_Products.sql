@@ -14,6 +14,7 @@ GO
 	EXEC p_Get_Active_Order_Products '{ "businessId" : 1}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [OrderProduct]
+	select * from [business]
 */
 -- =============================================
 

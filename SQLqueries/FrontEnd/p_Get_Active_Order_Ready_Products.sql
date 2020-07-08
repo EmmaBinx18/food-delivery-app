@@ -13,7 +13,7 @@ GO
     DECLARE @Error int 
 	EXEC p_Get_Active_Order_Ready_Products '{"orderId" : 1}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
-*/
+*/ 
 -- =============================================
 
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Get_Active_Order_Ready_Products')
@@ -74,7 +74,7 @@ BEGIN
 					FROM
 						pickup_locations c
 					INNER JOIN [Address] A 
-						ON A.addressId = c.businessId
+						ON A.addressId = c.addressId
 					WHERE
 						c.orderId = h.orderId
 						FOR JSON PATH
