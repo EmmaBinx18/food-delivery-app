@@ -63,7 +63,7 @@ router.post('/', (req, res) => {
     logger.info('INSERT NEW ORDER');
     try {
         db.executeStoredProcedure(sp.orders.CREATE_ORDER, req.body.params, (data) => {
-            return ordersHelper.getClosesDriver(req.body.params.addressId, data.orderId, res);
+            return ordersHelper.getClosesDriver(req.body.params.addressId, data[0].orderId, res);
         });
     }
     catch (error) {

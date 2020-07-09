@@ -14,7 +14,7 @@ export class DeliveryDashboardComponent implements OnInit {
 
   delivery: any = {};
   order: any = null;
-  deliveries: any = [];
+  deliveries: any = null;
 
   deliveriesError: boolean = false;
   deliveryDisplay: boolean = false;
@@ -27,7 +27,12 @@ export class DeliveryDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.refreshDeliveries();
+  }
+
+  refreshDeliveries() {
     this.deliveryDisplay = false;
+    this.deliveries = [];
     this.getDeliveries();
   }
 

@@ -26,7 +26,7 @@ export class AddressesComponent implements OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.addresses.currentValue.length != 0) {
+    if (changes.addresses.currentValue != changes.addresses.previousValue) {
       this.loading = false;
     }
   }

@@ -25,7 +25,7 @@
       </div>
     </div>
     <h3 *ngIf="!loading && cartService.cart.length == 0 && !error">You don't have any current orders</h3>
-    <h3 *ngIf="!loading && addresses.length == 0 && !error">
+    <h3 *ngIf="!loading && addresses && addresses.length == 0 && !error">
       There is no address assigned to your account. Please assign an address
       before continuing
       <button class="button yellow add-address" (click)="addAddress()">
@@ -36,17 +36,17 @@
   </div>
   <div class="order-history">
     <app-loader *ngIf="loading && !error"></app-loader>
-    <h3 *ngIf="!loading && orders.length == 0 && !error">You don't have any previous orders</h3>
-    <div *ngIf="!loading && orders.length != 0 && !error" class="history-table">
+    <h3 *ngIf="!loading && !orders && !error">You don't have any previous orders</h3>
+    <div *ngIf="!loading && orders && orders.length != 0 && !error" class="history-table">
       <h2>Previous Orders</h2>
       <table>
         <tr *ngFor="let order of orders">
+          <td>Order {{order.orderId}}</td>
           <td>{{order.orderDateTime}}</td>
           <td>{{order.products.length}} items</td>
-          <td *ngIf="order.orderStatus == 'Awaiting_payment'"><button (click)="pay(order)"
-              class="button yellow pay">Pay</button></td>
-          <td *ngIf="order.orderStatus == 'Products_not_ready'"><button (click)="track(order)"
-              class="button yellow pay">Track Order</button></td>
+          <td *ngIf="order.orderStatus == 'Products_not_ready' || order.orderStatus == 'Delivery_in_progress'"><button
+              (click)="track(order)" class="button yellow pay">Track Order</button></td>
+          <td *ngIf="order.orderStatus == 'Done'">Order Delivered</td>
         </tr>
       </table>
     </div>

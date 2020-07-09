@@ -12,9 +12,9 @@ import { OrdersService } from 'src/app/core/services/orders.service';
   styleUrls: ["./account.component.scss"],
 })
 export class AccountComponent implements OnInit {
-  orders: any = [];
-  profile: any = [];
-  addresses: any = [];
+  orders: any = null;
+  profile: any = null;
+  addresses: any = null;
 
   ordersError: boolean = false;
   profileError: boolean = false;
@@ -35,6 +35,10 @@ export class AccountComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.refresh();
+  }
+
+  refresh() {
     this.getProfile();
     this.getAddresses();
     this.getOrderHistory();
@@ -49,7 +53,7 @@ export class AccountComponent implements OnInit {
       .catch(() => {
         this.profileError = true;
         this.handleError();
-      })
+      });
   }
 
   getAddresses() {
@@ -61,7 +65,7 @@ export class AccountComponent implements OnInit {
       .catch(() => {
         this.addressesError = true;
         this.handleError();
-      })
+      });
   }
 
   getOrderHistory() {
@@ -85,6 +89,7 @@ export class AccountComponent implements OnInit {
   changeDisplay(option: string) {
     this.setAllFalse();
     this.display[option] = true;
+    this.refresh();
   }
 
   handleError() {

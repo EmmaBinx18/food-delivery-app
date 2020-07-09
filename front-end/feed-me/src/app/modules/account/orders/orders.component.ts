@@ -37,14 +37,19 @@ export class OrdersComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.loading = true;
-    this.getSubTotal(this.cartService.cart, this.itemsTotal);
+    this.subtotal = this.getSubTotal(this.cartService.cart);
     this.getItemsTotal();
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    this.loading = false;
     Object.keys(changes).forEach(key => {
-      if (changes[key].currentValue.length !== 0) {
-        this.commonService.formatDate(this.orders);
+      if (changes[key].currentValue != changes[key].previousValue) {
+        if (key == 'orders') {
+          if (this.orders.length != 0) {
+            this.commonService.formatDate(this.orders);
+          }
+        }
         this.loading = false;
       }
     });
@@ -54,10 +59,12 @@ export class OrdersComponent implements OnInit, OnChanges {
     this.address = event.target.value;
   }
 
-  getSubTotal(order: any, total: number) {
+  getSubTotal(order: any) {
+    let total = 0;
     order.forEach((item) => {
       total += item.product.price * item.quantity;
     });
+    return total;
   }
 
   getItemsTotal() {
@@ -85,27 +92,6 @@ export class OrdersComponent implements OnInit, OnChanges {
       .catch(() => {
         this.snackbarService.error('Your order could not be submitted. Please try again later.');
       });
-  }
-
-  pay(order: any) {
-    this.orderService.makeOrderPayment(order.orderId, this.getOrderPrice(order))
-      .then(() => {
-        this.snackbarService.success('Payment successful');
-        this.refreshOrderEmitter.emit();
-      })
-      .catch(() => {
-        this.snackbarService.error('Could not make payment. Please try again later.');
-      });
-  }
-
-  getOrderPrice(order: any) {
-    let total = 0;
-    this.orders.forEach(item => {
-      if (item == order) {
-        this.getSubTotal(item, total);
-      }
-    });
-    return total;
   }
 
   track(order: any) {

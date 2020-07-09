@@ -28,7 +28,16 @@ export class DeliveryService {
   }
 
   getDeliveriesForDriver(driverId: string) {
+    driverId = 'driver_uid';
     return this.http.get(`api/delivery/${driverId}`).toPromise();
+  }
+
+  pickupOrder(businessId: string, orderId: string) {
+    return this.http.post(`api/delivery/pickupOrder`, { params: { businessId, orderId } }).toPromise();
+  }
+
+  completeDelivery(orderId: string) {
+    return this.http.post(`api/delivery/completeDelivery`, { params: { orderId, kmTraveled: 20.582 } }).toPromise();
   }
 
   mapOrderReadyProduct(location: any) {

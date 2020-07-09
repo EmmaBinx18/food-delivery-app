@@ -26,7 +26,7 @@ export class ProfileComponent implements OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.profile.currentValue.length != 0) {
+    if (changes.profile.currentValue != changes.profile.previousValue) {
       this.loading = false;
       this.initProfileForm();
       this.populateForm();

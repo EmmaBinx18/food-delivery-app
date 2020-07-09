@@ -13,5 +13,5 @@
         </table>
     </div>
     <h3 *ngIf="!loading && error">An error occurred loading your deliveries</h3>
-    <h3 *ngIf="!loading && deliveries.length == 0">You don't have any deliveries assigned to you yet</h3>
+    <h3 *ngIf="!loading && deliveries && deliveries.length == 0">You don't have any deliveries assigned to you yet</h3>
 </div>
