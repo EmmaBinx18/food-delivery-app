@@ -19,7 +19,9 @@ export class UserService {
   }
 
   insertUser(user: User) {
-    return this.http.post(`https://us-central1-feedme-208a2.cloudfunctions.next/app/user`, { params: this._mapUserObject(user) }).toPromise();
+    // return this.http.post(`/api/user`, { params: this._mapUserObject(user) }).toPromise();
+    // return this.http.post(`https://us-central1-feedme-208a2.cloudfunctions.next/app/user`, { params: this._mapUserObject(user) }).toPromise();
+    return this.http.post(`https://us-central1-feedme-208a2.cloudfunctions.net/app/user`, { params: this._mapUserObject(user) }).toPromise();
   }
 
   updateUser(user: User) {

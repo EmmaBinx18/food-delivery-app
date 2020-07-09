@@ -1,14 +1,14 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyBAIAQRUTdp69Ygvh-MhlmGurR23fRSWfw",
-    authDomain: "feedme-app-34f97.firebaseapp.com",
-    databaseURL: "https://feedme-app-34f97.firebaseio.com",
-    projectId: "feedme-app-34f97",
-    storageBucket: "feedme-app-34f97.appspot.com",
-    messagingSenderId: "642237886412",
-    appId: "1:642237886412:web:075805945535f50ba13769",
-    measurementId: "G-PC159T974W"
+    apiKey: "AIzaSyBQoSzIt2SIZAZJoF4Zw1j96xTNC46vZu8",
+    authDomain: "feedme-angular.firebaseapp.com",
+    databaseURL: "https://feedme-angular.firebaseio.com",
+    projectId: "feedme-angular",
+    storageBucket: "feedme-angular.appspot.com",
+    messagingSenderId: "501130974425",
+    appId: "1:501130974425:web:fbd7c6b30f95e394c85ac8",
+    measurementId: "G-L90ES30YPQ"
   },
   mapbox: {
     accessToken: 'pk.eyJ1IjoiZmVlZG1ld2ViYXBwIiwiYSI6ImNrYnY1czVxdzAwNmQzMGxieTU4MnZraWEifQ.NQrq1y608FyGnM3Z7nmghg'

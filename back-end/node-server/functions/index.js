@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const timeout = require('connect-timeout');
 const cors = require('cors');
 
+const admin = require('firebase-admin');
+admin.initializeApp();
+
 const userController = require('./routes/user/user.controller');
 const businessController = require('./routes/business/business.controller');
 const productsController = require('./routes/products/products.controller');

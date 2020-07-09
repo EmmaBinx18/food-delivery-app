@@ -1,14 +1,18 @@
-{  
-   "/api/*": {  
-    "target": "http://localhost:5001/feedme-208a2/us-central1/app",  
-    "secure": false, 
-    "changeOrigin": true, 
-    "pathRewrite": {"^/api" : ""}  
-   },
-   "/mapbox/*": {
-    "target": "geocoding/v5",  
-    "secure": false, 
-    "changeOrigin": true, 
-    "pathRewrite": {"^/mapbox" : ""}
-   }
- }
+{
+  "/api/*": {
+    "target": "http://localhost:5001/feedme-208a2/us-central1/app",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  },
+  "/mapbox/*": {
+    "target": "geocoding/v5",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/mapbox": ""
+    }
+  }
+}
