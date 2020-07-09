@@ -13,7 +13,7 @@ import { Address } from '../../../core/models/address.model';
 })
 export class AddressesComponent implements OnChanges {
 
-  @Input() addresses: any = [];
+  @Input() addresses: any;
   @Input() error: boolean;
 
   loading: boolean = true;
@@ -26,7 +26,7 @@ export class AddressesComponent implements OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.addresses.currentValue != changes.addresses.previousValue) {
+    if (changes.addresses.currentValue != null) {
       this.loading = false;
     }
   }

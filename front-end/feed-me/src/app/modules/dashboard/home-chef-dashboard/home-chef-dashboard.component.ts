@@ -13,8 +13,8 @@ export class HomeChefDashboardComponent implements OnChanges {
 
   @Input() business: any = [];
 
-  products: any = [];
-  orders: any = [];
+  products: any = null;
+  orders: any = null;
 
   productsError: boolean = false;
   ordersError: boolean = false;

@@ -9,7 +9,7 @@ const logger = require('../../logger/winstin.logger');
 router.get('/:addressId', (req, res) => {
     logger.info('GET ADDRESS BY ID');
     try {
-        db.executeStoredProcedure(sp.address.GET_ADDRESS, { addressId: req.params.addressId }, (data) => {
+        return db.executeStoredProcedure(sp.address.GET_ADDRESS, { addressId: req.params.addressId }, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -22,7 +22,7 @@ router.get('/:addressId', (req, res) => {
 router.post('/', (req, res) => {
     logger.info('INSERT NEW ADDRESS');
     try {
-        db.executeStoredProcedure(sp.address.CREATE_UPDATE_ADDRESS, req.body.params, (data) => {
+        return db.executeStoredProcedure(sp.address.CREATE_UPDATE_ADDRESS, req.body.params, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
 router.patch('/', (req, res) => {
     logger.info('UPDATE ADDRESS');
     try {
-        db.executeStoredProcedure(sp.address.CREATE_UPDATE_USER, req.body.params, (data) => {
+        return db.executeStoredProcedure(sp.address.CREATE_UPDATE_USER, req.body.params, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -48,7 +48,7 @@ router.patch('/', (req, res) => {
 router.get('/user/:userId', (req, res) => {
     logger.info('GET ALL ADDRESSES FOR USER');
     try {
-        db.executeStoredProcedure(sp.address.GET_USER_ADDRESS, { userId: req.params.userId }, (data) => {
+        return db.executeStoredProcedure(sp.address.GET_USER_ADDRESS, { userId: req.params.userId }, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -61,7 +61,7 @@ router.get('/user/:userId', (req, res) => {
 router.post('/user/:userId', (req, res) => {
     logger.info('REMOVE ADDRESS FROM USER');
     try {
-        db.executeStoredProcedure(sp.address.DELINK_USER_ADDRESS, { userId: req.params.userId, addressId: req.body.params }, (data) => {
+        return db.executeStoredProcedure(sp.address.DELINK_USER_ADDRESS, { userId: req.params.userId, addressId: req.body.params }, (data) => {
             return res.status(200).send(data);
         });
     }

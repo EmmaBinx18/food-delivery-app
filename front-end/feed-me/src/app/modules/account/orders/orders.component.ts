@@ -13,8 +13,8 @@ import { ModalService } from 'src/app/shared/modal/modal.service';
   styleUrls: ["./orders.component.scss"],
 })
 export class OrdersComponent implements OnInit, OnChanges {
-  @Input() orders: any = [];
-  @Input() addresses: any = [];
+  @Input() orders: any;
+  @Input() addresses: any;
   @Input() error: boolean;
 
   subtotal: number = 0;
@@ -42,15 +42,14 @@ export class OrdersComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.loading = false;
     Object.keys(changes).forEach(key => {
-      if (changes[key].currentValue != changes[key].previousValue) {
-        if (key == 'orders') {
-          if (this.orders.length != 0) {
+      if (key == 'orders') {
+        if (changes.orders.currentValue !== null) {
+          this.loading = false;
+          if (changes.orders.currentValue.length !== 0) {
             this.commonService.formatDate(this.orders);
           }
         }
-        this.loading = false;
       }
     });
   }

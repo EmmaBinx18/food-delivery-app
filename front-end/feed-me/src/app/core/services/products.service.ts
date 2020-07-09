@@ -11,19 +11,19 @@ export class ProductsService {
   constructor(private http: HttpClient) { }
 
   getAllProducts() {
-    return this.http.get(`api/products`).toPromise();
+    return this.http.get(`/api/products`).toPromise();
   }
 
   getProductsForABusiness(businessId: string) {
-    return this.http.get(`api/products/business/${businessId}`).toPromise();
+    return this.http.get(`/api/products/business/${businessId}`).toPromise();
   }
 
   insertProduct(product: Product) {
-    return this.http.post('api/products', { params: this.mapProduct(product) }).toPromise();
+    return this.http.post('/api/products', { params: this.mapProduct(product) }).toPromise();
   }
 
   removeProduct(productId: string) {
-    return this.http.post(`api/products/remove`, { params: productId }).toPromise();
+    return this.http.post(`/api/products/remove`, { params: productId }).toPromise();
   }
 
   mapProduct(product: Product) {

@@ -25,34 +25,34 @@ export class HomeChefService {
   }
 
   insertBusiness(business: any, addressId: string) {
-    return this.http.post(`api/business`, {
+    return this.http.post(`/api/business`, {
       params:
         { businessId: -1, name: business.businessName, categoryId: business.category, addressId: addressId, userId: business.uid }
     }).toPromise();
   }
 
   getAllOperationalStatuses() {
-    return this.http.get(`api/business/operationalStatus`).toPromise();
+    return this.http.get(`/api/business/operationalStatus`).toPromise();
   }
 
   getOperationalStatusById(operationalStatusId: string) {
-    return this.http.get(`api/business/operationalStatus/${operationalStatusId}`).toPromise();
+    return this.http.get(`/api/business/operationalStatus/${operationalStatusId}`).toPromise();
   }
 
   getAllBusinesses() {
-    return this.http.get(`api/business`).toPromise();
+    return this.http.get(`/api/business`).toPromise();
   }
 
   getBusinessById(businessId: string) {
-    return this.http.get(`api/business/${businessId}`).toPromise();
+    return this.http.get(`/api/business/${businessId}`).toPromise();
   }
 
   getBusinessByUserId(userId: string) {
-    return this.http.get(`api/business/user/${userId}`).toPromise();
+    return this.http.get(`/api/business/user/${userId}`).toPromise();
   }
 
   getBusinessesByCategory(categoryId: string) {
-    return this.http.get(`api/business/category/${categoryId}`).toPromise();
+    return this.http.get(`/api/business/category/${categoryId}`).toPromise();
   }
 
   getStats() {

@@ -50,11 +50,14 @@ export class CurrentDeliveryComponent implements OnChanges {
           if (item.businessId == business.businessId) {
             item.pickup = true;
           }
+        });
 
-          if (this.orderCompleteCheck()) {
-            this.orderComplete = true;
-          }
-        })
+        document.getElementById(business.businessId).style.backgroundColor = '#62874C';
+        document.getElementById(business.businessId).style.color = 'white';
+
+        if (this.orderCompleteCheck()) {
+          this.orderComplete = true;
+        }
       })
       .catch(() => {
         this.snackbarService.error('Could not complete order pickup. Please try again');
@@ -72,7 +75,6 @@ export class CurrentDeliveryComponent implements OnChanges {
     this.deliveryService.completeDelivery(this.order.orderId)
       .then(() => {
         this.snackbarService.success('Successfully complete delivery');
-        this.loading = true;
         this.deliveryRefreshEmitter.emit();
       })
       .catch(() => {

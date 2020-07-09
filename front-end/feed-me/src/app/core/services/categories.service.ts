@@ -13,11 +13,11 @@ export class CategoriesService {
   constructor(private http: HttpClient) { }
 
   getAllCategories() {
-    return this.http.get(`api/category`).toPromise();
+    return this.http.get(`/api/category`).toPromise();
   }
 
   getCategoryById(categoryId: string) {
-    return this.http.get(`api/category/${categoryId}`).toPromise();
+    return this.http.get(`/api/category/${categoryId}`).toPromise();
   }
 
   getDefaultCategories() {

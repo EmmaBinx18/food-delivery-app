@@ -32,7 +32,7 @@ export class DeliveryDashboardComponent implements OnInit {
 
   refreshDeliveries() {
     this.deliveryDisplay = false;
-    this.deliveries = [];
+    this.deliveries = null;
     this.getDeliveries();
   }
 

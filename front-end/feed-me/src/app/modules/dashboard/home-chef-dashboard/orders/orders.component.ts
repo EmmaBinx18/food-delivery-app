@@ -23,9 +23,11 @@ export class OrdersComponent implements OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.orders.currentValue.length != 0) {
+    if (changes.orders.currentValue !== null) {
       this.loading = false;
-      this.commonService.formatDate(this.orders);
+      if (changes.orders.currentValue.length !== 0) {
+        this.commonService.formatDate(this.orders);
+      }
     }
   }
 

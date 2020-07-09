@@ -10,7 +10,7 @@ const logger = require('../../logger/winstin.logger');
 router.get('/deliveryReady', (req, res) => {
     logger.info('GET DELIVERY READY ORDERS');
     try {
-        db.executeStoredProcedure(sp.orders.GET_DELIVERY_READY_ORDERS, {}, () => {
+        return db.executeStoredProcedure(sp.orders.GET_DELIVERY_READY_ORDERS, {}, () => {
             return res.status(200).send();
         });
     }
@@ -23,7 +23,7 @@ router.get('/deliveryReady', (req, res) => {
 router.get('/business/:businessId', (req, res) => {
     logger.info('GET ACTIVE ORDERS FOR BUSINESS');
     try {
-        db.executeStoredProcedure(sp.orders.GET_ACTIVE_ORDER_PRODUCTS, { businessId: req.params.businessId }, (data) => {
+        return db.executeStoredProcedure(sp.orders.GET_ACTIVE_ORDER_PRODUCTS, { businessId: req.params.businessId }, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -36,7 +36,7 @@ router.get('/business/:businessId', (req, res) => {
 router.get('/user/:userId/history', (req, res) => {
     logger.info('GET USER ORDER HISTORY');
     try {
-        db.executeStoredProcedure(sp.orders.GET_PREVIOUS_USER_ORDERS, { userId: req.params.userId }, (data) => {
+        return db.executeStoredProcedure(sp.orders.GET_PREVIOUS_USER_ORDERS, { userId: req.params.userId }, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -49,7 +49,7 @@ router.get('/user/:userId/history', (req, res) => {
 router.get('/activeOrderReadyProducts/:orderId', (req, res) => {
     logger.info('GET ACTIVE ORDER READY PRODUCTS');
     try {
-        db.executeStoredProcedure(sp.orders.GET_ACTIVE_ORDER_READY_PRODUCTS, { orderId: req.params.orderId }, (data) => {
+        return db.executeStoredProcedure(sp.orders.GET_ACTIVE_ORDER_READY_PRODUCTS, { orderId: req.params.orderId }, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -62,7 +62,7 @@ router.get('/activeOrderReadyProducts/:orderId', (req, res) => {
 router.post('/', (req, res) => {
     logger.info('INSERT NEW ORDER');
     try {
-        db.executeStoredProcedure(sp.orders.CREATE_ORDER, req.body.params, (data) => {
+        return db.executeStoredProcedure(sp.orders.CREATE_ORDER, req.body.params, (data) => {
             return ordersHelper.getClosesDriver(req.body.params.addressId, data[0].orderId, res);
         });
     }
@@ -75,7 +75,7 @@ router.post('/', (req, res) => {
 router.post('/pay', (req, res) => {
     logger.info('MAKE ORDER PAYMENT');
     try {
-        db.executeStoredProcedure(sp.orders.CREATE_PAYMENT, req.body.params, (data) => {
+        return db.executeStoredProcedure(sp.orders.CREATE_PAYMENT, req.body.params, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -88,7 +88,7 @@ router.post('/pay', (req, res) => {
 router.post('/trackOrder', (req, res) => {
     logger.info('TRACK ORDER PAYMENT');
     try {
-        db.executeStoredProcedure(sp.orders.TRACK_ORDER, { orderId: req.body.params }, (data) => {
+        return db.executeStoredProcedure(sp.orders.TRACK_ORDER, { orderId: req.body.params }, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -101,7 +101,7 @@ router.post('/trackOrder', (req, res) => {
 router.post('/completeOrder', (req, res) => {
     logger.info('COMPLETE ORDER PRODUCT');
     try {
-        db.executeStoredProcedure(sp.orders.COMPLETE_ORDER_PRODUCT, req.body.params, (data) => {
+        return db.executeStoredProcedure(sp.orders.COMPLETE_ORDER_PRODUCT, req.body.params, (data) => {
             return res.status(200).send(data);
         });
     }

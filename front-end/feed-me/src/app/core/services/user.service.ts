@@ -11,23 +11,23 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getAllUsers() {
-    return this.http.get(`api/user`).toPromise();
+    return this.http.get(`/api/user`).toPromise();
   }
 
   getUser(uid: string) {
-    return this.http.get(`api/user/${uid}`).toPromise();
+    return this.http.get(`/api/user/${uid}`).toPromise();
   }
 
   insertUser(user: User) {
-    return this.http.post(`api/user`, { params: this._mapUserObject(user) }).toPromise();
+    return this.http.post(`https://us-central1-feedme-208a2.cloudfunctions.next/app/user`, { params: this._mapUserObject(user) }).toPromise();
   }
 
   updateUser(user: User) {
-    return this.http.patch(`api/user`, { params: this._mapUserObject(user) }).toPromise();
+    return this.http.patch(`/api/user`, { params: this._mapUserObject(user) }).toPromise();
   }
 
   deactivateUser(uid: string) {
-    return this.http.post(`api/user/deactivate`, { params: uid }).toPromise();
+    return this.http.post(`/api/user/deactivate`, { params: uid }).toPromise();
   }
 
   private _mapUserObject(user: User) {

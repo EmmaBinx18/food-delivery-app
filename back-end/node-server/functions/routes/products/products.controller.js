@@ -9,7 +9,7 @@ const logger = require('../../logger/winstin.logger');
 router.get('/', (req, res) => {
     logger.info('GET ALL PRODUCTS');
     try {
-        db.executeStoredProcedure(sp.products.GET_PRODUCTS_CATEGORY, { categoryid: null }, (data) => {
+        return db.executeStoredProcedure(sp.products.GET_PRODUCTS_CATEGORY, { categoryid: null }, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 router.get('/business/:businessId', (req, res) => {
     logger.info('GET ALL PRODUCTS FOR A BUSINESS');
     try {
-        db.executeStoredProcedure(sp.products.GET_PRODUCTS_BUSINESS, { businessId: req.params.businessId }, (data) => {
+        return db.executeStoredProcedure(sp.products.GET_PRODUCTS_BUSINESS, { businessId: req.params.businessId }, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -35,7 +35,7 @@ router.get('/business/:businessId', (req, res) => {
 router.post('/', (req, res) => {
     logger.info('INSERT NEW PRODUCT');
     try {
-        db.executeStoredProcedure(sp.products.CREATE_UPDATE_PRODUCT, req.body.params, (data) => {
+        return db.executeStoredProcedure(sp.products.CREATE_UPDATE_PRODUCT, req.body.params, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
 router.post('/remove', (req, res) => {
     logger.info('REMOVE PRODUCT');
     try {
-        db.executeStoredProcedure(sp.products.UPDATE_PRODUCT_STATUS, { productId: req.body.params, availabilityStatus: '1' }, (data) => {
+        return db.executeStoredProcedure(sp.products.UPDATE_PRODUCT_STATUS, { productId: req.body.params, availabilityStatus: '1' }, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -61,7 +61,7 @@ router.post('/remove', (req, res) => {
 router.patch('/', (req, res) => {
     logger.info('UPDATE PRODUCT');
     try {
-        db.executeStoredProcedure(sp.products.CREATE_UPDATE_PRODUCT, req.body.params, (data) => {
+        return db.executeStoredProcedure(sp.products.CREATE_UPDATE_PRODUCT, req.body.params, (data) => {
             return res.status(200).send(data);
         });
     }

@@ -12,9 +12,9 @@ import { OrdersService } from 'src/app/core/services/orders.service';
   styleUrls: ["./account.component.scss"],
 })
 export class AccountComponent implements OnInit {
-  orders: any = null;
-  profile: any = null;
-  addresses: any = null;
+  orders: any = [];
+  profile: any = [];
+  addresses: any = [];
 
   ordersError: boolean = false;
   profileError: boolean = false;

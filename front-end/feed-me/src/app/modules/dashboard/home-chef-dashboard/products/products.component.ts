@@ -24,7 +24,7 @@ export class ProductsComponent implements OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.products.currentValue.length != 0) {
+    if (changes.products.currentValue !== null) {
       this.loading = false;
     }
   }

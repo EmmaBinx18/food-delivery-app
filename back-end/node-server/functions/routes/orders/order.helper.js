@@ -42,7 +42,7 @@ const ordersHelper = {
 
         let id;
         distances.forEach(obj => {
-            if (obj.distance == distance) {
+            if (obj.distance === distance) {
                 id = obj.driverId;
             }
         });

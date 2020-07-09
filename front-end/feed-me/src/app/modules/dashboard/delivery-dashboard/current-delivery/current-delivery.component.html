@@ -5,7 +5,7 @@
         <app-map [type]="'driver'" [delivery]="delivery"></app-map>
     </div>
     <div *ngIf="!loading" class="buttons">
-        <button class="button" *ngFor="let location of order.locations"
+        <button class="button" *ngFor="let location of order.locations" [id]="location.businessId"
             (click)="completePickup(location)">{{location.businessName}}<img src="/assets/icons/checked.png"
                 class="icon" alt="complete_pickup" /></button>
     </div>

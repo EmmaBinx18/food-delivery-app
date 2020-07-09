@@ -9,7 +9,7 @@ const logger = require('../../logger/winstin.logger');
 router.get('/', (req, res) => {
     logger.info('GET ALL BUSINESSES');
     try {
-        db.executeStoredProcedure(sp.business.GET_BUSINESS, { businessId: null }, (data) => {
+        return db.executeStoredProcedure(sp.business.GET_BUSINESS, { businessId: null }, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 router.get('/:businessId', (req, res) => {
     logger.info('GET BUSINESS BY ID');
     try {
-        db.executeStoredProcedure(sp.business.GET_BUSINESS, { businessId: req.params.businessId }, (data) => {
+        return db.executeStoredProcedure(sp.business.GET_BUSINESS, { businessId: req.params.businessId }, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -35,7 +35,7 @@ router.get('/:businessId', (req, res) => {
 router.get('/user/:userId', (req, res) => {
     logger.info('GET BUSINESS BY USER ID');
     try {
-        db.executeStoredProcedure(sp.business.GET_BUSINESS_USER, { userId: req.params.userId }, (data) => {
+        return db.executeStoredProcedure(sp.business.GET_BUSINESS_USER, { userId: req.params.userId }, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -48,7 +48,7 @@ router.get('/user/:userId', (req, res) => {
 router.post('/', (req, res) => {
     logger.info('INSERT NEW BUSINESS');
     try {
-        db.executeStoredProcedure(sp.business.CREATE_UPDATE_BUSINESS, req.body.params, (data) => {
+        return db.executeStoredProcedure(sp.business.CREATE_UPDATE_BUSINESS, req.body.params, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -61,7 +61,7 @@ router.post('/', (req, res) => {
 router.patch('/', (req, res) => {
     logger.info('UPDATE BUSINESS');
     try {
-        db.executeStoredProcedure(sp.business.CREATE_UPDATE_BUSINESS, req.body.params, (data) => {
+        return db.executeStoredProcedure(sp.business.CREATE_UPDATE_BUSINESS, req.body.params, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -74,7 +74,7 @@ router.patch('/', (req, res) => {
 router.get('/category/:categoryId', (req, res) => {
     logger.info('GET BUSINESSES BY CATEGORY');
     try {
-        db.executeStoredProcedure(sp.business.GET_BUSINESS_CATEGORY, { categoryId: req.params.categoryId }, (data) => {
+        return db.executeStoredProcedure(sp.business.GET_BUSINESS_CATEGORY, { categoryId: req.params.categoryId }, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -87,7 +87,7 @@ router.get('/category/:categoryId', (req, res) => {
 router.get('/operationalStatus', (req, res) => {
     logger.info('GET ALL OPERATIONAL STATUSES');
     try {
-        db.executeStoredProcedure(sp.business.GET_OPERATIONAL_STATUS, { operationalStatusId: null }, (data) => {
+        return db.executeStoredProcedure(sp.business.GET_OPERATIONAL_STATUS, { operationalStatusId: null }, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -100,7 +100,7 @@ router.get('/operationalStatus', (req, res) => {
 router.get('/operationalStatus/:operationalStatusId', (req, res) => {
     logger.info('GET OPERATIONAL STATUS BY ID');
     try {
-        db.executeStoredProcedure(sp.business.GET_OPERATIONAL_STATUS, { operationalStatusId: req.params.operationalStatusId }, (data) => {
+        return db.executeStoredProcedure(sp.business.GET_OPERATIONAL_STATUS, { operationalStatusId: req.params.operationalStatusId }, (data) => {
             return res.status(200).send(data);
         });
     }
