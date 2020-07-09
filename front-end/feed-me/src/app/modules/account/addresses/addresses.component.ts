@@ -32,22 +32,23 @@ export class AddressesComponent implements OnChanges {
   }
 
   addAddress() {
-    const address = {
+    this.addressService.insertAddress(this.mapAddress())
+      .then(() => {
+        this.snackbarService.success('Successfully added address to profile');
+        this.addresses.push(this.mapAddress());
+      })
+      .catch(() => {
+        this.snackbarService.error('Could not add address to your profile. Please try again later')
+      });
+  }
+
+  mapAddress() {
+    return {
       addressId: -1,
       address: this.mapService.address.place_name,
       geometry: this.mapService.address.geometry,
       userId: this.authService.getCurrentUser().uid
     };
-
-    this.addressService.insertAddress(address)
-      .then(() => {
-        this.snackbarService.success('Successfully added address to profile');
-        this.addresses.push(address);
-
-      })
-      .catch(() => {
-        this.snackbarService.error('Could not add address to your profile. Please try again later')
-      });
   }
 
   removeAddress(address: Address) {
