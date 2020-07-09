@@ -36,7 +36,6 @@ export class OrdersComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
-    this.loading = true;
     this.getSubTotal(this.cartService.cart, this.itemsTotal);
     this.getItemsTotal();
   }
