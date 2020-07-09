@@ -1,1 +1,17 @@
-<p>admin-home works!</p>
+<main>
+    <div class="main">
+      <div class="nav">
+        <ul>
+          <li (click)="changeDisplay('business')"><img class="icon" src="/assets/icons/cart2.png" alt="orders" /></li>
+          <li (click)="changeDisplay('user')"><img class="icon" src="/assets/icons/profile.png" alt="profile" /></li>
+        </ul>
+      </div>
+      <div class="items">
+        <app-business *ngIf="display.business" ></app-business>
+        <app-user *ngIf="display.user"></app-user>
+      </div>
+    </div>
+  </main>
+
+
+

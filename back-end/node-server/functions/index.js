@@ -11,6 +11,7 @@ const ordersController = require('./routes/orders/orders.controller');
 const categoryController = require('./routes/category/category.controller');
 const addressController = require('./routes/address/address.controller');
 const deliveryController = require('./routes/delivery/delivery.controller');
+const adminController = require('./routes/admin/admin.controller')
 
 const app = express();
 
@@ -31,5 +32,6 @@ app.use('/orders', ordersController);
 app.use('/category', categoryController);
 app.use('/address', addressController);
 app.use('/delivery', deliveryController);
+app.use('/admin',adminController);
 
 exports.app = functions.https.onRequest(app);

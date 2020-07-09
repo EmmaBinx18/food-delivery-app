@@ -1,0 +1,25 @@
+.open {
+    background-color: var(--primary-success);
+    width: 3rem;
+  }
+  
+  .closed {
+    background-color: var(--primary-error);
+    width: 3.5rem;
+  }
+  
+  .pending {
+    background-color: var(--primary-yellow);
+    width: 9rem;
+  }
+  
+  .open,
+  .closed,
+  .pending {
+    border-radius: 6px;
+    color: white !important;
+    padding: 0.3rem;
+  }
+
+
+  

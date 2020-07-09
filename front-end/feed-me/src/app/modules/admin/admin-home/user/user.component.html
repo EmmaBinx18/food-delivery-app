@@ -1,0 +1,40 @@
+<div class="users">
+    <app-loader *ngIf="loading && !error"></app-loader>
+    <div class="view_users">
+        <div *ngIf="!loading" class="users-table" style="max-width: 95%;">
+            <h2>Users</h2>
+            <table>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Role</th>
+                    <th>Manage Account</th>
+                    <th>Manage Role</th>
+
+                </tr>
+                <tr *ngFor="let user of users">
+                    <td>{{ user.firstname}} {{ user.lastname}}</td>
+                    <td>
+                        <p>{{user.roleName}}</p>
+                    </td>
+                    <td>
+                        <button *ngIf="user.isActive" (click)="deactivateUser(user)" class="button-deactivate">
+                            <p>Deactivate</p>
+                        </button>
+                        <button *ngIf="!user.isActive" (click)="activateUser(user)" class="button-activate">
+                            <p>Activate</p>
+                        </button>
+                    </td>
+                    <td>
+                        <button *ngIf="!(user.roleid==0)" (click)="removeUserRole(user)" class="button-remove-role">
+                            <p>Remove {{user.roleName}} role</p>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <h3 *ngIf="error">
+            There was an error loading the users. Please try again
+            later.
+        </h3>
+    </div>
+</div>

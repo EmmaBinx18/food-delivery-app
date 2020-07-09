@@ -1,0 +1,54 @@
+<div >
+    <app-loader *ngIf="loading && !error"></app-loader>
+    <div class="businesses" *ngIf="!loading">
+        <h2>Businesses</h2>
+        <table>
+            
+        <tr *ngFor="let business of businesses" >
+            <td>{{ business.name }}</td>
+            <td>{{business.userId}}</td>
+            <td>
+                <h3
+                    [ngClass]="{'closed': business.operationalStatusId == 3, 'open': business.operationalStatusId == 2,'pending': business.operationalStatusId == 1}">
+                    {{business.operationalStatus}}</h3>
+            </td>
+            <td>
+                <button [disabled]="!(business.operationalStatusId == 1)" (click)="approveBusiness(business.businessId)">
+                    <p>Approve</p>
+                </button>
+                <button [disabled]="!(business.operationalStatusId == 1)" (click)="disapproveBusiness(business.businessId)">
+                    <p>Deny</p>
+                </button>
+            </td>
+            <td *ngIf="business.operationalStatusId == 2" (click)="closeBusiness(business.businessId)">
+                <button >
+                    <p>Close</p>
+                </button> 
+            </td>
+            <td *ngIf="business.operationalStatusId == 3" (click)="openBusiness(business.businessId)">
+                <button>
+                    <p>Open</p>
+                </button> 
+            </td>
+
+            <td *ngIf="!business.userId">
+                <div class="controls">
+                    <select (change)="setUser(business.businessId, $event)">
+                    
+                        <option value="" disabled>Select a user</option>
+                        <option *ngFor="let customer of customers" [value]="customer.userId">{{customer.firstname}} {{customer.lastname}}
+                        </option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <button (click)="approveAll()">
+        <p>Approve all businesses</p>
+    </button>
+    </div>
+    <h3 *ngIf="error">
+      There was an error loading the businesses. Please try again
+      later.
+    </h3>
+  </div>

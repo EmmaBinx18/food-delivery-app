@@ -5,8 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 const routes: Routes = [
-    { path: '', component: AdminHomeComponent },
-    { path: 'admin', redirectTo: '' }
+    { path: '', component: AdminHomeComponent }
 ];
 
 @NgModule({

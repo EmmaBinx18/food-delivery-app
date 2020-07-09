@@ -39,6 +39,12 @@ const TRACK_ORDER = 'p_Track_Order';
 const ADD_TO_DRIVER_ROLE = 'p_Add_To_Driver_Role';
 const GET_DRIVER = 'p_Get_Driver';
 
+const APPROVE_BUSINESS = 'p_Approve_Business'
+const REMOVE_USER_FROM_ROLE = 'p_Remove_User_Role'
+const GET_USER_ROLES = 'p_Get_Roles'
+const ADD_TO_BUSINESS_ROLE = 'p_Add_To_Business_Role'
+const CLOSE_BUSINESS = 'p_Close_Business'
+
 module.exports = {
     CREATE_UPDATE_ADDRESS,
     CREATE_UPDATE_BUSINESS,
@@ -72,5 +78,10 @@ module.exports = {
     GET_DRIVER_ORDER,
     UPDATE_PRODUCT_STATUS,
     CREATE_PAYMENT,
-    TRACK_ORDER
+    TRACK_ORDER,
+    APPROVE_BUSINESS,
+    REMOVE_USER_FROM_ROLE,
+    GET_USER_ROLES,
+    ADD_TO_BUSINESS_ROLE,
+    CLOSE_BUSINESS
 }

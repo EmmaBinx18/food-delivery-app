@@ -1,0 +1,58 @@
+@import '../../../../../assets/styles/common.scss';
+@import '../../../../../assets/styles/table.scss';
+@import '../admin-home.component.scss';
+
+.users{
+    @extend .container;
+  
+    .view-users{
+      width: 65%;
+      max-height: 70vh;
+      @extend .white-container;
+      @media(max-width: 1000px){
+        width: 95%; 
+        margin-bottom: 4%;
+      }
+    }
+  }
+
+.users-table {
+  @extend .table-container;
+  tr {background-color: rgb(240, 240, 240);}
+}
+
+.button-deactivate {
+    color: black;
+    border: 2px solid var(--primary-error);
+    border-radius: 0.8em;
+    // padding: 2px 12px 2px 12px;
+  }
+
+.button-deactivate:hover{
+    background-color: var(--primary-error);
+    color: white;
+}
+
+.button-activate {
+    color: black;
+    border: 2px solid var(--primary-green);
+    border-radius: 0.8em;
+    
+  }
+
+.button-activate:hover{
+    background-color: var(--primary-green);
+    color: white;
+}
+
+.button-remove-role {
+    color: black;
+    border: 2px solid var(--primary-yellow);
+    border-radius: 0.8em;
+    
+  }
+
+.button-remove-role:hover{
+    background-color: var(--primary-yellow);
+    color: white;
+}

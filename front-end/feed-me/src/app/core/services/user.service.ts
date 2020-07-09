@@ -27,7 +27,11 @@ export class UserService {
   }
 
   deactivateUser(uid: string) {
-    return this.http.post(`api/user/deactivate`, { params: uid }).toPromise();
+    return this.http.get(`api/user/${uid}/deactivate`).toPromise();
+  }
+
+  reactivateUser(uid: string){
+    return this.http.get(`api/user/${uid}/reactivate`).toPromise();
   }
 
   private _mapUserObject(user: User) {

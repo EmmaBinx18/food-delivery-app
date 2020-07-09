@@ -58,15 +58,30 @@ router.patch('/', (req, res) => {
     }
 });
 
-router.post('/:uid/deactivate', (req, res) => {
+router.get('/:uid/deactivate', (req, res) => {
     logger.info('DEACTIVATE USER');
     try {
-        db.executeStoredProcedure(sp.DEACTIVATE_USER, { id: req.params.uid }, () => {
+        // console.log({ userId: req.params.uid })
+        db.executeStoredProcedure(sp.DEACTIVATE_USER, { userId: req.params.uid }, () => {
             return res.status(200).send();
         });
     }
     catch (error) {
         logger.error('DEACTIVATE ERROR', error);
+        return res.status(500).send(error);
+    }
+});
+
+router.get('/:uid/reactivate', (req, res) => {
+    logger.info('REACTIVATE USER');
+    try {
+        // console.log({ userId: req.params.uid })
+        db.executeStoredProcedure(sp.DEACTIVATE_USER, { userId: req.params.uid , activate : true}, () => {
+            return res.status(200).send();
+        });
+    }
+    catch (error) {
+        logger.error('REACTIVATE ERROR', error);
         return res.status(500).send(error);
     }
 });

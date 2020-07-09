@@ -86,6 +86,7 @@ router.get('/category/:categoryId', (req, res) => {
 
 router.get('/operationalStatus', (req, res) => {
     logger.info('GET ALL OPERATIONAL STATUSES');
+    
     try {
         db.executeStoredProcedure(sp.GET_OPERATIONAL_STATUS, { operationalStatusId: null }, (data) => {
             return res.status(200).send(data);
