@@ -6,11 +6,11 @@
         </button>
         <h1>{{business.name}}</h1>
         <h3>{{address}}</h3>
-        <h3 [ngClass]="{'closed': business.operationalStatusId == 2, 'open': business.operationalStatusId == 1}">
+        <h3 [ngClass]="{'closed': operational == 'Closed', 'open': operational == 'Open'}">
             {{operational}}</h3>
     </div>
     <table *ngIf="!loading && products.length !== 0 && !error">
-        <tr *ngFor="let product of products" [ngClass]="{'disabled': business.operationalStatusId == 2}">
+        <tr *ngFor="let product of products" [ngClass]="{'disabled': operational == 'Closed'}">
             <td>{{product.name}}</td>
             <td class="description">{{product.description}}</td>
             <td>R{{product.price}}</td>
