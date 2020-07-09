@@ -9,7 +9,7 @@ const logger = require('../../logger/winstin.logger');
 router.post('/register', (req, res) => {
     logger.info('INSERT NEW DRIVER');
     try {
-        db.executeStoredProcedure(sp.ADD_TO_DRIVER_ROLE, req.body.params, (data) => {
+        db.executeStoredProcedure(sp.delivery.ADD_TO_DRIVER_ROLE, req.body.params, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -22,8 +22,8 @@ router.post('/register', (req, res) => {
 router.get('/:driverId', (req, res) => {
     logger.info('GET DELIVERIES FOR DRIVER');
     try {
-        db.executeStoredProcedure(sp.GET_DRIVER_ORDER, { driverId: 'driver_uid', deliveryStatusId: 1 }, (data) => {
-            // db.executeStoredProcedure(sp.GET_DRIVER_ORDER, { driverId: req.params.driverId, deliveryStatusId: 1 }, (data) => {
+        db.executeStoredProcedure(sp.delivery.GET_DRIVER_ORDER, { driverId: 'driver_uid', deliveryStatusId: 1 }, (data) => {
+            // db.executeStoredProcedure(sp.delivery.GET_DRIVER_ORDER, { driverId: req.params.driverId, deliveryStatusId: 1 }, (data) => {
             return res.status(200).send(data);
         });
     }

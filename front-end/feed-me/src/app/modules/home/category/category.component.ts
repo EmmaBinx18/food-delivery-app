@@ -51,7 +51,7 @@ export class CategoryComponent implements OnInit {
       .then(response => {
         this.businesses = response;
         this.loading = false;
-        // this.filterBusinesses();
+        this.filterBusinesses();
       })
       .catch(() => {
         this.error = true;

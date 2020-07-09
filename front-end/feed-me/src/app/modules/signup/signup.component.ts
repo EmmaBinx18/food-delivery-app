@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from 'src/app/core/authentication/authentication.service';
 import { Role } from '../../core/models/role.enum';
+import { CommonService } from 'src/app/core/services/common.service';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +17,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private commonService: CommonService
   ) { }
 
   ngOnInit() {
@@ -35,7 +37,7 @@ export class SignupComponent implements OnInit {
       role: Role.Customer
     },
       {
-        validator: this.matchPassword('password', 'confirmPassword'),
+        validator: this.commonService.matchPassword('password', 'confirmPassword'),
       });
   }
 
@@ -45,27 +47,6 @@ export class SignupComponent implements OnInit {
         .catch(error => {
           this.error = error;
         });
-    }
-  }
-
-  matchPassword(password: string, confirmPassword: string) {
-    return (formGroup: FormGroup) => {
-      const passwordControl = formGroup.controls[password];
-      const confirmPasswordControl = formGroup.controls[confirmPassword];
-
-      if (!passwordControl || !confirmPasswordControl) {
-        return null;
-      }
-
-      if (confirmPasswordControl.errors && !confirmPasswordControl.errors.passwordMismatch) {
-        return null;
-      }
-
-      if (passwordControl.value !== confirmPasswordControl.value) {
-        confirmPasswordControl.setErrors({ passwordMismatch: true });
-      } else {
-        confirmPasswordControl.setErrors(null);
-      }
     }
   }
 

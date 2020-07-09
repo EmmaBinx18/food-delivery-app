@@ -1,10 +1,10 @@
 <div class="orders">
   <div class="current-order">
     <app-loader *ngIf="loading && !error"></app-loader>
-    <div *ngIf="!loading && currentOrder.length != 0 && !error" class="order-table">
+    <div *ngIf="!loading && cartService.cart.length != 0 && !error" class="order-table">
       <h2>Current Cart Items</h2>
       <table>
-        <tr *ngFor="let item of currentOrder">
+        <tr *ngFor="let item of cartService.cart">
           <td>{{ item.product.name }}</td>
           <td>{{ item.quantity }}</td>
           <td>R{{ item.product.price * item.quantity }}</td>
@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <h3 *ngIf="!loading && currentOrder.length == 0 && !error">You don't have any current orders</h3>
+    <h3 *ngIf="!loading && cartService.cart.length == 0 && !error">You don't have any current orders</h3>
     <h3 *ngIf="!loading && addresses.length == 0 && !error">
       There is no address assigned to your account. Please assign an address
       before continuing
