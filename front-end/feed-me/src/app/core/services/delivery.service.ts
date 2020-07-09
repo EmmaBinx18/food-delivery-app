@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { AddressService } from './address.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +25,19 @@ export class DeliveryService {
   }
 
   insertDriver(driver: any, addressId: string) {
-    return this.http.post(`api/delivery/register`, { params: { userId: driver.uid, addressId: addressId } }).toPromise();
+    return this.http.post(`${environment.api}/delivery/register`, { params: { userId: driver.uid, addressId: addressId } }).toPromise();
   }
 
   getDeliveriesForDriver(driverId: string) {
-    return this.http.get(`api/delivery/${driverId}`).toPromise();
+    return this.http.get(`${environment.api}/delivery/${driverId}`).toPromise();
+  }
+
+  pickupOrder(businessId: string, orderId: string) {
+    return this.http.post(`${environment.api}/delivery/pickupOrder`, { params: { businessId, orderId } }).toPromise();
+  }
+
+  completeDelivery(orderId: string) {
+    return this.http.post(`${environment.api}/delivery/completeDelivery`, { params: { orderId, kmTraveled: 20.582 } }).toPromise();
   }
 
   mapOrderReadyProduct(location: any) {

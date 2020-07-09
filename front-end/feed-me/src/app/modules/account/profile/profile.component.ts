@@ -12,7 +12,7 @@ import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 })
 export class ProfileComponent implements OnChanges {
 
-  @Input() profile: any = [];
+  @Input() profile: any;
   @Input() error: boolean;
 
   profileForm: FormGroup;
@@ -26,7 +26,7 @@ export class ProfileComponent implements OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.profile.currentValue.length != 0) {
+    if (changes.profile.currentValue != null) {
       this.loading = false;
       this.initProfileForm();
       this.populateForm();

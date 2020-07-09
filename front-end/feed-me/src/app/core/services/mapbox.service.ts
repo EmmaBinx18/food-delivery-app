@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Renderer2 } from '@angular/core';
 import { environment } from '../../../environments/environment'
 
 import * as mapboxgl from 'mapbox-gl'
@@ -25,7 +25,8 @@ export class MapboxService {
 
   constructor(
     private ordersService: OrdersService,
-    public addressService: AddressService
+    public addressService: AddressService,
+    private renderer: Renderer2
   ) {
     mapboxgl.accessToken = environment.mapbox.accessToken;
   }
@@ -134,6 +135,7 @@ export class MapboxService {
             closeOnClick: false
           }).setHTML('<p>' + ev.result.place_name + '</p>'));
         this.address = ev.result;
+        this.renderer.setAttribute(this.renderer.selectRootElement('#map'), 'value', this.address.place_name);
       });
       geolocate.trigger();
 
@@ -145,6 +147,7 @@ export class MapboxService {
             longitude: position[0]
           }, (err, res) => {
             this.address = res.features[0];
+            this.renderer.setAttribute(this.renderer.selectRootElement('#map'), 'value', this.address.place_name);
           });
 
         if (this.address) {
@@ -155,6 +158,7 @@ export class MapboxService {
               offset: 25, closeButton: false,
               closeOnClick: false
             }).setHTML('<p>' + this.address.place_name + '</p>'));
+          this.renderer.setAttribute(this.renderer.selectRootElement('#map'), 'value', this.address.place_name);
         }
         else {
           this.marker
@@ -172,6 +176,7 @@ export class MapboxService {
               longitude: location.lng
             }, (err, res) => {
               this.address = res.features[0];
+              this.renderer.setAttribute(this.renderer.selectRootElement('#map'), 'value', this.address.place_name);
             });
 
           this.marker
@@ -180,6 +185,7 @@ export class MapboxService {
               closeButton: false,
               closeOnClick: false
             }).setHTML('<p>' + this.address.place_name + '</p>'));
+          this.renderer.setAttribute(this.renderer.selectRootElement('#map'), 'value', this.address.place_name);
         }
       });
     });
@@ -237,7 +243,6 @@ export class MapboxService {
       showUserLocation: true,
       trackUserLocation: true,
       zoom: 20
-
     });
 
     map.addControl(geolocate);
@@ -252,7 +257,6 @@ export class MapboxService {
         instructions: true
       },
       zoom: 20
-
     });
 
     map.addControl(directions, 'top-left');

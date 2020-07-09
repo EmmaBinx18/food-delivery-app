@@ -13,7 +13,7 @@ import { Address } from '../../../core/models/address.model';
 })
 export class AddressesComponent implements OnChanges {
 
-  @Input() addresses: any = [];
+  @Input() addresses: any;
   @Input() error: boolean;
 
   loading: boolean = true;
@@ -26,16 +26,17 @@ export class AddressesComponent implements OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.addresses.currentValue.length != 0) {
+    if (changes.addresses.currentValue != null) {
       this.loading = false;
     }
   }
 
   addAddress() {
-    this.addressService.insertAddress(this.mapAddress())
+    const address = this.mapAddress();
+    this.addressService.insertAddress(address)
       .then(() => {
         this.snackbarService.success('Successfully added address to profile');
-        this.addresses.push(this.mapAddress());
+        this.addresses.push(address);
       })
       .catch(() => {
         this.snackbarService.error('Could not add address to your profile. Please try again later')

@@ -9,7 +9,7 @@ const logger = require('../../logger/winstin.logger');
 router.get('/', (req, res) => {
     logger.info('GET ALL CATEGORIES');
     try {
-        db.executeStoredProcedure(sp.category.GET_CATEGORY, { categoryId: null }, (data) => {
+        return db.executeStoredProcedure(sp.category.GET_CATEGORY, { categoryId: null }, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 router.get('/:categoryId', (req, res) => {
     logger.info('GET CATEGORY BY ID');
     try {
-        db.executeStoredProcedure(sp.category.GET_CATEGORY, { categoryId: req.params.categoryId }, (data) => {
+        return db.executeStoredProcedure(sp.category.GET_CATEGORY, { categoryId: req.params.categoryId }, (data) => {
             return res.status(200).send(data);
         });
     }
@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
     }
 
     try {
-        db.executeStoredProcedure(sp.category.CREATE_UPDATE_CATEGORY, newCategory, () => {
+        return db.executeStoredProcedure(sp.category.CREATE_UPDATE_CATEGORY, newCategory, () => {
             return res.status(200).send();
         });
     }
@@ -55,7 +55,7 @@ router.patch('/', (req, res) => {
     logger.info('UPDATE CATEGORY');
 
     try {
-        db.executeStoredProcedure(sp.category.CREATE_UPDATE_CATEGORY, req.body.params, () => {
+        return db.executeStoredProcedure(sp.category.CREATE_UPDATE_CATEGORY, req.body.params, () => {
             return res.status(200).send();
         });
     }

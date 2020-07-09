@@ -15,6 +15,8 @@ const CREATE_UPDATE_CATEGORY = 'p_Create_Update_Category';
 const ADD_TO_DRIVER_ROLE = 'p_Add_To_Driver_Role';
 const GET_DRIVER = 'p_Get_Driver';
 const GET_DRIVER_ORDER = 'p_Get_Driver_Order';
+const COMPLETE_ORDER_DELIVERY = 'p_Complete_Order_Delivery';
+const PICK_UP_ORDER = 'p_Pick_Up_Order_Product';
 
 const GET_USER = 'p_Get_User';
 const CREATE_UPDATE_USER = 'p_Create_Update_User';
@@ -56,7 +58,9 @@ module.exports = {
     delivery: {
         ADD_TO_DRIVER_ROLE,
         GET_DRIVER_ORDER,
-        GET_DRIVER
+        GET_DRIVER,
+        COMPLETE_ORDER_DELIVERY,
+        PICK_UP_ORDER
     },
     orders: {
         GET_DELIVERY_READY_ORDERS,

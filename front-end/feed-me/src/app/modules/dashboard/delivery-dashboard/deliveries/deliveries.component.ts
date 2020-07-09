@@ -18,8 +18,10 @@ export class DeliveriesComponent implements OnChanges {
   constructor(private commonService: CommonService) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.deliveries.currentValue.length != 0) {
-      this.commonService.formatDate(this.deliveries);
+    if (changes.deliveries.currentValue != null) {
+      if (this.deliveries.length != 0) {
+        this.commonService.formatDate(this.deliveries);
+      }
       this.loading = false;
     }
   }

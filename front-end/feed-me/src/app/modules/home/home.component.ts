@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.category = "";
     window.scroll(0, 0);
   }
 

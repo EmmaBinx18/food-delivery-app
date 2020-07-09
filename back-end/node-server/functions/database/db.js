@@ -29,8 +29,9 @@ module.exports = {
     },
     returnChecker(data) {
         const response = this.mapReturnData(data);
-        if (!response || response.length == 0) {
-            return [];
+        const json = JSON.parse(response);
+        if (!response || response.length === 0 || json[0].results === 0) {
+            return null;
         }
         return JSON.parse(response);
     },

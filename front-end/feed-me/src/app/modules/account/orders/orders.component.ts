@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, Renderer2 } from "@angular/core";
 
 import { CartItem } from "src/app/core/models/cart-item.model";
 import { CartService } from "src/app/core/services/cart.service";
@@ -13,8 +13,8 @@ import { ModalService } from 'src/app/shared/modal/modal.service';
   styleUrls: ["./orders.component.scss"],
 })
 export class OrdersComponent implements OnInit, OnChanges {
-  @Input() orders: any = [];
-  @Input() addresses: any = [];
+  @Input() orders: any;
+  @Input() addresses: any;
   @Input() error: boolean;
 
   subtotal: number = 0;
@@ -32,19 +32,25 @@ export class OrdersComponent implements OnInit, OnChanges {
     private orderService: OrdersService,
     private commonService: CommonService,
     public snackbarService: SnackbarService,
-    public modalService: ModalService
+    public modalService: ModalService,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit() {
-    this.getSubTotal(this.cartService.cart, this.itemsTotal);
+    this.loading = true;
+    this.subtotal = this.getSubTotal(this.cartService.cart);
     this.getItemsTotal();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     Object.keys(changes).forEach(key => {
-      if (changes[key].currentValue.length !== 0) {
-        this.commonService.formatDate(this.orders);
-        this.loading = false;
+      if (key == 'orders') {
+        if (changes.orders.currentValue !== null) {
+          this.loading = false;
+          if (changes.orders.currentValue.length !== 0) {
+            this.commonService.formatDate(this.orders);
+          }
+        }
       }
     });
   }
@@ -53,10 +59,12 @@ export class OrdersComponent implements OnInit, OnChanges {
     this.address = event.target.value;
   }
 
-  getSubTotal(order: any, total: number) {
+  getSubTotal(order: any) {
+    let total = 0;
     order.forEach((item) => {
       total += item.product.price * item.quantity;
     });
+    return total;
   }
 
   getItemsTotal() {
@@ -86,31 +94,10 @@ export class OrdersComponent implements OnInit, OnChanges {
       });
   }
 
-  pay(order: any) {
-    this.orderService.makeOrderPayment(order.orderId, this.getOrderPrice(order))
-      .then(() => {
-        this.snackbarService.success('Payment successful');
-        this.refreshOrderEmitter.emit();
-      })
-      .catch(() => {
-        this.snackbarService.error('Could not make payment. Please try again later.');
-      });
-  }
-
-  getOrderPrice(order: any) {
-    let total = 0;
-    this.orders.forEach(item => {
-      if (item == order) {
-        this.getSubTotal(item, total);
-      }
-    });
-    return total;
-  }
-
   track(order: any) {
     this.tracking = true;
     this.order = order;
-    document.getElementById('tracking').scrollIntoView({ behavior: "smooth" });
+    this.renderer.selectRootElement('#tracking').scrollIntoView({ behavior: "smooth" });
   }
 
   closeTracking() {
