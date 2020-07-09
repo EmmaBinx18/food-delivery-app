@@ -4,7 +4,6 @@ import {
   ViewChild,
   ElementRef,
   EventEmitter,
-  Renderer2,
   Output,
 } from "@angular/core";
 
@@ -27,7 +26,6 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private renderer: Renderer2,
     public router: Router,
     public modalService: ModalService
   ) { }
@@ -50,11 +48,11 @@ export class HeaderComponent implements OnInit {
   }
 
   openNav() {
-    this.renderer.setStyle(this.nav.nativeElement, "left", "0");
+    this.nav.nativeElement.style.left = '0';
   }
 
   closeNav() {
-    this.renderer.setStyle(this.nav.nativeElement, "left", "-200rem");
+    this.nav.nativeElement.style.left = '-200rem';
   }
 
   navigate(option: string) {

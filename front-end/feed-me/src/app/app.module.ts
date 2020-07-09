@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { AuthService } from './core/authentication/authentication.service';
 import { SharedModule } from './shared/shared.module';
 import { CartModule } from './modules/cart/cart.module';
+import { AuthGuard } from './core/guards/auth.guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,7 @@ import { CartModule } from './modules/cart/cart.module';
     SharedModule,
     CartModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
