@@ -27,10 +27,8 @@ export class HomeChefDashboardComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.business.currentValue.length != 0) {
-      this.getProducts('1');
-      this.getOrders('1');
-      // this.getProducts(this.business[0].businessId);
-      // this.getOrders(this.business[0].businessId);
+      this.getProducts(this.business[0].businessId);
+      this.getOrders(this.business[0].businessId);
     }
   }
 

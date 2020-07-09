@@ -8,14 +8,14 @@ const ordersHelper = {
         let coordinates;
         let drivers;
 
-        db.executeStoredProcedure(sp.GET_ADDRESS, { addressId: addressId }, async (data) => {
+        db.executeStoredProcedure(sp.address.GET_ADDRESS, { addressId: addressId }, async (data) => {
             coordinates = data[0].coordinates;
         });
 
-        return db.executeStoredProcedure(sp.GET_DRIVER, { userId: null }, async (data) => {
+        return db.executeStoredProcedure(sp.delivery.GET_DRIVER, { userId: null }, async (data) => {
             drivers = data;
             const driverId = this.getClosestDriver(drivers, coordinates);
-            return db.executeStoredProcedure(sp.ASSIGN_ORDER_DRIVER, { orderId: orderId, driverId: driverId }, (response) => {
+            return db.executeStoredProcedure(sp.orders.ASSIGN_ORDER_DRIVER, { orderId: orderId, driverId: driverId }, (response) => {
                 return res.status(200).send(response);
             });
         });

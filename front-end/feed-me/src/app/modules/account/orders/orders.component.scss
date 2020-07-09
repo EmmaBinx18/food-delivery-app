@@ -13,7 +13,7 @@
 
   .current-order, .order-history{
     max-height: 65vh;
-    @media(max-width: 900px){max-height: 40vh;}
+    @media(max-width: 900px){max-height: 44vh;}
   }
 
   .tracking-order{
@@ -28,6 +28,12 @@
       width: 95%;
       display: flex;
       margin-bottom: 4%;
+      justify-content: space-around;
+    }
+
+    .select-address{
+      text-align: start;
+      margin-left: 3%;
     }
   }
 
@@ -64,4 +70,14 @@ button {
 
   .icon{margin-top: 10%;}
   .pay{width: 100%;}
+}
+
+select{
+  border: 1px solid var(--primary-dark-blue);
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 10px;
+  height: 3rem;
+  width: 40%;
+  @media(max-width: 600px){font-size: 0.8rem;}
 }

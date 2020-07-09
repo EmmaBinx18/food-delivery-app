@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { CartService } from './core/services/cart.service';
 
 @Component({
@@ -8,7 +9,6 @@ import { CartService } from './core/services/cart.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'feed-me';
   cart: boolean = false;
 
   constructor(

@@ -17,18 +17,18 @@ export class OrdersComponent implements OnInit, OnChanges {
   @Input() addresses: any = [];
   @Input() error: boolean;
 
-  currentOrder: CartItem[] = [];
   subtotal: number = 0;
   itemsTotal: number = 0;
   loading: boolean = true;
   tracking: boolean = false;
   order: any = null;
+  address: string = '';
 
   @Output() changeDisplayEmitter = new EventEmitter();
   @Output() refreshOrderEmitter = new EventEmitter();
 
   constructor(
-    private cartService: CartService,
+    public cartService: CartService,
     private orderService: OrdersService,
     private commonService: CommonService,
     public snackbarService: SnackbarService,
@@ -37,8 +37,7 @@ export class OrdersComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.loading = true;
-    this.currentOrder = this.cartService.cart;
-    this.getSubTotal(this.currentOrder, this.itemsTotal);
+    this.getSubTotal(this.cartService.cart, this.itemsTotal);
     this.getItemsTotal();
   }
 
@@ -51,6 +50,10 @@ export class OrdersComponent implements OnInit, OnChanges {
     });
   }
 
+  setAddress(event: any) {
+    this.address = event.target.value;
+  }
+
   getSubTotal(order: any, total: number) {
     order.forEach((item) => {
       total += item.product.price * item.quantity;
@@ -58,7 +61,7 @@ export class OrdersComponent implements OnInit, OnChanges {
   }
 
   getItemsTotal() {
-    this.currentOrder.forEach((item) => {
+    this.cartService.cart.forEach((item) => {
       this.itemsTotal += item.quantity;
     });
   }
@@ -76,7 +79,6 @@ export class OrdersComponent implements OnInit, OnChanges {
       .then(() => {
         this.cartService.clearCart();
         this.refreshOrderEmitter.emit();
-        this.currentOrder = [];
         this.loading = true;
         this.snackbarService.success('Your order has been created and should be on its way shortly');
       })

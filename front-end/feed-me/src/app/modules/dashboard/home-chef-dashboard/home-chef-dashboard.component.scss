@@ -6,12 +6,9 @@
   margin: auto;
 
   app-products, app-orders{
-    width: 48%;
+    width: 100%;
     max-height: 70vh;
+    margin-bottom: 2%;
     @extend .white-container;
-    @media(max-width: 1000px){
-      width: 100%; 
-      margin-bottom: 4%;
-    }
   }
 }
