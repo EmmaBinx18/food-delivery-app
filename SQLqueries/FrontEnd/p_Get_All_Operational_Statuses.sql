@@ -34,7 +34,7 @@ BEGIN
 
 	WITH (operationalStatusId INT )
 	SET NOCOUNT ON;
-	IF( @operationalStatusId IS NULL)
+	IF( @operationalStatusId = -1)
 		BEGIN
 			SELECT *
 			FROM [OperationalStatus]

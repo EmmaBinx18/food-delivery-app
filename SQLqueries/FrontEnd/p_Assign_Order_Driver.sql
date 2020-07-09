@@ -31,7 +31,7 @@ BEGIN
 	BEGIN TRANSACTION
 		BEGIN TRY
 			DECLARE @OrderStatusDId INT, @orderId INT,  @driverId VARCHAR(128), @deliveryStatusPId INT, @deliveryId INT
-			SET @OrderStatusDId = 4  --'Delivery_In_Progess';
+			SET @OrderStatusDId = 2  --'Delivery_In_Progess';
 			SET @deliveryStatusPId = 1 --'Picking_up_items';
 
 			SELECT @orderId = orderId, @driverId = driverId

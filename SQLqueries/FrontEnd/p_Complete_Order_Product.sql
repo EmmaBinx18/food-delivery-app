@@ -43,7 +43,7 @@ BEGIN
 
 		--Check if all items are ready in particular order id
 		DECLARE @OrderStatusPId INT,@OrderStatusRId INT, @outstandingProducts INT
-		SET @OrderStatusRId = 3 -- 'Waiting_for_driver';
+		SET @OrderStatusRId = 3 -- 'Delivery_in_progress';
 
 		;WITH selected_order AS
 		(

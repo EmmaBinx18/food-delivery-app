@@ -10,17 +10,17 @@ GO
 -- Usage: 
  /*
     DECLARE @Error int 
-	EXEC p_Add_To_Driver_Role '{ "userId" : "driver_uid", "addressId":1 }', @Error OUTPUT
+	EXEC p_Add_To_Business_Role '{ "userId" : "user_uid", "businessId":2 }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
-	SELECT * FROM [Role]
-	SELECT * FROM [DriverAddress]
+	SELECT * FROM [UserRole]
+	SELECT * FROM [BusinessUser]
 */
 -- =============================================
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Add_To_Driver_Role')
-	DROP PROCEDURE [dbo].p_Add_To_Driver_Role
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Add_To_Business_Role')
+	DROP PROCEDURE [dbo].p_Add_To_Business_Role
 GO
 
-CREATE PROCEDURE p_Add_To_Driver_Role 
+CREATE PROCEDURE p_Add_To_Business_Role 
 	@JSON VARCHAR(MAX),
 	@Error INT OUTPUT
 AS
@@ -28,18 +28,18 @@ BEGIN
 	SET NOCOUNT ON;
 	BEGIN TRANSACTION
 		BEGIN TRY
-			DECLARE @RoleDId INT, @userId VARCHAR(128), @addressId INT
-			SELECT @RoleDId = 2  --driver roleid
+			DECLARE @RoleDId INT, @userId VARCHAR(128), @businessId INT
+			SELECT @RoleDId = 3  --homechef roleid
 
-			SELECT @userId = userId, @addressId = addressId
+			SELECT @userId = userId, @businessId = businessId
 			FROM OPENJSON(@JSON)
-			WITH (userId VARCHAR(128), addressId INT)
+			WITH (userId VARCHAR(128), businessId INT)
 
 			INSERT INTO [UserRole]
 			VALUES (@userId, @RoleDId)
 
-			INSERT INTO [DriverAddress]
-			VALUES (@userId, @addressId)
+			INSERT INTO [BusinessUser]
+			VALUES (@userId, @businessId)
 
 			SET @Error = 0
 			SELECT 1 [success] , NULL [error] FOR JSON PATH, INCLUDE_NULL_VALUES 

@@ -6,12 +6,12 @@ GO
 -- =============================================
 -- Author:		Susan van Zyl
 -- Create date: 2020-06-27
--- Description:	Approve a business given the business id or all pending approval businesses when given id NULL
+-- Description:	Approve a business given the business id and activate 1 or all pending approval businesses when given id NULL, deny when id and no activate
 -- 
 -- Usage: 
  /*
     DECLARE @Error int 
-	EXEC p_Approve_Business '{ "businessId" : null}', @Error OUTPUT
+	EXEC p_Approve_Business '{ "businessId" : 1}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [Business]
 	select * from [OperationalStatus]
@@ -30,14 +30,15 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	BEGIN TRY
-		DECLARE @operationalStatusOId  INT,  @operationalStatusPId  INT
+		DECLARE @operationalStatusOId  INT,  @operationalStatusPId  INT, @operationalStatusDId INT, @activate BIT
 		SET @operationalStatusOId = 2 --open
 		SET @operationalStatusPId = 1 --pending approval
+		SET @operationalStatusDId = 4 --denied
 
 		DECLARE	@businessId INT
-		SELECT @businessId = businessId
+		SELECT @businessId = businessId, @activate = activate
 		FROM OPENJSON(@JSON)
-		WITH (businessId INT)
+		WITH (businessId INT, activate BIT)
 
 		IF (@BusinessId IS NULL)
 			BEGIN
@@ -46,9 +47,9 @@ BEGIN
 				WHERE operationalStatusId = @operationalStatusPId
 			END
 		ELSE
-			BEGIN
+			BEGIN		
 				UPDATE [Business]
-					SET operationalStatusId = @operationalStatusOId
+					SET operationalStatusId = CASE WHEN @activate IS NULL THEN @operationalStatusDId ELSE  @operationalStatusOId END
 				WHERE businessId = @businessId			
 			END
 		SET @Error = 0

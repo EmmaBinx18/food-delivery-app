@@ -10,7 +10,7 @@ GO
 -- Usage: 
  /*
     DECLARE @Error int 
-	EXEC p_Remove_User_Role '{ "userId" : "driver_uid", "roleId": 2}', @Error OUTPUT
+	EXEC p_Remove_User_Role '{ "userId" : "driver_uid"}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 	SELECT * FROM [UserRole]
 */
@@ -26,12 +26,24 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	BEGIN TRY
-		DECLARE @userId VARCHAR(128), @roleId INT
-		SELECT @userId = userId, @roleId = roleId
+		DECLARE @userId VARCHAR(128)
+		SELECT @userId = userId
 		FROM OPENJSON(@JSON)
-		WITH (userId VARCHAR(128), roleId INT)
+		WITH (userId VARCHAR(128))
+
+		DECLARE @roleId INT = (SELECT roleId FROM [UserRole] WHERE [UserId]  = @userId)
 
 		DELETE FROM [UserRole] WHERE [UserId]  = @userId
+
+		IF (@roleId =3)
+		BEGIN
+			DELETE FROM [BusinessUser] WHERE [UserId]  = @userId
+		END
+
+		IF (@roleId =2)
+		BEGIN
+			DELETE FROM [DriverAddress] WHERE [UserId]  = @userId
+		END
 
 		SET @Error = 0
 		SELECT 1 [success] , NULL [error] FOR JSON PATH, INCLUDE_NULL_VALUES 

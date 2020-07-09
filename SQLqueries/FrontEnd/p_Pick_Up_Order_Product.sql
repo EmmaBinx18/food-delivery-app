@@ -11,9 +11,9 @@ GO
 -- Usage: 
  /*
     DECLARE @Error int 
-	EXEC p_Pick_Up_Order_Product '{ "productId" : 1, "orderId" : 1}', @Error OUTPUT
+	EXEC p_Pick_Up_Order_Product '{ "businessId" : 1, "orderId" : 1}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
-	SELECT * FROM [OrderProduct]
+	SELECT * FROM [OrderProduct] OP INNER JOIN [Product] P ON P.productId = OP.productId
 	SELECT * FROM [Order] O JOIN [Delivery] D ON D.DeliveryId = O.DeliveryId
 */
 -- =============================================
@@ -30,18 +30,29 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	BEGIN TRY
-		DECLARE @OrderProductStatusPId INT,  @productId INT, @orderId INT
+		DECLARE @OrderProductStatusPId INT,  @businessId INT, @orderId INT
 		SET @OrderProductStatusPId = 4 -- 'Picked_up'
 
 
-		SELECT @productId = productId, @orderId = orderId
+		SELECT @businessId = businessId, @orderId = orderId
 		FROM OPENJSON(@JSON)
-		WITH (productId INT, orderId INT)
+		WITH (businessId INT, orderId INT)
 
-		UPDATE [OrderProduct]
+
+		;WITH selected_order AS (
+			SELECT orderId, orderDateTime FROM [Order] WHERE orderId = @orderId 		
+		),
+		business_products AS (
+			SELECT so.orderId, p.productId
+			FROM selected_order so
+			INNER JOIN [OrderProduct] OP ON OP.OrderId = so.orderId
+			INNER JOIN [Product] P ON P.productId = OP.productId AND P.businessId = @businessId
+		)
+		UPDATE OP
 			SET OrderProductStatusId = @OrderProductStatusPId,
 				[orderItemReady] = GETDATE()
-		WHERE productId = @productId AND  orderId = @orderId 
+		FROM [OrderProduct] OP
+		INNER JOIN business_products bp ON bp.orderId = OP.orderId  AND bp.productId = OP.productId
 
 		--Check if all items are picked up in particular order id
 		DECLARE @DeliveryStatusOId INT, @outstandingProducts INT

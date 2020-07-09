@@ -14,7 +14,7 @@ GO
 	EXEC p_Get_Business '{ "businessId" : null }', @Error OUTPUT
 	--OR  EXEC p_Get_Business '{ "businessId" : 1 }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
-	SELECT * FROM [Business]
+	SELECT * FROM [BusinessUser]
 */
 -- =============================================
 
@@ -36,15 +36,17 @@ BEGIN
 	SET NOCOUNT ON;
 	IF( @businessId IS NULL)
 		BEGIN
-			SELECT *
-			FROM [Business]
+			SELECT B.*, BU.userId
+			FROM [Business] B
+			LEFT OUTER JOIN [BusinessUser] BU ON B.businessId = BU.businessId
 			FOR JSON PATH	 
 		END
 	ELSE
 		BEGIN 
-			SELECT *
-			FROM [Business]
-			WHERE businessId = @businessId
+			SELECT B.*, BU.userId
+			FROM [Business] B
+			LEFT OUTER JOIN [BusinessUser] BU ON B.businessId = BU.businessId
+			WHERE B.businessId = @businessId
 			FOR JSON PATH	 
 		END
 

@@ -11,9 +11,9 @@ GO
 -- Usage: 
  /*
     DECLARE @Error int 
-	EXEC p_Deactivate_User '{ "userId" : "uniqueidentifier"}', @Error OUTPUT
+	EXEC p_Deactivate_User '{ "userId" : "chef_uid", "activate" : 1}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
-	SELECT * FROM [User]
+	SELECT * FROM [Users]
 */
 -- =============================================
 
@@ -28,14 +28,15 @@ CREATE PROCEDURE p_Deactivate_User
 AS
 BEGIN
 	BEGIN TRY
-		DECLARE	@userId VARCHAR(128)
-		SELECT @userId = userId
-		FROM OPENJSON(@JSON)
-		WITH (userId VARCHAR(128) )
-
 		SET NOCOUNT ON;
-		UPDATE [User]
-		SET [isActive] = 0
+
+		DECLARE	@userId VARCHAR(128), @activate BIT = 0
+		SELECT @userId = userId, @activate = activate
+		FROM OPENJSON(@JSON)
+		WITH (userId VARCHAR(128), activate BIT )
+	
+		UPDATE [Users]
+		SET [isActive] = ISNULL(@activate,0)
 		WHERE userId = @userId			
 
 		SET @Error = 0

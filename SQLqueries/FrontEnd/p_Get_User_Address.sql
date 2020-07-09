@@ -11,7 +11,7 @@ GO
 -- Usage:   
 /*
 	DECLARE @Error int 
-	EXEC p_Get_User_Address '{ "userId" : "user_uid" }', @Error OUTPUT
+	EXEC p_Get_User_Address '{ "userId" : "PiAfL1byyDf6UypJYUmCC9iLP712" }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 */
 -- =============================================
@@ -38,7 +38,7 @@ BEGIN
 	(
 		SELECT U.userId from [Users] U where U.userId = @userId
 	)
-	SELECT su.userId, oa.locations
+	SELECT su.userId, CASE WHEN oa.locations IS NULL THEN 0  ELSE null END [results] , oa.locations
 	FROM selected_user su
 	INNER JOIN 
 	(

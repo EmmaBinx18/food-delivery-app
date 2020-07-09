@@ -158,8 +158,9 @@ BEGIN
 	PRIMARY KEY ([operationalStatusId]));
 
 	INSERT INTO OperationalStatus
-	VALUES ('Pending_Approval'), ('Open'), ('Closed')
+	VALUES ('Pending_Approval'), ('Open'), ('Closed') ,('Denied')
 
+	
 END
 GO
 
@@ -220,7 +221,7 @@ BEGIN
 	PRIMARY KEY ([orderStatusId]));
 
 	INSERT INTO OrderStatus
-	VALUES ('Awaiting_payment'), ('Products_not_ready'), ('Waiting_for_driver'), ('Delivery_In_Progess'), ('Done')
+	VALUES ('Awaiting_payment'), ('Products_not_ready'), ('Delivery_In_Progess'), ('Done')
 
 END
 GO

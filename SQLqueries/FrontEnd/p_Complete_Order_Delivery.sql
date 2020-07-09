@@ -32,7 +32,7 @@ BEGIN
 	BEGIN TRANSACTION
 		BEGIN TRY
 			DECLARE @OrderStatusDId INT, @orderId INT,  @driverId VARCHAR(128), @deliveryStatusPId INT, @deliveryId INT, @kmTraveled DECIMAL(13,9)
-			SET @OrderStatusDId = 5  --'Done';
+			SET @OrderStatusDId = 4  --'Done';
 			SET @deliveryStatusPId = 3 --'Delivered';
 
 			SELECT @orderId = orderId, @kmTraveled = kmTraveled

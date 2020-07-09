@@ -11,7 +11,7 @@ GO
 -- Usage:   
 /*
 	DECLARE @Error int 
-	EXEC p_Get_Previous_User_Orders '{ "userId" : "user_uid" }', @Error OUTPUT 
+	EXEC p_Get_Previous_User_Orders '{ "userId" : "PiAfL1byyDf6UypJYUmCC9iLP712" }', @Error OUTPUT 
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 
 	select * from users
@@ -81,11 +81,11 @@ BEGIN
 		ORDER BY orderDateTime, ao.orderid
 		FOR JSON PATH
 	END
-	--ELSE
-	--BEGIN
-	--	SELECT 1 [undefined]
-	--	FOR JSON PATH, INCLUDE_NULL_VALUES 
-	--END
+	ELSE
+	BEGIN
+		SELECT 0 [results]
+		FOR JSON PATH--, INCLUDE_NULL_VALUES 
+	END
 
 END
 GO

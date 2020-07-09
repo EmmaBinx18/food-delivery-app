@@ -28,17 +28,26 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	DECLARE @roleId INT
-	SELECT @roleId = roleId
-	FROM OPENJSON(@JSON) 
-	WITH (roleId INT)
-
-	SELECT U.*
-	FROM [UserRole] UR 
-	INNER JOIN [User] U ON U.userId = UR.userId
-	WHERE roleId = @roleId
-	FOR JSON PATH	 
-			
+	
+		DECLARE @roleId INT
+		SELECT @roleId = roleId
+		FROM OPENJSON(@JSON) 
+		WITH (roleId INT)
+	IF (@roleId IS NOT NULL)
+	BEGIN
+		SELECT U.*
+		FROM [UserRole] UR 
+		INNER JOIN [User] U ON U.userId = UR.userId
+		WHERE roleId = @roleId
+		FOR JSON PATH	 
+	END
+	ELSE
+	BEGIN
+		SELECT U.*
+		FROM [User] U
+		LEFT OUTER JOIN  [UserRole] UR ON U.userId = UR.userId
+		WHERE UR.roleId IS NULL
+	END
 	SET @Error = 0
 END
 GO

@@ -11,16 +11,16 @@ GO
 -- Usage: 
  /*
     DECLARE @Error int 
-	EXEC p_Get_Active_Order_Ready_Products '{"orderId" : 1}', @Error OUTPUT
+	EXEC p_Track_Order '{"orderId" : 3}', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
 */ 
 -- =============================================
 
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Get_Active_Order_Ready_Products')
-	DROP PROCEDURE [dbo].p_Get_Active_Order_Ready_Products
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P'AND name = 'p_Track_Order')
+	DROP PROCEDURE [dbo].p_Track_Order
 GO
 
-CREATE PROCEDURE p_Get_Active_Order_Ready_Products 
+CREATE PROCEDURE p_Track_Order 
 	@JSON VARCHAR(MAX),
 	@Error INT OUTPUT
 
@@ -29,7 +29,7 @@ BEGIN
 	SET NOCOUNT ON;
 
 	DECLARE @orderProductStatusRId INT, @BusinessId INT
-	SET @orderProductStatusRId = 3  --'Ready'
+	--SET @orderProductStatusRId = 3  --'Ready'
 	
 	DECLARE @orderId INT
 
@@ -40,7 +40,7 @@ BEGIN
 	;WITH selected_order AS
 	(
 		--SELECT orderId, orderDateTime, [addressId] FROM [Order] WHERE orderId = @orderId
-		SELECT orderId, orderDateTime,  A.[addressId], A.[address], JSON_QUERY(CONCAT('[',A.LatLong.Lat,',',A.LatLong.Long,  ']')) [coordinates] 
+		SELECT orderId, orderDateTime,  A.[addressId], A.[address], JSON_QUERY(CONCAT('[',A.LatLong.Lat,',',A.LatLong.Long,  ']')) [coordinates] , O.deliveryId
 		FROM [Order] O
 		INNER JOIN [Address] A  ON A.addressId = O.addressId
 		WHERE orderId = @orderId
@@ -55,7 +55,7 @@ BEGIN
 			INNER JOIN Business B ON B.businessId = P.businessId
 			GROUP BY  ao.orderId, b.businessId, B.[name], B.addressId
 	)
-	SELECT ao.orderId, ao.orderDateTime,  ao.addressId, ao.coordinates, ao.[address], oa.locations
+	SELECT ao.orderId, ao.orderDateTime,  ao.addressId, ao.coordinates, ao.[address], oa.locations, CASE WHEN T.LatLong.Lat IS NOT NULL THEN JSON_QUERY(CONCAT('[',T.LatLong.Lat,',',T.LatLong.Long,  ']')) ELSE null END [driverCordinates]
 	FROM selected_order ao
 	INNER JOIN 
 	(
@@ -70,7 +70,7 @@ BEGIN
 				SELECT 
 					(
 					SELECT  
-						c.[Name] [businessName], c.businessId, c.addressId, A.[address], JSON_QUERY(CONCAT('[',A.LatLong.Lat,',',A.LatLong.Long,  ']')) [coordinates]
+						c.[Name] [businessName], c.addressId, A.[address], JSON_QUERY(CONCAT('[',A.LatLong.Lat,',',A.LatLong.Long,  ']')) [coordinates]
 					FROM
 						pickup_locations c
 					INNER JOIN [Address] A 
@@ -81,6 +81,8 @@ BEGIN
 					) AS Locations
 				) d	
 	) oa ON ao.orderId = oa.orderId
+	LEFT OUTER JOIN Delivery D ON D.deliveryId = ao.deliveryId
+	LEFT OUTER JOIN Tracking T ON T.deliveryId = D.deliveryId
 	ORDER BY orderDateTime, ao.orderid
 	FOR JSON PATH
 	
