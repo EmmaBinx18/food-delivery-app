@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Renderer2 } from '@angular/core';
 
 import { AuthService } from '../../core/authentication/authentication.service';
 import { ModalService } from '../modal/modal.service';
@@ -12,14 +12,18 @@ export class FooterComponent {
 
   @Output() openFormEmitter = new EventEmitter<string>();
 
-  constructor(private authService: AuthService, public modalService: ModalService) { }
+  constructor(
+    private authService: AuthService,
+    public modalService: ModalService,
+    private renderer: Renderer2
+  ) { }
 
   logout() {
     this.authService.logout();
   }
 
   scroll(element: string) {
-    document.getElementById(`${element}`).scrollIntoView({ behavior: "smooth" });
+    this.renderer.selectRootElement(`#${element}`).scrollIntoView({ behavior: "smooth" });
   }
 
   openForm(option: string) {

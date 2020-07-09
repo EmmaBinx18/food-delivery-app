@@ -10,3 +10,8 @@
   border:1px solid gray;
   background-color:lightblue;
 }
+
+.mapboxgl-ctrl-geocoder mapboxgl-ctrl{
+  width: 350px !important;
+  @media(max-width: 400px){width: 260px !important;}
+}

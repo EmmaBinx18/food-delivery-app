@@ -34,7 +34,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.role = this.authService.getCurrentRole();
-    this.role = Role.Delivery;
   }
 
   logout() {
@@ -59,6 +58,8 @@ export class HeaderComponent implements OnInit {
   }
 
   navigate(option: string) {
+    this.closeNav();
+    this.modalService.close();
     this.router.navigate([`/${option}`]);
   }
 }

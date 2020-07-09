@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, Renderer2 } from "@angular/core";
 
 import { CartItem } from "src/app/core/models/cart-item.model";
 import { CartService } from "src/app/core/services/cart.service";
@@ -32,7 +32,8 @@ export class OrdersComponent implements OnInit, OnChanges {
     private orderService: OrdersService,
     private commonService: CommonService,
     public snackbarService: SnackbarService,
-    public modalService: ModalService
+    public modalService: ModalService,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit() {
@@ -96,7 +97,7 @@ export class OrdersComponent implements OnInit, OnChanges {
   track(order: any) {
     this.tracking = true;
     this.order = order;
-    document.getElementById('tracking').scrollIntoView({ behavior: "smooth" });
+    this.renderer.selectRootElement('#tracking').scrollIntoView({ behavior: "smooth" });
   }
 
   closeTracking() {

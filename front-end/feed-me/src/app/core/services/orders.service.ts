@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { CartItem } from '../models/cart-item.model';
 import { AuthService } from '../authentication/authentication.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class OrdersService {
   ) { }
 
   insertOrder(cart: CartItem[], addressId) {
-    return this.http.post(`/api/orders`, { params: this.mapOrderObject(cart, addressId) }).toPromise();
+    return this.http.post(`${environment.api}/orders`, { params: this.mapOrderObject(cart, addressId) }).toPromise();
   }
 
   mapOrderObject(cart: CartItem[], addressId: string) {
@@ -34,26 +35,26 @@ export class OrdersService {
   }
 
   getOrdersForBusiness(businessId: string) {
-    return this.http.get(`/api/orders/business/${businessId}`).toPromise();
+    return this.http.get(`${environment.api}/orders/business/${businessId}`).toPromise();
   }
 
   getActiveOrderReadyProducts(orderId: string) {
-    return this.http.get(`/api/orders/activeOrderReadyProducts/${orderId}`).toPromise();
+    return this.http.get(`${environment.api}/orders/activeOrderReadyProducts/${orderId}`).toPromise();
   }
 
   getUserOrderHistory(userId: string) {
-    return this.http.get(`/api/orders/user/${userId}/history`).toPromise();
+    return this.http.get(`${environment.api}/orders/user/${userId}/history`).toPromise();
   }
 
   postCompleteOrder(order: any) {
-    return this.http.post(`/api/orders/completeOrder`, { params: { productId: order.productId, orderId: order.OrderId } }).toPromise();
+    return this.http.post(`${environment.api}/orders/completeOrder`, { params: { productId: order.productId, orderId: order.OrderId } }).toPromise();
   }
 
   makeOrderPayment(orderId: string, amount: number) {
-    return this.http.post(`/api/orders/pay`, { params: { paymentTypeid: 1, amount, orderId } }).toPromise();
+    return this.http.post(`${environment.api}/orders/pay`, { params: { paymentTypeid: 1, amount, orderId } }).toPromise();
   }
 
   trackOrder(orderId: any) {
-    return this.http.post(`/api/orders/trackOrder`, { params: orderId }).toPromise();
+    return this.http.post(`${environment.api}/orders/trackOrder`, { params: orderId }).toPromise();
   }
 }
