@@ -19,21 +19,20 @@ export class ProductsService {
     return this.http.post(`${environment.api}/products/businessProduct`, { params: businessId }).toPromise();
   }
 
-  insertProduct(product: Product) {
-    return this.http.post(`${environment.api}/products`, { params: this.mapProduct(product) }).toPromise();
+  insertProduct(product: Product, businessId: string) {
+    return this.http.post(`${environment.api}/products`, { params: this.mapProduct(product, businessId) }).toPromise();
   }
 
   removeProduct(productId: string) {
     return this.http.post(`${environment.api}/products/remove`, { params: productId }).toPromise();
   }
 
-  mapProduct(product: Product) {
+  mapProduct(product: Product, businessId: string) {
     return {
       productId: -1,
       name: product.name,
       description: product.description,
-      businessId: product.businessId,
-      availabilityStatusId: 1,
+      businessId: businessId,
       price: product.price,
       minPrepareTime: product.minPrepareTime
     }

@@ -10,6 +10,8 @@ import {
 import { AuthService } from "../../core/authentication/authentication.service";
 import { ModalService } from "../modal/modal.service";
 import { Router } from '@angular/router';
+import { HomeChefService } from 'src/app/core/services/home-chef.service';
+import { DeliveryService } from 'src/app/core/services/delivery.service';
 
 @Component({
   selector: "app-header",
@@ -25,7 +27,9 @@ export class HeaderComponent {
   constructor(
     public authService: AuthService,
     public router: Router,
-    public modalService: ModalService
+    public modalService: ModalService,
+    public homeChefService: HomeChefService,
+    public deliveryService: DeliveryService
   ) { }
 
   logout() {

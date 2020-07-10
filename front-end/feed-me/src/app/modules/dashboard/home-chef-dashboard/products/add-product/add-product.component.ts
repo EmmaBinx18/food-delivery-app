@@ -61,7 +61,7 @@ export class AddProductComponent implements OnInit {
   addMeal() {
     this.setBusinessId();
     if (this.addProductForm.valid) {
-      this.productsService.insertProduct(this.addProductForm.value)
+      this.productsService.insertProduct(this.addProductForm.value, this.business.businessId)
         .then(() => {
           this.closeModal();
           this.snackbarService.success('Successfully added new product');

@@ -55,7 +55,12 @@ export class AdminComponent implements OnInit {
   getBusinesses() {
     this.homeChefService.getAllBusinesses()
       .then(response => {
-        this.businesses = response;
+        if (response[0].results) {
+          this.businesses = [];
+        }
+        else {
+          this.businesses = response;
+        }
       })
       .catch(() => {
         this.businessError = true;
@@ -66,7 +71,12 @@ export class AdminComponent implements OnInit {
   getUsers() {
     this.userService.getAllUsers()
       .then(response => {
-        this.users = response;
+        if (response[0].results) {
+          this.users = [];
+        }
+        else {
+          this.users = response;
+        }
       })
       .catch(() => {
         this.snackbarService.error('Could not get all users. Please try again later.')
@@ -76,7 +86,12 @@ export class AdminComponent implements OnInit {
   getUserRoles() {
     this.adminService.getUserRoles()
       .then(response => {
-        this.roles = response;
+        if (response[0].results) {
+          this.roles = [];
+        }
+        else {
+          this.roles = response;
+        }
       })
       .catch(() => {
         this.snackbarService.error('Could not get all roles. Please try again later.');

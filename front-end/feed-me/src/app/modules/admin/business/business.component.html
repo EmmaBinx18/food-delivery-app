@@ -22,8 +22,8 @@
                     </ng-container>
                 </tr>
             </table>
+            <button (click)="approveAll()" class="button yellow">Approve all businesses</button>
         </div>
-        <button (click)="approveAll()" class="button yellow">Approve all businesses</button>
     </div>
     <div class="businesses">
         <app-loader *ngIf="loading && !error"></app-loader>
@@ -48,7 +48,6 @@
                 </tr>
             </table>
         </div>
-        <button (click)="approveAll()" class="button yellow">Approve all businesses</button>
     </div>
     <h3 *ngIf="error">
         There was an error loading the businesses. Please try again

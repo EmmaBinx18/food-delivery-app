@@ -39,8 +39,13 @@ export class DeliveryDashboardComponent implements OnInit {
   getDeliveries() {
     this.deliveryService.getDeliveriesForDriver(this.authService.getCurrentUser().uid)
       .then(response => {
+        if (!response[0].results) {
+          this.deliveries = response;
+        }
+        else {
+          this.deliveries = [];
+        }
         this.deliveriesError = false;
-        this.deliveries = response;
       })
       .catch(() => {
         this.deliveriesError = true;

@@ -59,11 +59,11 @@ export class AccountComponent implements OnInit {
   getAddresses() {
     this.addressService.getUserAddresses(this.authService.getCurrentUser().uid)
       .then(response => {
-        if (Object.entries(response).length != 0) {
-          this.addresses = response[0].locations;
+        if (response[0].results) {
+          this.addresses = [];
         }
         else {
-          this.addresses = [];
+          this.addresses = response[0].locations;
         }
         this.addressesError = false;
       })
@@ -76,7 +76,12 @@ export class AccountComponent implements OnInit {
   getOrderHistory() {
     this.ordersService.getUserOrderHistory(this.authService.getCurrentUser().uid)
       .then(response => {
-        this.orders = response;
+        if (response[0].results) {
+          this.orders = [];
+        }
+        else {
+          this.orders = response;
+        }
         this.ordersError = false;
       })
       .catch(() => {

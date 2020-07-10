@@ -3,6 +3,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
+import * as e from 'express';
 
 @Component({
   selector: 'app-home-chef-dashboard',
@@ -35,7 +36,12 @@ export class HomeChefDashboardComponent implements OnChanges {
   getProducts(businessId: string) {
     this.productsService.getProductsForABusiness(businessId)
       .then(response => {
-        this.products = response;
+        if (response[0].results) {
+          this.products = [];
+        }
+        else {
+          this.products = response;
+        }
         this.productsError = false;
       })
       .catch(() => {
@@ -47,7 +53,12 @@ export class HomeChefDashboardComponent implements OnChanges {
   getOrders(businessId: string) {
     this.ordersService.getOrdersForBusiness(businessId)
       .then(response => {
-        this.orders = response;
+        if (response[0].results) {
+          this.orders = [];
+        }
+        else {
+          this.orders = response;
+        }
         this.ordersError = false;
       })
       .catch(() => {

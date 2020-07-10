@@ -61,11 +61,13 @@ export class HomeChefRegisterComponent implements OnInit {
   register() {
     this.setAddress();
     if (this.registerForm.valid) {
+      console.log
       this.homeChefService
         .registerBusiness(this.registerForm.value)
         .then(() => {
           this.snackbarService.success("Successfully sent business registration request");
           this.modalService.close();
+          this.homeChefService.register = true;
         })
         .catch(() => {
           this.snackbarService.error("Could not register business. Please try again later");

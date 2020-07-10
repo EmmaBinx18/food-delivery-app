@@ -28,10 +28,10 @@
       <li
         *ngIf="authService.getCurrentRole() != 1 && authService.getCurrentRole() != 2 && authService.getCurrentRole() != 3"
         class="buttons">
-        <button (click)="openForm('homeChef')" class="button yellow home-chef">
+        <button (click)="openForm('homeChef')" class="button yellow home-chef" *ngIf="!homeChefService.register">
           Register as a Home Chef
         </button>
-        <button (click)="openForm('driver')" class="button yellow driver">
+        <button (click)="openForm('driver')" class="button yellow driver" *ngIf="!deliveryService.register">
           Register as a Driver
         </button>
       </li>
