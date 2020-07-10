@@ -1,0 +1,57 @@
+<div class="business">
+    <div class="pending-businesses">
+        <app-loader *ngIf="loading && !error"></app-loader>
+        <div class="pending-table" *ngIf="!loading && !error">
+            <h2>Businesses Pending Approval</h2>
+            <table>
+                <tr *ngFor="let business of businesses">
+                    <ng-container *ngIf="business.operationalStatusId == 1">
+                        <td>{{ business.name }}</td>
+                        <td>{{business.userId}}</td>
+                        <td>
+                            <h3 class="pending">Pending Approval</h3>
+                        </td>
+                        <td>
+                            <img class="icon" src="/assets/icons/checked.png" alt="approve"
+                                (click)="approveBusiness(business.businessId)" *ngIf="business" />
+                        </td>
+                        <td>
+                            <img class="icon" src="/assets/icons/cancel.png" alt="deny "
+                                (click)="disapproveBusiness(business.businessId)" />
+                        </td>
+                    </ng-container>
+                </tr>
+            </table>
+        </div>
+        <button (click)="approveAll()" class="button yellow">Approve all businesses</button>
+    </div>
+    <div class="businesses">
+        <app-loader *ngIf="loading && !error"></app-loader>
+        <div class="business-table" *ngIf="!loading && !error">
+            <h2>Current Businesses</h2>
+            <table>
+                <tr *ngFor="let business of businesses">
+                    <ng-container *ngIf="business.operationalStatusId != 1">
+                        <td>{{ business.name }}</td>
+                        <td>{{business.userId}}</td>
+                        <td>
+                            <h3
+                                [ngClass]="{'closed': business.operationalStatusId == 3, 'open': business.operationalStatusId == 2}">
+                                {{business.operationalStatus}}</h3>
+                        </td>
+                        <td>
+                            <img class="icon" src="/assets/icons/cancel.png" alt="deny"
+                                (click)="disapproveBusiness(business.businessId)"
+                                *ngIf="business.operationalStatusId != 3" />
+                        </td>
+                    </ng-container>
+                </tr>
+            </table>
+        </div>
+        <button (click)="approveAll()" class="button yellow">Approve all businesses</button>
+    </div>
+    <h3 *ngIf="error">
+        There was an error loading the businesses. Please try again
+        later.
+    </h3>
+</div>

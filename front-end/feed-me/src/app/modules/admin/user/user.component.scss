@@ -1,0 +1,46 @@
+@import '../../../../assets/styles/common.scss';
+@import '../../../../assets/styles/table.scss';
+@import '../admin.component.scss';
+
+.users{
+  @extend .container;
+  width: 95%;
+  max-height: 70vh;
+  @extend .white-container;
+  margin-bottom: 4%;
+  margin: auto;
+}
+
+.view-users {
+  max-height: 70vh;
+  overflow: scroll;
+  @extend .table-container;
+  tr {background-color: rgb(240, 240, 240);}
+}
+
+.active {
+  background-color: var(--primary-success);
+}
+
+.deactive {
+  background-color: var(--primary-error);
+}
+
+.remove-role {
+  background-color: var(--primary-yellow);
+  color: var(--primary-dark-blue);
+}
+
+.active,
+.deactive,
+.remove-role {
+  border-radius: 6px;
+  color: white !important;
+  padding: 0.3rem;
+  border: none;
+  padding: 0.5rem;
+
+  &:hover{
+    cursor: pointer;
+  }
+}

@@ -27,7 +27,6 @@ export class AuthService {
                 localStorage.setItem('user', JSON.stringify(this._currentUser));
                 this._currentRole = JSON.parse(localStorage.getItem('role'));
             } else {
-                this._currentUser = null;
                 localStorage.removeItem('user');
                 localStorage.removeItem('role');
                 this.router.navigate(['/login']);
@@ -62,8 +61,13 @@ export class AuthService {
                         this._currentRole = res[0].roleid;
                         localStorage.setItem('user', JSON.stringify(this._currentUser));
                         localStorage.setItem('role', res[0].roleid);
-                        this.router.navigate(['/home']);
-                        //TODO: Check is user is active or not
+
+                        if (this._currentRole == 1) {
+                            this.router.navigate(['/admin']);
+                        }
+                        else {
+                            this.router.navigate(['/home']);
+                        }
                     })
                     .catch(error => {
                         throw (error);
@@ -111,5 +115,9 @@ export class AuthService {
                 localStorage.removeItem('role');
                 this.router.navigate(['/login']);
             });
+    }
+
+    isLoggedIn() {
+        return this._currentUser != null;
     }
 }

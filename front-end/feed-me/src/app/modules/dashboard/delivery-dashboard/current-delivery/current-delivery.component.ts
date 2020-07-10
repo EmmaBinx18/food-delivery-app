@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter, Renderer2 } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
 import { MapboxService } from 'src/app/core/services/mapbox.service';
 import { DeliveryService } from 'src/app/core/services/delivery.service';
@@ -24,8 +24,7 @@ export class CurrentDeliveryComponent implements OnChanges {
   constructor(
     private deliveryService: DeliveryService,
     public mapboxService: MapboxService,
-    public snackbarService: SnackbarService,
-    private renderer: Renderer2
+    public snackbarService: SnackbarService
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -53,8 +52,8 @@ export class CurrentDeliveryComponent implements OnChanges {
           }
         });
 
-        this.renderer.setStyle(this.renderer.selectRootElement(`#${business.businessId}`), "background", "#62874C");
-        this.renderer.setStyle(this.renderer.selectRootElement(`#${business.businessId}`), "color", "white");
+        document.getElementById(business.businessId).style.backgroundColor = '#62874C';
+        document.getElementById(business.businessId).style.color = 'white';
 
         if (this.orderCompleteCheck()) {
           this.orderComplete = true;

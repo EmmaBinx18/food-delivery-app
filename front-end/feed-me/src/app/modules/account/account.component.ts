@@ -52,31 +52,41 @@ export class AccountComponent implements OnInit {
       })
       .catch(() => {
         this.profileError = true;
-        this.handleError();
+        this.snackbarService.error('Could not load your profile information. Please try again later.');
       });
   }
 
   getAddresses() {
     this.addressService.getUserAddresses(this.authService.getCurrentUser().uid)
       .then(response => {
-        this.addresses = response[0].locations;
+        if (response != null) {
+          this.addresses = response[0].locations;
+        }
+        else {
+          this.addresses = [];
+        }
         this.addressesError = false;
       })
       .catch(() => {
         this.addressesError = true;
-        this.handleError();
+        this.snackbarService.error('Could not load your address information. Please try again later.');
       });
   }
 
   getOrderHistory() {
     this.ordersService.getUserOrderHistory(this.authService.getCurrentUser().uid)
       .then(response => {
-        this.orders = response;
+        if (response != null) {
+          this.orders = response;
+        }
+        else {
+          this.orders = [];
+        }
         this.ordersError = false;
       })
       .catch(() => {
         this.ordersError = true;
-        this.handleError();
+        this.snackbarService.error('Could not load your order history. Please try again later.');
       })
   }
 
@@ -90,9 +100,5 @@ export class AccountComponent implements OnInit {
     this.setAllFalse();
     this.display[option] = true;
     this.refresh();
-  }
-
-  handleError() {
-    this.snackbarService.error('Could not load your profile information. Please try again later.');
   }
 }

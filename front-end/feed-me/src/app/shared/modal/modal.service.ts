@@ -1,4 +1,4 @@
-import { Injectable, Renderer2 } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -9,19 +9,19 @@ export class ModalService {
   component: any = null;
   componentSubject: Subject<string> = new Subject<string>();
 
-  constructor(private renderer: Renderer2) {
+  constructor() {
     this.componentSubject.subscribe(option => {
       this.component = option;
     });
   }
 
   open(option: string) {
-    this.renderer.setAttribute(document.body, 'position', 'fixed');
+    document.body.style.position = 'fixed';
     this.componentSubject.next(option);
   }
 
   close() {
-    this.renderer.setAttribute(document.body, 'position', 'relative');
+    document.body.style.position = 'relative';
     this.componentSubject.next(null);
   }
 }
