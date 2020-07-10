@@ -24,7 +24,7 @@ ul{
 
 h1{
     font-size: 3rem;
-    @media(max-width: 920px){font-size: 2.5rem;}
+    @media(max-width: 91.25){font-size: 2.5rem;}
     @media(max-width: 850px){font-size: 2rem;}
     @media(max-width: 600px){font-size: 1.4rem;}
 }
@@ -56,9 +56,9 @@ h1, h2, h3, h4, h5{
     background-color: white;
     color: var(--primary-dark-blue);
     border: none;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     text-align: center;
-    padding: 10px;
+    padding: 0.625rem;
     white-space: nowrap;
     font-family: var(--primary-font-family);
 

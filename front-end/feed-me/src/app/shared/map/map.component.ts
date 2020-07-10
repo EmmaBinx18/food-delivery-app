@@ -41,7 +41,7 @@ export class MapComponent implements OnInit {
 
   driverMap() {
     this.mapService.loadLocationMarkers(this.delivery.orderId).then(() => {
-      this.mapService.renderDriverMap(this.map);
+      this.mapService.renderDriverMap(this.map, this.delivery);
     });
   }
 

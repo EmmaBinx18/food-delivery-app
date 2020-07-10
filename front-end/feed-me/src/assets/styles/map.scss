@@ -1,28 +1,28 @@
 .map{
     margin: auto;
-    height: 500px; 
-    width: 700px;
+    height: 31.25rem; 
+    width: 43.75rem;
     margin-top: 3%;
 
     @media(max-width: 1300px){
-        height: 400px;
-        width: 600px
+        height: 25rem;
+        width: 37.5rem
     }
 
     @media(max-width: 600px){
-        height: 350px;
-        width: 500px;
+        height: 21.875;
+        width: 31.25rem;
         margin-top: 6%;
     }
 
-    @media(max-width: 520px){
-        height: 300px;
-        width: 450px;
+    @media(max-width: 51.25){
+        height: 18.75rem;
+        width: 28.125rem;
     }
 
     @media(max-width: 480px){
-        height: 300px;
-        width: 400px;
+        height: 18.75rem;
+        width: 25rem;
     }
 
     input, a{

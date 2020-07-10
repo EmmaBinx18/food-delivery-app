@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment'
+import { environment } from '../../../environments/environment';
 
-import * as mapboxgl from 'mapbox-gl'
-import * as MapboxGeocoder from 'mapbox-gl-geocoder'
-import * as MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
+import * as mapboxgl from 'mapbox-gl';
+import * as MapboxGeocoder from 'mapbox-gl-geocoder';
+import * as MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
+
 import { AddressService } from './address.service';
 import { OrdersService } from './orders.service';
+import { DeliveryService } from './delivery.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +27,8 @@ export class MapboxService {
 
   constructor(
     private ordersService: OrdersService,
-    public addressService: AddressService
+    public addressService: AddressService,
+    public deliveryService: DeliveryService
   ) {
     mapboxgl.accessToken = environment.mapbox.accessToken;
   }
@@ -232,7 +235,7 @@ export class MapboxService {
     });
   }
 
-  renderDriverMap(map: mapboxgl.Map) {
+  renderDriverMap(map: mapboxgl.Map, delivery: any) {
     map = this.setMap();
 
     const geolocate = new mapboxgl.GeolocateControl({
@@ -258,6 +261,7 @@ export class MapboxService {
       zoom: 20
     });
 
+    this.deliveryService.updateDriverLocation(delivery.id, { geometry: { coordinates: this.coordinates } }).then();
     map.addControl(directions, 'top-left');
     map.on('load', () => {
       geolocate.trigger();

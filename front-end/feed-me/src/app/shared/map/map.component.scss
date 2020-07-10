@@ -4,14 +4,14 @@
 }
   
 .mapboxgl-marker {
-  width: 25px;
-  height: 25px;
+  width: 1.563rem;
+  height: 1.563rem;
   border-radius: 50%;
-  border:1px solid gray;
+  border: 0.063rem solid gray;
   background-color:lightblue;
 }
 
 .mapboxgl-ctrl-geocoder mapboxgl-ctrl{
-  width: 350px !important;
+  width: 21.875 !important;
   @media(max-width: 400px){width: 260px !important;}
 }

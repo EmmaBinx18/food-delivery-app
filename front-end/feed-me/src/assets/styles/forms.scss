@@ -27,10 +27,10 @@ form{
 }
 
 .form-input{
-    border: 1px solid var(--primary-dark-blue);
-    border-radius: 8px;
+    border: 0.063rem solid var(--primary-dark-blue);
+    border-radius: 0.5rem;
     font-size: 1rem;
-    padding: 10px;
+    padding: 0.625rem;
     @media(max-width: 600px){font-size: 0.8rem;}
 }
 
@@ -46,7 +46,7 @@ input{
     @media(max-width: 500px){width: 80%;}
 
     &.error-outline{
-        border: 1px solid var(--primary-error);
+        border: rem solid var(--primary-error);
         background-color: rgba(223, 79, 79, 0.274);
     }
 }

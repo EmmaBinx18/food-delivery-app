@@ -42,6 +42,10 @@ export class DeliveryService {
     return this.http.post(`${environment.api}/delivery/completeDelivery`, { params: { orderId, kmTraveled: 20.582 } }).toPromise();
   }
 
+  updateDriverLocation(deliveryId: string, geometry: any) {
+    return this.http.post(`${environment.api}/delivery/updatelocation`, { params: { deliveryId, geometry } }).toPromise();
+  }
+
   mapOrderReadyProduct(location: any) {
     return {
       type: 'Feature',

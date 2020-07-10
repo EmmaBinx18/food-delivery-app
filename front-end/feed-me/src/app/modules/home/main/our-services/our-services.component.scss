@@ -14,11 +14,11 @@ ul{
     }
 
     li{
-        padding-top: 20px;
-        padding-bottom: 20px;
-        height: 320px;
-        @media(max-width: 900px){height: 260px;}
-        @media(max-width: 800px){height: 200px; margin-bottom: 4%;}
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+        height: 31.25rem;
+        @media(max-width: 900px){height: 16.25rem;}
+        @media(max-width: 800px){height: 16.25rem; margin-bottom: 4%;}
         &:hover{
             font-weight: normal;
             cursor: default;
@@ -29,17 +29,17 @@ ul{
 .card{
     background-color: white;
     width: 25%;
-    padding: 20px;
+    padding: 1.25;
     text-align: center;
     box-shadow: var(--primary-box-shadow);
     @media(max-width: 800px){
         width: 85%;
-        padding: 10px;
+        padding: 0.625rem;
     }
 
     p{
         font-family: var(--secondary-font-family);
-        padding: 16px;
+        padding: 1rem;
         font-weight: normal;
         font-size: 1.3rem;
         @media(max-width: 900px){font-size: 1rem;}
@@ -54,17 +54,17 @@ ul{
 .circle{
     background-color: #dceaeb;
     border-radius: 50%;
-    width: 140px;
-    height: 140px;
+    width: 8.75rem;
+    height: 8.75rem;
     margin: auto;
 
     @media(max-width: 900px){
-        width: 100px;
-        height: 100px;
+        width: 6.25rem;
+        height: 6.25rem;
     }
 
     img{
-        margin-top: 16px;
-        @media(max-width: 900px){width: 70px}
+        margin-top: 1rem;
+        @media(max-width: 900px){width: 4.375rem}
     }
 }
