@@ -1,69 +1,3 @@
-IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Country')
-BEGIN
-	CREATE TABLE Country
-	(
-		[countryId] INT IDENTITY(1,1),
-		[name] varchar(255),
-		PRIMARY KEY ([countryId])
-	);
-
-	INSERT INTO Country
-	VALUES ('South Africa')
-END
-GO
-
-IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Province')
-BEGIN
-	CREATE TABLE Province
-	(
-		[provinceId] INT IDENTITY(1,1),
-		[name] varchar(255),
-		[countryId] int NOT NULL FOREIGN KEY REFERENCES [Country]([countryId]),
-		PRIMARY KEY ([provinceId])
-	);
-
-	INSERT INTO Province
-	VALUES ('Free State',1),
-	   ('Eastern Cape',1),
-	   ('North West',1),
-	   ('Northern Cape', 1),
-	   ('Western Cape', 1),
-	   ('Gauteng',1),
-	   ('Limpopo', 1),
-	   ('Kwa-Zulu Natal',1),
-	   ('Mpumalanga',1) 
-END
-GO
-
-
-IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'City')
-BEGIN
-	CREATE TABLE City
-	(
-		[cityId] INT IDENTITY(1,1),
-		[name] varchar(255),
-		[provinceId] int NOT NULL FOREIGN KEY REFERENCES [Province]([provinceId]),
-		PRIMARY KEY ([cityId])
-	);
-
-	INSERT INTO City
-	VALUES ('Bloemfontein', 1),
-		   ('Bethlehem', 1),
-		   ('Kroonstad', 1),
-		   ('Welkom', 1),
-		   ('Pretoria', 6),
-		   ('Johannesburg', 6),
-		   ('Vanderbijlpark', 6),
-		   ('Krugersdorp', 6),
-		   ('Roodepoort', 6),
-		   ('Cape Town', 5),
-		   ('Bellville', 5),
-		   ('Paarl', 5),
-		   ('Stellenbosch', 5),
-		   ('Worcester', 5)
-END
-GO
-
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Role')
 BEGIN
 	CREATE TABLE [Role]
@@ -99,6 +33,7 @@ BEGIN
 	CREATE TABLE [UserRole] (
 	  [userId] VARCHAR(128) NOT NULL FOREIGN KEY REFERENCES [Users]([userId]) PRIMARY KEY,
 	  [roleId] int NOT NULL FOREIGN KEY REFERENCES [Role]([roleId]),
+	  [isApproved] bit default 1 
 	);
 END
 GO
@@ -129,24 +64,11 @@ GO
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'DriverAddress')
 BEGIN
 
-	DECLARE @driverAddress TABLE
-	(
-		[userId] VARCHAR(128),
-		[addressId] int
-	)
-
-	INSERT INTO @driverAddress
-	SELECT * FROM [DriverAddress]
-
-	DROP TABLE [DriverAddress]
-
 	CREATE TABLE [DriverAddress] (
 	  [userId] VARCHAR(128) NOT NULL FOREIGN KEY REFERENCES [Users]([userId])  PRIMARY KEY,
 	  [addressId] int NOT NULL FOREIGN KEY REFERENCES [Address]([addressId])
 	);
 
-	INSERT INTO [DriverAddress]
-	SELECT * FROM @driverAddress
 END
 GO
 
@@ -158,8 +80,9 @@ BEGIN
 	PRIMARY KEY ([operationalStatusId]));
 
 	INSERT INTO OperationalStatus
-	VALUES ('Pending_Approval'), ('Open'), ('Closed')
+	VALUES ('Pending_Approval'), ('Open'), ('Closed') ,('Denied')
 
+	
 END
 GO
 
@@ -220,7 +143,7 @@ BEGIN
 	PRIMARY KEY ([orderStatusId]));
 
 	INSERT INTO OrderStatus
-	VALUES ('Awaiting_payment'), ('Products_not_ready'), ('Waiting_for_driver'), ('Delivery_In_Progess'), ('Done')
+	VALUES ('Awaiting_payment'), ('Products_not_ready'), ('Delivery_In_Progess'), ('Done')
 
 END
 GO
@@ -247,7 +170,7 @@ BEGIN
 	[startTime] datetime,
 	[deliveryStatusId] int NOT NULL FOREIGN KEY REFERENCES [DeliveryStatus]([DeliveryStatusId]),
 	[driverId] VARCHAR(128) NOT NULL FOREIGN KEY REFERENCES [Users]([userId]),
-	[endTime] varchar(255),
+	[endTime] datetime,
 	[kmTraveled] int,
 	[etd] datetime,
 	PRIMARY KEY ([deliveryId])
@@ -258,11 +181,9 @@ GO
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Tracking')
 BEGIN
 	CREATE TABLE [Tracking] (
-	[trackingId] INT IDENTITY(1,1),
-	[latLong] geometry,
+	[latLong] GEOGRAPHY,
 	[timeStamp] datetime,
-	[deliveryId] int NOT NULL FOREIGN KEY REFERENCES [Delivery]([deliveryId]),
-	PRIMARY KEY ([trackingId])
+	[deliveryId] int NOT NULL FOREIGN KEY REFERENCES [Delivery]([deliveryId]) PRIMARY KEY
 	);
 END
 GO
