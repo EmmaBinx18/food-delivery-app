@@ -11,7 +11,7 @@ import { OrdersService } from 'src/app/core/services/orders.service';
 })
 export class HomeChefDashboardComponent implements OnChanges {
 
-  @Input() business: any = [];
+  @Input() business: any;
 
   products: any = null;
   orders: any = null;

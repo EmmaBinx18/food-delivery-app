@@ -9,7 +9,7 @@
     </div>
     <div class="items">
       <app-orders [orders]="orders" [addresses]="addresses" [error]="ordersError" *ngIf="display.orders"
-        (changeDisplayEmitter)="changeDisplay('account')" (refreshOrderEmitter)="getOrderHistory()"></app-orders>
+        (changeDisplayEmitter)="changeDisplay('address')" (refreshOrderEmitter)="getOrderHistory()"></app-orders>
       <app-addresses *ngIf="display.addresses" [addresses]="addresses" [error]="addressesError"></app-addresses>
       <app-profile [profile]="profile" *ngIf="display.profile" [error]="profileError"></app-profile>
     </div>

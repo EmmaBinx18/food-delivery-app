@@ -14,7 +14,7 @@ import { SnackbarService } from "../../shared/snackbar/snackbar.service";
 })
 export class DashboardComponent implements OnInit {
   stats: any = [];
-  business: any = [];
+  business: any = null;
   userName: string = '';
 
   constructor(
