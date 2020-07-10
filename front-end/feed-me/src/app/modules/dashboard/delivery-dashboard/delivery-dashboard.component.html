@@ -1,0 +1,7 @@
+<div class="delivery-dashboard">
+    <app-deliveries *ngIf="!deliveryDisplay" [deliveries]="deliveries" [error]="deliveriesError"
+        (showDeliveryEmitter)="showDelivery($event)">
+    </app-deliveries>
+    <app-current-delivery *ngIf="deliveryDisplay" [delivery]="delivery" [order]="order"
+        (deliveryRefreshEmitter)="refreshDeliveries()"></app-current-delivery>
+</div>

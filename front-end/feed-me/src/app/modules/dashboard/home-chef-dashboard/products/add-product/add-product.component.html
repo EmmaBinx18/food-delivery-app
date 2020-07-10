@@ -1,0 +1,36 @@
+<div class="form-container">
+    <h1>ADD PRODUCT</h1>
+    <form [formGroup]="addProductForm" (ngSubmit)="addMeal()">
+        <div class="form-group">
+            <div class="controls">
+                <input type="text" id="name" placeholder="Meal Name" class="form-control full-width"
+                    formControlName="name"
+                    [ngClass]="{ 'error-outline': (addProductForm.controls.name.errors?.required && addProductForm.controls.name.touched) }" />
+            </div>
+            <div class="controls">
+                <input type="text" id="description" placeholder="Description" class="form-control full-width"
+                    formControlName="description"
+                    [ngClass]="{ 'error-outline': (addProductForm.controls.description.errors?.required && addProductForm.controls.description.touched) }" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="controls price">
+                <h3 class="label">Price</h3>
+                <input type="number" min="0" id="price" placeholder="Price" class="form-control" formControlName="price"
+                    [ngClass]="{ 'error-outline': (addProductForm.controls.price.errors?.required && addProductForm.controls.price.touched) }" />
+            </div>
+            <div class="controls prep">
+                <h3 class="label">Prep Time</h3>
+                <input type="number" min="0" id="minPrepareTime" placeholder="Prep Time" class="form-control"
+                    formControlName="minPrepareTime"
+                    [ngClass]="{ 'error-outline': (addProductForm.controls.minPrepareTime.errors?.required && addProductForm.controls.minPrepareTime.touched) }" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="button yellow button-spacing" type="submit" [disabled]="addProductForm.invalid">ADD
+                PRODUCT</button>
+        </div>
+    </form>
+</div>

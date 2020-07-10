@@ -1,0 +1,64 @@
+@import "../../../../../assets/styles/table.scss";
+
+.business {
+  margin-left: 1%;
+  margin-top: 1%;
+  min-height: 80vh;
+  max-height: 80vh;
+}
+
+.info {
+  margin-left: 1%;
+  text-align: start;
+
+  h3 {
+    font-family: var(--secondary-font-family);
+    margin-left: 1%;
+  }
+
+  h1 {
+    margin-left: 1%;
+  }
+}
+
+.open {
+  background-color: var(--primary-success);
+  width: 3rem;
+}
+
+.closed {
+  background-color: var(--primary-error);
+  width: 3.5rem;
+}
+
+.open,
+.closed {
+  border-radius: 6px;
+  color: white !important;
+  padding: 0.3rem;
+}
+
+.back-button {
+  p {
+    margin-left: 40px;
+    color: var(--primary-dark-grey);
+    font-family: var(--secondary-font-family);
+
+    &:hover {
+      font-size: 14px;
+      cursor: pointer;
+    }
+  }
+}
+
+table {
+  width: 98%;
+  border-spacing: 0 15px;
+
+  .description,
+  .prep-time {
+    @media (max-width: 670px) {
+      display: none;
+    }
+  }
+}

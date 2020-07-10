@@ -1,0 +1,16 @@
+<div class="form-container">
+    <h1>REGISTER AS A DELIVERY DRIVER</h1>
+    <p>Please note that every request to become a delivery driver can only be approved by an administrator
+        once the driver has been thoroughly vetted.
+    </p>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="map">
+            <app-map [type]="'address'"></app-map>
+        </div>
+
+        <div class="form-group">
+            <button class="button yellow button-spacing" type="submit"
+                [disabled]="registerForm.invalid || this.mapService.address == null">REGISTER</button>
+        </div>
+    </form>
+</div>

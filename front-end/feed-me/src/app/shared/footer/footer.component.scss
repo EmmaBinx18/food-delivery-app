@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import '../../../assets/styles/variables.scss';
 @import '../../../assets/styles/common.scss';
 
@@ -24,6 +25,29 @@ h2{
     color: white;
     padding-left: 5px;
     @media(max-width: 900px){font-size: 1.1rem;}
+=======
+footer{
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: none;
+    background-color: var(--primary-dark-blue);
+
+    div{
+        flex-grow: 1;
+        display: flex;
+        justify-content: space-evenly;
+
+        ul{
+            @media(max-width: 800px){width: 40%}
+        }
+    }
+}
+
+h3{
+    color: white;
+>>>>>>> 57ba6553f8b93de297e33165d60a71dd66318974
 }
 
 ul li{
@@ -33,6 +57,7 @@ ul li{
         font-size: 1rem;
         @media(max-width: 600px){font-size: 0.8rem;}
     }
+<<<<<<< HEAD
 }
 
 .menu-list{
@@ -49,4 +74,6 @@ ul li{
     @media(max-width: 600px){
         padding: 15px;
     }
+=======
+>>>>>>> 57ba6553f8b93de297e33165d60a71dd66318974
 }

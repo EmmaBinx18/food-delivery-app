@@ -1,0 +1,41 @@
+.table-container{
+  width: 100%;
+  overflow: scroll;
+  min-height: auto;
+}
+
+table {
+  text-align: center;
+  margin: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  border-collapse: separate;
+  width: 95%;
+  border-spacing: 0 1rem;
+
+  tr {
+    box-shadow: var(--primary-box-shadow);
+    border-radius: 6px;
+    background-color: white;
+  }
+
+  td {
+    font-size: 1.1rem;
+    font-family: var(--secondary-font-family);
+    padding: 0.4rem;
+
+    @media (max-width: 900px) {font-size: 0.9rem;}
+    @media (max-width: 600px) {font-size: 0.8rem;}
+  }
+
+  .disabled {
+    background-color: var(--primary-medium-grey) !important;
+    opacity: 0.5;
+
+    .icon {
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
+  }
+}

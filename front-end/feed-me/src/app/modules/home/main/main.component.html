@@ -1,0 +1,13 @@
+<div class="main">
+    <img class="banner" src="/assets/images/home-banner.png" alt="home_banner" />
+    <section id="services">
+        <app-our-services></app-our-services>
+    </section>
+    <section id="aboutUs">
+        <app-about-us></app-about-us>
+    </section>
+    <section id="categories">
+        <app-meal-categories (openCategoryEmitter)="openCategory($event)">
+        </app-meal-categories>
+    </section>
+</div>

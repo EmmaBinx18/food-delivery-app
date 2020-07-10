@@ -1,0 +1,49 @@
+@import '../../../../../assets/styles/common.scss';
+
+h1{
+    text-align: center;
+}
+
+.categories{
+    @extend .flex-container;
+    flex-wrap: wrap;
+    margin-bottom: 4%;
+
+    div{
+        width: 20rem;
+        height: 20rem;
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 10px 20px 10px 20px;
+        flex-grow: 1;
+        @extend .flex-container;
+        box-shadow: var(--primary-box-shadow);
+
+        @media(max-width: 1500px){
+            width: 14rem;
+            height: 14rem;
+        }
+
+        @media(max-width: 900px){
+            width: 10rem;
+            height: 10rem;
+        }
+
+        @media(max-width: 500px){
+            width: 6rem;
+            height: 6rem;
+        }
+
+        h2{
+            background-color: white;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+        }
+
+        &:hover{
+            cursor: pointer;
+            opacity: 0.7;
+        }
+    }
+}

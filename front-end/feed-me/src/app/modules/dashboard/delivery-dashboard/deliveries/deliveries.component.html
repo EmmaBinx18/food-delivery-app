@@ -1,0 +1,17 @@
+<div class="deliveries">
+    <app-loader *ngIf="loading && !error"></app-loader>
+    <div *ngIf="!loading && !error" class="deliveries-table">
+        <h2>Assigned Deliveries</h2>
+        <table *ngIf="deliveries.length != 0">
+            <tr *ngFor="let delivery of deliveries">
+                <td>Order {{delivery.orderId}}</td>
+                <td>{{delivery.OrderDateTime}}</td>
+                <td><img class="icon" src="/assets/icons/checked.png" alt="accept_delivery"
+                        (click)="acceptDelivery(delivery)" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <h3 *ngIf="!loading && error">An error occurred loading your deliveries</h3>
+    <h3 *ngIf="!loading && deliveries.length == 0">You don't have any deliveries assigned to you yet</h3>
+</div>

@@ -1,0 +1,59 @@
+@import '../../../../assets/styles/common.scss';
+
+.category{
+    width: 96%;
+    margin: 2% auto;
+    min-height: 80vh;
+    max-height: 80vh;
+    text-align: center;
+}
+
+.buttons {
+    text-align: start;
+    display: flex;
+    overflow-x: scroll;
+
+    button{
+        margin-left: 15px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+
+        img{
+            padding-right: 10px;
+        }
+    }
+    
+    .active{
+        background-color: var(--primary-light-blue) !important;
+        color: white;
+    }
+}
+
+.businesses{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    div{
+        width: 20%;
+        height: 13rem;
+        @extend .white-container;
+        margin: 8px 8px 8px 8px;
+        padding: 10px;
+
+        @media(max-width: 900px){height: 10rem;}
+        @media(max-width: 700px){height: 8rem;}
+        @media(max-width: 500px){height: 3rem; width: 100%}
+
+        h2{
+            text-align: center;
+            overflow-wrap: break-word;
+        }
+
+        &:hover{
+            cursor: pointer;
+            opacity: 0.7;
+        }
+    }
+}

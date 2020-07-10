@@ -1,0 +1,14 @@
+@import '../../../../assets/styles/common.scss';
+@import '../dashboard.component.scss';
+
+.home-chef-dashboard{
+  @extend .container;
+  margin: auto;
+
+  app-products, app-orders{
+    width: 100%;
+    max-height: 70vh;
+    margin-bottom: 2%;
+    @extend .white-container;
+  }
+}

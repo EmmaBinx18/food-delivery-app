@@ -1,0 +1,69 @@
+@import './variables.scss';
+
+.form-container{
+    .controls{
+        display: inline;
+        margin-left: 2%;
+    }
+
+    @media(max-width: 600px){margin-top: 10%;}
+    @media(max-width: 400px){margin-top: 20%;}
+}
+
+form{
+    margin-top: 6%;
+    width: 100%;
+    margin-top: 0;
+    @media(max-width: 700px){margin-top: 2%;}
+    @media(max-width: 600px){margin-top: 5%;}
+
+    .form-group{
+        margin-top: 2%;
+    }
+
+    input::placeholder{
+        color: var(--primary-dark-blue);
+    }
+}
+
+.form-input{
+    border: 1px solid var(--primary-dark-blue);
+    border-radius: 8px;
+    font-size: 1rem;
+    padding: 10px;
+    @media(max-width: 600px){font-size: 0.8rem;}
+}
+
+input{
+    @extend .form-input;
+    width: 38%;
+
+    @media(max-width: 600px){
+        width: 70%;
+        margin-top: 2%;
+    }
+
+    @media(max-width: 500px){width: 80%;}
+
+    &.error-outline{
+        border: 1px solid var(--primary-error);
+        background-color: rgba(223, 79, 79, 0.274);
+    }
+}
+
+select{
+    @extend .form-input;
+    width: 40.5%;
+
+    @media(max-width: 600px){
+        width: 75.5%;
+        margin-top: 3%;
+    }
+
+    @media(max-width: 500px){width: 73.6%}
+    @media(max-width: 460px){width: 74.5%}
+    @media(max-height: 850px) and (min-width: 600px){
+        width: 53.5%;
+        margin-top: 3%;
+    }
+}

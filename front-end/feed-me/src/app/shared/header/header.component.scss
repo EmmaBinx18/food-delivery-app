@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import '../../../assets/styles/variables.scss';
 @import '../../../assets/styles/common.scss';
 
@@ -35,10 +36,91 @@ img{
         a{
             font-family: var(--primary-font-family);
             font-size: 1.1rem;
+=======
+header{
+    width: 100%;
+    background-color: var(--primary-dark-blue);
+
+    nav{
+        padding: 1rem 0;
+
+        .nav-list{
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: row;
+            z-index: 200;
+
+            .spacer{
+                display: none;
+                @media(max-width: 800px){display: block;}
+            }
+
+            .buttons{
+                position: absolute;
+                right: 0;
+                top: 2%;
+                padding-right: 30px;
+                .driver{margin-left: 6%;}
+                button{
+                    width: auto;
+                    margin-top: 2%;
+                }
+
+                @media(max-width: 800px){
+                    position: relative;
+                    padding-left: 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding-right: 0;
+
+                    .home-chef{margin-top: 10%;}
+                    .driver{margin-left: 0;}
+                    button{
+                        width: 80%;
+                        margin-top: 4%;
+                    }
+                }
+            }
+
+            li{
+                margin: 0 2rem;
+                display: flex;
+
+                a{
+                    @media(max-width: 800px){font-size: 1rem;}
+                }
+                
+                .icon{
+                    display: none;
+                    @media(max-width: 800px){display: inline;}
+                }
+            }
+
+            @media(max-width: 800px){
+                height: 100vh;
+                width: 62%;
+                position: fixed;
+                top: 0;
+                left: -200rem;
+                flex-direction: column;
+                background-color: var(--primary-dark-blue);
+                box-shadow: var(--secondary-box-shadow);
+                margin-block-start: 0;
+    
+                li{
+                    margin-bottom: 2rem;
+                    align-items: center;
+                    a{margin-left: 2rem}
+                    margin-left: 10%;
+                }
+            }
+>>>>>>> 57ba6553f8b93de297e33165d60a71dd66318974
         }
     }
 }
 
+<<<<<<< HEAD
 #burger-menu {
     width: 100%;
 
@@ -46,5 +128,17 @@ img{
         width: 40px;
         float: right;
         padding-right: 20px;
+=======
+.menu-icons {
+    display: none;
+    cursor: pointer;
+    width: 2rem;
+    margin-left: 1rem;
+    @media(max-width: 800px){display: block;}
+
+    &.closed{
+        padding-bottom: 2%;
+        margin-top: 1rem;
+>>>>>>> 57ba6553f8b93de297e33165d60a71dd66318974
     }
 }

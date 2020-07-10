@@ -1,0 +1,15 @@
+@import '../../../../../assets/styles/table.scss';
+@import '../../../../../assets/styles/common.scss';
+
+.deliveries{
+    width: 100%;
+
+    h2{
+        font-family: var(--secondary-font-family);
+    }
+}
+
+.deliveries-table{
+    @extend .table-container;
+    tr {background-color: rgb(240, 240, 240);}
+}

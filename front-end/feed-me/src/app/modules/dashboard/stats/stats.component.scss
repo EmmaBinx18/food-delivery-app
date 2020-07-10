@@ -1,0 +1,29 @@
+@import '../../../../assets/styles/common.scss';
+@import '../dashboard.component.scss';
+
+.stats-container{
+    @extend .container;
+    margin: auto;
+    margin-bottom: 2%;
+    justify-content: space-evenly;
+    @extend .white-container;
+
+    @media(max-width: 850px){
+        .description{
+            display: none;
+
+            &:hover{
+                //Add tooltip
+            }
+        }
+    }
+
+    div{
+        text-align: center;
+        font-family: var(--secondary-font-family);
+
+        .stats{
+            color: var(--primary-green)
+        }
+    }
+}

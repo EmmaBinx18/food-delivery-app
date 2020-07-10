@@ -1,0 +1,29 @@
+<div class="form-container">
+    <h1>REGISTER AS A HOME CHEF</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="form-group">
+            <div class="controls">
+                <input type="text" id="businessName" placeholder="Business Name" class="form-control"
+                    formControlName="businessName"
+                    [ngClass]="{ 'error-outline': (registerForm.controls.businessName.errors?.required && registerForm.controls.businessName.touched) }" />
+            </div>
+            <div class="controls">
+                <select (change)="setCategory($event)" formControlName="category"
+                    [ngClass]="{ 'error-outline': (registerForm.controls.category.errors?.required && registerForm.controls.category.touched) }">
+                    <option value="" disabled>Category</option>
+                    <option *ngFor="let category of categories" [value]="category.categoryId">{{category.name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="map">
+            <app-map [type]="'address'"></app-map>
+        </div>
+
+        <div class="form-group">
+            <button class="button yellow button-spacing" type="submit"
+                [disabled]="registerForm.invalid">REGISTER</button>
+        </div>
+    </form>
+</div>

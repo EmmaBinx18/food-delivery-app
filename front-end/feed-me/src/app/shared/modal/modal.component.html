@@ -1,0 +1,7 @@
+<div class="modal" *ngIf="component !== null">
+    <div class="overlay" (click)="modalService.close()"></div>
+    <div class="container">
+        <img src="/assets/icons/grey-icons/close.svg" alt="close" class="icon" (click)="closeForm()" />
+        <ng-template [ngComponentOutlet]="component"></ng-template>
+    </div>
+</div>

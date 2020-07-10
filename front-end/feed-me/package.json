@@ -15,11 +15,12 @@
     "@angular/common": "~9.0.6",
     "@angular/compiler": "~9.0.6",
     "@angular/core": "~9.0.6",
-    "@angular/fire": "^6.0.0",
+    "@angular/fire": "^6.0.2",
     "@angular/forms": "~9.0.6",
     "@angular/platform-browser": "~9.0.6",
     "@angular/platform-browser-dynamic": "~9.0.6",
     "@angular/router": "~9.0.6",
+<<<<<<< HEAD
     "@fortawesome/angular-fontawesome": "^0.6.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
     "@fortawesome/free-brands-svg-icons": "^5.13.1",
@@ -27,6 +28,14 @@
     "@types/mapbox-gl": "^1.11.0",
     "firebase": "^7.15.3",
     "mapbox-gl": "^1.11.0",
+=======
+    "@mapbox/mapbox-gl-directions": "^4.0.3",
+    "@mapbox/mapbox-gl-geocoder": "^4.5.1",
+    "firebase": "^7.15.5",
+    "mapbox-gl": "^1.11.0",
+    "mapbox-gl-directions": "^3.0.3",
+    "mapbox-gl-geocoder": "^2.0.1",
+>>>>>>> 57ba6553f8b93de297e33165d60a71dd66318974
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

@@ -1,0 +1,16 @@
+<main class="main">
+    <div class="nav">
+        <ul>
+            <li (click)="changeDisplay('business')"><img class="icon" src="/assets/icons/business.png" alt="orders" />
+            </li>
+            <li (click)="changeDisplay('user')"><img class="icon" src="/assets/icons/profile.png" alt="profile" />
+            </li>
+        </ul>
+    </div>
+    <div class="items">
+        <app-business *ngIf="display.business" [businesses]="businesses" [users]="users" [error]="businessError"
+            (refreshEmitter)="refresh()"></app-business>
+        <app-user *ngIf="display.user" [users]="users" [roles]="roles" [error]="usersError"
+            (refreshEmitter)="refresh()"></app-user>
+    </div>
+</main>

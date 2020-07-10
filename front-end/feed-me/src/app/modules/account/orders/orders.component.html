@@ -1,0 +1,61 @@
+<div class="orders">
+  <div class="current-order">
+    <app-loader *ngIf="loading && !error"></app-loader>
+    <div *ngIf="!loading && cartService.cart.length != 0 && !error" class="order-table">
+      <h2>Current Cart Items</h2>
+      <table>
+        <tr *ngFor="let item of cartService.cart">
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>R{{ item.product.price * item.quantity }}</td>
+          <img class="icon" src="/assets/icons/trash.png" alt="remove_cart_item" (click)="removeCartItem(item)" />
+        </tr>
+      </table>
+      <h3 class="select-address">Select an address</h3>
+      <div class="info">
+        <select>
+          <option (change)="setAddress($event)" *ngFor="let address of addresses" [value]="address.addressId">
+            {{address.address}}</option>
+        </select>
+        <div class="checkout">
+          <h3>Subtotal: R{{ subtotal }}</h3>
+          <h4>{{ itemsTotal }} items</h4>
+          <button class="button yellow button-spacing" (click)="checkout()">Checkout</button>
+        </div>
+      </div>
+    </div>
+    <h3 *ngIf="!loading && cartService.cart.length == 0 && !error">You don't have any current orders</h3>
+    <h3 *ngIf="!loading && addresses.length == 0 && !error">
+      There is no address assigned to your account. Please assign an address
+      before continuing
+      <button class="button yellow add-address" (click)="addAddress()">
+        Add address
+      </button>
+    </h3>
+    <h3 *ngIf="!loading && error">An error occurred loading your current order</h3>
+  </div>
+  <div class="order-history">
+    <app-loader *ngIf="loading && !error"></app-loader>
+    <h3 *ngIf="!loading && !error">You don't have any previous orders</h3>
+    <div *ngIf="!loading && orders.length != 0 && !error" class="history-table">
+      <h2>Previous Orders</h2>
+      <table>
+        <tr *ngFor="let order of orders">
+          <td>Order {{order.orderId}}</td>
+          <td>{{order.orderDateTime}}</td>
+          <td>{{order.products.length}} items</td>
+          <td *ngIf="order.orderStatus == 'Products_not_ready' || order.orderStatus == 'Delivery_in_progress'"><button
+              (click)="track(order)" class="button yellow pay">Track Order</button></td>
+          <td *ngIf="order.orderStatus == 'Done'">Order Delivered</td>
+        </tr>
+      </table>
+    </div>
+    <h3 *ngIf="!loading && error">An error occurred loading your previous orders</h3>
+  </div>
+  <div class="tracking-order" id="tracking">
+    <div *ngIf="tracking">
+      <app-track-order [order]="order" (closeTrackingEmitter)="closeTracking()">
+      </app-track-order>
+    </div>
+  </div>
+</div>

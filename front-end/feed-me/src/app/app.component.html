@@ -1,1 +1,9 @@
+<app-header (openCartEmitter)="openCart()"></app-header>
+<app-cart *ngIf="cart" (closeCartEmitter)="closeCart()"></app-cart>
+
 <router-outlet></router-outlet>
+
+<app-footer></app-footer>
+
+<app-modal></app-modal>
+<app-snackbar></app-snackbar>

@@ -1,0 +1,17 @@
+@import '../../../../assets/styles/common.scss';
+@import '../dashboard.component.scss';
+
+.delivery-dashboard{
+  @extend .container;
+  margin: auto;
+
+  app-deliveries, app-current-delivery{
+    width: 100%; 
+    margin-bottom: 4%;
+    @extend .white-container;
+  }
+
+  app-deliveries{
+    max-height: 70vh;
+  }
+}

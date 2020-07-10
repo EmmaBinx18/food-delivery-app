@@ -1,0 +1,41 @@
+@import '../../../assets/styles/common.scss';
+
+.headings{
+    margin-top: 2%;
+    align-self: end;
+    margin-left: 4%;
+}
+
+.business-name{
+    margin-bottom: 0px;
+}
+
+.user-name{
+    color: grey;
+    margin-top: 0px;
+}
+
+.main{
+    width: 100%;
+    margin: 2% auto;
+    min-height: 80vh;
+    max-height: 84vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.container{
+    width: 95%;
+    @extend .flex-container;
+    flex-direction: row;
+    max-height: 80vh;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    @media(max-width: 1000px){
+        justify-content: center;
+    }
+}

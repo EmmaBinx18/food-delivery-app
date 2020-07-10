@@ -1,10 +1,16 @@
+<<<<<<< HEAD
 @import '../../../assets/styles/variables.scss';
 @import '../../../assets/styles/common.scss';
+=======
+@import '../../../assets/styles/common.scss';
+@import '../../../assets/styles/forms.scss';
+>>>>>>> 57ba6553f8b93de297e33165d60a71dd66318974
 
 .form-container{
     width: 60%;
     @extend .white-container;
 
+<<<<<<< HEAD
     @media(max-width: 850px){
         width: 100%;
         height: 80%;
@@ -43,4 +49,19 @@ button[type="submit"]{
     position: absolute;
     left: 0;
     top: 0;
+=======
+    @media(max-width: 900px){
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        background-image: url('/assets/images/login-signup.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
+
+.login-error{
+    @extend .error;
+    margin-top: 5%;
+>>>>>>> 57ba6553f8b93de297e33165d60a71dd66318974
 }

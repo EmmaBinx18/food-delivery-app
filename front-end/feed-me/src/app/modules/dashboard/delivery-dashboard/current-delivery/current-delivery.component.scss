@@ -1,0 +1,35 @@
+@import '../../../../../assets/styles/common.scss';
+@import '../../../../../assets/styles/map.scss';
+
+.current-delivery{
+    width: 100%;
+    padding-bottom: 4%;
+
+    h2{
+        font-family: var(--secondary-font-family);
+    }
+}
+
+.map{
+    width: 100%;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    width: 95%;
+    margin-top: 2%;
+
+    .button{
+        display: flex;
+        align-items: center;
+        background-color: rgb(240, 240, 240);
+        font-size: 1.2rem;
+        @media(max-width: 600px){font-size: 0.9rem;}
+
+        img{
+            margin-left: 1rem;
+        }
+    }
+}

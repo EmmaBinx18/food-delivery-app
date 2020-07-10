@@ -1,0 +1,13 @@
+@import '../../../../../assets/styles/table.scss';
+
+.orders{
+    width: 100%;
+    h2{
+        font-family: var(--secondary-font-family);
+    }
+}
+
+.orders-table{
+    @extend .table-container;
+    tr {background-color: rgb(240, 240, 240);}
+}

@@ -1,0 +1,15 @@
+<div class="current-delivery">
+    <app-loader *ngIf="loading"></app-loader>
+    <h2 *ngIf="!loading">Current Delivery</h2>
+    <div *ngIf="!loading" class="map">
+        <app-map [type]="'driver'" [delivery]="delivery"></app-map>
+    </div>
+    <div *ngIf="!loading" class="buttons">
+        <button class="button" *ngFor="let location of order.locations" [id]="location.businessId"
+            (click)="completePickup(location)">{{location.businessName}}<img src="/assets/icons/checked.png"
+                class="icon" alt="complete_pickup" /></button>
+    </div>
+    <button [disabled]="!orderComplete" *ngIf="!loading" class="button yellow button-spacing"
+        (click)="completeDelivery()">ORDER COMPLETE</button>
+    <h3 *ngIf="!delivery && !loading">An error occurred loading your deliveries</h3>
+</div>
