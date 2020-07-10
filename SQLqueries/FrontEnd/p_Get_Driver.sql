@@ -11,10 +11,10 @@ GO
 -- Usage:   
 /*
 	DECLARE @Error int 
-	--EXEC p_Get_Driver '{ "userId" : "null" }', @Error OUTPUT 
+	EXEC p_Get_Driver '{ "userId" : null }', @Error OUTPUT 
 	EXEC p_Get_Driver '{ "userId" : "driver_uid" }', @Error OUTPUT
 	SELECT * FROM ErrorTracer WHERE ErrorID = @Error
-	SELECT * FROM [DriverAddress]
+	SELECT * FROM [UserRole] where roleId = 2
 */
 -- =============================================
 
@@ -38,7 +38,7 @@ BEGIN
 		BEGIN
 			SELECT U.*,JSON_QUERY(CONCAT('[',A.LatLong.Lat,',',A.LatLong.Long,  ']')) [coordinates] 
 			FROM [Users] U
-			INNER JOIN [UserRole] UR ON UR.UserId = U.userId  AND UR.RoleId = 2
+			INNER JOIN [UserRole] UR ON UR.UserId = U.userId  AND UR.RoleId = 2 AND UR.isApproved = 1
 			INNER JOIN [DriverAddress] DA ON DA.UserId = U.UserId
 			INNER JOIN [Address] A ON A.addressId = DA.addressId
 			FOR JSON PATH	 
@@ -49,7 +49,7 @@ BEGIN
 		BEGIN
 			SELECT U.*,JSON_QUERY(CONCAT('[',A.LatLong.Lat,',',A.LatLong.Long,  ']')) [coordinates] 
 			FROM [Users] U
-			INNER JOIN [UserRole] UR ON UR.UserId = U.userId  AND UR.RoleId = 2 AND  U.userId = @userId
+			INNER JOIN [UserRole] UR ON UR.UserId = U.userId  AND UR.RoleId = 2 AND  U.userId = @userId AND UR.isApproved = 1
 			INNER JOIN [DriverAddress] DA ON DA.UserId = U.UserId
 			INNER JOIN [Address] A ON A.addressId = DA.addressId
 			FOR JSON PATH	

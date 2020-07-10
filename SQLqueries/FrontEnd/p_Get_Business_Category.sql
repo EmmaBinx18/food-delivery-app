@@ -26,15 +26,22 @@ CREATE PROCEDURE p_Get_Business_Category
 	@Error INT OUTPUT 
 AS
 BEGIN
+	SET NOCOUNT ON;
 
 	DECLARE @categoryid VARCHAR(128)
 	SELECT @categoryid = categoryid
 	FROM OPENJSON(@JSON) 
 	WITH (categoryId INT )
 
-	SET NOCOUNT ON;
-	SELECT *
-	FROM [Business] B
+	;WITH businesses_with_products AS
+	(
+		SELECT DISTINCT businessId 
+		FROM Product P
+		WHERE P.availabilitystatusId IN (1,3)
+	)
+	SELECT B.*
+	FROM businesses_with_products bp 
+	INNER JOIN [Business] B ON bp.businessId = B.businessId
 	WHERE categoryId = @categoryid
 	FOR JSON PATH	 
 
