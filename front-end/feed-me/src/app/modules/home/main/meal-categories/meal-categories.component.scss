@@ -14,7 +14,7 @@ h1{
         height: 20rem;
         background-size: cover;
         background-repeat: no-repeat;
-        margin: 10px 20px 10px 20px;
+        margin: 0.625rem 1.25 0.625rem 1.25;
         flex-grow: 1;
         @extend .flex-container;
         box-shadow: var(--primary-box-shadow);
@@ -37,7 +37,7 @@ h1{
         h2{
             background-color: white;
             width: 100%;
-            padding: 10px;
+            padding: 0.625rem;
             text-align: center;
         }
 
