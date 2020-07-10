@@ -1,6 +1,6 @@
 <main class="main">
     <div class="headings">
-        <h1 class="business-name" *ngIf="this.authService.getCurrentRole() == 3">{{business.name}}</h1>
+        <h1 class="business-name" *ngIf="this.authService.getCurrentRole() == 3">{{businessName}}</h1>
         <h2 class="user-name">{{userName}}</h2>
     </div>
     <app-home-chef-dashboard *ngIf="this.authService.getCurrentRole() == 3" [business]="business">

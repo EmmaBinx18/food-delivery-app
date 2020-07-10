@@ -24,7 +24,6 @@ export class AdminComponent implements OnInit {
   };
 
   businesses: any = null;
-  customers: any = null;
   businessError: boolean = false;
 
   users: any = null;
@@ -62,17 +61,6 @@ export class AdminComponent implements OnInit {
         this.businessError = true;
         this.snackbarService.error('Could not load businesses. Please try again later.');
       });
-  }
-
-  getCustomers() {
-    this.adminService.getCustomers()
-      .then(response => {
-        this.customers = response;
-      })
-      .catch(() => {
-        this.businessError = true;
-        this.snackbarService.error('Could not load customers. Please try again later.');
-      })
   }
 
   getUsers() {

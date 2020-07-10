@@ -7,15 +7,15 @@
       <li>
         <img src="/assets/icons/home.png" alt="home" class="icon" /><a (click)="navigate('home')">Home</a>
       </li>
-      <li *ngIf="this.authService.getCurrentRole() === 3">
+      <li *ngIf="authService.getCurrentRole() === 3">
         <img src="/assets/icons/dashboard.png" alt="dashboard" class="icon" /><a (click)="navigate('dashboard')">Home
           Chef</a>
       </li>
-      <li *ngIf="this.authService.getCurrentRole() === 2">
+      <li *ngIf="authService.getCurrentRole() === 2">
         <img src="/assets/icons/dashboard.png" alt="dashboard" class="icon" /><a
           (click)="navigate('dashboard')">Deliveries</a>
       </li>
-      <li>
+      <li *ngIf="authService.getCurrentRole() != 1">
         <img src="/assets/icons/cart2.png" alt="cart" class="icon" /><a (click)="openCart()">Cart</a>
       </li>
       <li>
@@ -25,13 +25,13 @@
         <img src="/assets/icons/logout.png" alt="logout" class="icon" /><a (click)="logout()">Logout</a>
       </li>
 
-      <li *ngIf="this.authService.getCurrentRole() != 1" class="buttons">
-        <button *ngIf="this.authService.getCurrentRole() != 3" (click)="openForm('homeChef')"
-          class="button yellow home-chef">
+      <li
+        *ngIf="authService.getCurrentRole() != 1 && authService.getCurrentRole() != 2 && authService.getCurrentRole() != 3"
+        class="buttons">
+        <button (click)="openForm('homeChef')" class="button yellow home-chef">
           Register as a Home Chef
         </button>
-        <button *ngIf="this.authService.getCurrentRole() != 2" (click)="openForm('driver')"
-          class="button yellow driver">
+        <button (click)="openForm('driver')" class="button yellow driver">
           Register as a Driver
         </button>
       </li>
