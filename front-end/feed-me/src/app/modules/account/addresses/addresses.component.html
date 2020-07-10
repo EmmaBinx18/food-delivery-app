@@ -13,6 +13,9 @@
             </table>
         </div>
         <h3 *ngIf="!loading && error">An error occurred loading you addresses</h3>
+        <h3 *ngIf="!loading && !error && addresses.length == 0">You don't have any addresses currently. Add an address
+            to
+            your profile.</h3>
     </div>
     <div class="add-address">
         <div class="address-map">

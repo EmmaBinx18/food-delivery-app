@@ -8,7 +8,6 @@ import {
 } from "@angular/core";
 
 import { AuthService } from "../../core/authentication/authentication.service";
-import { Role } from "src/app/core/models/role.enum";
 import { ModalService } from "../modal/modal.service";
 import { Router } from '@angular/router';
 
@@ -17,22 +16,17 @@ import { Router } from '@angular/router';
   templateUrl: "./header.component.html",
   styleUrls: ["./header.component.scss"],
 })
-export class HeaderComponent implements OnInit {
-  role: Role;
+export class HeaderComponent {
 
   @ViewChild("nav", { static: false }) nav: ElementRef;
 
   @Output() openCartEmitter = new EventEmitter();
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     public router: Router,
     public modalService: ModalService
   ) { }
-
-  ngOnInit() {
-    this.role = this.authService.getCurrentRole();
-  }
 
   logout() {
     this.authService.logout();

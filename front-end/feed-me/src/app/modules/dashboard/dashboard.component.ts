@@ -17,8 +17,6 @@ export class DashboardComponent implements OnInit {
   business: any = [];
   userName: string = '';
 
-  role: Role;
-
   constructor(
     public authService: AuthService,
     private homeChefService: HomeChefService,
@@ -27,7 +25,6 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.role = this.authService.getCurrentRole();
     this.userName = this.authService.getCurrentUser().displayName;
     this.stats = this.homeChefService.getStats();
     if (this.authService.getCurrentRole() === Role.HomeChef) {
