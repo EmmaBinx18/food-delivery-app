@@ -54,6 +54,7 @@ export class DeliveryRegisterComponent implements OnInit {
         .then(() => {
           this.snackbarService.success('Successfully sent registration request');
           this.modalService.close();
+          this.deliveryService.register = true;
         })
         .catch(() => {
           this.snackbarService.error('Could not submit your request. Please try again later');

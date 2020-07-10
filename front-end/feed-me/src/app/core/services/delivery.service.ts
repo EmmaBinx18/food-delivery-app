@@ -9,6 +9,8 @@ import { environment } from '../../../environments/environment';
 })
 export class DeliveryService {
 
+  register: boolean = false;
+
   constructor(
     private http: HttpClient,
     private addressService: AddressService

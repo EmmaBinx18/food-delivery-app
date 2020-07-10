@@ -46,7 +46,12 @@ export class BusinessComponent implements OnChanges {
   getOperationalStatusById() {
     this.homeChefService.getOperationalStatusById('-1')
       .then(response => {
-        this.operationalStatuses = response;
+        if (response[0].results) {
+          this.operationalStatuses = [];
+        }
+        else {
+          this.operationalStatuses = response;
+        }
         this.getStatuses();
       })
       .catch(() => {
@@ -108,16 +113,4 @@ export class BusinessComponent implements OnChanges {
         this.snackbarService.error('Could not assign user to business. Please try again later.');
       });
   }
-
-  // openBusiness(businessId: string) {
-  //   this.adminService.openBusiness(businessId)
-  //   .then(() => {
-
-  //   })
-  // }
-
-  // closeBusiness(businessId: string) {
-  //   this.adminService.closeBusiness(businessId);
-  // }
-
 }

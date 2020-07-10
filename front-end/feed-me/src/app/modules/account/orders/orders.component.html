@@ -12,7 +12,7 @@
         </tr>
       </table>
       <h3 class="select-address">Select an address</h3>
-      <div class="info">
+      <div class="info" *ngIf="(addresses && addresses.length != 0)">
         <select>
           <option (change)="setAddress($event)" *ngFor="let address of addresses" [value]="address.addressId">
             {{address.address}}</option>
@@ -36,8 +36,8 @@
   </div>
   <div class="order-history">
     <app-loader *ngIf="loading && !error"></app-loader>
-    <h3 *ngIf="!loading && !error">You don't have any previous orders</h3>
-    <div *ngIf="!loading && orders.length != 0 && !error" class="history-table">
+    <h3 *ngIf="!loading && !error && orders.length ==0">You don't have any previous orders</h3>
+    <div *ngIf="!loading && orders != null && orders.length != 0 && !error" class="history-table">
       <h2>Previous Orders</h2>
       <table>
         <tr *ngFor="let order of orders">

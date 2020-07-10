@@ -10,6 +10,8 @@ import { environment } from '../../../environments/environment';
 })
 export class HomeChefService {
 
+  register: boolean = false;
+
   constructor(
     private http: HttpClient,
     private addressService: AddressService

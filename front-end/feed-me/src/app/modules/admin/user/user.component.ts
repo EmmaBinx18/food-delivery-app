@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 import { AdminService } from 'src/app/core/services/admin.service';
