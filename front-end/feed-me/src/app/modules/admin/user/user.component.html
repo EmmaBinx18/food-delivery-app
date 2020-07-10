@@ -28,16 +28,6 @@
                         Activate
                     </button>
                 </td>
-                <ng-container>
-                    <td>
-                        <img class="icon" src="/assets/icons/checked.png" alt="approve"
-                            (click)="approveDriver(user.userId)" />
-                    </td>
-                    <td>
-                        <img class="icon" src="/assets/icons/cancel.png" alt="deny "
-                            (click)="denyDriver(user.userId)" />
-                    </td>
-                </ng-container>
                 <td>
                     <button *ngIf="!(user.roleid==0)" (click)="removeUserRole(user)" class="remove-role">
                         Remove {{user.roleName}} role

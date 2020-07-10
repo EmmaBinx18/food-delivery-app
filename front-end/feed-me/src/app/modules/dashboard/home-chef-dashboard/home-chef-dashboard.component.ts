@@ -11,7 +11,7 @@ import { OrdersService } from 'src/app/core/services/orders.service';
 })
 export class HomeChefDashboardComponent implements OnChanges {
 
-  @Input() business: any = [];
+  @Input() business: any;
 
   products: any = null;
   orders: any = null;
@@ -26,7 +26,7 @@ export class HomeChefDashboardComponent implements OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.business.currentValue.length != 0) {
+    if (changes.business.currentValue != null) {
       this.getProducts(this.business[0].businessId);
       this.getOrders(this.business[0].businessId);
     }

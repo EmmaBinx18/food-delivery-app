@@ -2,10 +2,12 @@
     <div>
         <ul>
             <li><a routerLink="'/home'">Home</a></li>
-            <li *ngIf="this.authService.getCurrentRole() != 1 && this.authService.getCurrentRole() != 3"><a
-                    (click)="openForm('homeChef')">Register as a Home Chef</a></li>
-            <li *ngIf="this.authService.getCurrentRole() != 1 && this.authService.getCurrentRole() != 2"><a
-                    (click)="openForm('driver')">Register as a Delivery Driver</a></li>
+            <li
+                *ngIf="authService.getCurrentRole() != 1 && authService.getCurrentRole() != 2 && authService.getCurrentRole() != 3">
+                <a (click)="openForm('homeChef')">Register as a Home Chef</a></li>
+            <li
+                *ngIf="authService.getCurrentRole() != 1 && authService.getCurrentRole() != 2 && authService.getCurrentRole() != 3">
+                <a (click)="openForm('driver')">Register as a Delivery Driver</a></li>
             <li><a (click)="scroll('services')">Our Services</a></li>
         </ul>
         <ul>

@@ -54,7 +54,7 @@ export class AddProductComponent implements OnInit {
 
   setBusinessId() {
     this.addProductForm
-      .get("category")
+      .get("businessId")
       .setValue(this.business.businessId, { onlySelf: true });
   }
 

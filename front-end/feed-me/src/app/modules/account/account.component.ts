@@ -12,9 +12,9 @@ import { OrdersService } from 'src/app/core/services/orders.service';
   styleUrls: ["./account.component.scss"],
 })
 export class AccountComponent implements OnInit {
-  orders: any = [];
-  profile: any = [];
-  addresses: any = [];
+  orders: any = null;
+  profile: any = null;
+  addresses: any = null;
 
   ordersError: boolean = false;
   profileError: boolean = false;
@@ -59,7 +59,7 @@ export class AccountComponent implements OnInit {
   getAddresses() {
     this.addressService.getUserAddresses(this.authService.getCurrentUser().uid)
       .then(response => {
-        if (response != null) {
+        if (Object.entries(response).length != 0) {
           this.addresses = response[0].locations;
         }
         else {
@@ -76,12 +76,7 @@ export class AccountComponent implements OnInit {
   getOrderHistory() {
     this.ordersService.getUserOrderHistory(this.authService.getCurrentUser().uid)
       .then(response => {
-        if (response != null) {
-          this.orders = response;
-        }
-        else {
-          this.orders = [];
-        }
+        this.orders = response;
         this.ordersError = false;
       })
       .catch(() => {

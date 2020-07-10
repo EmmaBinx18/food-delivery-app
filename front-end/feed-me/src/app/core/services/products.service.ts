@@ -16,7 +16,7 @@ export class ProductsService {
   }
 
   getProductsForABusiness(businessId: string) {
-    return this.http.get(`${environment.api}/products/business/${businessId}`).toPromise();
+    return this.http.post(`${environment.api}/products/businessProduct`, { params: businessId }).toPromise();
   }
 
   insertProduct(product: Product) {

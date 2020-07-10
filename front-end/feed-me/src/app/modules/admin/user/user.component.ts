@@ -76,12 +76,4 @@ export class UserComponent implements OnChanges {
     });
     this.users = users;
   }
-
-  approveDriver(driverId: string) {
-
-  }
-
-  denyDriver(driverId: string) {
-
-  }
 }

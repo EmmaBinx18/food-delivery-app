@@ -14,8 +14,9 @@ import { SnackbarService } from "../../shared/snackbar/snackbar.service";
 })
 export class DashboardComponent implements OnInit {
   stats: any = [];
-  business: any = [];
+  business: any = null;
   userName: string = '';
+  businessName: string = '';
 
   constructor(
     public authService: AuthService,
@@ -44,6 +45,7 @@ export class DashboardComponent implements OnInit {
     this.homeChefService.getBusinessByUserId(this.authService.getCurrentUser().uid)
       .then(response => {
         this.business = response;
+        this.businessName = response[0].name;
       })
       .catch(() => {
         this.snackbarService.error('Your business could not be loaded. Please try again later.');
