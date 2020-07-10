@@ -7,11 +7,11 @@
       <li>
         <img src="/assets/icons/home.png" alt="home" class="icon" /><a (click)="navigate('home')">Home</a>
       </li>
-      <li *ngIf="role === 2">
+      <li *ngIf="this.authService.getCurrentRole() === 3">
         <img src="/assets/icons/dashboard.png" alt="dashboard" class="icon" /><a (click)="navigate('dashboard')">Home
           Chef</a>
       </li>
-      <li *ngIf="role === 3">
+      <li *ngIf="this.authService.getCurrentRole() === 2">
         <img src="/assets/icons/dashboard.png" alt="dashboard" class="icon" /><a
           (click)="navigate('dashboard')">Deliveries</a>
       </li>
@@ -25,11 +25,13 @@
         <img src="/assets/icons/logout.png" alt="logout" class="icon" /><a (click)="logout()">Logout</a>
       </li>
 
-      <li *ngIf="role == 0" class="buttons">
-        <button (click)="openForm('homeChef')" class="button yellow home-chef">
+      <li *ngIf="this.authService.getCurrentRole() != 1" class="buttons">
+        <button *ngIf="this.authService.getCurrentRole() != 3" (click)="openForm('homeChef')"
+          class="button yellow home-chef">
           Register as a Home Chef
         </button>
-        <button (click)="openForm('driver')" class="button yellow driver">
+        <button *ngIf="this.authService.getCurrentRole() != 2" (click)="openForm('driver')"
+          class="button yellow driver">
           Register as a Driver
         </button>
       </li>

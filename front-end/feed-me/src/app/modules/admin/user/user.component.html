@@ -1,0 +1,53 @@
+<div class="users">
+    <app-loader *ngIf="loading && !error"></app-loader>
+    <div class="view-users">
+        <h2>Users</h2>
+        <table>
+            <tr>
+                <th>
+                    <h3>Full Name</h3>
+                </th>
+                <th>
+                    <h3>Role</h3>
+                </th>
+                <th>
+                    <h3>Manage Account</h3>
+                </th>
+                <th>
+                    <h3>Manage Role</h3>
+                </th>
+            </tr>
+            <tr *ngFor="let user of users">
+                <td>{{ user.firstname}} {{ user.lastname}}</td>
+                <td>{{user.roleName}}</td>
+                <td>
+                    <button *ngIf="user.isActive" (click)="deactivateUser(user)" class="deactive">
+                        Deactivate
+                    </button>
+                    <button *ngIf="!user.isActive" (click)="activateUser(user)" class="active">
+                        Activate
+                    </button>
+                </td>
+                <ng-container>
+                    <td>
+                        <img class="icon" src="/assets/icons/checked.png" alt="approve"
+                            (click)="approveDriver(user.userId)" />
+                    </td>
+                    <td>
+                        <img class="icon" src="/assets/icons/cancel.png" alt="deny "
+                            (click)="denyDriver(user.userId)" />
+                    </td>
+                </ng-container>
+                <td>
+                    <button *ngIf="!(user.roleid==0)" (click)="removeUserRole(user)" class="remove-role">
+                        Remove {{user.roleName}} role
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <h3 *ngIf="error">
+        There was an error loading the users. Please try again
+        later.
+    </h3>
+</div>

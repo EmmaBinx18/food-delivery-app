@@ -12,7 +12,10 @@ export class FooterComponent {
 
   @Output() openFormEmitter = new EventEmitter<string>();
 
-  constructor(private authService: AuthService, public modalService: ModalService) { }
+  constructor(
+    public authService: AuthService,
+    public modalService: ModalService
+  ) { }
 
   logout() {
     this.authService.logout();

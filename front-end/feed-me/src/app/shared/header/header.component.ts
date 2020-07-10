@@ -4,12 +4,10 @@ import {
   ViewChild,
   ElementRef,
   EventEmitter,
-  Renderer2,
   Output,
 } from "@angular/core";
 
 import { AuthService } from "../../core/authentication/authentication.service";
-import { Role } from "src/app/core/models/role.enum";
 import { ModalService } from "../modal/modal.service";
 import { Router } from '@angular/router';
 
@@ -18,24 +16,17 @@ import { Router } from '@angular/router';
   templateUrl: "./header.component.html",
   styleUrls: ["./header.component.scss"],
 })
-export class HeaderComponent implements OnInit {
-  role: Role;
+export class HeaderComponent {
 
   @ViewChild("nav", { static: false }) nav: ElementRef;
 
   @Output() openCartEmitter = new EventEmitter();
 
   constructor(
-    private authService: AuthService,
-    private renderer: Renderer2,
+    public authService: AuthService,
     public router: Router,
     public modalService: ModalService
   ) { }
-
-  ngOnInit() {
-    this.role = this.authService.getCurrentRole();
-    this.role = Role.Delivery;
-  }
 
   logout() {
     this.authService.logout();
@@ -51,14 +42,16 @@ export class HeaderComponent implements OnInit {
   }
 
   openNav() {
-    this.renderer.setStyle(this.nav.nativeElement, "left", "0");
+    this.nav.nativeElement.style.left = '0';
   }
 
   closeNav() {
-    this.renderer.setStyle(this.nav.nativeElement, "left", "-200rem");
+    this.nav.nativeElement.style.left = '-200rem';
   }
 
   navigate(option: string) {
+    this.closeNav();
+    this.modalService.close();
     this.router.navigate([`/${option}`]);
   }
 }
